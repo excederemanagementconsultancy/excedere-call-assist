@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Excedere Call Assist</title>
+
+<style>
+:root {
+  --bg: #07110f;
+  --panel: #0d1815;
+  --panel2: #111f1b;
+  --border: #22352f;
+  --text: #edf5f2;
+  --muted: #8ea39c;
+  --green: #35d07f;
+  --green-dark: #17643f;
+  --amber: #e9b44c;
+  --red: #e66b6b;
+  --blue: #57a8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(31, 116, 77, .15), transparent 28%),
+    var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* HEADER */
+
+header {
+  height: 74px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(7, 17, 15, .92);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--green);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--green);
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.brand-name {
+  font-size: 18px;
+  letter-spacing: .16em;
+}
+
+.brand-product {
+  color: var(--green);
+  font-size: 11px;
+  letter-spacing: .24em;
+  margin-top: 3px;
+}
+
+.status {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* MAIN LAYOUT */
+
+.workspace {
+  display: grid;
+  grid-template-columns: 300px minmax(420px, 1fr) 340px;
+  min-height: calc(100vh - 74px);
+}
+
+/* COMMON PANEL */
+
+.panel {
+  padding: 24px;
+}
+
+.left-panel {
+  border-right: 1px solid var(--border);
+}
+
+.right-panel {
+  border-left: 1px solid var(--border);
+}
+
+.eyebrow {
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(18, 34, 29, .95), rgba(11, 23, 19, .95));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+/* LEAD */
+
+.lead-name {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.lead-company {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.lead-details {
+  margin-top: 22px;
+}
+
+.detail {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.detail:last-child {
+  border-bottom: 0;
+}
+
+.detail-label {
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.local-time {
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* SCRIPT */
+
+.script-panel {
+  padding: 30px 38px;
+}
+
+.call-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.call-header h1 {
+  margin: 0;
+  font-size: 29px;
+}
+
+.call-stage {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.start-call {
+  border: 0;
+  background: var(--green);
+  color: #04110b;
+  padding: 12px 20px;
+  border-radius: 9px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.start-call:hover {
+  filter: brightness(1.08);
+}
+
+.script-box {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(12, 25, 21, .82);
+  padding: 28px;
+  min-height: 245px;
+}
+
+.script-label {
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.script-text {
+  font-size: 22px;
+  line-height: 1.6;
+}
+
+.script-text strong {
+  color: var(--green);
+}
+
+/* RESPONSE BUTTONS */
+
+.response-title {
+  margin: 26px 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.responses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.response-btn {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 9px;
+  padding: 11px 14px;
+  cursor: pointer;
+}
+
+.response-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.response-btn.primary {
+  background: var(--green-dark);
+  border-color: var(--green);
+}
+
+.response-btn.end {
+  border-color: #693b3b;
+  color: #ef9696;
+}
+
+/* CALL PROGRESS */
+
+.progress {
+  display: flex;
+  gap: 6px;
+  margin-top: 28px;
+}
+
+.progress-step {
+  height: 4px;
+  flex: 1;
+  border-radius: 20px;
+  background: var(--border);
+}
+
+.progress-step.active {
+  background: var(--green);
+}
+
+/* RIGHT */
+
+.notes-title {
+  font-size: 18px;
+  margin: 0 0 14px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 180px;
+  resize: vertical;
+  background: #08120f;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 13px;
+  outline: none;
+}
+
+textarea:focus {
+  border-color: var(--green);
+}
+
+.objections {
+  margin-top: 26px;
+}
+
+.objection-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 8px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  background: transparent;
+  color: #c5d2cd;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.objection-btn:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.call-outcome {
+  margin-top: 26px;
+}
+
+.outcome-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.outcome-btn {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.outcome-btn:hover {
+  border-color: var(--green);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+  .workspace {
+    grid-template-columns: 260px 1fr;
+  }
+
+  .right-panel {
+    grid-column: 1 / -1;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+}
+
+@media (max-width: 720px) {
+  .workspace {
+    display: block;
+  }
+
+  .left-panel,
+  .right-panel {
+    border: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .script-panel {
+    padding: 24px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+  <div class="brand">
+    <div class="brand-mark">E</div>
+
+    <div>
+      <div class="brand-name">EXCEDERE</div>
+      <div class="brand-product">CALL ASSIST</div>
+    </div>
+  </div>
+
+  <div class="status">
+    Guided Conversation Workspace
+  </div>
+
+</header>
+
+<main class="workspace">
+
+  <!-- LEAD PANEL -->
+
+  <aside class="panel left-panel">
+
+    <div class="eyebrow">Current Lead</div>
+
+    <div class="lead-name" id="leadName">
+      Anthony
+    </div>
+
+    <div class="lead-company">
+      Owner<br>
+      Public House Temecula
+    </div>
+
+    <div class="lead-details">
+
+      <div class="detail">
+        <div class="detail-label">Role Advertised</div>
+        <div class="detail-value">
+          Part-time Bookkeeper
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="detail-label">Location</div>
+        <div class="detail-value">
+          Temecula, California
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="detail-label">Local Time</div>
+        <div class="detail-value local-time" id="localTime">
+          Loading...
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="detail-label">Advertised Hours</div>
+        <div class="detail-value">
+          15 to 18 hours per week
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="detail-label">Pay</div>
+        <div class="detail-value">
+          $24 to $27 per hour
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="detail-label">Systems</div>
+        <div class="detail-value">
+          Toast, Xtra Chef, ADP, QuickBooks Online, Tip Haus
+        </div>
+      </div>
+
+    </div>
+
+  </aside>
+
+  <!-- CALL ASSIST -->
+
+  <section class="script-panel">
+
+    <div class="call-header">
+
+      <div>
+        <div class="eyebrow">Live Call Assist</div>
+        <h1>Bookkeeper Vacancy Call</h1>
+        <div class="call-stage" id="stageText">
+          Ready to start
+        </div>
+      </div>
+
+      <button class="start-call" onclick="startCall()">
+        Start Call
+      </button>
+
+    </div>
+
+    <div class="script-box">
+
+      <div class="script-label" id="scriptLabel">
+        Before you call
+      </div>
+
+      <div class="script-text" id="scriptText">
+        Review the lead information, then press
+        <strong>Start Call</strong> when you're ready.
+      </div>
+
+    </div>
+
+    <div class="response-title">
+      Prospect response
+    </div>
+
+    <div class="responses" id="responses">
+
+      <button class="response-btn" disabled>
+        Start the call first
+      </button>
+
+    </div>
+
+    <div class="progress">
+      <div class="progress-step" id="p1"></div>
+      <div class="progress-step" id="p2"></div>
+      <div class="progress-step" id="p3"></div>
+      <div class="progress-step" id="p4"></div>
+      <div class="progress-step" id="p5"></div>
+    </div>
+
+  </section>
+
+  <!-- NOTES / OBJECTIONS -->
+
+  <aside class="panel right-panel">
+
+    <div class="eyebrow">Call Notes</div>
+
+    <h3 class="notes-title">
+      Live notes
+    </h3>
+
+    <textarea id="notes"
+      placeholder="Type notes while you're speaking..."></textarea>
+
+    <div class="objections">
+
+      <div class="eyebrow">
+        Quick Objections
+      </div>
+
+      <button class="objection-btn"
+        onclick="showObjection('busy')">
+        I'm busy
+      </button>
+
+      <button class="objection-btn"
+        onclick="showObjection('internal')">
+        We're handling it internally
+      </button>
+
+      <button class="objection-btn"
+        onclick="showObjection('local')">
+        We only hire locally
+      </button>
+
+      <button class="objection-btn"
+        onclick="showObjection('info')">
+        Send me some information
+      </button>
+
+      <button class="objection-btn"
+        onclick="showObjection('notInterested')">
+        Not interested
+      </button>
+
+    </div>
+
+    <div class="call-outcome">
+
+      <div class="eyebrow">
+        Call Outcome
+      </div>
+
+      <div class="outcome-grid">
+
+        <button class="outcome-btn"
+          onclick="setOutcome('Appointment booked')">
+          Appointment
+        </button>
+
+        <button class="outcome-btn"
+          onclick="setOutcome('Callback required')">
+          Callback
+        </button>
+
+        <button class="outcome-btn"
+          onclick="setOutcome('Follow up required')">
+          Follow Up
+        </button>
+
+        <button class="outcome-btn"
+          onclick="setOutcome('Not interested')">
+          Not Interested
+        </button>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+</main>
+
+</div>
+
+<script>
+
+const lead = {
+  firstName: "Anthony",
+  company: "Public House Temecula"
+};
+
+function updateTime() {
+
+  const time = new Intl.DateTimeFormat(
+    "en-US",
+    {
+      timeZone: "America/Los_Angeles",
+      hour: "numeric",
+      minute: "2-digit"
+    }
+  ).format(new Date());
+
+  document.getElementById("localTime").textContent =
+    time + " Pacific Time";
+}
+
+updateTime();
+setInterval(updateTime, 60000);
+
+
+/* SCRIPT ENGINE */
+
+function startCall() {
+
+  setStage("Opening", 1);
+
+  showScript(
+    "Opening",
+    `Is that <strong>${lead.firstName}</strong>?<br><br>
+    ${lead.firstName}, I noticed you're currently looking to hire a
+    bookkeeper. This is a business call about that vacancy, but it isn't
+    the usual recruiter pitch.<br><br>
+    Can I ask you one quick question, and then you can decide whether
+    we continue?`
+  );
+
+  showResponses([
+    ["Yes / Go ahead", discovery],
+    ["I'm busy", () => showObjection("busy")],
+    ["What is this about?", explainCall],
+    ["Not interested", () => showObjection("notInterested")]
+  ]);
+}
+
+
+function discovery() {
+
+  setStage("Discovery", 2);
+
+  showScript(
+    "Discovery",
+    `How's the search going so far? Are you finding the right people,
+    or is that proving difficult?`
+  );
+
+  showResponses([
+    ["Still looking", discoveryTwo],
+    ["Found someone", foundSomeone],
+    ["Handling internally", () => showObjection("internal")]
+  ]);
+}
+
+
+function discoveryTwo() {
+
+  showScript(
+    "Discovery",
+    `Have you already found someone you're happy with,
+    or are you still looking?`
+  );
+
+  showResponses([
+    ["Still looking", discoveryThree],
+    ["Found someone", foundSomeone]
+  ]);
+}
+
+
+function discoveryThree() {
+
+  setStage("Qualification", 3);
+
+  showScript(
+    "Qualification",
+    `What's missing from the applicants you've seen so far?`
+  );
+
+  showResponses([
+    ["Continue", workloadQuestion]
+  ]);
+}
+
+
+function workloadQuestion() {
+
+  showScript(
+    "Current Situation",
+    `Who's handling the bookkeeping work while you're recruiting?`
+  );
+
+  showResponses([
+    ["Continue", alternativeQuestion]
+  ]);
+}
+
+
+function alternativeQuestion() {
+
+  setStage("Solution", 4);
+
+  showScript(
+    "Permission",
+    `Would you be open to looking at another way of filling the role?`
+  );
+
+  showResponses([
+    ["Yes", appointment],
+    ["Maybe", appointment],
+    ["No", () => showObjection("notInterested")]
+  ]);
+}
+
+
+function appointment() {
+
+  setStage("Appointment", 5);
+
+  showScript(
+    "Appointment",
+    `Would it be worth twenty minutes to see if that could work for you?`
+  );
+
+  showResponses([
+    ["Yes", appointmentBooked],
+    ["What would we discuss?", meetingExplanation],
+    ["Send information", () => showObjection("info")]
+  ]);
+}
+
+
+function meetingExplanation() {
+
+  showScript(
+    "Meeting Explanation",
+    `It's simply a short conversation to understand what you need,
+    show you how the alternative works, and see whether it makes
+    commercial sense for your business.<br><br>
+    If it doesn't, we leave it there.`
+  );
+
+  showResponses([
+    ["Book the meeting", appointmentBooked],
+    ["Not now", () => setOutcome("Follow up required")]
+  ]);
+}
+
+
+function appointmentBooked() {
+
+  showScript(
+    "Close",
+    `Perfect. Let's get a time in the diary.<br><br>
+    Once we've agreed the time, I'll send the calendar invitation
+    and confirmation across.`
+  );
+
+  showResponses([
+    ["Appointment booked", () =>
+      setOutcome("Appointment booked")]
+  ]);
+}
+
+
+function explainCall() {
+
+  showScript(
+    "Reason for Call",
+    `We help businesses look at an alternative way of filling roles
+    like bookkeeping without relying entirely on the local hiring market.<br><br>
+    I only wanted to ask a couple of questions to see whether it's
+    even relevant to you.`
+  );
+
+  showResponses([
+    ["Go ahead", discovery],
+    ["Not interested", () => showObjection("notInterested")]
+  ]);
+}
+
+
+function foundSomeone() {
+
+  showScript(
+    "Role Filled",
+    `Understood. Has everything been finalised with them,
+    or are you still keeping your options open until they start?`
+  );
+
+  showResponses([
+    ["Still open", discoveryThree],
+    ["Fully filled", () => setOutcome("Role filled")]
+  ]);
+}
+
+
+/* OBJECTIONS */
+
+function showObjection(type) {
+
+  const objections = {
+
+    busy: {
+      title: "I'm busy",
+      text:
+        `Of course. Can I take ten seconds to say why I called?
+        If it's not relevant, I'll let you go.`,
+      buttons: [
+        ["Go ahead", discovery],
+        ["Still busy", callback]
+      ]
+    },
+
+    internal: {
+      title: "Handling internally",
+      text:
+        `Understood. Is that temporary while you look,
+        or is that the long-term plan?`,
+      buttons: [
+        ["Temporary", discoveryThree],
+        ["Long-term plan", alternativeQuestion]
+      ]
+    },
+
+    local: {
+      title: "We only hire locally",
+      text:
+        `Understood. Is there a particular reason the person needs
+        to be physically local for this role?`,
+      buttons: [
+        ["Explain reason", discoveryThree],
+        ["Open to remote", alternativeQuestion]
+      ]
+    },
+
+    info: {
+      title: "Send information",
+      text:
+        `Absolutely. So I send something relevant rather than a
+        generic brochure, can I ask you one quick question about
+        what you're looking for?`,
+      buttons: [
+        ["Go ahead", discovery],
+        ["Just email me", () => setOutcome("Information requested")]
+      ]
+    },
+
+    notInterested: {
+      title: "Not interested",
+      text:
+        `No problem. Is that because you've already solved the
+        bookkeeping requirement, or because the alternative itself
+        isn't something you'd consider?`,
+      buttons: [
+        ["Role solved", () => setOutcome("Role filled")],
+        ["Not considering alternatives", () =>
+          setOutcome("Not interested")]
+      ]
+    }
+
+  };
+
+  const objection = objections[type];
+
+  showScript(
+    "Objection: " + objection.title,
+    objection.text
+  );
+
+  showResponses(objection.buttons);
+}
+
+
+function callback() {
+
+  showScript(
+    "Callback",
+    `No problem at all. When would be a better time
+    for a quick call?`
+  );
+
+  showResponses([
+    ["Callback arranged", () =>
+      setOutcome("Callback required")]
+  ]);
+}
+
+
+/* UI HELPERS */
+
+function showScript(label, text) {
+
+  document.getElementById("scriptLabel").textContent = label;
+  document.getElementById("scriptText").innerHTML = text;
+}
+
+
+function showResponses(buttons) {
+
+  const area = document.getElementById("responses");
+
+  area.innerHTML = "";
+
+  buttons.forEach(([label, action]) => {
+
+    const button = document.createElement("button");
+
+    button.className = "response-btn";
+    button.textContent = label;
+    button.onclick = action;
+
+    area.appendChild(button);
+
+  });
+}
+
+
+function setStage(stage, number) {
+
+  document.getElementById("stageText").textContent = stage;
+
+  for (let i = 1; i <= 5; i++) {
+
+    document
+      .getElementById("p" + i)
+      .classList.toggle("active", i <= number);
+  }
+}
+
+
+function setOutcome(outcome) {
+
+  showScript(
+    "Call Complete",
+    `<strong>${outcome}</strong><br><br>
+    Add any final notes before moving to the next lead.`
+  );
+
+  document.getElementById("stageText").textContent =
+    "Completed: " + outcome;
+
+  showResponses([
+    ["Start again", startCall]
+  ]);
+}
+
+</script>
+
+</body>
+</html>
