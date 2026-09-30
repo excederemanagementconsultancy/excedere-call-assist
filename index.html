@@ -99,8 +99,6 @@ header {
   min-height: calc(100vh - 74px);
 }
 
-/* COMMON PANEL */
-
 .panel {
   padding: 24px;
 }
@@ -111,6 +109,7 @@ header {
 
 .right-panel {
   border-left: 1px solid var(--border);
+  overflow-y: auto;
 }
 
 .eyebrow {
@@ -123,7 +122,11 @@ header {
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(18, 34, 29, .95), rgba(11, 23, 19, .95));
+  background: linear-gradient(
+    180deg,
+    rgba(18, 34, 29, .95),
+    rgba(11, 23, 19, .95)
+  );
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 18px;
@@ -217,7 +220,7 @@ header {
   border-radius: 16px;
   background: rgba(12, 25, 21, .82);
   padding: 28px;
-  min-height: 245px;
+  min-height: 280px;
 }
 
 .script-label {
@@ -236,6 +239,16 @@ header {
 
 .script-text strong {
   color: var(--green);
+}
+
+.script-note {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--amber);
+  background: rgba(233, 180, 76, .08);
+  color: #d9c99f;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* RESPONSE BUTTONS */
@@ -278,7 +291,7 @@ header {
   color: #ef9696;
 }
 
-/* CALL PROGRESS */
+/* PROGRESS */
 
 .progress {
   display: flex;
@@ -297,7 +310,7 @@ header {
   background: var(--green);
 }
 
-/* RIGHT */
+/* RIGHT PANEL */
 
 .notes-title {
   font-size: 18px;
@@ -320,11 +333,14 @@ textarea:focus {
   border-color: var(--green);
 }
 
-.objections {
+.objections,
+.quick-answers,
+.call-outcome {
   margin-top: 26px;
 }
 
-.objection-btn {
+.objection-btn,
+.answer-btn {
   display: block;
   width: 100%;
   text-align: left;
@@ -337,13 +353,14 @@ textarea:focus {
   cursor: pointer;
 }
 
-.objection-btn:hover {
+.objection-btn:hover,
+.answer-btn:hover {
   color: var(--green);
   border-color: var(--green);
 }
 
-.call-outcome {
-  margin-top: 26px;
+.answer-btn {
+  color: #a9c9bc;
 }
 
 .outcome-grid {
@@ -392,6 +409,10 @@ textarea:focus {
 
   .script-panel {
     padding: 24px;
+  }
+
+  .script-text {
+    font-size: 19px;
   }
 }
 </style>
@@ -492,6 +513,7 @@ textarea:focus {
       <div>
         <div class="eyebrow">Live Call Assist</div>
         <h1>Bookkeeper Vacancy Call</h1>
+
         <div class="call-stage" id="stageText">
           Ready to start
         </div>
@@ -538,7 +560,7 @@ textarea:focus {
 
   </section>
 
-  <!-- NOTES / OBJECTIONS -->
+  <!-- NOTES AND OBJECTIONS -->
 
   <aside class="panel right-panel">
 
@@ -548,8 +570,12 @@ textarea:focus {
       Live notes
     </h3>
 
-    <textarea id="notes"
-      placeholder="Type notes while you're speaking..."></textarea>
+    <textarea
+      id="notes"
+      placeholder="Type notes while you're speaking..."
+    ></textarea>
+
+    <!-- QUICK OBJECTIONS -->
 
     <div class="objections">
 
@@ -568,6 +594,11 @@ textarea:focus {
       </button>
 
       <button class="objection-btn"
+        onclick="showObjection('policy')">
+        We do not outsource
+      </button>
+
+      <button class="objection-btn"
         onclick="showObjection('local')">
         We only hire locally
       </button>
@@ -578,11 +609,48 @@ textarea:focus {
       </button>
 
       <button class="objection-btn"
+        onclick="showObjection('budget')">
+        No budget
+      </button>
+
+      <button class="objection-btn"
+        onclick="showObjection('filled')">
+        Role filled
+      </button>
+
+      <button class="objection-btn"
         onclick="showObjection('notInterested')">
         Not interested
       </button>
 
     </div>
+
+    <!-- QUICK ANSWERS -->
+
+    <div class="quick-answers">
+
+      <div class="eyebrow">
+        Quick Answers
+      </div>
+
+      <button class="answer-btn"
+        onclick="showQuickAnswer('who')">
+        Who are you?
+      </button>
+
+      <button class="answer-btn"
+        onclick="showQuickAnswer('support')">
+        What kind of bookkeeping support?
+      </button>
+
+      <button class="answer-btn"
+        onclick="showQuickAnswer('recruitment')">
+        Are you a recruitment company?
+      </button>
+
+    </div>
+
+    <!-- CALL OUTCOME -->
 
     <div class="call-outcome">
 
@@ -608,6 +676,16 @@ textarea:focus {
         </button>
 
         <button class="outcome-btn"
+          onclick="setOutcome('Information requested')">
+          Send Info
+        </button>
+
+        <button class="outcome-btn"
+          onclick="setOutcome('Role filled')">
+          Role Filled
+        </button>
+
+        <button class="outcome-btn"
           onclick="setOutcome('Not interested')">
           Not Interested
         </button>
@@ -629,6 +707,9 @@ const lead = {
   company: "Public House Temecula"
 };
 
+
+/* LOCAL TIME */
+
 function updateTime() {
 
   const time = new Intl.DateTimeFormat(
@@ -648,7 +729,7 @@ updateTime();
 setInterval(updateTime, 60000);
 
 
-/* SCRIPT ENGINE */
+/* START CALL */
 
 function startCall() {
 
@@ -657,61 +738,66 @@ function startCall() {
   showScript(
     "Opening",
     `Is that <strong>${lead.firstName}</strong>?<br><br>
+
     ${lead.firstName}, I noticed you're currently looking to hire a
     bookkeeper. This is a business call about that vacancy, but it isn't
     the usual recruiter pitch.<br><br>
+
     Can I ask you one quick question, and then you can decide whether
     we continue?`
   );
 
   showResponses([
-    ["Yes / Go ahead", discovery],
+    ["Yes / Go ahead", searchStatus],
     ["I'm busy", () => showObjection("busy")],
-    ["What is this about?", explainCall],
+    ["Who are you?", () => showQuickAnswer("who")],
     ["Not interested", () => showObjection("notInterested")]
   ]);
 }
 
 
-function discovery() {
+/* DISCOVERY */
+
+function searchStatus() {
 
   setStage("Discovery", 2);
 
   showScript(
     "Discovery",
-    `How's the search going so far? Are you finding the right people,
+    `How's the search going so far, are you finding the right people,
     or is that proving difficult?`
   );
 
   showResponses([
-    ["Still looking", discoveryTwo],
-    ["Found someone", foundSomeone],
-    ["Handling internally", () => showObjection("internal")]
+    ["It's proving difficult", applicantsQuestion],
+    ["It's going fine", searchGoingFine],
+    ["We're handling it internally", () => showObjection("internal")],
+    ["Role filled", () => showObjection("filled")]
   ]);
 }
 
 
-function discoveryTwo() {
+function searchGoingFine() {
 
   showScript(
     "Discovery",
-    `Have you already found someone you're happy with,
+    `That's good. Have you already found someone you're happy with,
     or are you still looking?`
   );
 
   showResponses([
-    ["Still looking", discoveryThree],
-    ["Found someone", foundSomeone]
+    ["Still looking", applicantsQuestion],
+    ["Found someone", () => showObjection("filled")]
   ]);
 }
 
 
-function discoveryThree() {
+function applicantsQuestion() {
 
   setStage("Qualification", 3);
 
   showScript(
-    "Qualification",
+    "Applicant Quality",
     `What's missing from the applicants you've seen so far?`
   );
 
@@ -724,8 +810,8 @@ function discoveryThree() {
 function workloadQuestion() {
 
   showScript(
-    "Current Situation",
-    `Who's handling the bookkeeping work while you're recruiting?`
+    "Current Workload",
+    `Who's handling the work while you're recruiting?`
   );
 
   showResponses([
@@ -744,14 +830,51 @@ function alternativeQuestion() {
   );
 
   showResponses([
-    ["Yes", appointment],
-    ["Maybe", appointment],
+    ["Yes", summariseSituation],
+    ["Possibly", summariseSituation],
     ["No", () => showObjection("notInterested")]
   ]);
 }
 
 
-function appointment() {
+/* SUMMARISE AND POSITION */
+
+function summariseSituation() {
+
+  showScript(
+    "Confirm Their Situation",
+    `So if I've understood you correctly, the main issue is
+    <strong>[their problem]</strong>, and in the meantime
+    <strong>[whoever is doing the work]</strong> is picking up the slack.<br><br>
+
+    Is that fair?`
+  );
+
+  showResponses([
+    ["Yes, that's fair", positionSolution],
+    ["Clarify situation", workloadQuestion]
+  ]);
+}
+
+
+function positionSolution() {
+
+  showScript(
+    "Position The Alternative",
+    `The reason I asked is that we help businesses in exactly this
+    situation by providing dedicated bookkeeping support rather than
+    continuing the same hiring cycle.`
+  );
+
+  showResponses([
+    ["Continue", appointmentQuestion]
+  ]);
+}
+
+
+/* APPOINTMENT */
+
+function appointmentQuestion() {
 
   setStage("Appointment", 5);
 
@@ -761,9 +884,10 @@ function appointment() {
   );
 
   showResponses([
-    ["Yes", appointmentBooked],
-    ["What would we discuss?", meetingExplanation],
-    ["Send information", () => showObjection("info")]
+    ["Yes", meetingExplanation],
+    ["What does that look like?", meetingExplanation],
+    ["Send information", () => showObjection("info")],
+    ["Not interested", () => showObjection("notInterested")]
   ]);
 }
 
@@ -772,63 +896,107 @@ function meetingExplanation() {
 
   showScript(
     "Meeting Explanation",
-    `It's simply a short conversation to understand what you need,
-    show you how the alternative works, and see whether it makes
-    commercial sense for your business.<br><br>
-    If it doesn't, we leave it there.`
+    `It's just 20 minutes. We understand what you need, explain how
+    the support works, and you can decide if it's worth taking further.<br><br>
+
+    No commitment.`
   );
 
   showResponses([
-    ["Book the meeting", appointmentBooked],
-    ["Not now", () => setOutcome("Follow up required")]
+    ["Offer appointment times", offerTimes],
+    ["Send information instead", () => showObjection("info")]
   ]);
 }
 
 
-function appointmentBooked() {
+function offerTimes() {
+
+  showScript(
+    "Offer Two Times",
+    `Great. Would Thursday at 3 or Friday at 11 work for you?`
+  );
+
+  showResponses([
+    ["Thursday at 3", attendanceCheck],
+    ["Friday at 11", attendanceCheck],
+    ["Different time", alternativeTime]
+  ]);
+}
+
+
+function alternativeTime() {
+
+  showScript(
+    "Alternative Time",
+    `No problem. What time would work better for you?`
+  );
+
+  showResponses([
+    ["Time agreed", attendanceCheck],
+    ["Needs callback", callback]
+  ]);
+}
+
+
+function attendanceCheck() {
+
+  showScript(
+    "Confirm Attendance",
+    `Perfect, I've got you down.<br><br>
+
+    Before I let you go, is there anything that could realistically
+    get in the way of you attending that call?`
+  );
+
+  showResponses([
+    ["No", commitmentCheck],
+    ["Possible issue", commitmentCheck]
+  ]);
+}
+
+
+function commitmentCheck() {
+
+  showScript(
+    "Test Commitment",
+    `If this made sense, is there anything you can already see that
+    would stop you moving forward?`
+  );
+
+  showResponses([
+    ["Nothing stopping us", confirmEmail],
+    ["They raise a concern", () => showObjection("notInterested")],
+    ["Need more information", () => showObjection("info")]
+  ]);
+}
+
+
+function confirmEmail() {
+
+  showScript(
+    "Confirm Email",
+    `I'll send the calendar invite straight after this call.<br><br>
+
+    Is this the best email for you?`
+  );
+
+  showResponses([
+    ["Yes", finalClose],
+    ["Update email", finalClose]
+  ]);
+}
+
+
+function finalClose() {
 
   showScript(
     "Close",
-    `Perfect. Let's get a time in the diary.<br><br>
-    Once we've agreed the time, I'll send the calendar invitation
-    and confirmation across.`
+    `Great, you'll have it shortly. Speak then.`
   );
 
   showResponses([
     ["Appointment booked", () =>
       setOutcome("Appointment booked")]
-  ]);
-}
-
-
-function explainCall() {
-
-  showScript(
-    "Reason for Call",
-    `We help businesses look at an alternative way of filling roles
-    like bookkeeping without relying entirely on the local hiring market.<br><br>
-    I only wanted to ask a couple of questions to see whether it's
-    even relevant to you.`
-  );
-
-  showResponses([
-    ["Go ahead", discovery],
-    ["Not interested", () => showObjection("notInterested")]
-  ]);
-}
-
-
-function foundSomeone() {
-
-  showScript(
-    "Role Filled",
-    `Understood. Has everything been finalised with them,
-    or are you still keeping your options open until they start?`
-  );
-
-  showResponses([
-    ["Still open", discoveryThree],
-    ["Fully filled", () => setOutcome("Role filled")]
   ]);
 }
 
@@ -841,59 +1009,122 @@ function showObjection(type) {
 
     busy: {
       title: "I'm busy",
+
       text:
         `Of course. Can I take ten seconds to say why I called?
         If it's not relevant, I'll let you go.`,
+
       buttons: [
-        ["Go ahead", discovery],
+        ["Go ahead", searchStatus],
         ["Still busy", callback]
       ]
     },
 
+
     internal: {
-      title: "Handling internally",
+      title: "We're handling it internally",
+
       text:
         `Understood. Is that temporary while you look,
-        or is that the long-term plan?`,
+        or the long-term plan?`,
+
       buttons: [
-        ["Temporary", discoveryThree],
-        ["Long-term plan", alternativeQuestion]
+        ["Temporary", internalTemporary],
+        ["Long-term plan", () =>
+          setOutcome("Handling internally")]
       ]
     },
+
+
+    policy: {
+      title: "We do not outsource",
+
+      text:
+        `I understand. Is that a firm policy for every role,
+        or would it ever be reviewed if internal hiring wasn't
+        covering the workload?`,
+
+      buttons: [
+        ["Firm policy", firmPolicyEnd],
+        ["Could be reviewed", workloadQuestion]
+      ]
+    },
+
+
+    info: {
+      title: "Send me some information",
+
+      text:
+        `Of course. Just so I don't send you something irrelevant,
+        what's the bigger issue at the moment, finding the right person,
+        the time the search is taking, or keeping the workload covered?`,
+
+      buttons: [
+        ["Finding the right person", infoFollowUp],
+        ["Search taking too long", infoFollowUp],
+        ["Keeping workload covered", infoFollowUp],
+        ["Just email me", () =>
+          setOutcome("Information requested")]
+      ]
+    },
+
 
     local: {
       title: "We only hire locally",
+
       text:
-        `Understood. Is there a particular reason the person needs
-        to be physically local for this role?`,
+        `Understood. Can I ask, what makes hiring locally important
+        for this role?`,
+
       buttons: [
-        ["Explain reason", discoveryThree],
-        ["Open to remote", alternativeQuestion]
+        ["Needs to be onsite / legal", () =>
+          setOutcome("Local hire required")],
+        ["Reason is flexible", localFollowUp]
       ]
     },
 
-    info: {
-      title: "Send information",
+
+    budget: {
+      title: "No budget",
+
       text:
-        `Absolutely. So I send something relevant rather than a
-        generic brochure, can I ask you one quick question about
-        what you're looking for?`,
+        `Understood. Is there no budget for the role at all,
+        or is the current hiring budget already stretched?`,
+
       buttons: [
-        ["Go ahead", discovery],
-        ["Just email me", () => setOutcome("Information requested")]
+        ["No budget at all", budgetFollowUp],
+        ["Budget is stretched", budgetFollowUp]
       ]
     },
+
+
+    filled: {
+      title: "Role filled",
+
+      text:
+        `Good to hear. Has the person already started,
+        or are they due to start soon?`,
+
+      buttons: [
+        ["Already started", roleFilledEnd],
+        ["Due to start soon", () =>
+          setOutcome("Role filled")]
+      ]
+    },
+
 
     notInterested: {
       title: "Not interested",
+
       text:
-        `No problem. Is that because you've already solved the
-        bookkeeping requirement, or because the alternative itself
-        isn't something you'd consider?`,
+        `No problem at all. Is that because the hiring search is
+        under control, or simply not a priority right now?`,
+
       buttons: [
-        ["Role solved", () => setOutcome("Role filled")],
-        ["Not considering alternatives", () =>
-          setOutcome("Not interested")]
+        ["Search is under control", () =>
+          setOutcome("Not interested")],
+        ["Not a priority", notInterestedEnd],
+        ["Don't want to engage", notInterestedEnd]
       ]
     }
 
@@ -901,12 +1132,128 @@ function showObjection(type) {
 
   const objection = objections[type];
 
+  if (!objection) return;
+
   showScript(
     "Objection: " + objection.title,
     objection.text
   );
 
   showResponses(objection.buttons);
+}
+
+
+/* OBJECTION FOLLOW UPS */
+
+function internalTemporary() {
+
+  showScript(
+    "Handling Internally",
+    `That makes sense. Would you be open to another way
+    to take some pressure off the team?`
+  );
+
+  showResponses([
+    ["Yes", summariseSituation],
+    ["Maybe", summariseSituation],
+    ["No", () => showObjection("notInterested")]
+  ]);
+}
+
+
+function firmPolicyEnd() {
+
+  showScript(
+    "Firm Company Policy",
+    `Understood. Thanks for being clear.`
+  );
+
+  showResponses([
+    ["Thank them and end call", () =>
+      setOutcome("Company policy: no outsourcing")]
+  ]);
+}
+
+
+function infoFollowUp() {
+
+  showScript(
+    "Information Follow Up",
+    `Got it. I'll send you something around that.<br><br>
+
+    Why don't we put 15 to 20 minutes in the diary as well,
+    and if it's not relevant when you see it, we can leave it there?`
+  );
+
+  showResponses([
+    ["Yes, book a time", offerTimes],
+    ["Just send the information", () =>
+      setOutcome("Information requested")]
+  ]);
+}
+
+
+function localFollowUp() {
+
+  showScript(
+    "Local Hiring",
+    `That makes sense. The reason I ask is that we provide dedicated
+    support that works your hours and integrates with your team.<br><br>
+
+    Would you be open to a short conversation to see whether that
+    could still work?`
+  );
+
+  showResponses([
+    ["Yes", appointmentQuestion],
+    ["Maybe", meetingExplanation],
+    ["No", () => setOutcome("Local hire only")]
+  ]);
+}
+
+
+function budgetFollowUp() {
+
+  showScript(
+    "Budget",
+    `Understood. What is keeping the work covered while you're
+    trying to fill the position?`
+  );
+
+  showResponses([
+    ["Continue", workloadQuestion]
+  ]);
+}
+
+
+function roleFilledEnd() {
+
+  showScript(
+    "Role Filled",
+    `Great, I'm glad you got it sorted.<br><br>
+
+    I'll leave you to it, and if anything changes in future,
+    you know where we are.`
+  );
+
+  showResponses([
+    ["End call", () =>
+      setOutcome("Role filled")]
+  ]);
+}
+
+
+function notInterestedEnd() {
+
+  showScript(
+    "Not Interested",
+    `Understood. Thanks for your time, and I'll leave you to it.`
+  );
+
+  showResponses([
+    ["End call", () =>
+      setOutcome("Not interested")]
+  ]);
 }
 
 
@@ -920,8 +1267,86 @@ function callback() {
 
   showResponses([
     ["Callback arranged", () =>
-      setOutcome("Callback required")]
+      setOutcome("Callback required")],
+    ["No callback", () =>
+      setOutcome("Not interested")]
   ]);
+}
+
+
+/* QUICK ANSWERS */
+
+function showQuickAnswer(type) {
+
+  const answers = {
+
+    who: {
+      title: "Who are you?",
+
+      text:
+        `Sorry, I should've said. Wes from Hey Rachel.
+        We help businesses with bookkeeping support.<br><br>
+
+        How's the search going so far, are you finding the right people,
+        or is that proving difficult?`,
+
+      buttons: [
+        ["Continue", searchStatus],
+        ["I'm busy", () => showObjection("busy")]
+      ]
+    },
+
+
+    support: {
+      title: "What kind of bookkeeping support?",
+
+      text:
+        `We help businesses access experienced bookkeeping professionals
+        without having to rely entirely on the local hiring market.<br><br>
+
+        Out of interest, what's been the biggest challenge with the
+        search so far, finding the right experience or finding someone
+        within budget?`,
+
+      buttons: [
+        ["Finding the right experience", applicantsQuestion],
+        ["Budget", () => showObjection("budget")],
+        ["Continue", searchStatus]
+      ]
+    },
+
+
+    recruitment: {
+      title: "Are you a recruitment company?",
+
+      text:
+        `Not exactly. We provide businesses with dedicated bookkeeping
+        professionals through an outsourced model, so we handle the
+        employment side rather than simply introducing you to someone
+        and walking away.<br><br>
+
+        How's the search going at your end, are you finding the right
+        people or is cost becoming part of the problem?`,
+
+      buttons: [
+        ["Finding people is difficult", applicantsQuestion],
+        ["Cost is the problem", () => showObjection("budget")],
+        ["Continue", searchStatus]
+      ]
+    }
+
+  };
+
+  const answer = answers[type];
+
+  if (!answer) return;
+
+  showScript(
+    "Quick Answer: " + answer.title,
+    answer.text
+  );
+
+  showResponses(answer.buttons);
 }
 
 
