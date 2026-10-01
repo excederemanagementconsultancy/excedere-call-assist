@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Excedere Email</title>
+
+<style>
+:root{
+  --bg:#06110e;
+  --panel:#0a1915;
+  --panel2:#0d1e19;
+  --border:#223c32;
+  --border-soft:#193128;
+  --text:#f0f7f4;
+  --muted:#8da89d;
+  --green:#35d07f;
+  --green-dark:#113e2b;
+  --red:#f06464;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+}
+
+body{
+  color:var(--text);
+  background:
+    radial-gradient(circle at 80% 0%,rgba(45,180,109,.08),transparent 30%),
+    linear-gradient(180deg,#06110e 0%,#07140f 100%);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+button,input,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  min-height:100vh;
+}
+
+header{
+  min-height:78px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 28px;
+  border-bottom:1px solid var(--border);
+  background:rgba(5,16,13,.97);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.brand-mark{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--green);
+  border-radius:11px;
+  color:var(--green);
+  font-size:20px;
+  font-weight:800;
+}
+
+.brand-name{
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:.18em;
+}
+
+.brand-product{
+  margin-top:4px;
+  color:var(--green);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.26em;
+}
+
+.close-btn{
+  min-height:42px;
+  padding:0 18px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--panel2);
+  color:var(--text);
+}
+
+.workspace{
+  width:min(1100px,calc(100% - 40px));
+  margin:38px auto;
+}
+
+.page-heading{
+  margin-bottom:24px;
+}
+
+.eyebrow{
+  margin-bottom:10px;
+  color:var(--green);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.20em;
+  text-transform:uppercase;
+}
+
+h1{
+  margin:0 0 8px;
+  font-size:34px;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.contact-card{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:18px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:rgba(12,28,23,.85);
+}
+
+.contact-item{
+  padding:11px 13px;
+  border:1px solid var(--border-soft);
+  border-radius:9px;
+  background:#07130f;
+}
+
+.contact-label{
+  margin-bottom:5px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.contact-value{
+  font-size:14px;
+  font-weight:700;
+}
+
+.composer{
+  padding:22px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:rgba(12,28,23,.88);
+}
+
+.field{
+  margin-bottom:17px;
+}
+
+label{
+  display:block;
+  margin-bottom:7px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:750;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  outline:none;
+  background:#08140f;
+  color:var(--text);
+}
+
+input:focus,
+textarea:focus{
+  border-color:var(--green);
+}
+
+#message{
+  min-height:340px;
+  resize:vertical;
+  line-height:1.6;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+  margin-top:18px;
+}
+
+.action-btn{
+  min-height:46px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--panel2);
+  color:var(--text);
+  font-weight:750;
+}
+
+.action-btn.primary{
+  border:0;
+  background:var(--green);
+  color:#03120b;
+}
+
+.status{
+  min-height:20px;
+  margin-top:12px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.good{
+  color:var(--green);
+}
+
+.bad{
+  color:var(--red);
+}
+
+@media(max-width:720px){
+
+  .workspace{
+    width:min(100% - 24px,1100px);
+    margin:22px auto;
+  }
+
+  .contact-card{
+    grid-template-columns:1fr;
+  }
+
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+<div class="brand">
+
+<div class="brand-mark">
+E
+</div>
+
+<div>
+
+<div class="brand-name">
+EXCEDERE
+</div>
+
+<div class="brand-product">
+EMAIL
+</div>
+
+</div>
+
+</div>
+
+<button
+  class="close-btn"
+  onclick="window.close()">
+  Close
+</button>
+
+</header>
+
+
+<main class="workspace">
+
+<div class="page-heading">
+
+<div class="eyebrow">
+Prospect Communication
+</div>
+
+<h1>
+Email Composer
+</h1>
+
+<div class="subtitle">
+Compose the message here, then open it in your normal email application.
+</div>
+
+</div>
+
+
+<div class="contact-card">
+
+<div class="contact-item">
+
+<div class="contact-label">
+Contact
+</div>
+
+<div
+  id="contactName"
+  class="contact-value">
+  Not selected
+</div>
+
+</div>
+
+
+<div class="contact-item">
+
+<div class="contact-label">
+Company
+</div>
+
+<div
+  id="contactCompany"
+  class="contact-value">
+  Not selected
+</div>
+
+</div>
+
+</div>
+
+
+<div class="composer">
+
+
+<div class="field">
+
+<label for="to">
+To
+</label>
+
+<input
+  id="to"
+  type="email"
+  placeholder="prospect@example.com">
+
+</div>
+
+
+<div class="field">
+
+<label for="subject">
+Subject
+</label>
+
+<input
+  id="subject"
+  type="text"
+  placeholder="Enter email subject">
+
+</div>
+
+
+<div class="field">
+
+<label for="message">
+Message
+</label>
+
+<textarea
+  id="message"
+  placeholder="Write your email here..."></textarea>
+
+</div>
+
+
+<div class="actions">
+
+<button
+  class="action-btn primary"
+  onclick="openEmailApp()">
+  Open in Email App
+</button>
+
+<button
+  class="action-btn"
+  onclick="copyEmail()">
+  Copy Email
+</button>
+
+<button
+  class="action-btn"
+  onclick="clearEmail()">
+  Clear
+</button>
+
+</div>
+
+
+<div
+  id="status"
+  class="status">
+</div>
+
+
+</div>
+
+</main>
+
+</div>
+
+
+<script>
+
+function getParam(name){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  return params.get(name) || "";
+}
+
+
+const contactName =
+  getParam("name");
+
+
+const company =
+  getParam("company");
+
+
+const email =
+  getParam("email");
+
+
+document
+  .getElementById(
+    "contactName"
+  )
+  .textContent =
+    contactName ||
+    "Not provided";
+
+
+document
+  .getElementById(
+    "contactCompany"
+  )
+  .textContent =
+    company ||
+    "Not provided";
+
+
+document
+  .getElementById(
+    "to"
+  )
+  .value =
+    email;
+
+
+function openEmailApp(){
+
+  const to =
+    document
+      .getElementById(
+        "to"
+      )
+      .value
+      .trim();
+
+
+  const subject =
+    document
+      .getElementById(
+        "subject"
+      )
+      .value
+      .trim();
+
+
+  const message =
+    document
+      .getElementById(
+        "message"
+      )
+      .value
+      .trim();
+
+
+  const status =
+    document
+      .getElementById(
+        "status"
+      );
+
+
+  if(!to){
+
+    status.className =
+      "status bad";
+
+    status.textContent =
+      "Enter an email address first.";
+
+    return;
+  }
+
+
+  const mailto =
+    "mailto:" +
+    encodeURIComponent(to) +
+    "?subject=" +
+    encodeURIComponent(subject) +
+    "&body=" +
+    encodeURIComponent(message);
+
+
+  status.className =
+    "status good";
+
+  status.textContent =
+    "Opening your email application...";
+
+
+  window.location.href =
+    mailto;
+}
+
+
+async function copyEmail(){
+
+  const to =
+    document
+      .getElementById(
+        "to"
+      )
+      .value
+      .trim();
+
+
+  const subject =
+    document
+      .getElementById(
+        "subject"
+      )
+      .value
+      .trim();
+
+
+  const message =
+    document
+      .getElementById(
+        "message"
+      )
+      .value
+      .trim();
+
+
+  const text =
+`To: ${to}
+
+Subject: ${subject}
+
+${message}`;
+
+
+  try{
+
+    await navigator
+      .clipboard
+      .writeText(
+        text
+      );
+
+
+    document
+      .getElementById(
+        "status"
+      )
+      .innerHTML =
+        '<span class="good">Email copied.</span>';
+
+  }catch{
+
+    document
+      .getElementById(
+        "status"
+      )
+      .innerHTML =
+        '<span class="bad">Unable to copy email.</span>';
+  }
+}
+
+
+function clearEmail(){
+
+  document
+    .getElementById(
+      "subject"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "message"
+    )
+    .value =
+      "";
+
+
+  document
+    .getElementById(
+      "status"
+    )
+    .textContent =
+      "";
+}
+
+</script>
+
+</body>
+</html>
