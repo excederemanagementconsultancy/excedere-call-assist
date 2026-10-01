@@ -8,19 +8,30 @@
 
 <style>
 :root {
-  --bg: #07110f;
-  --panel: #0b1714;
-  --panel2: #101e1a;
-  --panel3: #08120f;
-  --border: #22352f;
-  --border-soft: #1b2d27;
-  --text: #edf5f2;
-  --muted: #8ea39c;
+  --bg: #06110e;
+  --bg-soft: #081712;
+  --panel: #0a1915;
+  --panel-2: #0d1e19;
+  --panel-3: #10231d;
+  --panel-hover: #132820;
+
+  --border: #223c32;
+  --border-soft: #193128;
+
+  --text: #f0f7f4;
+  --muted: #8da89d;
+  --muted-2: #637d73;
+
   --green: #35d07f;
-  --green-dark: #17643f;
+  --green-soft: #28bd70;
+  --green-dark: #113e2b;
+
   --amber: #e9b44c;
-  --red: #e66b6b;
-  --blue: #57a8ff;
+  --red: #f06464;
+  --blue: #63aaff;
+
+  --shadow:
+    0 18px 40px rgba(0, 0, 0, .22);
 }
 
 * {
@@ -34,83 +45,90 @@ body {
 }
 
 body {
+  color: var(--text);
+
   background:
     radial-gradient(
-      circle at 80% 0%,
-      rgba(31, 116, 77, .12),
+      circle at 78% 0%,
+      rgba(45, 180, 109, .08),
       transparent 28%
     ),
-    var(--bg);
-
-  color: var(--text);
+    linear-gradient(
+      180deg,
+      #06110e 0%,
+      #07140f 100%
+    );
 
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+
+  -webkit-font-smoothing:
+    antialiased;
 }
 
 button,
-textarea,
-input {
+input,
+textarea {
   font: inherit;
 }
 
 button {
   transition:
-    border-color .15s ease,
-    color .15s ease,
     background .15s ease,
-    transform .15s ease;
+    color .15s ease,
+    border-color .15s ease,
+    transform .12s ease,
+    filter .15s ease;
 }
 
 button:active {
-  transform: translateY(1px);
+  transform:
+    translateY(1px);
 }
 
 .app {
   min-height: 100vh;
 }
 
+
 /* =========================================================
    HEADER
 ========================================================= */
 
 header {
-  min-height: 74px;
+  min-height: 78px;
 
   display: grid;
 
   grid-template-columns:
-    280px
-    minmax(300px, 620px)
+    260px
+    minmax(420px, 660px)
     1fr;
+
+  gap: 28px;
 
   align-items: center;
 
-  gap: 22px;
-
   padding:
     12px
-    24px;
-
-  border-bottom:
-    1px solid
-    var(--border);
-
-  background:
-    rgba(
-      7,
-      17,
-      15,
-      .96
-    );
+    28px;
 
   position: sticky;
   top: 0;
 
-  z-index: 30;
+  z-index: 50;
+
+  background:
+    rgba(5, 16, 13, .97);
+
+  border-bottom:
+    1px solid var(--border);
+
+  backdrop-filter:
+    blur(12px);
 }
 
 .brand {
@@ -120,18 +138,17 @@ header {
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
-
-  border:
-    1px solid
-    var(--green);
-
-  border-radius:
-    11px;
+  width: 44px;
+  height: 44px;
 
   display: grid;
   place-items: center;
+
+  border:
+    1px solid var(--green);
+
+  border-radius:
+    11px;
 
   color:
     var(--green);
@@ -141,29 +158,40 @@ header {
 
   font-weight:
     800;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(53, 208, 127, .05);
 }
 
 .brand-name {
   font-size:
-    18px;
+    17px;
+
+  font-weight:
+    700;
 
   letter-spacing:
-    .16em;
+    .18em;
 }
 
 .brand-product {
+  margin-top:
+    4px;
+
   color:
     var(--green);
 
   font-size:
-    11px;
+    10px;
+
+  font-weight:
+    700;
 
   letter-spacing:
-    .24em;
-
-  margin-top:
-    3px;
+    .26em;
 }
+
 
 /* =========================================================
    SEARCH
@@ -173,46 +201,11 @@ header {
   position: relative;
 }
 
-.search-box {
-  width: 100%;
-
-  height: 44px;
-
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:
-    10px;
-
-  background:
-    var(--panel2);
-
-  color:
-    var(--text);
-
-  padding:
-    0 42px
-    0 42px;
-
-  outline:
-    none;
-}
-
-.search-box:focus {
-  border-color:
-    var(--green);
-}
-
 .search-icon {
-  position:
-    absolute;
+  position: absolute;
 
-  left:
-    14px;
-
-  top:
-    50%;
+  left: 15px;
+  top: 50%;
 
   transform:
     translateY(-50%);
@@ -222,29 +215,66 @@ header {
 
   pointer-events:
     none;
+
+  font-size:
+    17px;
+}
+
+.search-box {
+  width: 100%;
+  height: 46px;
+
+  padding:
+    0 42px
+    0 44px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    10px;
+
+  outline:
+    none;
+
+  background:
+    #0c1b17;
+
+  color:
+    var(--text);
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255, 255, 255, .015);
+}
+
+.search-box::placeholder {
+  color:
+    #738d83;
+}
+
+.search-box:focus {
+  border-color:
+    var(--green);
+
+  box-shadow:
+    0 0 0 2px
+    rgba(53, 208, 127, .08);
 }
 
 .search-clear {
-  position:
-    absolute;
+  position: absolute;
 
-  right:
-    10px;
-
-  top:
-    50%;
+  right: 9px;
+  top: 50%;
 
   transform:
     translateY(-50%);
 
-  width:
-    28px;
+  width: 29px;
+  height: 29px;
 
-  height:
-    28px;
-
-  border:
-    0;
+  border: 0;
 
   border-radius:
     7px;
@@ -259,64 +289,67 @@ header {
     pointer;
 }
 
-.search-results {
-  display:
-    none;
+.search-clear:hover {
+  color:
+    var(--green);
 
-  position:
-    absolute;
+  background:
+    rgba(53, 208, 127, .06);
+}
+
+.search-results {
+  display: none;
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
 
   top:
     calc(100% + 8px);
 
-  left:
-    0;
-
-  right:
-    0;
-
   max-height:
-    340px;
+    360px;
 
   overflow-y:
     auto;
 
   border:
-    1px solid
-    var(--border);
+    1px solid var(--border);
 
   border-radius:
-    10px;
+    11px;
 
   background:
-    #091410;
+    #091713;
 
   box-shadow:
-    0 18px 45px
-    rgba(0, 0, 0, .35);
+    0 24px 60px
+    rgba(0, 0, 0, .42);
 
   z-index:
-    80;
+    90;
 }
 
 .search-results.open {
-  display:
-    block;
+  display: block;
 }
 
 .search-result {
-  width:
-    100%;
+  display: block;
+
+  width: 100%;
 
   padding:
-    12px 14px;
+    13px 15px;
 
-  border:
-    0;
+  text-align:
+    left;
+
+  border: 0;
 
   border-bottom:
-    1px solid
-    var(--border-soft);
+    1px solid var(--border-soft);
 
   background:
     transparent;
@@ -324,43 +357,44 @@ header {
   color:
     var(--text);
 
-  text-align:
-    left;
-
   cursor:
     pointer;
 }
 
 .search-result:last-child {
-  border-bottom:
-    0;
+  border-bottom: 0;
 }
 
 .search-result:hover {
   background:
-    var(--panel2);
+    var(--panel-hover);
 }
 
 .search-result strong {
-  display:
-    block;
+  display: block;
 
   margin-bottom:
     3px;
+
+  font-size:
+    14px;
 }
 
 .search-result small {
   color:
     var(--muted);
+
+  font-size:
+    12px;
 }
 
+
 /* =========================================================
-   RECORD NAVIGATION
+   HEADER NAVIGATION
 ========================================================= */
 
 .record-nav {
-  display:
-    flex;
+  display: flex;
 
   justify-content:
     flex-end;
@@ -369,42 +403,44 @@ header {
     center;
 
   gap:
-    9px;
+    10px;
 }
 
 .record-counter {
+  min-width:
+    68px;
+
   color:
-    #cbd9d4;
+    #c7d5d0;
 
   font-size:
     13px;
-
-  min-width:
-    70px;
 
   text-align:
     right;
 }
 
 .nav-arrow {
-  width:
-    42px;
+  width: 42px;
+  height: 42px;
 
-  height:
-    42px;
+  display: grid;
+  place-items: center;
 
   border:
-    1px solid
-    var(--border);
+    1px solid var(--border);
 
   border-radius:
     9px;
 
   background:
-    var(--panel2);
+    #0d1e19;
 
   color:
     var(--text);
+
+  font-size:
+    20px;
 
   cursor:
     pointer;
@@ -422,8 +458,10 @@ header {
   min-height:
     42px;
 
-  border:
-    0;
+  padding:
+    0 19px;
+
+  border: 0;
 
   border-radius:
     9px;
@@ -432,128 +470,160 @@ header {
     var(--green);
 
   color:
-    #04110b;
+    #03120b;
 
   font-weight:
     800;
-
-  padding:
-    0 18px;
 
   cursor:
     pointer;
 }
 
+.next-record-top:hover {
+  filter:
+    brightness(1.07);
+}
+
+
 /* =========================================================
-   MAIN LAYOUT
+   THREE COLUMN WORKSPACE
 ========================================================= */
 
 .workspace {
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
     300px
-    minmax(500px, 1fr)
-    400px;
+    minmax(620px, 1fr)
+    500px;
 
   min-height:
-    calc(100vh - 74px);
-}
-
-.panel {
-  padding:
-    24px;
+    calc(100vh - 78px);
 }
 
 .left-panel {
+  min-width: 0;
+
+  padding:
+    26px 26px 30px;
+
   border-right:
-    1px solid
-    var(--border);
+    1px solid var(--border);
 
   background:
-    rgba(
-      8,
-      20,
-      16,
-      .48
-    );
+    rgba(7, 21, 16, .52);
+
+  height:
+    calc(100vh - 78px);
+
+  overflow-y:
+    auto;
+
+  position: sticky;
+  top: 78px;
 }
 
 .script-panel {
+  min-width: 0;
+
   padding:
-    28px 34px;
+    32px 38px 48px;
 }
 
 .right-panel {
-  border-left:
-    1px solid
-    var(--border);
+  min-width: 0;
 
   padding:
-    18px;
+    16px;
+
+  border-left:
+    1px solid var(--border);
 
   background:
-    rgba(
-      8,
-      20,
-      16,
-      .48
-    );
+    rgba(7, 21, 16, .56);
+
+  height:
+    calc(100vh - 78px);
+
+  overflow-y:
+    auto;
+
+  position: sticky;
+  top: 78px;
 }
 
+
+/* =========================================================
+   COMMON
+========================================================= */
+
 .eyebrow {
+  margin-bottom:
+    13px;
+
   color:
     var(--green);
 
   font-size:
-    11px;
+    10px;
 
   font-weight:
     800;
 
   letter-spacing:
-    .18em;
+    .2em;
 
   text-transform:
     uppercase;
-
-  margin-bottom:
-    12px;
 }
 
+
 /* =========================================================
-   LEAD PANEL
+   LEFT LEAD PANEL
 ========================================================= */
 
 .lead-name {
+  margin-bottom:
+    6px;
+
   font-size:
     30px;
 
   font-weight:
-    750;
+    760;
 
-  margin-bottom:
-    8px;
+  letter-spacing:
+    -.02em;
 }
 
-.lead-title,
-.lead-company {
+.lead-title {
   color:
-    #d5e0dc;
+    #e0eae6;
+
+  font-size:
+    14px;
 
   line-height:
-    1.55;
+    1.45;
 }
 
 .lead-company {
+  margin-top:
+    2px;
+
   color:
     var(--muted);
+
+  font-size:
+    14px;
+
+  line-height:
+    1.45;
 }
 
 .lead-details {
   margin-top:
-    22px;
+    24px;
 }
 
 .detail {
@@ -561,30 +631,38 @@ header {
     12px 0;
 
   border-bottom:
-    1px solid
-    var(--border-soft);
+    1px solid var(--border-soft);
 }
 
 .detail-label {
+  margin-bottom:
+    6px;
+
   color:
     var(--muted);
 
   font-size:
-    11px;
+    10px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    .13em;
 
   text-transform:
     uppercase;
-
-  letter-spacing:
-    .11em;
-
-  margin-bottom:
-    6px;
 }
 
 .detail-value {
+  color:
+    var(--text);
+
   font-size:
-    14px;
+    13px;
+
+  font-weight:
+    560;
 
   line-height:
     1.5;
@@ -598,17 +676,17 @@ header {
     750;
 }
 
+
 /* =========================================================
    PHONE
 ========================================================= */
 
 .phone-row {
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
-    1fr
-    36px;
+    minmax(0, 1fr)
+    38px;
 
   gap:
     8px;
@@ -618,20 +696,24 @@ header {
 }
 
 .phone-link {
-  display:
-    flex;
+  display: flex;
 
-  gap:
-    8px;
+  min-width: 0;
 
   align-items:
     center;
+
+  gap:
+    9px;
 
   color:
     var(--text);
 
   text-decoration:
     none;
+
+  font-size:
+    14px;
 }
 
 .phone-link:hover {
@@ -639,22 +721,29 @@ header {
     var(--green);
 }
 
-.edit-phone {
-  width:
-    36px;
+.phone-link span:last-child {
+  overflow:
+    hidden;
 
-  height:
-    36px;
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+.edit-phone {
+  width: 38px;
+  height: 38px;
 
   border:
-    1px solid
-    var(--border);
+    1px solid var(--border);
 
   border-radius:
     8px;
 
   background:
-    var(--panel2);
+    var(--panel-2);
 
   color:
     var(--muted);
@@ -664,19 +753,16 @@ header {
 }
 
 .edit-phone:hover {
-  color:
+  border-color:
     var(--green);
 
-  border-color:
+  color:
     var(--green);
 }
 
 .direct-number {
   color:
-    var(--muted);
-
-  font-size:
-    13px;
+    #d4e0dc;
 }
 
 .empty-number {
@@ -688,24 +774,22 @@ header {
 }
 
 .skip-record {
-  width:
-    100%;
-
-  margin-top:
-    22px;
+  width: 100%;
 
   min-height:
-    44px;
+    46px;
+
+  margin-top:
+    24px;
 
   border:
-    1px solid
-    var(--border);
+    1px solid var(--border);
 
   border-radius:
     9px;
 
   background:
-    var(--panel2);
+    var(--panel-2);
 
   color:
     var(--text);
@@ -723,15 +807,139 @@ header {
 
   color:
     var(--green);
+
+  background:
+    var(--panel-3);
 }
 
+
 /* =========================================================
-   CENTER CALL AREA
+   CENTER HEADER
 ========================================================= */
 
 .call-header {
-  display:
-    flex;
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
+  gap:
+    26px;
+
+  width: 100%;
+
+  max-width:
+    900px;
+
+  margin:
+    0 auto 24px;
+}
+
+.call-header h1 {
+  margin:
+    0;
+
+  font-size:
+    clamp(
+      29px,
+      2vw,
+      36px
+    );
+
+  letter-spacing:
+    -.025em;
+
+  line-height:
+    1.15;
+}
+
+.call-stage {
+  margin-top:
+    8px;
+
+  color:
+    var(--muted);
+
+  font-size:
+    13px;
+}
+
+.start-call {
+  min-width:
+    142px;
+
+  min-height:
+    48px;
+
+  border: 0;
+
+  border-radius:
+    10px;
+
+  background:
+    var(--green);
+
+  color:
+    #03120b;
+
+  font-size:
+    14px;
+
+  font-weight:
+    850;
+
+  cursor:
+    pointer;
+}
+
+.start-call:hover {
+  filter:
+    brightness(1.07);
+}
+
+
+/* =========================================================
+   SCRIPT CARD
+========================================================= */
+
+.script-box {
+  width: 100%;
+
+  max-width:
+    900px;
+
+  min-height:
+    310px;
+
+  margin:
+    0 auto;
+
+  padding:
+    30px 30px 32px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(12, 27, 22, .92),
+      rgba(9, 22, 18, .88)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255, 255, 255, .018);
+}
+
+.script-topline {
+  display: flex;
 
   justify-content:
     space-between;
@@ -740,114 +948,27 @@ header {
     center;
 
   gap:
-    22px;
-
-  margin-bottom:
-    22px;
-}
-
-.call-header h1 {
-  margin:
-    0;
-
-  font-size:
-    30px;
-}
-
-.call-stage {
-  color:
-    var(--muted);
-
-  font-size:
-    13px;
-
-  margin-top:
-    7px;
-}
-
-.start-call {
-  border:
-    0;
-
-  background:
-    var(--green);
-
-  color:
-    #04110b;
-
-  padding:
-    13px 22px;
-
-  border-radius:
-    9px;
-
-  font-weight:
-    800;
-
-  cursor:
-    pointer;
-
-  white-space:
-    nowrap;
-}
-
-.start-call:hover {
-  filter:
-    brightness(1.08);
-}
-
-.script-box {
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:
-    15px;
-
-  background:
-    rgba(
-      12,
-      25,
-      21,
-      .82
-    );
-
-  padding:
-    26px;
-
-  min-height:
-    285px;
-}
-
-.script-topline {
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  gap:
     20px;
 
   margin-bottom:
-    18px;
+    22px;
 }
 
 .script-label {
   color:
     var(--green);
 
-  text-transform:
-    uppercase;
-
-  letter-spacing:
-    .16em;
-
   font-size:
-    11px;
+    10px;
 
   font-weight:
     800;
+
+  letter-spacing:
+    .18em;
+
+  text-transform:
+    uppercase;
 }
 
 .step-label {
@@ -859,102 +980,163 @@ header {
 }
 
 .script-text {
+  max-width:
+    760px;
+
+  color:
+    #f3f7f5;
+
   font-size:
-    21px;
+    clamp(
+      20px,
+      1.45vw,
+      24px
+    );
+
+  font-weight:
+    440;
 
   line-height:
-    1.65;
+    1.62;
+
+  letter-spacing:
+    -.012em;
 }
 
 .script-text strong {
   color:
     var(--green);
+
+  font-weight:
+    760;
 }
 
+
+/* =========================================================
+   RESPONSES
+========================================================= */
+
 .response-title {
+  width: 100%;
+
+  max-width:
+    900px;
+
   margin:
-    24px 0 12px;
+    28px auto 12px;
 
   color:
     var(--green);
 
   font-size:
-    11px;
+    10px;
 
   font-weight:
     800;
 
+  letter-spacing:
+    .18em;
+
   text-transform:
     uppercase;
-
-  letter-spacing:
-    .16em;
 }
 
 .responses {
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
     1fr 1fr;
 
   gap:
-    10px;
+    12px;
+
+  width: 100%;
+
+  max-width:
+    900px;
+
+  margin:
+    0 auto;
 }
 
 .response-btn {
   min-height:
-    60px;
+    64px;
 
-  background:
-    var(--panel2);
+  padding:
+    12px 16px;
 
   border:
-    1px solid
-    var(--border);
-
-  color:
-    var(--text);
+    1px solid var(--border);
 
   border-radius:
     10px;
 
-  padding:
-    11px 14px;
+  background:
+    linear-gradient(
+      180deg,
+      #0d211a,
+      #0b1b17
+    );
+
+  color:
+    var(--text);
+
+  font-size:
+    15px;
+
+  font-weight:
+    700;
 
   cursor:
     pointer;
-
-  font-weight:
-    650;
 }
 
-.response-btn:hover {
+.response-btn:hover:not(:disabled) {
   border-color:
     var(--green);
 
   color:
     var(--green);
+
+  background:
+    #10281f;
 }
 
+.response-btn:disabled {
+  color:
+    #d7e1dd;
+
+  cursor:
+    default;
+
+  opacity:
+    .82;
+}
+
+
 /* =========================================================
-   PROGRESS
+   PROGRESS TRACKER
 ========================================================= */
 
 .progress-area {
-  margin-top:
-    34px;
+  width: 100%;
+
+  max-width:
+    820px;
+
+  margin:
+    44px auto 0;
+
+  padding:
+    0 10px;
 }
 
 .progress-line {
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
     repeat(5, 1fr);
-
-  align-items:
-    start;
 
   position:
     relative;
@@ -967,52 +1149,42 @@ header {
   position:
     absolute;
 
-  top:
-    14px;
-
   left:
     10%;
 
   right:
     10%;
 
+  top:
+    17px;
+
   height:
     2px;
 
   background:
-    #344741;
+    #334b42;
 }
 
 .progress-item {
-  text-align:
-    center;
-
   position:
     relative;
 
   z-index:
     2;
+
+  text-align:
+    center;
 }
 
 .progress-circle {
   width:
-    30px;
+    35px;
 
   height:
-    30px;
+    35px;
 
   margin:
-    0 auto 9px;
-
-  border:
-    3px solid
-    #4d625b;
-
-  border-radius:
-    50%;
-
-  background:
-    var(--bg);
+    0 auto 10px;
 
   display:
     grid;
@@ -1020,11 +1192,23 @@ header {
   place-items:
     center;
 
+  border:
+    3px solid #526a60;
+
+  border-radius:
+    50%;
+
+  background:
+    var(--bg);
+
   color:
     var(--muted);
 
   font-size:
     11px;
+
+  font-weight:
+    700;
 }
 
 .progress-item.active
@@ -1034,9 +1218,16 @@ header {
 
   color:
     var(--green);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(53, 208, 127, .05);
 }
 
 .progress-item small {
+  display:
+    block;
+
   color:
     var(--muted);
 
@@ -1044,143 +1235,143 @@ header {
     11px;
 }
 
+
 /* =========================================================
-   RIGHT TOOL CARDS
+   RIGHT PANEL CARDS
 ========================================================= */
 
 .tool-card {
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:
+  margin-bottom:
     11px;
 
   padding:
-    13px;
+    14px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    12px;
 
   background:
-    rgba(
-      10,
-      24,
-      19,
-      .68
+    linear-gradient(
+      145deg,
+      rgba(12, 28, 23, .90),
+      rgba(8, 21, 17, .94)
     );
 
-  margin-bottom:
-    10px;
+  box-shadow:
+    inset 0 1px 0
+    rgba(255, 255, 255, .014);
 }
 
 .tool-card-title {
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    center;
-
-  gap:
-    10px;
+  margin-bottom:
+    11px;
 
   color:
     var(--green);
 
   font-size:
-    11px;
+    10px;
 
   font-weight:
-    800;
+    850;
+
+  letter-spacing:
+    .18em;
 
   text-transform:
     uppercase;
-
-  letter-spacing:
-    .16em;
-
-  margin-bottom:
-    10px;
 }
 
 textarea {
-  width:
-    100%;
-
-  min-height:
-    92px;
+  width: 100%;
 
   resize:
     vertical;
 
-  background:
-    var(--panel3);
+  padding:
+    12px 13px;
 
-  color:
-    var(--text);
+  outline:
+    none;
 
   border:
-    1px solid
-    var(--border);
+    1px solid var(--border);
 
   border-radius:
     9px;
 
-  padding:
-    12px;
+  background:
+    #08140f;
 
-  outline:
-    none;
+  color:
+    var(--text);
+
+  line-height:
+    1.5;
 }
 
 textarea:focus {
   border-color:
     var(--green);
+
+  box-shadow:
+    0 0 0 2px
+    rgba(53, 208, 127, .06);
 }
+
+#notes {
+  min-height:
+    104px;
+}
+
 
 /* =========================================================
    OBJECTIONS
 ========================================================= */
 
 .objection-grid {
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
     1fr 1fr;
 
   gap:
-    7px;
+    8px;
 }
 
 .objection-btn {
   min-height:
-    43px;
+    46px;
 
   padding:
-    9px 10px;
+    9px 11px;
+
+  border:
+    1px solid var(--border);
 
   border-radius:
     8px;
 
   background:
-    var(--panel2);
+    #0d1f1a;
 
   color:
-    #dce7e3;
+    #e3ece8;
 
-  border:
-    1px solid
-    var(--border);
+  font-size:
+    12px;
 
-  cursor:
-    pointer;
+  font-weight:
+    620;
 
   text-align:
     left;
 
-  font-size:
-    13px;
+  cursor:
+    pointer;
 }
 
 .objection-btn:hover {
@@ -1189,48 +1380,56 @@ textarea:focus {
 
   color:
     var(--green);
+
+  background:
+    #10271f;
 }
+
 
 /* =========================================================
    QUICK ANSWERS
 ========================================================= */
 
 .answer-grid {
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
     repeat(3, 1fr);
 
   gap:
-    7px;
+    8px;
 }
 
 .answer-btn {
   min-height:
-    52px;
+    58px;
 
   padding:
     8px;
+
+  border:
+    1px solid var(--border);
 
   border-radius:
     8px;
 
   background:
-    var(--panel2);
+    #0d1f1a;
 
   color:
-    #dce7e3;
+    #e3ece8;
 
-  border:
-    1px solid
-    var(--border);
+  font-size:
+    11px;
+
+  font-weight:
+    620;
+
+  line-height:
+    1.3;
 
   cursor:
     pointer;
-
-  font-size:
-    12px;
 }
 
 .answer-btn:hover {
@@ -1239,21 +1438,24 @@ textarea:focus {
 
   color:
     var(--green);
+
+  background:
+    #10271f;
 }
+
 
 /* =========================================================
    OUTCOMES
 ========================================================= */
 
 .outcome-grid {
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
     1fr 1fr;
 
   gap:
-    7px;
+    8px;
 }
 
 .outcome-btn {
@@ -1261,26 +1463,28 @@ textarea:focus {
     43px;
 
   padding:
-    9px;
+    9px 10px;
+
+  border:
+    1px solid var(--border);
 
   border-radius:
     8px;
 
-  border:
-    1px solid
-    var(--border);
-
   background:
-    var(--panel2);
+    #0d1f1a;
 
   color:
-    var(--text);
+    #e6efeb;
+
+  font-size:
+    12px;
+
+  font-weight:
+    650;
 
   cursor:
     pointer;
-
-  font-size:
-    13px;
 }
 
 .outcome-btn:hover {
@@ -1299,43 +1503,35 @@ textarea:focus {
     var(--green);
 }
 
+
 /* =========================================================
-   COLLAPSIBLE SECTIONS
+   COLLAPSIBLE TOOLS
 ========================================================= */
 
 details.tool-details {
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:
+  margin-bottom:
     11px;
 
-  background:
-    rgba(
-      10,
-      24,
-      19,
-      .68
-    );
+  overflow:
+    hidden;
 
-  margin-bottom:
-    10px;
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(12, 28, 23, .90),
+      rgba(8, 21, 17, .94)
+    );
 }
 
 details.tool-details
 summary {
-  list-style:
-    none;
-
-  cursor:
-    pointer;
-
-  padding:
-    14px;
-
-  display:
-    flex;
+  display: flex;
 
   justify-content:
     space-between;
@@ -1344,18 +1540,34 @@ summary {
     center;
 
   gap:
-    10px;
+    12px;
+
+  min-height:
+    66px;
+
+  padding:
+    13px 15px;
+
+  list-style:
+    none;
+
+  cursor:
+    pointer;
 }
 
 details.tool-details
 summary::-webkit-details-marker {
-  display:
-    none;
+  display: none;
+}
+
+details.tool-details
+summary:hover {
+  background:
+    rgba(53, 208, 127, .025);
 }
 
 .summary-left {
-  display:
-    flex;
+  display: flex;
 
   flex-direction:
     column;
@@ -1366,16 +1578,16 @@ summary::-webkit-details-marker {
 
 .summary-title {
   color:
-    #e8f2ef;
-
-  font-weight:
-    750;
-
-  letter-spacing:
-    .08em;
+    #eff6f3;
 
   font-size:
-    13px;
+    12px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .09em;
 }
 
 .summary-subtitle {
@@ -1389,6 +1601,9 @@ summary::-webkit-details-marker {
 .chevron {
   color:
     var(--muted);
+
+  transition:
+    transform .16s ease;
 }
 
 details[open]
@@ -1399,91 +1614,92 @@ details[open]
 
 .details-body {
   padding:
-    0 13px 13px;
+    0 14px 14px;
 }
+
 
 /* =========================================================
    KRISP
 ========================================================= */
 
 .krisp-meta {
+  margin-bottom:
+    10px;
+
   color:
     var(--muted);
 
   font-size:
-    12px;
-
-  margin-bottom:
-    10px;
+    11px;
 
   line-height:
     1.45;
 }
 
 .krisp-card {
-  border:
-    1px solid
-    var(--border);
-
-  background:
-    var(--panel3);
-
-  border-radius:
-    9px;
+  margin-bottom:
+    10px;
 
   padding:
     12px;
 
-  margin-bottom:
+  border:
+    1px solid var(--border-soft);
+
+  border-radius:
     9px;
+
+  background:
+    #07130f;
 }
 
 .krisp-heading {
-  font-size:
-    11px;
+  margin-bottom:
+    7px;
 
   color:
     var(--muted);
 
-  text-transform:
-    uppercase;
+  font-size:
+    10px;
+
+  font-weight:
+    650;
 
   letter-spacing:
-    .11em;
+    .12em;
 
-  margin-bottom:
-    7px;
+  text-transform:
+    uppercase;
 }
 
 .krisp-content {
+  max-height:
+    210px;
+
+  overflow-y:
+    auto;
+
+  color:
+    #d8e4df;
+
   font-size:
     12px;
 
   line-height:
     1.55;
 
-  color:
-    #d7e2de;
-
   white-space:
     pre-wrap;
-
-  max-height:
-    220px;
-
-  overflow-y:
-    auto;
 }
 
 .refresh-btn {
-  width:
-    100%;
+  width: 100%;
 
   min-height:
-    40px;
+    42px;
 
-  border:
-    0;
+  border: 0;
 
   border-radius:
     8px;
@@ -1492,13 +1708,18 @@ details[open]
     var(--green);
 
   color:
-    #04110b;
+    #03120b;
 
   font-weight:
     800;
 
   cursor:
     pointer;
+}
+
+.refresh-btn:hover {
+  filter:
+    brightness(1.07);
 }
 
 .krisp-status,
@@ -1523,18 +1744,18 @@ details[open]
     var(--red);
 }
 
+
 /* =========================================================
    CRM NOTES
 ========================================================= */
 
 .crm-notes-box {
   min-height:
-    190px;
+    185px;
 }
 
 .crm-actions {
-  display:
-    grid;
+  display: grid;
 
   grid-template-columns:
     1fr 1fr;
@@ -1548,17 +1769,16 @@ details[open]
 
 .crm-action {
   min-height:
-    40px;
+    42px;
+
+  border:
+    1px solid var(--border);
 
   border-radius:
     8px;
 
-  border:
-    1px solid
-    var(--border);
-
   background:
-    var(--panel2);
+    var(--panel-2);
 
   color:
     var(--text);
@@ -1570,6 +1790,14 @@ details[open]
     pointer;
 }
 
+.crm-action:hover {
+  border-color:
+    var(--green);
+
+  color:
+    var(--green);
+}
+
 .crm-action.primary {
   border:
     0;
@@ -1578,57 +1806,88 @@ details[open]
     var(--green);
 
   color:
-    #04110b;
+    #03120b;
 }
 
-.crm-action:hover {
-  border-color:
-    var(--green);
+.crm-action.primary:hover {
+  color:
+    #03120b;
+
+  filter:
+    brightness(1.07);
 }
+
 
 /* =========================================================
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 1220px) {
+@media (max-width: 1450px) {
+
+  .workspace {
+    grid-template-columns:
+      275px
+      minmax(520px, 1fr)
+      420px;
+  }
+
+  .script-panel {
+    padding:
+      30px 28px 44px;
+  }
+
+}
+
+@media (max-width: 1160px) {
 
   header {
     grid-template-columns:
-      220px 1fr;
+      220px
+      1fr;
   }
 
   .record-nav {
     grid-column:
       1 / -1;
-
-    justify-content:
-      flex-end;
   }
 
   .workspace {
     grid-template-columns:
       270px
-      1fr;
+      minmax(0, 1fr);
+  }
+
+  .left-panel {
+    height:
+      auto;
+
+    position:
+      static;
   }
 
   .right-panel {
     grid-column:
       1 / -1;
 
+    height:
+      auto;
+
+    position:
+      static;
+
     border-left:
       0;
 
     border-top:
-      1px solid
-      var(--border);
+      1px solid var(--border);
   }
+
 }
 
 @media (max-width: 760px) {
 
   header {
-    display:
-      flex;
+    display: flex;
 
     flex-direction:
       column;
@@ -1643,8 +1902,7 @@ details[open]
   }
 
   .workspace {
-    display:
-      block;
+    display: block;
   }
 
   .left-panel,
@@ -1653,23 +1911,57 @@ details[open]
       0;
 
     border-bottom:
-      1px solid
-      var(--border);
+      1px solid var(--border);
   }
 
   .script-panel {
     padding:
-      20px;
+      24px 18px 40px;
+  }
+
+  .call-header {
+    flex-direction:
+      column;
+  }
+
+  .start-call {
+    width:
+      100%;
   }
 
   .responses,
   .objection-grid,
   .outcome-grid,
-  .answer-grid {
+  .answer-grid,
+  .crm-actions {
     grid-template-columns:
       1fr;
   }
 
+}
+
+
+/* =========================================================
+   SCROLLBARS
+========================================================= */
+
+.left-panel::-webkit-scrollbar,
+.right-panel::-webkit-scrollbar,
+.krisp-content::-webkit-scrollbar,
+.search-results::-webkit-scrollbar {
+  width:
+    8px;
+}
+
+.left-panel::-webkit-scrollbar-thumb,
+.right-panel::-webkit-scrollbar-thumb,
+.krisp-content::-webkit-scrollbar-thumb,
+.search-results::-webkit-scrollbar-thumb {
+  background:
+    #254239;
+
+  border-radius:
+    20px;
 }
 </style>
 </head>
@@ -1687,6 +1979,7 @@ details[open]
     </div>
 
     <div>
+
       <div class="brand-name">
         EXCEDERE
       </div>
@@ -1694,14 +1987,16 @@ details[open]
       <div class="brand-product">
         CALL ASSIST
       </div>
+
     </div>
 
   </div>
 
+
   <div class="search-wrap">
 
     <span class="search-icon">
-      🔎
+      ◯
     </span>
 
     <input
@@ -1725,6 +2020,7 @@ details[open]
     </div>
 
   </div>
+
 
   <div class="record-nav">
 
@@ -1759,654 +2055,677 @@ details[open]
 
 </header>
 
+
 <main class="workspace">
 
-  <!-- =====================================================
-       LEFT PANEL
-  ====================================================== -->
 
-  <aside class="panel left-panel">
+<!-- =====================================================
+     LEFT PANEL
+====================================================== -->
 
-    <div class="eyebrow">
-      Current Lead
-    </div>
+<aside class="left-panel">
 
-    <div
-      class="lead-name"
-      id="leadName">
-    </div>
+  <div class="eyebrow">
+    Current Lead
+  </div>
 
-    <div
-      class="lead-title"
-      id="leadTitle">
-    </div>
+  <div
+    class="lead-name"
+    id="leadName">
+  </div>
 
-    <div
-      class="lead-company"
-      id="leadCompany">
-    </div>
+  <div
+    class="lead-title"
+    id="leadTitle">
+  </div>
 
-    <div class="lead-details">
-
-      <div class="detail">
-
-        <div class="detail-label">
-          Role Advertised
-        </div>
-
-        <div
-          class="detail-value"
-          id="leadRole">
-        </div>
-
-      </div>
-
-      <div class="detail">
-
-        <div class="detail-label">
-          Location
-        </div>
-
-        <div
-          class="detail-value"
-          id="leadLocation">
-        </div>
-
-      </div>
-
-      <div class="detail">
-
-        <div class="detail-label">
-          Telephone Number
-        </div>
-
-        <div class="phone-row">
-
-          <a
-            class="phone-link"
-            id="mainPhoneLink"
-            href="#">
-            <span>☎</span>
-            <span id="mainPhone"></span>
-          </a>
-
-          <button
-            class="edit-phone"
-            type="button"
-            onclick="editPhone('phone')"
-            title="Edit main telephone number">
-            ✎
-          </button>
-
-        </div>
-
-      </div>
-
-      <div class="detail">
-
-        <div class="detail-label">
-          Direct / Mobile Number
-        </div>
-
-        <div class="phone-row">
-
-          <a
-            class="phone-link"
-            id="directPhoneLink"
-            href="#">
-            <span>☎</span>
-            <span
-              class="direct-number"
-              id="directPhone">
-            </span>
-          </a>
-
-          <button
-            class="edit-phone"
-            type="button"
-            onclick="editPhone('directPhone')"
-            title="Edit direct number">
-            ✎
-          </button>
-
-        </div>
-
-      </div>
-
-      <div class="detail">
-
-        <div class="detail-label">
-          Local Time
-        </div>
-
-        <div
-          class="detail-value local-time"
-          id="localTime">
-        </div>
-
-      </div>
-
-      <div class="detail">
-
-        <div class="detail-label">
-          Advertised Hours
-        </div>
-
-        <div
-          class="detail-value"
-          id="leadHours">
-        </div>
-
-      </div>
-
-      <div class="detail">
-
-        <div class="detail-label">
-          Pay
-        </div>
-
-        <div
-          class="detail-value"
-          id="leadPay">
-        </div>
-
-      </div>
-
-      <div class="detail">
-
-        <div class="detail-label">
-          Systems
-        </div>
-
-        <div
-          class="detail-value"
-          id="leadSystems">
-        </div>
-
-      </div>
-
-    </div>
-
-    <button
-      class="skip-record"
-      type="button"
-      onclick="nextRecord()">
-      Skip to Next Record →
-    </button>
-
-  </aside>
+  <div
+    class="lead-company"
+    id="leadCompany">
+  </div>
 
 
-  <!-- =====================================================
-       CENTER PANEL
-  ====================================================== -->
+  <div class="lead-details">
 
-  <section class="script-panel">
 
-    <div class="call-header">
+    <div class="detail">
 
-      <div>
-
-        <div class="eyebrow">
-          Live Call Assist
-        </div>
-
-        <h1
-          id="callTitle">
-          Bookkeeper Vacancy Call
-        </h1>
-
-        <div
-          class="call-stage"
-          id="stageText">
-          Follow the script and select the best response.
-        </div>
-
-      </div>
-
-      <button
-        class="start-call"
-        type="button"
-        onclick="startCall()">
-        ☎ Start Call
-      </button>
-
-    </div>
-
-    <div class="script-box">
-
-      <div class="script-topline">
-
-        <div
-          class="script-label"
-          id="scriptLabel">
-          Before you call
-        </div>
-
-        <div
-          class="step-label"
-          id="stepLabel">
-          Ready
-        </div>
-
+      <div class="detail-label">
+        Role Advertised
       </div>
 
       <div
-        class="script-text"
-        id="scriptText">
+        class="detail-value"
+        id="leadRole">
+      </div>
 
-        Review the lead information, then press
-        <strong>Start Call</strong>
-        when you're ready.
+    </div>
+
+
+    <div class="detail">
+
+      <div class="detail-label">
+        Location
+      </div>
+
+      <div
+        class="detail-value"
+        id="leadLocation">
+      </div>
+
+    </div>
+
+
+    <div class="detail">
+
+      <div class="detail-label">
+        Telephone Number
+      </div>
+
+      <div class="phone-row">
+
+        <a
+          class="phone-link"
+          id="mainPhoneLink"
+          href="#">
+          <span>☎</span>
+          <span id="mainPhone"></span>
+        </a>
+
+        <button
+          class="edit-phone"
+          type="button"
+          onclick="editPhone('phone')">
+          ✎
+        </button>
 
       </div>
 
     </div>
 
-    <div class="response-title">
-      Prospect Response
+
+    <div class="detail">
+
+      <div class="detail-label">
+        Direct / Mobile Number
+      </div>
+
+      <div class="phone-row">
+
+        <a
+          class="phone-link"
+          id="directPhoneLink"
+          href="#">
+          <span>☎</span>
+
+          <span
+            class="direct-number"
+            id="directPhone">
+          </span>
+
+        </a>
+
+        <button
+          class="edit-phone"
+          type="button"
+          onclick="editPhone('directPhone')">
+          ✎
+        </button>
+
+      </div>
+
     </div>
 
+
+    <div class="detail">
+
+      <div class="detail-label">
+        Local Time
+      </div>
+
+      <div
+        class="detail-value local-time"
+        id="localTime">
+      </div>
+
+    </div>
+
+
+    <div class="detail">
+
+      <div class="detail-label">
+        Advertised Hours
+      </div>
+
+      <div
+        class="detail-value"
+        id="leadHours">
+      </div>
+
+    </div>
+
+
+    <div class="detail">
+
+      <div class="detail-label">
+        Pay
+      </div>
+
+      <div
+        class="detail-value"
+        id="leadPay">
+      </div>
+
+    </div>
+
+
+    <div class="detail">
+
+      <div class="detail-label">
+        Systems
+      </div>
+
+      <div
+        class="detail-value"
+        id="leadSystems">
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <button
+    class="skip-record"
+    type="button"
+    onclick="nextRecord()">
+    Skip to Next Record →
+  </button>
+
+</aside>
+
+
+<!-- =====================================================
+     CENTER PANEL
+====================================================== -->
+
+<section class="script-panel">
+
+
+  <div class="call-header">
+
+    <div>
+
+      <div class="eyebrow">
+        Live Call Assist
+      </div>
+
+      <h1 id="callTitle">
+        Bookkeeper Vacancy Call
+      </h1>
+
+      <div
+        class="call-stage"
+        id="stageText">
+        Follow the script and select the best response.
+      </div>
+
+    </div>
+
+
+    <button
+      class="start-call"
+      type="button"
+      onclick="startCall()">
+      ☎ Start Call
+    </button>
+
+  </div>
+
+
+  <div class="script-box">
+
+    <div class="script-topline">
+
+      <div
+        class="script-label"
+        id="scriptLabel">
+        Before you call
+      </div>
+
+      <div
+        class="step-label"
+        id="stepLabel">
+        Ready
+      </div>
+
+    </div>
+
+
     <div
-      class="responses"
-      id="responses">
+      class="script-text"
+      id="scriptText">
+
+      Review the lead information, then press
+      <strong>Start Call</strong>
+      when you're ready.
+
+    </div>
+
+  </div>
+
+
+  <div class="response-title">
+    Prospect Response
+  </div>
+
+
+  <div
+    class="responses"
+    id="responses">
+
+    <button
+      class="response-btn"
+      disabled>
+      Start the call first
+    </button>
+
+  </div>
+
+
+  <div class="progress-area">
+
+    <div class="progress-line">
+
+
+      <div
+        class="progress-item"
+        id="progress1">
+
+        <div class="progress-circle">
+          1
+        </div>
+
+        <small>
+          Opening
+        </small>
+
+      </div>
+
+
+      <div
+        class="progress-item"
+        id="progress2">
+
+        <div class="progress-circle">
+          2
+        </div>
+
+        <small>
+          Discovery
+        </small>
+
+      </div>
+
+
+      <div
+        class="progress-item"
+        id="progress3">
+
+        <div class="progress-circle">
+          3
+        </div>
+
+        <small>
+          Qualification
+        </small>
+
+      </div>
+
+
+      <div
+        class="progress-item"
+        id="progress4">
+
+        <div class="progress-circle">
+          4
+        </div>
+
+        <small>
+          Solution
+        </small>
+
+      </div>
+
+
+      <div
+        class="progress-item"
+        id="progress5">
+
+        <div class="progress-circle">
+          5
+        </div>
+
+        <small>
+          Appointment
+        </small>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     RIGHT PANEL
+====================================================== -->
+
+<aside class="right-panel">
+
+
+  <div class="tool-card">
+
+    <div class="tool-card-title">
+      Call Notes
+    </div>
+
+    <textarea
+      id="notes"
+      placeholder="Type notes while you're speaking..."></textarea>
+
+  </div>
+
+
+  <div class="tool-card">
+
+    <div class="tool-card-title">
+      Quick Objections
+    </div>
+
+    <div class="objection-grid">
 
       <button
-        class="response-btn"
-        disabled>
-        Start the call first
+        class="objection-btn"
+        onclick="showObjection('busy')">
+        ◷ I'm busy
+      </button>
+
+      <button
+        class="objection-btn"
+        onclick="showObjection('internal')">
+        👥 We're handling it internally
+      </button>
+
+      <button
+        class="objection-btn"
+        onclick="showObjection('policy')">
+        ⦸ We do not outsource
+      </button>
+
+      <button
+        class="objection-btn"
+        onclick="showObjection('local')">
+        📍 We only hire locally
+      </button>
+
+      <button
+        class="objection-btn"
+        onclick="showObjection('info')">
+        ▤ Send me some information
+      </button>
+
+      <button
+        class="objection-btn"
+        onclick="showObjection('budget')">
+        $ No budget
+      </button>
+
+      <button
+        class="objection-btn"
+        onclick="showObjection('filled')">
+        ✓ Role filled
+      </button>
+
+      <button
+        class="objection-btn"
+        onclick="showObjection('notInterested')">
+        ✕ Not interested
       </button>
 
     </div>
 
-    <div class="progress-area">
+  </div>
 
-      <div class="progress-line">
 
-        <div
-          class="progress-item"
-          id="progress1">
+  <div class="tool-card">
 
-          <div class="progress-circle">
-            1
-          </div>
+    <div class="tool-card-title">
+      Quick Answers
+    </div>
 
-          <small>
-            Opening
-          </small>
+    <div class="answer-grid">
 
+      <button
+        class="answer-btn"
+        onclick="showQuickAnswer('who')">
+        Who are you?
+      </button>
+
+      <button
+        class="answer-btn"
+        onclick="showQuickAnswer('support')">
+        What kind of bookkeeping support?
+      </button>
+
+      <button
+        class="answer-btn"
+        onclick="showQuickAnswer('recruitment')">
+        Are you a recruitment company?
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="tool-card">
+
+    <div class="tool-card-title">
+      Call Outcome
+    </div>
+
+    <div class="outcome-grid">
+
+      <button
+        class="outcome-btn"
+        data-outcome="Appointment booked"
+        onclick="setOutcome('Appointment booked', this)">
+        Appointment
+      </button>
+
+      <button
+        class="outcome-btn"
+        data-outcome="Callback required"
+        onclick="setOutcome('Callback required', this)">
+        Callback
+      </button>
+
+      <button
+        class="outcome-btn"
+        data-outcome="Follow up required"
+        onclick="setOutcome('Follow up required', this)">
+        Follow Up
+      </button>
+
+      <button
+        class="outcome-btn"
+        data-outcome="Information requested"
+        onclick="setOutcome('Information requested', this)">
+        Send Info
+      </button>
+
+      <button
+        class="outcome-btn"
+        data-outcome="Role filled"
+        onclick="setOutcome('Role filled', this)">
+        Role Filled
+      </button>
+
+      <button
+        class="outcome-btn"
+        data-outcome="Not interested"
+        onclick="setOutcome('Not interested', this)">
+        Not Interested
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <details class="tool-details">
+
+    <summary>
+
+      <div class="summary-left">
+
+        <div class="summary-title">
+          KRISP CALL DATA
+        </div>
+
+        <div class="summary-subtitle">
+          View transcript and Krisp notes
+        </div>
+
+      </div>
+
+      <div class="chevron">
+       ⌄
+      </div>
+
+    </summary>
+
+
+    <div class="details-body">
+
+      <div
+        class="krisp-meta"
+        id="krispMeta">
+        No Krisp data loaded yet.
+      </div>
+
+
+      <div class="krisp-card">
+
+        <div class="krisp-heading">
+          Krisp Transcript
         </div>
 
         <div
-          class="progress-item"
-          id="progress2">
+          class="krisp-content"
+          id="krispTranscript">
+          Transcript will appear here after Krisp processes the call.
+        </div>
 
-          <div class="progress-circle">
-            2
-          </div>
+      </div>
 
-          <small>
-            Discovery
-          </small>
 
+      <div class="krisp-card">
+
+        <div class="krisp-heading">
+          Krisp Notes
         </div>
 
         <div
-          class="progress-item"
-          id="progress3">
-
-          <div class="progress-circle">
-            3
-          </div>
-
-          <small>
-            Qualification
-          </small>
-
+          class="krisp-content"
+          id="krispNotes">
+          Krisp notes will appear here when available.
         </div>
 
-        <div
-          class="progress-item"
-          id="progress4">
+      </div>
 
-          <div class="progress-circle">
-            4
-          </div>
 
-          <small>
-            Solution
-          </small>
+      <button
+        class="refresh-btn"
+        onclick="loadKrispData()">
+        Refresh Krisp Data
+      </button>
 
-        </div>
 
-        <div
-          class="progress-item"
-          id="progress5">
-
-          <div class="progress-circle">
-            5
-          </div>
-
-          <small>
-            Appointment
-          </small>
-
-        </div>
-
+      <div
+        class="krisp-status"
+        id="krispStatus">
       </div>
 
     </div>
 
-  </section>
+  </details>
 
 
-  <!-- =====================================================
-       RIGHT PANEL
-  ====================================================== -->
+  <details class="tool-details">
 
-  <aside class="right-panel">
+    <summary>
 
-    <!-- CALL NOTES -->
+      <div class="summary-left">
 
-    <div class="tool-card">
+        <div class="summary-title">
+          CRM NOTES
+        </div>
 
-      <div class="tool-card-title">
-        Call Notes
+        <div class="summary-subtitle">
+          Generate and copy structured CRM notes
+        </div>
+
       </div>
+
+      <div class="chevron">
+       ⌄
+      </div>
+
+    </summary>
+
+
+    <div class="details-body">
 
       <textarea
-        id="notes"
-        placeholder="Type notes while you're speaking..."></textarea>
+        id="crmNotesOutput"
+        class="crm-notes-box"
+        placeholder="Generate structured CRM notes from the call..."></textarea>
 
-    </div>
 
+      <div class="crm-actions">
 
-    <!-- OBJECTIONS -->
+        <button
+          class="crm-action primary"
+          onclick="generateCRMNotes()">
+          Generate CRM Notes
+        </button>
 
-    <div class="tool-card">
+        <button
+          class="crm-action"
+          onclick="copyCRMNotes()">
+          Copy CRM Notes
+        </button>
 
-      <div class="tool-card-title">
-        Quick Objections
       </div>
 
-      <div class="objection-grid">
 
-        <button
-          class="objection-btn"
-          onclick="showObjection('busy')">
-          ◷ I'm busy
-        </button>
-
-        <button
-          class="objection-btn"
-          onclick="showObjection('internal')">
-          👥 We're handling it internally
-        </button>
-
-        <button
-          class="objection-btn"
-          onclick="showObjection('policy')">
-          ⦸ We do not outsource
-        </button>
-
-        <button
-          class="objection-btn"
-          onclick="showObjection('local')">
-          📍 We only hire locally
-        </button>
-
-        <button
-          class="objection-btn"
-          onclick="showObjection('info')">
-          ▤ Send me some information
-        </button>
-
-        <button
-          class="objection-btn"
-          onclick="showObjection('budget')">
-          $ No budget
-        </button>
-
-        <button
-          class="objection-btn"
-          onclick="showObjection('filled')">
-          ✓ Role filled
-        </button>
-
-        <button
-          class="objection-btn"
-          onclick="showObjection('notInterested')">
-          ✕ Not interested
-        </button>
-
+      <div
+        class="crm-note-status"
+        id="crmNoteStatus">
       </div>
 
     </div>
 
+  </details>
 
-    <!-- QUICK ANSWERS -->
 
-    <div class="tool-card">
-
-      <div class="tool-card-title">
-        Quick Answers
-      </div>
-
-      <div class="answer-grid">
-
-        <button
-          class="answer-btn"
-          onclick="showQuickAnswer('who')">
-          Who are you?
-        </button>
-
-        <button
-          class="answer-btn"
-          onclick="showQuickAnswer('support')">
-          What kind of bookkeeping support?
-        </button>
-
-        <button
-          class="answer-btn"
-          onclick="showQuickAnswer('recruitment')">
-          Are you a recruitment company?
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- OUTCOMES -->
-
-    <div class="tool-card">
-
-      <div class="tool-card-title">
-        Call Outcome
-      </div>
-
-      <div class="outcome-grid">
-
-        <button
-          class="outcome-btn"
-          data-outcome="Appointment booked"
-          onclick="setOutcome('Appointment booked', this)">
-          Appointment
-        </button>
-
-        <button
-          class="outcome-btn"
-          data-outcome="Callback required"
-          onclick="setOutcome('Callback required', this)">
-          Callback
-        </button>
-
-        <button
-          class="outcome-btn"
-          data-outcome="Follow up required"
-          onclick="setOutcome('Follow up required', this)">
-          Follow Up
-        </button>
-
-        <button
-          class="outcome-btn"
-          data-outcome="Information requested"
-          onclick="setOutcome('Information requested', this)">
-          Send Info
-        </button>
-
-        <button
-          class="outcome-btn"
-          data-outcome="Role filled"
-          onclick="setOutcome('Role filled', this)">
-          Role Filled
-        </button>
-
-        <button
-          class="outcome-btn"
-          data-outcome="Not interested"
-          onclick="setOutcome('Not interested', this)">
-          Not Interested
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- KRISP -->
-
-    <details class="tool-details">
-
-      <summary>
-
-        <div class="summary-left">
-
-          <div class="summary-title">
-            KRISP CALL DATA
-          </div>
-
-          <div class="summary-subtitle">
-            View transcript and Krisp notes
-          </div>
-
-        </div>
-
-        <div class="chevron">
-         ⌄
-        </div>
-
-      </summary>
-
-      <div class="details-body">
-
-        <div
-          class="krisp-meta"
-          id="krispMeta">
-          No Krisp data loaded yet.
-        </div>
-
-        <div class="krisp-card">
-
-          <div class="krisp-heading">
-            Krisp Transcript
-          </div>
-
-          <div
-            class="krisp-content"
-            id="krispTranscript">
-            Transcript will appear here after Krisp processes the call.
-          </div>
-
-        </div>
-
-        <div class="krisp-card">
-
-          <div class="krisp-heading">
-            Krisp Notes
-          </div>
-
-          <div
-            class="krisp-content"
-            id="krispNotes">
-            Krisp notes will appear here when available.
-          </div>
-
-        </div>
-
-        <button
-          class="refresh-btn"
-          onclick="loadKrispData()">
-          Refresh Krisp Data
-        </button>
-
-        <div
-          class="krisp-status"
-          id="krispStatus">
-        </div>
-
-      </div>
-
-    </details>
-
-
-    <!-- CRM NOTES -->
-
-    <details class="tool-details">
-
-      <summary>
-
-        <div class="summary-left">
-
-          <div class="summary-title">
-            CRM NOTES
-          </div>
-
-          <div class="summary-subtitle">
-            Generate and copy structured CRM notes
-          </div>
-
-        </div>
-
-        <div class="chevron">
-         ⌄
-        </div>
-
-      </summary>
-
-      <div class="details-body">
-
-        <textarea
-          id="crmNotesOutput"
-          class="crm-notes-box"
-          placeholder="Generate structured CRM notes from the call..."></textarea>
-
-        <div class="crm-actions">
-
-          <button
-            class="crm-action primary"
-            onclick="generateCRMNotes()">
-            Generate CRM Notes
-          </button>
-
-          <button
-            class="crm-action"
-            onclick="copyCRMNotes()">
-            Copy CRM Notes
-          </button>
-
-        </div>
-
-        <div
-          class="crm-note-status"
-          id="crmNoteStatus">
-        </div>
-
-      </div>
-
-    </details>
-
-  </aside>
+</aside>
 
 </main>
 
@@ -2416,14 +2735,14 @@ details[open]
 <script>
 
 /* =========================================================
-   SAMPLE LEAD DATABASE
-   WE WILL REPLACE/EXPAND THIS WITH REAL LEADS NEXT
+   LEAD DATA
 ========================================================= */
 
 const defaultLeads = [
 
   {
-    id: "lead-001",
+    id:
+      "lead-001",
 
     firstName:
       "Anthony",
@@ -2472,6 +2791,10 @@ const LEAD_STORAGE_KEY =
   "excedereCallAssistLeads";
 
 
+const KRISP_FUNCTION_URL =
+  "https://kxxoyhagfmexvnzpuwys.supabase.co/functions/v1/latest-krisp-transcript";
+
+
 let leads =
   loadLeads();
 
@@ -2482,10 +2805,6 @@ let currentLeadIndex =
 
 let currentOutcome =
   "";
-
-
-const KRISP_FUNCTION_URL =
-  "https://kxxoyhagfmexvnzpuwys.supabase.co/functions/v1/latest-krisp-transcript";
 
 
 /* =========================================================
@@ -2501,12 +2820,14 @@ function loadLeads() {
         LEAD_STORAGE_KEY
       );
 
+
     if (stored) {
 
       const parsed =
         JSON.parse(
           stored
         );
+
 
       if (
         Array.isArray(
@@ -2516,7 +2837,9 @@ function loadLeads() {
       ) {
 
         return parsed;
+
       }
+
     }
 
   } catch (error) {
@@ -2528,11 +2851,13 @@ function loadLeads() {
 
   }
 
+
   return JSON.parse(
     JSON.stringify(
       defaultLeads
     )
   );
+
 }
 
 
@@ -2544,11 +2869,12 @@ function saveLeads() {
       leads
     )
   );
+
 }
 
 
 /* =========================================================
-   ACTIVE LEAD
+   LEAD RENDERING
 ========================================================= */
 
 function getLead() {
@@ -2559,6 +2885,7 @@ function getLead() {
     ] ||
     leads[0]
   );
+
 }
 
 
@@ -2567,9 +2894,11 @@ function renderLead() {
   const lead =
     getLead();
 
+
   if (!lead) {
     return;
   }
+
 
   document
     .getElementById(
@@ -2681,6 +3010,7 @@ function renderLead() {
 
 
   resetCallWorkspace();
+
 }
 
 
@@ -2696,10 +3026,12 @@ function renderPhone(
       textId
     );
 
+
   const link =
     document.getElementById(
       linkId
     );
+
 
   if (
     number &&
@@ -2709,9 +3041,11 @@ function renderPhone(
     text.textContent =
       number;
 
+
     text.classList.remove(
       "empty-number"
     );
+
 
     link.href =
       "tel:" +
@@ -2725,13 +3059,17 @@ function renderPhone(
     text.textContent =
       emptyText;
 
+
     text.classList.add(
       "empty-number"
     );
 
+
     link.href =
       "#";
+
   }
+
 }
 
 
@@ -2742,6 +3080,7 @@ function buildCallTitle(
   if (!role) {
     return "Vacancy Call";
   }
+
 
   return (
     role
@@ -2755,6 +3094,7 @@ function buildCallTitle(
       ) +
     " Vacancy Call"
   );
+
 }
 
 
@@ -2768,6 +3108,7 @@ function editPhone(
 
   const lead =
     getLead();
+
 
   const label =
     field === "phone"
@@ -2799,48 +3140,43 @@ function editPhone(
 
 
   if (
-    existing !== cleaned
+    existing === cleaned
   ) {
-
-    if (
-      existing
-    ) {
-
-      lead.phoneHistory =
-        lead.phoneHistory ||
-        [];
-
-
-      lead.phoneHistory.push({
-
-        field:
-          field,
-
-        oldNumber:
-          existing,
-
-        newNumber:
-          cleaned,
-
-        changedAt:
-          new Date()
-            .toISOString()
-
-      });
-
-    }
-
-
-    lead[field] =
-      cleaned;
-
-
-    saveLeads();
-
-
-    renderLead();
-
+    return;
   }
+
+
+  lead.phoneHistory =
+    lead.phoneHistory ||
+    [];
+
+
+  lead.phoneHistory.push({
+
+    field:
+      field,
+
+    oldNumber:
+      existing,
+
+    newNumber:
+      cleaned,
+
+    changedAt:
+      new Date()
+        .toISOString()
+
+  });
+
+
+  lead[field] =
+    cleaned;
+
+
+  saveLeads();
+
+
+  renderLead();
 
 }
 
@@ -2856,6 +3192,7 @@ function nextRecord() {
   ) {
     return;
   }
+
 
   currentLeadIndex =
     (
@@ -2876,6 +3213,7 @@ function previousRecord() {
   ) {
     return;
   }
+
 
   currentLeadIndex =
     (
@@ -2918,16 +3256,19 @@ searchInput.addEventListener(
 
     if (!query) {
 
+      searchResults.innerHTML =
+        "";
+
+
       searchResults
         .classList
         .remove(
           "open"
         );
 
-      searchResults.innerHTML =
-        "";
 
       return;
+
     }
 
 
@@ -2985,15 +3326,19 @@ function renderSearchResults(
         "div"
       );
 
+
     empty.className =
       "search-result";
+
 
     empty.innerHTML =
       "<strong>No matching records</strong>";
 
+
     searchResults.appendChild(
       empty
     );
+
 
     searchResults
       .classList
@@ -3001,7 +3346,9 @@ function renderSearchResults(
         "open"
       );
 
+
     return;
+
   }
 
 
@@ -3107,14 +3454,17 @@ document
       searchInput.value =
         "";
 
+
       searchResults.innerHTML =
         "";
+
 
       searchResults
         .classList
         .remove(
           "open"
         );
+
 
       searchInput.focus();
 
@@ -3172,6 +3522,7 @@ function escapeHtml(
       /'/g,
       "&#039;"
     );
+
 }
 
 
@@ -3579,7 +3930,7 @@ async function loadKrispData() {
 
 
 /* =========================================================
-   FREE CRM NOTES
+   FREE RULE BASED CRM NOTES
 ========================================================= */
 
 function cleanText(
@@ -4041,7 +4392,7 @@ async function copyCRMNotes() {
 
 
 /* =========================================================
-   SCRIPT ENGINE
+   CALL WORKSPACE
 ========================================================= */
 
 function resetCallWorkspace() {
@@ -4138,6 +4489,10 @@ function resetCallWorkspace() {
 }
 
 
+/* =========================================================
+   SCRIPT ENGINE
+========================================================= */
+
 function startCall() {
 
   const lead =
@@ -4152,6 +4507,7 @@ function startCall() {
 
   showScript(
     "Opening",
+
     `Is that <strong>${lead.firstName}</strong>?<br><br>
 
     ${lead.firstName}, I noticed you're currently looking to hire a
@@ -4209,6 +4565,7 @@ function searchStatus() {
 
   showScript(
     "Discovery",
+
     `How's the search going so far, are you finding the right people,
     or is that proving difficult?`
   );
@@ -4251,6 +4608,7 @@ function searchGoingFine() {
 
   showScript(
     "Discovery",
+
     `That's good. Have you already found someone you're happy with,
     or are you still looking?`
   );
@@ -4291,10 +4649,12 @@ function applicantsQuestion() {
 
 
   showResponses([
+
     [
       "Continue",
       workloadQuestion
     ]
+
   ]);
 
 }
@@ -4309,10 +4669,12 @@ function workloadQuestion() {
 
 
   showResponses([
+
     [
       "Continue",
       alternativeQuestion
     ]
+
   ]);
 
 }
@@ -4361,6 +4723,7 @@ function summariseSituation() {
 
   showScript(
     "Confirm Their Situation",
+
     `So if I've understood you correctly, the main issue is
     <strong>[their problem]</strong>, and in the meantime
     <strong>[whoever is doing the work]</strong> is picking up the slack.<br><br>
@@ -4390,6 +4753,7 @@ function positionSolution() {
 
   showScript(
     "Position The Alternative",
+
     `The reason I asked is that we help businesses in exactly this
     situation by providing dedicated bookkeeping support rather than
     continuing the same hiring cycle.`
@@ -4397,10 +4761,12 @@ function positionSolution() {
 
 
   showResponses([
+
     [
       "Continue",
       appointmentQuestion
     ]
+
   ]);
 
 }
@@ -4457,6 +4823,7 @@ function meetingExplanation() {
 
   showScript(
     "Meeting Explanation",
+
     `It's just 20 minutes. We understand what you need, explain how
     the support works, and you can decide if it's worth taking further.<br><br>
 
@@ -4543,6 +4910,7 @@ function attendanceCheck() {
 
   showScript(
     "Confirm Attendance",
+
     `Perfect, I've got you down.<br><br>
 
     Before I let you go, is there anything that could realistically
@@ -4571,6 +4939,7 @@ function commitmentCheck() {
 
   showScript(
     "Test Commitment",
+
     `If this made sense, is there anything you can already see that
     would stop you moving forward?`
   );
@@ -4608,6 +4977,7 @@ function confirmEmail() {
 
   showScript(
     "Confirm Email",
+
     `I'll send the calendar invite straight after this call.<br><br>
 
     Is this the best email for you?`
@@ -4640,6 +5010,7 @@ function finalClose() {
 
 
   showResponses([
+
     [
       "Appointment booked",
       () =>
@@ -4647,6 +5018,7 @@ function finalClose() {
           "Appointment booked"
         )
     ]
+
   ]);
 
 }
@@ -4902,9 +5274,7 @@ function showObjection(
     ];
 
 
-  if (
-    !objection
-  ) {
+  if (!objection) {
     return;
   }
 
@@ -4928,6 +5298,7 @@ function internalTemporary() {
 
   showScript(
     "Handling Internally",
+
     `That makes sense. Would you be open to another way
     to take some pressure off the team?`
   );
@@ -4967,6 +5338,7 @@ function firmPolicyEnd() {
 
 
   showResponses([
+
     [
       "Thank them and end call",
       () =>
@@ -4974,6 +5346,7 @@ function firmPolicyEnd() {
           "Company policy: no outsourcing"
         )
     ]
+
   ]);
 
 }
@@ -4983,6 +5356,7 @@ function infoFollowUp() {
 
   showScript(
     "Information Follow Up",
+
     `Got it. I'll send you something around that.<br><br>
 
     Why don't we put 15 to 20 minutes in the diary as well,
@@ -5014,6 +5388,7 @@ function localFollowUp() {
 
   showScript(
     "Local Hiring",
+
     `That makes sense. The reason I ask is that we provide dedicated
     support that works your hours and integrates with your team.<br><br>
 
@@ -5051,16 +5426,19 @@ function budgetFollowUp() {
 
   showScript(
     "Budget",
+
     `Understood. What is keeping the work covered while you're
     trying to fill the position?`
   );
 
 
   showResponses([
+
     [
       "Continue",
       workloadQuestion
     ]
+
   ]);
 
 }
@@ -5070,6 +5448,7 @@ function roleFilledEnd() {
 
   showScript(
     "Role Filled",
+
     `Great, I'm glad you got it sorted.<br><br>
 
     I'll leave you to it, and if anything changes in future,
@@ -5078,6 +5457,7 @@ function roleFilledEnd() {
 
 
   showResponses([
+
     [
       "End call",
       () =>
@@ -5085,6 +5465,7 @@ function roleFilledEnd() {
           "Role filled"
         )
     ]
+
   ]);
 
 }
@@ -5094,11 +5475,13 @@ function notInterestedEnd() {
 
   showScript(
     "Not Interested",
+
     `Understood. Thanks for your time, and I'll leave you to it.`
   );
 
 
   showResponses([
+
     [
       "End call",
       () =>
@@ -5106,6 +5489,7 @@ function notInterestedEnd() {
           "Not interested"
         )
     ]
+
   ]);
 
 }
@@ -5115,6 +5499,7 @@ function callback() {
 
   showScript(
     "Callback",
+
     `No problem at all. When would be a better time
     for a quick call?`
   );
@@ -5267,9 +5652,7 @@ function showQuickAnswer(
     ];
 
 
-  if (
-    !answer
-  ) {
+  if (!answer) {
     return;
   }
 
@@ -5441,6 +5824,7 @@ function setOutcome(
 
   showScript(
     "Call Complete",
+
     `<strong>${outcome}</strong><br><br>
     Add any final notes, then generate your CRM notes.`
   );
