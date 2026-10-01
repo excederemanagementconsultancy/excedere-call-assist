@@ -12,12 +12,14 @@
   --bg:#06110e;
   --panel:#0a1915;
   --panel2:#0d1e19;
+  --panel3:#10231d;
   --border:#223c32;
   --border-soft:#193128;
   --text:#f0f7f4;
   --muted:#8da89d;
   --green:#35d07f;
   --green-dark:#113e2b;
+  --amber:#e9b44c;
   --red:#f06464;
 }
 
@@ -44,6 +46,11 @@ button,input,textarea{
 
 button{
   cursor:pointer;
+  transition:.15s ease;
+}
+
+button:active{
+  transform:translateY(1px);
 }
 
 .app{
@@ -161,6 +168,49 @@ h1{
   font-weight:700;
 }
 
+.template-panel{
+  margin-bottom:18px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:rgba(12,28,23,.85);
+}
+
+.template-title{
+  margin-bottom:12px;
+  color:var(--green);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.16em;
+}
+
+.template-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.template-btn{
+  min-height:48px;
+  padding:9px 12px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--panel2);
+  color:var(--text);
+  font-weight:700;
+}
+
+.template-btn:hover{
+  border-color:var(--green);
+  color:var(--green);
+}
+
+.template-btn.active{
+  border-color:var(--green);
+  background:var(--green-dark);
+  color:var(--green);
+}
+
 .composer{
   padding:22px;
   border:1px solid var(--border);
@@ -241,6 +291,14 @@ textarea:focus{
   color:var(--red);
 }
 
+@media(max-width:800px){
+
+  .template-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
 @media(max-width:720px){
 
   .workspace{
@@ -249,6 +307,10 @@ textarea:focus{
   }
 
   .contact-card{
+    grid-template-columns:1fr;
+  }
+
+  .template-grid{
     grid-template-columns:1fr;
   }
 
@@ -308,7 +370,7 @@ Email Composer
 </h1>
 
 <div class="subtitle">
-Compose the message here, then open it in your normal email application.
+Choose a template or write your own message, then open it in your normal email application.
 </div>
 
 </div>
@@ -342,6 +404,55 @@ Company
   class="contact-value">
   Not selected
 </div>
+
+</div>
+
+</div>
+
+
+<div class="template-panel">
+
+<div class="template-title">
+EMAIL TEMPLATES
+</div>
+
+<div class="template-grid">
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('initial',this)">
+  Initial Outreach
+</button>
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('info',this)">
+  Send Information
+</button>
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('followup',this)">
+  Follow-Up
+</button>
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('callback',this)">
+  Callback Follow-Up
+</button>
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('appointment',this)">
+  Appointment Confirmation
+</button>
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('blank',this)">
+  Blank Email
+</button>
 
 </div>
 
@@ -477,6 +588,214 @@ document
   )
   .value =
     email;
+
+
+function greetingName(){
+
+  return contactName ||
+    "there";
+}
+
+
+function companyName(){
+
+  return company ||
+    "your business";
+}
+
+
+function clearTemplateSelection(){
+
+  document
+    .querySelectorAll(
+      ".template-btn"
+    )
+    .forEach(
+      button =>
+        button.classList.remove(
+          "active"
+        )
+    );
+}
+
+
+function applyTemplate(
+  type,
+  button
+){
+
+  clearTemplateSelection();
+
+
+  if(button){
+
+    button.classList.add(
+      "active"
+    );
+  }
+
+
+  const name =
+    greetingName();
+
+
+  const business =
+    companyName();
+
+
+  const subject =
+    document.getElementById(
+      "subject"
+    );
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  const templates = {
+
+
+    initial:{
+
+      subject:
+        `Quick question regarding ${business}`,
+
+      message:
+`Hi ${name},
+
+I wanted to reach out regarding the role you are currently recruiting for.
+
+We help businesses access experienced remote support where traditional local hiring may be taking longer or proving more expensive than expected.
+
+If the position is still open, I would be happy to briefly explain how the model works and see whether it could be relevant for ${business}.
+
+Best regards,
+
+Wes`
+    },
+
+
+    info:{
+
+      subject:
+        `Information as discussed - ${business}`,
+
+      message:
+`Hi ${name},
+
+Thanks for your time earlier.
+
+As discussed, I am sending over some information regarding the support options available for ${business}.
+
+If it looks relevant, we can arrange a short call to go through your requirements and answer any questions.
+
+Best regards,
+
+Wes`
+    },
+
+
+    followup:{
+
+      subject:
+        `Following up - ${business}`,
+
+      message:
+`Hi ${name},
+
+I wanted to follow up on my previous message regarding the role at ${business}.
+
+I appreciate priorities can change, so I wanted to check whether this is still something you are looking at.
+
+If the role is still open, I would be happy to reconnect briefly.
+
+Best regards,
+
+Wes`
+    },
+
+
+    callback:{
+
+      subject:
+        `Following up on our conversation - ${business}`,
+
+      message:
+`Hi ${name},
+
+Following our recent conversation, I wanted to reconnect as agreed.
+
+If the timing still works for you, I would be happy to pick things back up and discuss the role in a little more detail.
+
+Best regards,
+
+Wes`
+    },
+
+
+    appointment:{
+
+      subject:
+        `Meeting confirmation - ${business}`,
+
+      message:
+`Hi ${name},
+
+Thanks for taking the time to speak with me.
+
+Just confirming our upcoming meeting regarding ${business}.
+
+We will use the time to understand what you need, explain how the support model works, and answer any questions you may have.
+
+I look forward to speaking with you.
+
+Best regards,
+
+Wes`
+    },
+
+
+    blank:{
+
+      subject:
+        "",
+
+      message:
+        ""
+    }
+
+  };
+
+
+  const selected =
+    templates[type];
+
+
+  if(!selected){
+    return;
+  }
+
+
+  subject.value =
+    selected.subject;
+
+
+  message.value =
+    selected.message;
+
+
+  document
+    .getElementById(
+      "status"
+    )
+    .innerHTML =
+      `<span class="good">
+      Template loaded. You can edit anything before sending.
+      </span>`;
+}
 
 
 function openEmailApp(){
@@ -637,6 +956,9 @@ function clearEmail(){
     )
     .textContent =
       "";
+
+
+  clearTemplateSelection();
 }
 
 </script>
