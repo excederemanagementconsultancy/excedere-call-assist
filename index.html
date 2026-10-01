@@ -44,8 +44,6 @@ input {
   min-height: 100vh;
 }
 
-/* HEADER */
-
 header {
   height: 74px;
   border-bottom: 1px solid var(--border);
@@ -91,11 +89,9 @@ header {
   font-size: 13px;
 }
 
-/* MAIN LAYOUT */
-
 .workspace {
   display: grid;
-  grid-template-columns: 300px minmax(420px, 1fr) 340px;
+  grid-template-columns: 300px minmax(420px, 1fr) 370px;
   min-height: calc(100vh - 74px);
 }
 
@@ -120,19 +116,6 @@ header {
   text-transform: uppercase;
   margin-bottom: 14px;
 }
-
-.card {
-  background: linear-gradient(
-    180deg,
-    rgba(18, 34, 29, .95),
-    rgba(11, 23, 19, .95)
-  );
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 18px;
-}
-
-/* LEAD */
 
 .lead-name {
   font-size: 25px;
@@ -176,8 +159,6 @@ header {
   font-weight: 700;
 }
 
-/* SCRIPT */
-
 .script-panel {
   padding: 30px 38px;
 }
@@ -201,7 +182,8 @@ header {
   margin-top: 5px;
 }
 
-.start-call {
+.start-call,
+.refresh-btn {
   border: 0;
   background: var(--green);
   color: #04110b;
@@ -211,8 +193,14 @@ header {
   cursor: pointer;
 }
 
-.start-call:hover {
+.start-call:hover,
+.refresh-btn:hover {
   filter: brightness(1.08);
+}
+
+.refresh-btn {
+  width: 100%;
+  margin-top: 10px;
 }
 
 .script-box {
@@ -240,18 +228,6 @@ header {
 .script-text strong {
   color: var(--green);
 }
-
-.script-note {
-  margin-top: 18px;
-  padding: 12px 14px;
-  border-left: 3px solid var(--amber);
-  background: rgba(233, 180, 76, .08);
-  color: #d9c99f;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* RESPONSE BUTTONS */
 
 .response-title {
   margin: 26px 0 12px;
@@ -281,18 +257,6 @@ header {
   color: var(--green);
 }
 
-.response-btn.primary {
-  background: var(--green-dark);
-  border-color: var(--green);
-}
-
-.response-btn.end {
-  border-color: #693b3b;
-  color: #ef9696;
-}
-
-/* PROGRESS */
-
 .progress {
   display: flex;
   gap: 6px;
@@ -310,8 +274,6 @@ header {
   background: var(--green);
 }
 
-/* RIGHT PANEL */
-
 .notes-title {
   font-size: 18px;
   margin: 0 0 14px;
@@ -319,7 +281,7 @@ header {
 
 textarea {
   width: 100%;
-  min-height: 180px;
+  min-height: 160px;
   resize: vertical;
   background: #08120f;
   color: var(--text);
@@ -335,7 +297,8 @@ textarea:focus {
 
 .objections,
 .quick-answers,
-.call-outcome {
+.call-outcome,
+.krisp-section {
   margin-top: 26px;
 }
 
@@ -382,7 +345,51 @@ textarea:focus {
   border-color: var(--green);
 }
 
-/* RESPONSIVE */
+.krisp-card {
+  border: 1px solid var(--border);
+  background: #08120f;
+  border-radius: 10px;
+  padding: 13px;
+  margin-bottom: 12px;
+}
+
+.krisp-heading {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-bottom: 8px;
+}
+
+.krisp-content {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #d7e2de;
+  white-space: pre-wrap;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.krisp-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+
+.krisp-status {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.krisp-status.good {
+  color: var(--green);
+}
+
+.krisp-status.bad {
+  color: var(--red);
+}
 
 @media (max-width: 1050px) {
   .workspace {
@@ -440,8 +447,6 @@ textarea:focus {
 </header>
 
 <main class="workspace">
-
-  <!-- LEAD PANEL -->
 
   <aside class="panel left-panel">
 
@@ -504,22 +509,25 @@ textarea:focus {
 
   </aside>
 
-  <!-- CALL ASSIST -->
-
   <section class="script-panel">
 
     <div class="call-header">
 
       <div>
         <div class="eyebrow">Live Call Assist</div>
-        <h1>Bookkeeper Vacancy Call</h1>
+
+        <h1>
+          Bookkeeper Vacancy Call
+        </h1>
 
         <div class="call-stage" id="stageText">
           Ready to start
         </div>
       </div>
 
-      <button class="start-call" onclick="startCall()">
+      <button
+        class="start-call"
+        onclick="startCall()">
         Start Call
       </button>
 
@@ -544,7 +552,9 @@ textarea:focus {
 
     <div class="responses" id="responses">
 
-      <button class="response-btn" disabled>
+      <button
+        class="response-btn"
+        disabled>
         Start the call first
       </button>
 
@@ -560,11 +570,11 @@ textarea:focus {
 
   </section>
 
-  <!-- NOTES AND OBJECTIONS -->
-
   <aside class="panel right-panel">
 
-    <div class="eyebrow">Call Notes</div>
+    <div class="eyebrow">
+      Call Notes
+    </div>
 
     <h3 class="notes-title">
       Live notes
@@ -575,7 +585,56 @@ textarea:focus {
       placeholder="Type notes while you're speaking..."
     ></textarea>
 
-    <!-- QUICK OBJECTIONS -->
+    <div class="krisp-section">
+
+      <div class="eyebrow">
+        Krisp Call Data
+      </div>
+
+      <div class="krisp-meta" id="krispMeta">
+        No Krisp data loaded yet.
+      </div>
+
+      <div class="krisp-card">
+
+        <div class="krisp-heading">
+          Krisp Transcript
+        </div>
+
+        <div
+          class="krisp-content"
+          id="krispTranscript">
+          Transcript will appear here after Krisp processes the call.
+        </div>
+
+      </div>
+
+      <div class="krisp-card">
+
+        <div class="krisp-heading">
+          Krisp Notes
+        </div>
+
+        <div
+          class="krisp-content"
+          id="krispNotes">
+          Krisp notes will appear here when available.
+        </div>
+
+      </div>
+
+      <button
+        class="refresh-btn"
+        onclick="loadKrispData()">
+        Refresh Krisp Data
+      </button>
+
+      <div
+        class="krisp-status"
+        id="krispStatus">
+      </div>
+
+    </div>
 
     <div class="objections">
 
@@ -583,49 +642,55 @@ textarea:focus {
         Quick Objections
       </div>
 
-      <button class="objection-btn"
+      <button
+        class="objection-btn"
         onclick="showObjection('busy')">
         I'm busy
       </button>
 
-      <button class="objection-btn"
+      <button
+        class="objection-btn"
         onclick="showObjection('internal')">
         We're handling it internally
       </button>
 
-      <button class="objection-btn"
+      <button
+        class="objection-btn"
         onclick="showObjection('policy')">
         We do not outsource
       </button>
 
-      <button class="objection-btn"
+      <button
+        class="objection-btn"
         onclick="showObjection('local')">
         We only hire locally
       </button>
 
-      <button class="objection-btn"
+      <button
+        class="objection-btn"
         onclick="showObjection('info')">
         Send me some information
       </button>
 
-      <button class="objection-btn"
+      <button
+        class="objection-btn"
         onclick="showObjection('budget')">
         No budget
       </button>
 
-      <button class="objection-btn"
+      <button
+        class="objection-btn"
         onclick="showObjection('filled')">
         Role filled
       </button>
 
-      <button class="objection-btn"
+      <button
+        class="objection-btn"
         onclick="showObjection('notInterested')">
         Not interested
       </button>
 
     </div>
-
-    <!-- QUICK ANSWERS -->
 
     <div class="quick-answers">
 
@@ -633,24 +698,25 @@ textarea:focus {
         Quick Answers
       </div>
 
-      <button class="answer-btn"
+      <button
+        class="answer-btn"
         onclick="showQuickAnswer('who')">
         Who are you?
       </button>
 
-      <button class="answer-btn"
+      <button
+        class="answer-btn"
         onclick="showQuickAnswer('support')">
         What kind of bookkeeping support?
       </button>
 
-      <button class="answer-btn"
+      <button
+        class="answer-btn"
         onclick="showQuickAnswer('recruitment')">
         Are you a recruitment company?
       </button>
 
     </div>
-
-    <!-- CALL OUTCOME -->
 
     <div class="call-outcome">
 
@@ -660,32 +726,38 @@ textarea:focus {
 
       <div class="outcome-grid">
 
-        <button class="outcome-btn"
+        <button
+          class="outcome-btn"
           onclick="setOutcome('Appointment booked')">
           Appointment
         </button>
 
-        <button class="outcome-btn"
+        <button
+          class="outcome-btn"
           onclick="setOutcome('Callback required')">
           Callback
         </button>
 
-        <button class="outcome-btn"
+        <button
+          class="outcome-btn"
           onclick="setOutcome('Follow up required')">
           Follow Up
         </button>
 
-        <button class="outcome-btn"
+        <button
+          class="outcome-btn"
           onclick="setOutcome('Information requested')">
           Send Info
         </button>
 
-        <button class="outcome-btn"
+        <button
+          class="outcome-btn"
           onclick="setOutcome('Role filled')">
           Role Filled
         </button>
 
-        <button class="outcome-btn"
+        <button
+          class="outcome-btn"
           onclick="setOutcome('Not interested')">
           Not Interested
         </button>
@@ -706,6 +778,9 @@ const lead = {
   firstName: "Anthony",
   company: "Public House Temecula"
 };
+
+const KRISP_FUNCTION_URL =
+  "https://kxxoyhagfmexvnzpuwys.supabase.co/functions/v1/latest-krisp-transcript";
 
 
 /* LOCAL TIME */
@@ -729,7 +804,232 @@ updateTime();
 setInterval(updateTime, 60000);
 
 
-/* START CALL */
+/* SUPABASE SESSION */
+
+function getSupabaseAccessToken() {
+
+  const projectRef =
+    "kxxoyhagfmexvnzpuwys";
+
+  const expectedKey =
+    `sb-${projectRef}-auth-token`;
+
+  const exact =
+    localStorage.getItem(expectedKey);
+
+  if (exact) {
+    try {
+      const session = JSON.parse(exact);
+
+      if (session?.access_token) {
+        return session.access_token;
+      }
+
+      if (session?.currentSession?.access_token) {
+        return session.currentSession.access_token;
+      }
+
+    } catch (error) {
+      console.warn(
+        "Could not parse expected Supabase session",
+        error
+      );
+    }
+  }
+
+  for (
+    let i = 0;
+    i < localStorage.length;
+    i++
+  ) {
+
+    const key =
+      localStorage.key(i);
+
+    if (
+      !key ||
+      !key.includes(projectRef)
+    ) {
+      continue;
+    }
+
+    try {
+
+      const value =
+        localStorage.getItem(key);
+
+      if (!value) continue;
+
+      const parsed =
+        JSON.parse(value);
+
+      if (parsed?.access_token) {
+        return parsed.access_token;
+      }
+
+      if (
+        parsed?.currentSession?.access_token
+      ) {
+        return parsed.currentSession.access_token;
+      }
+
+    } catch (error) {
+      // Ignore unrelated localStorage values
+    }
+  }
+
+  return null;
+}
+
+
+/* KRISP DATA */
+
+async function loadKrispData() {
+
+  const status =
+    document.getElementById(
+      "krispStatus"
+    );
+
+  const transcriptBox =
+    document.getElementById(
+      "krispTranscript"
+    );
+
+  const notesBox =
+    document.getElementById(
+      "krispNotes"
+    );
+
+  const meta =
+    document.getElementById(
+      "krispMeta"
+    );
+
+  status.className =
+    "krisp-status";
+
+  status.textContent =
+    "Loading Krisp data...";
+
+  const token =
+    getSupabaseAccessToken();
+
+  if (!token) {
+
+    status.className =
+      "krisp-status bad";
+
+    status.textContent =
+      "No active Excedere login session found.";
+
+    return;
+  }
+
+  try {
+
+    const response =
+      await fetch(
+        KRISP_FUNCTION_URL,
+        {
+          method: "GET",
+          headers: {
+            "Authorization":
+              `Bearer ${token}`
+          }
+        }
+      );
+
+    const result =
+      await response.json();
+
+    if (
+      !response.ok ||
+      !result.success
+    ) {
+      throw new Error(
+        result.error ||
+        "Unable to load Krisp data"
+      );
+    }
+
+    if (!result.transcript) {
+
+      transcriptBox.textContent =
+        "No processed Krisp transcript found yet.";
+
+      notesBox.textContent =
+        "No Krisp notes found yet.";
+
+      meta.textContent =
+        "No Krisp meeting data available.";
+
+      status.className =
+        "krisp-status";
+
+      status.textContent =
+        "No transcript available yet.";
+
+      return;
+    }
+
+    const transcript =
+      result.transcript;
+
+    transcriptBox.textContent =
+      transcript.transcript_text ||
+      "Transcript text is empty.";
+
+    if (
+      result.notes &&
+      result.notes.krisp_notes
+    ) {
+
+      notesBox.textContent =
+        result.notes.krisp_notes;
+
+    } else {
+
+      notesBox.textContent =
+        "No Krisp notes have been generated for this meeting yet.";
+    }
+
+    const meetingTitle =
+      transcript.meeting_title ||
+      "Krisp meeting";
+
+    const duration =
+      transcript.duration_seconds
+        ? `${transcript.duration_seconds} seconds`
+        : "Duration unavailable";
+
+    meta.textContent =
+      `${meetingTitle} • ${duration}`;
+
+    status.className =
+      "krisp-status good";
+
+    status.textContent =
+      "Latest Krisp call loaded.";
+
+  } catch (error) {
+
+    console.error(
+      "Krisp load error:",
+      error
+    );
+
+    status.className =
+      "krisp-status bad";
+
+    status.textContent =
+      error.message ||
+      "Unable to load Krisp data.";
+  }
+}
+
+
+/* SCRIPT ENGINE */
 
 function startCall() {
 
@@ -755,8 +1055,6 @@ function startCall() {
   ]);
 }
 
-
-/* DISCOVERY */
 
 function searchStatus() {
 
@@ -837,8 +1135,6 @@ function alternativeQuestion() {
 }
 
 
-/* SUMMARISE AND POSITION */
-
 function summariseSituation() {
 
   showScript(
@@ -871,8 +1167,6 @@ function positionSolution() {
   ]);
 }
 
-
-/* APPOINTMENT */
 
 function appointmentQuestion() {
 
@@ -1009,25 +1303,20 @@ function showObjection(type) {
 
     busy: {
       title: "I'm busy",
-
       text:
         `Of course. Can I take ten seconds to say why I called?
         If it's not relevant, I'll let you go.`,
-
       buttons: [
         ["Go ahead", searchStatus],
         ["Still busy", callback]
       ]
     },
 
-
     internal: {
       title: "We're handling it internally",
-
       text:
         `Understood. Is that temporary while you look,
         or the long-term plan?`,
-
       buttons: [
         ["Temporary", internalTemporary],
         ["Long-term plan", () =>
@@ -1035,30 +1324,24 @@ function showObjection(type) {
       ]
     },
 
-
     policy: {
       title: "We do not outsource",
-
       text:
         `I understand. Is that a firm policy for every role,
         or would it ever be reviewed if internal hiring wasn't
         covering the workload?`,
-
       buttons: [
         ["Firm policy", firmPolicyEnd],
         ["Could be reviewed", workloadQuestion]
       ]
     },
 
-
     info: {
       title: "Send me some information",
-
       text:
         `Of course. Just so I don't send you something irrelevant,
         what's the bigger issue at the moment, finding the right person,
         the time the search is taking, or keeping the workload covered?`,
-
       buttons: [
         ["Finding the right person", infoFollowUp],
         ["Search taking too long", infoFollowUp],
@@ -1068,14 +1351,11 @@ function showObjection(type) {
       ]
     },
 
-
     local: {
       title: "We only hire locally",
-
       text:
         `Understood. Can I ask, what makes hiring locally important
         for this role?`,
-
       buttons: [
         ["Needs to be onsite / legal", () =>
           setOutcome("Local hire required")],
@@ -1083,28 +1363,22 @@ function showObjection(type) {
       ]
     },
 
-
     budget: {
       title: "No budget",
-
       text:
         `Understood. Is there no budget for the role at all,
         or is the current hiring budget already stretched?`,
-
       buttons: [
         ["No budget at all", budgetFollowUp],
         ["Budget is stretched", budgetFollowUp]
       ]
     },
 
-
     filled: {
       title: "Role filled",
-
       text:
         `Good to hear. Has the person already started,
         or are they due to start soon?`,
-
       buttons: [
         ["Already started", roleFilledEnd],
         ["Due to start soon", () =>
@@ -1112,14 +1386,11 @@ function showObjection(type) {
       ]
     },
 
-
     notInterested: {
       title: "Not interested",
-
       text:
         `No problem at all. Is that because the hiring search is
         under control, or simply not a priority right now?`,
-
       buttons: [
         ["Search is under control", () =>
           setOutcome("Not interested")],
@@ -1130,7 +1401,8 @@ function showObjection(type) {
 
   };
 
-  const objection = objections[type];
+  const objection =
+    objections[type];
 
   if (!objection) return;
 
@@ -1139,11 +1411,11 @@ function showObjection(type) {
     objection.text
   );
 
-  showResponses(objection.buttons);
+  showResponses(
+    objection.buttons
+  );
 }
 
-
-/* OBJECTION FOLLOW UPS */
 
 function internalTemporary() {
 
@@ -1207,7 +1479,8 @@ function localFollowUp() {
   showResponses([
     ["Yes", appointmentQuestion],
     ["Maybe", meetingExplanation],
-    ["No", () => setOutcome("Local hire only")]
+    ["No", () =>
+      setOutcome("Local hire only")]
   ]);
 }
 
@@ -1282,24 +1555,20 @@ function showQuickAnswer(type) {
 
     who: {
       title: "Who are you?",
-
       text:
         `Sorry, I should've said. Wes from Hey Rachel.
         We help businesses with bookkeeping support.<br><br>
 
         How's the search going so far, are you finding the right people,
         or is that proving difficult?`,
-
       buttons: [
         ["Continue", searchStatus],
         ["I'm busy", () => showObjection("busy")]
       ]
     },
 
-
     support: {
       title: "What kind of bookkeeping support?",
-
       text:
         `We help businesses access experienced bookkeeping professionals
         without having to rely entirely on the local hiring market.<br><br>
@@ -1307,7 +1576,6 @@ function showQuickAnswer(type) {
         Out of interest, what's been the biggest challenge with the
         search so far, finding the right experience or finding someone
         within budget?`,
-
       buttons: [
         ["Finding the right experience", applicantsQuestion],
         ["Budget", () => showObjection("budget")],
@@ -1315,10 +1583,8 @@ function showQuickAnswer(type) {
       ]
     },
 
-
     recruitment: {
       title: "Are you a recruitment company?",
-
       text:
         `Not exactly. We provide businesses with dedicated bookkeeping
         professionals through an outsourced model, so we handle the
@@ -1327,7 +1593,6 @@ function showQuickAnswer(type) {
 
         How's the search going at your end, are you finding the right
         people or is cost becoming part of the problem?`,
-
       buttons: [
         ["Finding people is difficult", applicantsQuestion],
         ["Cost is the problem", () => showObjection("budget")],
@@ -1337,7 +1602,8 @@ function showQuickAnswer(type) {
 
   };
 
-  const answer = answers[type];
+  const answer =
+    answers[type];
 
   if (!answer) return;
 
@@ -1346,7 +1612,9 @@ function showQuickAnswer(type) {
     answer.text
   );
 
-  showResponses(answer.buttons);
+  showResponses(
+    answer.buttons
+  );
 }
 
 
@@ -1354,40 +1622,75 @@ function showQuickAnswer(type) {
 
 function showScript(label, text) {
 
-  document.getElementById("scriptLabel").textContent = label;
-  document.getElementById("scriptText").innerHTML = text;
+  document
+    .getElementById("scriptLabel")
+    .textContent = label;
+
+  document
+    .getElementById("scriptText")
+    .innerHTML = text;
 }
 
 
 function showResponses(buttons) {
 
-  const area = document.getElementById("responses");
+  const area =
+    document.getElementById(
+      "responses"
+    );
 
   area.innerHTML = "";
 
-  buttons.forEach(([label, action]) => {
+  buttons.forEach(
+    ([label, action]) => {
 
-    const button = document.createElement("button");
+      const button =
+        document.createElement(
+          "button"
+        );
 
-    button.className = "response-btn";
-    button.textContent = label;
-    button.onclick = action;
+      button.className =
+        "response-btn";
 
-    area.appendChild(button);
+      button.textContent =
+        label;
 
-  });
+      button.onclick =
+        action;
+
+      area.appendChild(
+        button
+      );
+
+    }
+  );
 }
 
 
 function setStage(stage, number) {
 
-  document.getElementById("stageText").textContent = stage;
+  document
+    .getElementById(
+      "stageText"
+    )
+    .textContent =
+      stage;
 
-  for (let i = 1; i <= 5; i++) {
+  for (
+    let i = 1;
+    i <= 5;
+    i++
+  ) {
 
     document
-      .getElementById("p" + i)
-      .classList.toggle("active", i <= number);
+      .getElementById(
+        "p" + i
+      )
+      .classList
+      .toggle(
+        "active",
+        i <= number
+      );
   }
 }
 
@@ -1400,13 +1703,31 @@ function setOutcome(outcome) {
     Add any final notes before moving to the next lead.`
   );
 
-  document.getElementById("stageText").textContent =
-    "Completed: " + outcome;
+  document
+    .getElementById(
+      "stageText"
+    )
+    .textContent =
+      "Completed: " +
+      outcome;
 
   showResponses([
     ["Start again", startCall]
   ]);
 }
+
+
+/* AUTO LOAD KRISP DATA */
+
+window.addEventListener(
+  "load",
+  () => {
+    setTimeout(
+      loadKrispData,
+      800
+    );
+  }
+);
 
 </script>
 
