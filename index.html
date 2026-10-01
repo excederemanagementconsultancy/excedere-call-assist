@@ -17,11 +17,13 @@
   --border-soft: #193128;
   --text: #f0f7f4;
   --muted: #8da89d;
-  --muted2: #637d73;
   --green: #35d07f;
   --green-dark: #113e2b;
   --amber: #e9b44c;
+  --amber-dark: rgba(233, 180, 76, .12);
   --red: #f06464;
+  --red-dark: rgba(240, 100, 100, .11);
+  --blue: #63aaff;
 }
 
 * {
@@ -55,7 +57,8 @@ body {
     "Segoe UI",
     sans-serif;
 
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing:
+    antialiased;
 }
 
 button,
@@ -108,11 +111,14 @@ header {
 
   z-index: 50;
 
-  background: rgba(5, 16, 13, .97);
+  background:
+    rgba(5, 16, 13, .97);
 
-  border-bottom: 1px solid var(--border);
+  border-bottom:
+    1px solid var(--border);
 
-  backdrop-filter: blur(12px);
+  backdrop-filter:
+    blur(12px);
 }
 
 .brand {
@@ -128,7 +134,8 @@ header {
   display: grid;
   place-items: center;
 
-  border: 1px solid var(--green);
+  border:
+    1px solid var(--green);
 
   border-radius: 11px;
 
@@ -171,7 +178,8 @@ header {
   left: 15px;
   top: 50%;
 
-  transform: translateY(-50%);
+  transform:
+    translateY(-50%);
 
   color: var(--muted);
 
@@ -186,7 +194,8 @@ header {
     0 42px
     0 44px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 10px;
 
@@ -215,7 +224,8 @@ header {
   right: 9px;
   top: 50%;
 
-  transform: translateY(-50%);
+  transform:
+    translateY(-50%);
 
   width: 29px;
   height: 29px;
@@ -249,7 +259,8 @@ header {
 
   overflow-y: auto;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 11px;
 
@@ -276,7 +287,9 @@ header {
   text-align: left;
 
   border: 0;
-  border-bottom: 1px solid var(--border-soft);
+
+  border-bottom:
+    1px solid var(--border-soft);
 
   background: transparent;
 
@@ -340,7 +353,8 @@ header {
 .header-btn {
   padding: 0 15px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   background: var(--panel2);
 
@@ -358,7 +372,8 @@ header {
 .nav-arrow {
   width: 42px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   background: var(--panel2);
 
@@ -411,7 +426,8 @@ header {
 
   padding: 26px;
 
-  border-right: 1px solid var(--border);
+  border-right:
+    1px solid var(--border);
 
   background:
     rgba(7, 21, 16, .52);
@@ -437,7 +453,8 @@ header {
 
   padding: 16px;
 
-  border-left: 1px solid var(--border);
+  border-left:
+    1px solid var(--border);
 
   background:
     rgba(7, 21, 16, .56);
@@ -498,8 +515,7 @@ header {
   padding: 12px 0;
 
   border-bottom:
-    1px solid
-    var(--border-soft);
+    1px solid var(--border-soft);
 }
 
 .detail-label {
@@ -580,7 +596,8 @@ header {
   width: 38px;
   height: 38px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 8px;
 
@@ -605,20 +622,168 @@ header {
 
 
 /* =========================================================
-   LEAD INTELLIGENCE
+   CRM STATUS
 ========================================================= */
 
-.lead-intelligence {
+.crm-status-card {
   margin-top: 18px;
 
-  border: 1px solid var(--border);
+  padding: 13px;
+
+  border:
+    1px solid var(--border);
 
   border-radius: 10px;
 
-  background: rgba(12, 28, 23, .65);
+  background:
+    rgba(12, 28, 23, .68);
 }
 
-.lead-intelligence summary {
+.crm-status-top {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 11px;
+}
+
+.crm-status-title {
+  color: var(--green);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: .14em;
+
+  text-transform: uppercase;
+}
+
+.status-pill {
+  padding:
+    5px 9px;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: .06em;
+
+  text-transform: uppercase;
+}
+
+.status-pill.neutral {
+  color: var(--muted);
+
+  border:
+    1px solid var(--border);
+
+  background: var(--panel2);
+}
+
+.status-pill.green {
+  color: var(--green);
+
+  border:
+    1px solid
+    rgba(53, 208, 127, .35);
+
+  background:
+    rgba(53, 208, 127, .08);
+}
+
+.status-pill.amber {
+  color: var(--amber);
+
+  border:
+    1px solid
+    rgba(233, 180, 76, .4);
+
+  background:
+    var(--amber-dark);
+}
+
+.status-pill.red {
+  color: var(--red);
+
+  border:
+    1px solid
+    rgba(240, 100, 100, .4);
+
+  background:
+    var(--red-dark);
+}
+
+.crm-status-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 8px;
+}
+
+.crm-status-item {
+  padding:
+    8px 9px;
+
+  border:
+    1px solid
+    var(--border-soft);
+
+  border-radius: 8px;
+
+  background:
+    #07130f;
+}
+
+.crm-status-item span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+.crm-status-item strong {
+  display: block;
+
+  color: #dfe9e5;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   LEAD INTELLIGENCE
+========================================================= */
+
+.lead-intelligence,
+.call-history {
+  margin-top: 14px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 10px;
+
+  background:
+    rgba(12, 28, 23, .65);
+}
+
+.lead-intelligence summary,
+.call-history summary {
   padding: 13px;
 
   list-style: none;
@@ -633,11 +798,13 @@ header {
   letter-spacing: .1em;
 }
 
-.lead-intelligence summary::-webkit-details-marker {
+.lead-intelligence summary::-webkit-details-marker,
+.call-history summary::-webkit-details-marker {
   display: none;
 }
 
-.intelligence-body {
+.intelligence-body,
+.history-body {
   padding:
     0 13px 13px;
 }
@@ -646,8 +813,7 @@ header {
   padding: 10px 0;
 
   border-top:
-    1px solid
-    var(--border-soft);
+    1px solid var(--border-soft);
 }
 
 .intelligence-label {
@@ -673,14 +839,70 @@ header {
   white-space: pre-wrap;
 }
 
+
+/* =========================================================
+   CALL HISTORY
+========================================================= */
+
+.history-empty {
+  padding: 12px 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.history-entry {
+  padding: 11px 0;
+
+  border-top:
+    1px solid var(--border-soft);
+}
+
+.history-entry:first-child {
+  border-top: 0;
+}
+
+.history-date {
+  color: var(--green);
+
+  font-size: 10px;
+  font-weight: 750;
+
+  margin-bottom: 5px;
+}
+
+.history-outcome {
+  font-size: 12px;
+
+  font-weight: 700;
+
+  margin-bottom: 4px;
+}
+
+.history-next,
+.history-notes {
+  color: var(--muted);
+
+  font-size: 11px;
+
+  line-height: 1.45;
+}
+
+.history-next strong,
+.history-notes strong {
+  color: #cbd9d4;
+}
+
 .skip-record {
   width: 100%;
 
   min-height: 46px;
 
-  margin-top: 20px;
+  margin-top: 18px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 9px;
 
@@ -775,7 +997,8 @@ header {
   padding:
     30px 30px 32px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 15px;
 
@@ -869,7 +1092,8 @@ header {
 .response-btn {
   min-height: 64px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 10px;
 
@@ -979,7 +1203,7 @@ header {
 
 
 /* =========================================================
-   RIGHT TOOL CARDS
+   RIGHT CARDS
 ========================================================= */
 
 .tool-card {
@@ -987,7 +1211,8 @@ header {
 
   padding: 14px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 12px;
 
@@ -1012,16 +1237,16 @@ header {
   text-transform: uppercase;
 }
 
-textarea {
+textarea,
+.action-input {
   width: 100%;
-
-  resize: vertical;
 
   padding: 12px;
 
   outline: none;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 9px;
 
@@ -1032,7 +1257,12 @@ textarea {
   line-height: 1.5;
 }
 
-textarea:focus {
+textarea {
+  resize: vertical;
+}
+
+textarea:focus,
+.action-input:focus {
   border-color: var(--green);
 }
 
@@ -1062,7 +1292,8 @@ textarea:focus {
 .objection-btn,
 .answer-btn,
 .outcome-btn {
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 8px;
 
@@ -1118,6 +1349,74 @@ textarea:focus {
 
 
 /* =========================================================
+   FOLLOW UP
+========================================================= */
+
+.followup-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 155px;
+
+  gap: 9px;
+}
+
+.followup-label {
+  margin-bottom: 6px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+  letter-spacing: .1em;
+
+  text-transform: uppercase;
+}
+
+.save-call-btn {
+  width: 100%;
+
+  min-height: 45px;
+
+  margin-top: 10px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: var(--green);
+
+  color: #03120b;
+
+  font-weight: 850;
+
+  cursor: pointer;
+}
+
+.save-call-btn:hover {
+  filter: brightness(1.08);
+}
+
+.save-call-status {
+  margin-top: 8px;
+
+  min-height: 17px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+.save-call-status.good {
+  color: var(--green);
+}
+
+.save-call-status.bad {
+  color: var(--red);
+}
+
+
+/* =========================================================
    COLLAPSIBLE TOOLS
 ========================================================= */
 
@@ -1126,17 +1425,13 @@ details.tool-details {
 
   overflow: hidden;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 12px;
 
   background:
-    rgba(
-      10,
-      24,
-      19,
-      .85
-    );
+    rgba(10, 24, 19, .85);
 }
 
 details.tool-details summary {
@@ -1213,8 +1508,7 @@ details[open]
   padding: 12px;
 
   border:
-    1px solid
-    var(--border-soft);
+    1px solid var(--border-soft);
 
   border-radius: 9px;
 
@@ -1303,7 +1597,8 @@ details[open]
 .crm-action {
   min-height: 42px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 8px;
 
@@ -1341,7 +1636,8 @@ details[open]
   background:
     rgba(0, 0, 0, .70);
 
-  backdrop-filter: blur(5px);
+  backdrop-filter:
+    blur(5px);
 
   padding: 28px;
 
@@ -1356,11 +1652,13 @@ details[open]
 }
 
 .import-modal {
-  width: min(720px, 100%);
+  width:
+    min(720px, 100%);
 
   margin-top: 6vh;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 16px;
 
@@ -1382,8 +1680,7 @@ details[open]
   padding: 20px 22px;
 
   border-bottom:
-    1px solid
-    var(--border);
+    1px solid var(--border);
 }
 
 .modal-header h2 {
@@ -1396,7 +1693,8 @@ details[open]
   width: 36px;
   height: 36px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 8px;
 
@@ -1447,8 +1745,6 @@ details[open]
   padding:
     11px 18px;
 
-  border: 0;
-
   border-radius: 9px;
 
   background: var(--green);
@@ -1488,7 +1784,8 @@ details[open]
 .import-stat {
   padding: 14px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 9px;
 
@@ -1498,13 +1795,13 @@ details[open]
 .import-stat span {
   display: block;
 
+  margin-bottom: 5px;
+
   color: var(--muted);
 
   font-size: 10px;
 
   text-transform: uppercase;
-
-  margin-bottom: 5px;
 }
 
 .import-stat strong {
@@ -1514,7 +1811,8 @@ details[open]
 .mapping-box {
   padding: 14px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 10px;
 
@@ -1547,7 +1845,7 @@ details[open]
   font-size: 12px;
 }
 
-.mapping-row span:nth-child(1) {
+.mapping-row span:first-child {
   color: var(--muted);
 }
 
@@ -1565,7 +1863,8 @@ details[open]
 .mode-option {
   padding: 13px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 9px;
 
@@ -1624,8 +1923,7 @@ details[open]
   padding: 18px 22px;
 
   border-top:
-    1px solid
-    var(--border);
+    1px solid var(--border);
 }
 
 .modal-secondary,
@@ -1642,7 +1940,8 @@ details[open]
 }
 
 .modal-secondary {
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   background: var(--panel2);
 
@@ -1710,8 +2009,7 @@ details[open]
     border-left: 0;
 
     border-top:
-      1px solid
-      var(--border);
+      1px solid var(--border);
   }
 
 }
@@ -1741,12 +2039,12 @@ details[open]
     border: 0;
 
     border-bottom:
-      1px solid
-      var(--border);
+      1px solid var(--border);
   }
 
   .script-panel {
-    padding: 22px 18px;
+    padding:
+      22px 18px;
   }
 
   .responses,
@@ -1754,6 +2052,8 @@ details[open]
   .outcome-grid,
   .answer-grid,
   .crm-actions,
+  .followup-grid,
+  .crm-status-grid,
   .import-stat-grid,
   .import-mode {
     grid-template-columns: 1fr;
@@ -1766,6 +2066,11 @@ details[open]
 <body>
 
 <div class="app">
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
 
 <header>
 
@@ -1806,8 +2111,7 @@ details[open]
 
     <button
       class="search-clear"
-      id="clearSearch"
-      type="button">
+      id="clearSearch">
       ×
     </button>
 
@@ -1823,7 +2127,6 @@ details[open]
 
     <button
       class="header-btn"
-      type="button"
       onclick="openImportModal()">
       ↑ Import Leads
     </button>
@@ -1860,7 +2163,9 @@ details[open]
 <main class="workspace">
 
 
-<!-- LEFT -->
+<!-- =====================================================
+     LEFT
+====================================================== -->
 
 <aside class="left-panel">
 
@@ -2035,6 +2340,111 @@ details[open]
   </div>
 
 
+  <!-- CRM STATUS -->
+
+  <div class="crm-status-card">
+
+    <div class="crm-status-top">
+
+      <div class="crm-status-title">
+        CRM Status
+      </div>
+
+      <div
+        class="status-pill neutral"
+        id="followStatus">
+        New
+      </div>
+
+    </div>
+
+
+    <div class="crm-status-grid">
+
+      <div class="crm-status-item">
+
+        <span>
+          Last Called
+        </span>
+
+        <strong id="statusLastCalled">
+          Never
+        </strong>
+
+      </div>
+
+
+      <div class="crm-status-item">
+
+        <span>
+          Call Count
+        </span>
+
+        <strong id="statusCallCount">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="crm-status-item">
+
+        <span>
+          Last Outcome
+        </span>
+
+        <strong id="statusLastOutcome">
+          None
+        </strong>
+
+      </div>
+
+
+      <div class="crm-status-item">
+
+        <span>
+          Days Since Call
+        </span>
+
+        <strong id="statusDaysSince">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="crm-status-item">
+
+        <span>
+          Follow Up
+        </span>
+
+        <strong id="statusFollowUp">
+          None
+        </strong>
+
+      </div>
+
+
+      <div class="crm-status-item">
+
+        <span>
+          Next Action
+        </span>
+
+        <strong id="statusNextAction">
+          None
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- INTELLIGENCE -->
+
   <details class="lead-intelligence">
 
     <summary>
@@ -2159,6 +2569,22 @@ details[open]
   </details>
 
 
+  <!-- HISTORY -->
+
+  <details class="call-history">
+
+    <summary>
+      CALL HISTORY ▾
+    </summary>
+
+    <div
+      class="history-body"
+      id="callHistory">
+    </div>
+
+  </details>
+
+
   <button
     class="skip-record"
     onclick="nextRecord()">
@@ -2168,7 +2594,9 @@ details[open]
 </aside>
 
 
-<!-- CENTER -->
+<!-- =====================================================
+     CENTER
+====================================================== -->
 
 <section class="script-panel">
 
@@ -2257,44 +2685,73 @@ details[open]
         class="progress-item"
         id="progress1">
 
-        <div class="progress-circle">1</div>
-        <small>Opening</small>
+        <div class="progress-circle">
+          1
+        </div>
+
+        <small>
+          Opening
+        </small>
 
       </div>
+
 
       <div
         class="progress-item"
         id="progress2">
 
-        <div class="progress-circle">2</div>
-        <small>Discovery</small>
+        <div class="progress-circle">
+          2
+        </div>
+
+        <small>
+          Discovery
+        </small>
 
       </div>
+
 
       <div
         class="progress-item"
         id="progress3">
 
-        <div class="progress-circle">3</div>
-        <small>Qualification</small>
+        <div class="progress-circle">
+          3
+        </div>
+
+        <small>
+          Qualification
+        </small>
 
       </div>
+
 
       <div
         class="progress-item"
         id="progress4">
 
-        <div class="progress-circle">4</div>
-        <small>Solution</small>
+        <div class="progress-circle">
+          4
+        </div>
+
+        <small>
+          Solution
+        </small>
 
       </div>
+
 
       <div
         class="progress-item"
         id="progress5">
 
-        <div class="progress-circle">5</div>
-        <small>Appointment</small>
+        <div class="progress-circle">
+          5
+        </div>
+
+        <small>
+          Appointment
+        </small>
 
       </div>
 
@@ -2305,10 +2762,14 @@ details[open]
 </section>
 
 
-<!-- RIGHT -->
+<!-- =====================================================
+     RIGHT
+====================================================== -->
 
 <aside class="right-panel">
 
+
+  <!-- CALL NOTES -->
 
   <div class="tool-card">
 
@@ -2322,6 +2783,8 @@ details[open]
 
   </div>
 
+
+  <!-- OBJECTIONS -->
 
   <div class="tool-card">
 
@@ -2384,6 +2847,8 @@ details[open]
   </div>
 
 
+  <!-- ANSWERS -->
+
   <div class="tool-card">
 
     <div class="tool-card-title">
@@ -2414,6 +2879,8 @@ details[open]
 
   </div>
 
+
+  <!-- OUTCOME -->
 
   <div class="tool-card">
 
@@ -2469,6 +2936,67 @@ details[open]
 
   </div>
 
+
+  <!-- FOLLOW UP -->
+
+  <div class="tool-card">
+
+    <div class="tool-card-title">
+      Save Call Result
+    </div>
+
+
+    <div class="followup-grid">
+
+      <div>
+
+        <div class="followup-label">
+          Next Action
+        </div>
+
+        <input
+          class="action-input"
+          id="nextAction"
+          type="text"
+          placeholder="e.g. Call back, send info, attend meeting"
+        >
+
+      </div>
+
+
+      <div>
+
+        <div class="followup-label">
+          Follow-up Date
+        </div>
+
+        <input
+          class="action-input"
+          id="followUpDate"
+          type="date"
+        >
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="save-call-btn"
+      onclick="saveCallResult()">
+      Save Call Result
+    </button>
+
+
+    <div
+      class="save-call-status"
+      id="saveCallStatus">
+    </div>
+
+  </div>
+
+
+  <!-- KRISP -->
 
   <details class="tool-details">
 
@@ -2544,6 +3072,8 @@ details[open]
 
   </details>
 
+
+  <!-- CRM NOTES -->
 
   <details class="tool-details">
 
@@ -2649,7 +3179,7 @@ details[open]
         </strong>
 
         <p>
-          Excedere will automatically map the California bookkeeping lead format.
+          Excedere will automatically map the bookkeeping lead format.
         </p>
 
         <label
@@ -2863,7 +3393,7 @@ details[open]
 <script>
 
 /* =========================================================
-   CONFIGURATION
+   CONFIG
 ========================================================= */
 
 const LEAD_STORAGE_KEY =
@@ -2944,6 +3474,27 @@ const defaultLeads = [
       "",
 
     phoneHistory:
+      [],
+
+    lastCalled:
+      "",
+
+    callCount:
+      0,
+
+    lastOutcome:
+      "",
+
+    nextAction:
+      "",
+
+    nextFollowUpDate:
+      "",
+
+    lastCRMNotes:
+      "",
+
+    callHistory:
       []
 
   }
@@ -2972,6 +3523,53 @@ let pendingImportHeaders =
 
 
 /* =========================================================
+   DEFAULTS
+========================================================= */
+
+function ensureLeadDefaults(
+  lead
+) {
+
+  lead.directPhone ??=
+    "";
+
+  lead.email ??=
+    "";
+
+  lead.phoneHistory ??=
+    [];
+
+  lead.callNotes ??=
+    "";
+
+  lead.lastCalled ??=
+    "";
+
+  lead.callCount ??=
+    0;
+
+  lead.lastOutcome ??=
+    "";
+
+  lead.nextAction ??=
+    "";
+
+  lead.nextFollowUpDate ??=
+    "";
+
+  lead.lastCRMNotes ??=
+    "";
+
+  lead.callHistory ??=
+    [];
+
+
+  return lead;
+
+}
+
+
+/* =========================================================
    STORAGE
 ========================================================= */
 
@@ -2985,7 +3583,9 @@ function loadLeads() {
       );
 
 
-    if (stored) {
+    if (
+      stored
+    ) {
 
       const parsed =
         JSON.parse(
@@ -2998,7 +3598,9 @@ function loadLeads() {
         parsed.length
       ) {
 
-        return parsed;
+        return parsed.map(
+          ensureLeadDefaults
+        );
 
       }
 
@@ -3018,7 +3620,10 @@ function loadLeads() {
     JSON.stringify(
       defaultLeads
     )
-  );
+  )
+    .map(
+      ensureLeadDefaults
+    );
 
 }
 
@@ -3049,10 +3654,16 @@ function getLead() {
 }
 
 
+/* =========================================================
+   RENDER LEAD
+========================================================= */
+
 function renderLead() {
 
   const lead =
-    getLead();
+    ensureLeadDefaults(
+      getLead()
+    );
 
 
   if (!lead) {
@@ -3227,10 +3838,20 @@ function renderLead() {
   updateTime();
 
 
+  renderCRMStatus();
+
+
+  renderCallHistory();
+
+
   resetCallWorkspace();
 
 }
 
+
+/* =========================================================
+   SIMPLE HELPERS
+========================================================= */
 
 function setText(
   id,
@@ -3238,12 +3859,50 @@ function setText(
 ) {
 
   document
-    .getElementById(id)
+    .getElementById(
+      id
+    )
     .textContent =
       value;
 
 }
 
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value ||
+    ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   PHONE
+========================================================= */
 
 function renderPhone(
   textId,
@@ -3305,36 +3964,6 @@ function renderPhone(
 }
 
 
-function buildCallTitle(
-  role
-) {
-
-  if (!role) {
-    return "Vacancy Call";
-  }
-
-
-  return (
-    role
-      .replace(
-        /^part-time\s+/i,
-        ""
-      )
-      .replace(
-        /^full-time\s+/i,
-        ""
-      )
-      +
-      " Vacancy Call"
-  );
-
-}
-
-
-/* =========================================================
-   PHONE EDIT
-========================================================= */
-
 function editPhone(
   field
 ) {
@@ -3373,7 +4002,8 @@ function editPhone(
 
 
   if (
-    cleaned === existing
+    cleaned ===
+    existing
   ) {
     return;
   }
@@ -3414,7 +4044,771 @@ function editPhone(
 
 
 /* =========================================================
-   NAVIGATION
+   CALL TITLE
+========================================================= */
+
+function buildCallTitle(
+  role
+) {
+
+  if (
+    !role
+  ) {
+
+    return "Vacancy Call";
+
+  }
+
+
+  return (
+    role
+      .replace(
+        /^part-time\s+/i,
+        ""
+      )
+      .replace(
+        /^full-time\s+/i,
+        ""
+      )
+    +
+    " Vacancy Call"
+  );
+
+}
+
+
+/* =========================================================
+   CRM STATUS
+========================================================= */
+
+function differenceInDays(
+  fromDate,
+  toDate = new Date()
+) {
+
+  const start =
+    new Date(
+      fromDate
+    );
+
+
+  if (
+    Number.isNaN(
+      start.getTime()
+    )
+  ) {
+
+    return null;
+
+  }
+
+
+  const difference =
+    toDate.getTime() -
+    start.getTime();
+
+
+  return Math.floor(
+    difference /
+    86400000
+  );
+
+}
+
+
+function dateOnly(
+  date
+) {
+
+  const year =
+    date.getFullYear();
+
+
+  const month =
+    String(
+      date.getMonth() + 1
+    )
+      .padStart(
+        2,
+        "0"
+      );
+
+
+  const day =
+    String(
+      date.getDate()
+    )
+      .padStart(
+        2,
+        "0"
+      );
+
+
+  return `${year}-${month}-${day}`;
+
+}
+
+
+function getFollowStatus(
+  lead
+) {
+
+  const today =
+    new Date();
+
+
+  today.setHours(
+    0,
+    0,
+    0,
+    0
+  );
+
+
+  if (
+    lead.nextFollowUpDate
+  ) {
+
+    const due =
+      new Date(
+        `${lead.nextFollowUpDate}T00:00:00`
+      );
+
+
+    const daysUntil =
+      Math.ceil(
+        (
+          due.getTime() -
+          today.getTime()
+        ) /
+        86400000
+      );
+
+
+    if (
+      daysUntil < 0
+    ) {
+
+      return {
+        label:
+          "Overdue",
+
+        className:
+          "red"
+      };
+
+    }
+
+
+    if (
+      daysUntil <= 2
+    ) {
+
+      return {
+        label:
+          "Due Soon",
+
+        className:
+          "amber"
+      };
+
+    }
+
+
+    return {
+      label:
+        "On Track",
+
+      className:
+        "green"
+    };
+
+  }
+
+
+  if (
+    !lead.lastCalled
+  ) {
+
+    return {
+      label:
+        "New",
+
+      className:
+        "neutral"
+    };
+
+  }
+
+
+  const days =
+    differenceInDays(
+      lead.lastCalled
+    );
+
+
+  if (
+    days === null
+  ) {
+
+    return {
+      label:
+        "New",
+
+      className:
+        "neutral"
+    };
+
+  }
+
+
+  if (
+    days >= 8
+  ) {
+
+    return {
+      label:
+        "Overdue",
+
+      className:
+        "red"
+    };
+
+  }
+
+
+  if (
+    days >= 4
+  ) {
+
+    return {
+      label:
+        "Review",
+
+      className:
+        "amber"
+    };
+
+  }
+
+
+  return {
+    label:
+      "Current",
+
+    className:
+      "green"
+  };
+
+}
+
+
+function renderCRMStatus() {
+
+  const lead =
+    getLead();
+
+
+  const status =
+    getFollowStatus(
+      lead
+    );
+
+
+  const pill =
+    document.getElementById(
+      "followStatus"
+    );
+
+
+  pill.textContent =
+    status.label;
+
+
+  pill.className =
+    `status-pill ${status.className}`;
+
+
+  if (
+    lead.lastCalled
+  ) {
+
+    const date =
+      new Date(
+        lead.lastCalled
+      );
+
+
+    setText(
+      "statusLastCalled",
+      date.toLocaleString()
+    );
+
+
+    const days =
+      differenceInDays(
+        lead.lastCalled
+      );
+
+
+    setText(
+      "statusDaysSince",
+      days === 0
+        ? "Today"
+        : `${days} day${days === 1 ? "" : "s"}`
+    );
+
+  } else {
+
+    setText(
+      "statusLastCalled",
+      "Never"
+    );
+
+
+    setText(
+      "statusDaysSince",
+      "—"
+    );
+
+  }
+
+
+  setText(
+    "statusCallCount",
+    String(
+      lead.callCount ||
+      0
+    )
+  );
+
+
+  setText(
+    "statusLastOutcome",
+    lead.lastOutcome ||
+    "None"
+  );
+
+
+  setText(
+    "statusFollowUp",
+    lead.nextFollowUpDate
+      ? formatDateOnly(
+          lead.nextFollowUpDate
+        )
+      : "None"
+  );
+
+
+  setText(
+    "statusNextAction",
+    lead.nextAction ||
+    "None"
+  );
+
+}
+
+
+/* =========================================================
+   CALL HISTORY
+========================================================= */
+
+function renderCallHistory() {
+
+  const lead =
+    getLead();
+
+
+  const area =
+    document.getElementById(
+      "callHistory"
+    );
+
+
+  area.innerHTML =
+    "";
+
+
+  const history =
+    Array.isArray(
+      lead.callHistory
+    )
+      ? [...lead.callHistory]
+      : [];
+
+
+  if (
+    !history.length
+  ) {
+
+    area.innerHTML =
+      `<div class="history-empty">
+        No saved calls yet.
+      </div>`;
+
+
+    return;
+
+  }
+
+
+  history
+    .reverse()
+    .forEach(
+      entry => {
+
+        const wrapper =
+          document.createElement(
+            "div"
+          );
+
+
+        wrapper.className =
+          "history-entry";
+
+
+        const timestamp =
+          entry.timestamp
+            ? new Date(
+                entry.timestamp
+              )
+                .toLocaleString()
+            : "Unknown time";
+
+
+        wrapper.innerHTML =
+          `
+          <div class="history-date">
+            ${escapeHtml(
+              timestamp
+            )}
+          </div>
+
+          <div class="history-outcome">
+            ${escapeHtml(
+              entry.outcome ||
+              "No outcome"
+            )}
+          </div>
+
+          <div class="history-next">
+            <strong>Next:</strong>
+            ${escapeHtml(
+              entry.nextAction ||
+              "None"
+            )}
+            ${
+              entry.nextFollowUpDate
+                ? ` · ${escapeHtml(
+                    formatDateOnly(
+                      entry.nextFollowUpDate
+                    )
+                  )}`
+                : ""
+            }
+          </div>
+
+          ${
+            entry.liveNotes
+              ? `
+                <div class="history-notes">
+                  <strong>Notes:</strong>
+                  ${escapeHtml(
+                    entry.liveNotes
+                  )}
+                </div>
+              `
+              : ""
+          }
+          `;
+
+
+        area.appendChild(
+          wrapper
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDateOnly(
+  value
+) {
+
+  if (
+    !value
+  ) {
+
+    return "";
+
+  }
+
+
+  const date =
+    new Date(
+      `${value}T00:00:00`
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return value;
+
+  }
+
+
+  return date
+    .toLocaleDateString(
+      undefined,
+      {
+        year:
+          "numeric",
+
+        month:
+          "short",
+
+        day:
+          "numeric"
+      }
+    );
+
+}
+
+
+/* =========================================================
+   NEXT ACTION DEFAULTS
+========================================================= */
+
+function defaultNextAction(
+  outcome
+) {
+
+  const actions = {
+
+    "Appointment booked":
+      "Attend scheduled appointment",
+
+    "Callback required":
+      "Call prospect back",
+
+    "Follow up required":
+      "Follow up with prospect",
+
+    "Information requested":
+      "Send requested information and follow up",
+
+    "Role filled":
+      "No immediate action",
+
+    "Not interested":
+      "No immediate action",
+
+    "Handling internally":
+      "Revisit at a later date",
+
+    "Company policy: no outsourcing":
+      "No further action",
+
+    "Local hire required":
+      "Revisit if hiring requirements change",
+
+    "Local hire only":
+      "Revisit if hiring requirements change"
+
+  };
+
+
+  return (
+    actions[outcome] ||
+    ""
+  );
+
+}
+
+
+/* =========================================================
+   SAVE CALL RESULT
+========================================================= */
+
+function saveCallResult() {
+
+  const lead =
+    ensureLeadDefaults(
+      getLead()
+    );
+
+
+  const status =
+    document.getElementById(
+      "saveCallStatus"
+    );
+
+
+  if (
+    !currentOutcome
+  ) {
+
+    status.className =
+      "save-call-status bad";
+
+
+    status.textContent =
+      "Select a Call Outcome first.";
+
+
+    return;
+
+  }
+
+
+  const nextAction =
+    document
+      .getElementById(
+        "nextAction"
+      )
+      .value
+      .trim();
+
+
+  const followDate =
+    document
+      .getElementById(
+        "followUpDate"
+      )
+      .value;
+
+
+  const liveNotes =
+    document
+      .getElementById(
+        "notes"
+      )
+      .value
+      .trim();
+
+
+  const crmNotes =
+    document
+      .getElementById(
+        "crmNotesOutput"
+      )
+      .value
+      .trim();
+
+
+  const now =
+    new Date();
+
+
+  const timestamp =
+    now.toISOString();
+
+
+  const historyEntry = {
+
+    id:
+      makeLeadId(),
+
+    timestamp,
+
+    outcome:
+      currentOutcome,
+
+    nextAction:
+      nextAction ||
+      defaultNextAction(
+        currentOutcome
+      ),
+
+    nextFollowUpDate:
+      followDate,
+
+    liveNotes,
+
+    crmNotes
+
+  };
+
+
+  lead.lastCalled =
+    timestamp;
+
+
+  lead.callCount =
+    Number(
+      lead.callCount ||
+      0
+    ) +
+    1;
+
+
+  lead.lastOutcome =
+    currentOutcome;
+
+
+  lead.nextAction =
+    historyEntry.nextAction;
+
+
+  lead.nextFollowUpDate =
+    followDate;
+
+
+  lead.callNotes =
+    liveNotes;
+
+
+  lead.lastCRMNotes =
+    crmNotes;
+
+
+  lead.callHistory.push(
+    historyEntry
+  );
+
+
+  saveLeads();
+
+
+  renderCRMStatus();
+
+
+  renderCallHistory();
+
+
+  status.className =
+    "save-call-status good";
+
+
+  status.textContent =
+    "Call result saved to this lead.";
+
+
+  setTimeout(
+    () => {
+
+      status.textContent =
+        "";
+
+    },
+    3000
+  );
+
+}
+
+
+/* =========================================================
+   RECORD NAVIGATION
 ========================================================= */
 
 function nextRecord() {
@@ -3486,7 +4880,9 @@ searchInput.addEventListener(
         .toLowerCase();
 
 
-    if (!query) {
+    if (
+      !query
+    ) {
 
       searchResults.innerHTML =
         "";
@@ -3521,7 +4917,9 @@ searchInput.addEventListener(
               lead.whatTheyNeed,
               lead.requirements,
               lead.outsourcingAngle,
-              lead.mainConstraint
+              lead.mainConstraint,
+              lead.lastOutcome,
+              lead.nextAction
             ]
               .join(" ")
               .toLowerCase();
@@ -3703,38 +5101,6 @@ document
   );
 
 
-function escapeHtml(
-  value
-) {
-
-  return String(
-    value ||
-    ""
-  )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
 /* =========================================================
    LOCAL TIME
 ========================================================= */
@@ -3752,8 +5118,12 @@ function deriveTimezone(
 
 
   if (
-    value.includes("california") ||
-    value.includes(", ca")
+    value.includes(
+      "california"
+    ) ||
+    value.includes(
+      ", ca"
+    )
   ) {
 
     return {
@@ -3768,10 +5138,12 @@ function deriveTimezone(
 
 
   if (
-    value.includes("new york") ||
-    value.includes("florida") ||
-    value.includes(", ny") ||
-    value.includes(", fl")
+    value.includes(
+      "new york"
+    ) ||
+    value.includes(
+      "florida"
+    )
   ) {
 
     return {
@@ -3786,8 +5158,9 @@ function deriveTimezone(
 
 
   if (
-    value.includes("texas") ||
-    value.includes(", tx")
+    value.includes(
+      "texas"
+    )
   ) {
 
     return {
@@ -3818,7 +5191,9 @@ function updateTime() {
     getLead();
 
 
-  if (!lead) {
+  if (
+    !lead
+  ) {
     return;
   }
 
@@ -3840,14 +5215,17 @@ function updateTime() {
             "2-digit"
         }
       )
-      .format(
-        new Date()
-      );
+        .format(
+          new Date()
+        );
 
 
     setText(
       "localTime",
-      `${time} ${lead.timezoneLabel || ""}`
+      `${time} ${
+        lead.timezoneLabel ||
+        ""
+      }`
     );
 
   } catch (error) {
@@ -3869,7 +5247,7 @@ setInterval(
 
 
 /* =========================================================
-   CSV IMPORTER
+   CSV IMPORT
 ========================================================= */
 
 function openImportModal() {
@@ -3918,7 +5296,9 @@ async function handleCSVFile(
     event.target.files[0];
 
 
-  if (!file) {
+  if (
+    !file
+  ) {
     return;
   }
 
@@ -3984,20 +5364,21 @@ async function handleCSVFile(
             {};
 
 
-          pendingImportHeaders.forEach(
-            (
-              header,
-              index
-            ) => {
+          pendingImportHeaders
+            .forEach(
+              (
+                header,
+                index
+              ) => {
 
-              object[
-                header
-              ] =
-                row[index] ||
-                "";
+                object[
+                  header
+                ] =
+                  row[index] ||
+                  "";
 
-            }
-          );
+              }
+            );
 
 
           return object;
@@ -4007,9 +5388,10 @@ async function handleCSVFile(
 
 
     pendingImportRecords =
-      objects.map(
-        mapCSVRecord
-      );
+      objects
+        .map(
+          mapCSVRecord
+        );
 
 
     updateImportPreview();
@@ -4027,11 +5409,6 @@ async function handleCSVFile(
         false;
 
   } catch (error) {
-
-    console.error(
-      error
-    );
-
 
     status.textContent =
       error.message ||
@@ -4136,6 +5513,7 @@ function parseCSV(
       quoted =
         true;
 
+
       continue;
 
     }
@@ -4218,24 +5596,16 @@ function parseCSV(
   }
 
 
-  if (
-    !rows.length
-  ) {
-
-    return [];
-
-  }
-
-
   rows[0] =
-    rows[0].map(
-      header =>
-        String(
-          header ||
-          ""
-        )
-          .trim()
-    );
+    rows[0]
+      .map(
+        header =>
+          String(
+            header ||
+            ""
+          )
+            .trim()
+      );
 
 
   return rows;
@@ -4274,7 +5644,7 @@ function mapCSVRecord(
     );
 
 
-  return {
+  return ensureLeadDefaults({
 
     id:
       makeLeadId(),
@@ -4415,16 +5785,31 @@ function mapCSVRecord(
         "Call Notes"
       ),
 
-    publicResearchSources:
-      csvValue(
-        record,
-        "Public Research Sources"
-      ),
-
     phoneHistory:
+      [],
+
+    lastCalled:
+      "",
+
+    callCount:
+      0,
+
+    lastOutcome:
+      "",
+
+    nextAction:
+      "",
+
+    nextFollowUpDate:
+      "",
+
+    lastCRMNotes:
+      "",
+
+    callHistory:
       []
 
-  };
+  });
 
 }
 
@@ -4566,28 +5951,29 @@ function countImportDuplicates() {
     0;
 
 
-  pendingImportRecords.forEach(
-    lead => {
+  pendingImportRecords
+    .forEach(
+      lead => {
 
-      if (
-        isDuplicate(
-          lead,
-          combined
-        )
-      ) {
+        if (
+          isDuplicate(
+            lead,
+            combined
+          )
+        ) {
 
-        duplicateCount++;
+          duplicateCount++;
 
-      } else {
+        } else {
 
-        combined.push(
-          lead
-        );
+          combined.push(
+            lead
+          );
+
+        }
 
       }
-
-    }
-  );
+    );
 
 
   return duplicateCount;
@@ -4596,10 +5982,6 @@ function countImportDuplicates() {
 
 
 function updateImportPreview() {
-
-  const duplicateCount =
-    countImportDuplicates();
-
 
   setText(
     "previewRecordCount",
@@ -4615,13 +5997,16 @@ function updateImportPreview() {
 
   setText(
     "previewDuplicates",
-    duplicateCount
+    countImportDuplicates()
   );
 
 
   const names =
     pendingImportRecords
-      .slice(0, 5)
+      .slice(
+        0,
+        5
+      )
       .map(
         record =>
           `${record.firstName} — ${record.company}`
@@ -4679,7 +6064,10 @@ function performImport() {
   ) {
 
     leads =
-      pendingImportRecords;
+      pendingImportRecords
+        .map(
+          ensureLeadDefaults
+        );
 
 
     imported =
@@ -4687,30 +6075,33 @@ function performImport() {
 
   } else {
 
-    pendingImportRecords.forEach(
-      record => {
+    pendingImportRecords
+      .forEach(
+        record => {
 
-        if (
-          isDuplicate(
-            record
-          )
-        ) {
+          if (
+            isDuplicate(
+              record
+            )
+          ) {
 
-          skipped++;
+            skipped++;
 
-        } else {
+          } else {
 
-          leads.push(
-            record
-          );
+            leads.push(
+              ensureLeadDefaults(
+                record
+              )
+            );
 
 
-          imported++;
+            imported++;
+
+          }
 
         }
-
-      }
-    );
+      );
 
   }
 
@@ -4740,11 +6131,7 @@ function performImport() {
 
 
   setTimeout(
-    () => {
-
-      closeImportModal();
-
-    },
+    closeImportModal,
     850
   );
 
@@ -4752,7 +6139,7 @@ function performImport() {
 
 
 /* =========================================================
-   CALL NOTE PERSISTENCE
+   LIVE NOTE AUTOSAVE
 ========================================================= */
 
 document
@@ -4767,7 +6154,9 @@ document
         getLead();
 
 
-      if (!lead) {
+      if (
+        !lead
+      ) {
         return;
       }
 
@@ -4802,7 +6191,9 @@ function getSupabaseAccessToken() {
     );
 
 
-  if (exact) {
+  if (
+    exact
+  ) {
 
     try {
 
@@ -4852,7 +6243,9 @@ function getSupabaseAccessToken() {
   ) {
 
     const key =
-      localStorage.key(i);
+      localStorage.key(
+        i
+      );
 
 
     if (
@@ -4950,7 +6343,9 @@ async function loadKrispData() {
     getSupabaseAccessToken();
 
 
-  if (!token) {
+  if (
+    !token
+  ) {
 
     status.className =
       "krisp-status bad";
@@ -5174,7 +6569,8 @@ function buildSummaryFromTranscript() {
 
 
   const lower =
-    transcript.toLowerCase();
+    transcript
+      .toLowerCase();
 
 
   const points =
@@ -5318,43 +6714,28 @@ function getOutcomeText() {
 
 function getNextStepText() {
 
-  const map = {
+  const manualAction =
+    document
+      .getElementById(
+        "nextAction"
+      )
+      .value
+      .trim();
 
-    "Appointment booked":
-      "Send or confirm the calendar invitation and attend the scheduled appointment.",
 
-    "Callback required":
-      "Call the prospect back at the agreed time.",
+  if (
+    manualAction
+  ) {
 
-    "Follow up required":
-      "Follow up with the prospect on the agreed date.",
+    return manualAction;
 
-    "Information requested":
-      "Send the requested information and follow up afterward.",
-
-    "Role filled":
-      "No immediate action required. Revisit if future hiring needs arise.",
-
-    "Not interested":
-      "No immediate follow up required unless circumstances change.",
-
-    "Handling internally":
-      "Revisit the opportunity at an appropriate future date.",
-
-    "Company policy: no outsourcing":
-      "No further action required unless the company policy changes.",
-
-    "Local hire required":
-      "No immediate action required unless the prospect becomes open to remote support.",
-
-    "Local hire only":
-      "No immediate action required unless hiring requirements change."
-
-  };
+  }
 
 
   return (
-    map[currentOutcome] ||
+    defaultNextAction(
+      currentOutcome
+    ) ||
     "Select the appropriate call outcome and update the next action."
   );
 
@@ -5466,7 +6847,7 @@ async function copyCRMNotes() {
 
 
 /* =========================================================
-   RESET WORKSPACE
+   RESET
 ========================================================= */
 
 function resetCallWorkspace() {
@@ -5509,8 +6890,12 @@ function resetCallWorkspace() {
     )
     .innerHTML =
       `<button class="response-btn" disabled>
-      Start the call first
+        Start the call first
       </button>`;
+
+
+  const lead =
+    getLead();
 
 
   document
@@ -5518,7 +6903,25 @@ function resetCallWorkspace() {
       "notes"
     )
     .value =
-      getLead()?.callNotes ||
+      lead?.callNotes ||
+      "";
+
+
+  document
+    .getElementById(
+      "nextAction"
+    )
+    .value =
+      lead?.nextAction ||
+      "";
+
+
+  document
+    .getElementById(
+      "followUpDate"
+    )
+    .value =
+      lead?.nextFollowUpDate ||
       "";
 
 
@@ -5527,12 +6930,21 @@ function resetCallWorkspace() {
       "crmNotesOutput"
     )
     .value =
+      lead?.lastCRMNotes ||
       "";
 
 
   document
     .getElementById(
       "crmNoteStatus"
+    )
+    .textContent =
+      "";
+
+
+  document
+    .getElementById(
+      "saveCallStatus"
     )
     .textContent =
       "";
@@ -6335,10 +7747,14 @@ function showObjection(
 
 
   const objection =
-    objections[type];
+    objections[
+      type
+    ];
 
 
-  if (!objection) {
+  if (
+    !objection
+  ) {
     return;
   }
 
@@ -6703,10 +8119,14 @@ function showQuickAnswer(
 
 
   const answer =
-    answers[type];
+    answers[
+      type
+    ];
 
 
-  if (!answer) {
+  if (
+    !answer
+  ) {
     return;
   }
 
@@ -6847,6 +8267,10 @@ function setStage(
 }
 
 
+/* =========================================================
+   OUTCOME
+========================================================= */
+
 function setOutcome(
   outcome,
   clickedButton = null
@@ -6873,11 +8297,30 @@ function setOutcome(
     );
 
 
+  const actionField =
+    document.getElementById(
+      "nextAction"
+    );
+
+
+  if (
+    !actionField.value.trim()
+  ) {
+
+    actionField.value =
+      defaultNextAction(
+        outcome
+      );
+
+  }
+
+
   showScript(
     "Call Complete",
 
     `<strong>${outcome}</strong><br><br>
-    Add any final notes, then generate your CRM notes.`
+    Add any final notes, set the next action and follow-up date,
+    then save the call result.`
   );
 
 
@@ -6896,8 +8339,8 @@ function setOutcome(
     ],
 
     [
-      "Next Record",
-      nextRecord
+      "Save Call Result",
+      saveCallResult
     ]
 
   ]);
@@ -6912,6 +8355,15 @@ function setOutcome(
 window.addEventListener(
   "load",
   () => {
+
+    leads =
+      leads.map(
+        ensureLeadDefaults
+      );
+
+
+    saveLeads();
+
 
     renderLead();
 
