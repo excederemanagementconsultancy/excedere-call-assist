@@ -856,10 +856,10 @@ details.tool-details summary{
 }
 
 
-/* NEW MATCH ASSIST */
+/* MATCH ASSIST */
 
 .match-box{
-  display:none;
+  display:block;
   margin:10px 0;
   padding:11px 12px;
   border:1px solid var(--border);
@@ -1644,13 +1644,15 @@ when you're ready.
   MATCH ASSIST
 </div>
 
-<div id="krispMatchBadge" class="match-badge low">
-  LOW CONFIDENCE
+<div id="krispMatchBadge" class="match-badge possible">
+  Waiting for Krisp call
 </div>
 
 </div>
 
-<div id="krispMatchDetails" class="match-details"></div>
+<div id="krispMatchDetails" class="match-details">
+  Click <strong>Check Latest Krisp Call</strong> after Krisp has processed the call.
+</div>
 
 </div>
 
@@ -3348,19 +3350,26 @@ function renderMatchAssist(match){
     );
 
 
-  if(!match){
-
-    box.classList.remove(
-      "visible"
-    );
-
-    return;
-  }
-
-
   box.classList.add(
     "visible"
   );
+
+
+  if(!match){
+
+    badge.className =
+      "match-badge possible";
+
+
+    badge.textContent =
+      "Waiting for Krisp call";
+
+
+    details.innerHTML =
+      "Click <strong>Check Latest Krisp Call</strong> after Krisp has processed the call. Excedere will compare the current lead with the latest Krisp recording.";
+
+    return;
+  }
 
 
   badge.className =
@@ -3498,12 +3507,24 @@ function renderAttachedKrisp(){
     "No Krisp notes available.";
 
 
-  if(call.match){
-
-    renderMatchAssist(
-      call.match
+  const attachedMatch =
+    call.match ||
+    calculateKrispMatch(
+      lead,
+      call
     );
-  }
+
+
+  call.match =
+    attachedMatch;
+
+
+  renderMatchAssist(
+    attachedMatch
+  );
+
+
+  saveLeads();
 
 
   status.className =
