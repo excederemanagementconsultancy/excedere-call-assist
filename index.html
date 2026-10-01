@@ -311,6 +311,18 @@ header{
   text-decoration:none;
 }
 
+.email-open-btn{
+  width:100%;
+  min-height:40px;
+  margin-top:9px;
+  border:1px solid var(--green);
+  border-radius:8px;
+  background:var(--green-dark);
+  color:var(--green);
+  font-weight:800;
+  cursor:pointer;
+}
+
 .phone-row{
   display:grid;
   grid-template-columns:minmax(0,1fr) 38px;
@@ -1207,6 +1219,12 @@ details.tool-details summary{
 
   <a id="leadEmail" class="email-link" href="#"></a>
 
+  <button
+    class="email-open-btn"
+    onclick="openEmailComposer()">
+    ✉ Email Prospect
+  </button>
+
 </div>
 
 
@@ -1644,15 +1662,13 @@ when you're ready.
   MATCH ASSIST
 </div>
 
-<div id="krispMatchBadge" class="match-badge possible">
-  Waiting for Krisp call
+<div id="krispMatchBadge" class="match-badge low">
+  LOW CONFIDENCE
 </div>
 
 </div>
 
-<div id="krispMatchDetails" class="match-details">
-  Click <strong>Check Latest Krisp Call</strong> after Krisp has processed the call.
-</div>
+<div id="krispMatchDetails" class="match-details"></div>
 
 </div>
 
@@ -2693,6 +2709,42 @@ document
 
 
 /* =====================================================
+   EMAIL COMPOSER
+===================================================== */
+
+function openEmailComposer(){
+
+  const lead =
+    getLead();
+
+
+  const params =
+    new URLSearchParams({
+      name:
+        lead.firstName ||
+        "",
+      company:
+        lead.company ||
+        "",
+      email:
+        lead.email ||
+        ""
+    });
+
+
+  const emailUrl =
+    `email.html?${params.toString()}`;
+
+
+  window.open(
+    emailUrl,
+    "_blank",
+    "noopener"
+  );
+}
+
+
+/* =====================================================
    CRM STATUS
 ===================================================== */
 
@@ -3102,8 +3154,6 @@ function calculateKrispMatch(
     );
 
 
-  /* NAME */
-
   const firstName =
     normaliseMatchText(
       lead.firstName
@@ -3124,8 +3174,6 @@ function calculateKrispMatch(
     );
   }
 
-
-  /* COMPANY */
 
   const companyWords =
     importantWords(
@@ -3163,8 +3211,6 @@ function calculateKrispMatch(
   }
 
 
-  /* ROLE */
-
   const roleWords =
     importantWords(
       lead.role
@@ -3196,8 +3242,6 @@ function calculateKrispMatch(
     );
   }
 
-
-  /* TIME */
 
   const callStarted =
     lead.activeCallStartedAt
