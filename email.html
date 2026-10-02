@@ -12,20 +12,16 @@
   --bg:#06110e;
   --panel:#0a1915;
   --panel2:#0d1e19;
-  --panel3:#10231d;
   --border:#223c32;
   --border-soft:#193128;
   --text:#f0f7f4;
   --muted:#8da89d;
   --green:#35d07f;
   --green-dark:#113e2b;
-  --amber:#e9b44c;
   --red:#f06464;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html,body{
   margin:0;
@@ -40,22 +36,16 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-button,input,textarea{
-  font:inherit;
-}
+button,input,textarea{font:inherit}
 
 button{
   cursor:pointer;
   transition:.15s ease;
 }
 
-button:active{
-  transform:translateY(1px);
-}
+button:active{transform:translateY(1px)}
 
-.app{
-  min-height:100vh;
-}
+.app{min-height:100vh}
 
 header{
   min-height:78px;
@@ -249,10 +239,93 @@ textarea:focus{
 }
 
 #message{
-  min-height:340px;
+  min-height:300px;
   resize:vertical;
   line-height:1.6;
 }
+
+
+/* SIGNATURE PREVIEW */
+
+.signature-preview{
+  margin-top:6px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
+  color:#111;
+}
+
+.signature-label{
+  margin-bottom:12px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.signature-main{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.signature-logo{
+  width:58px;
+  height:58px;
+  flex:0 0 58px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:3px solid #02a7d8;
+  background:#04141d;
+  color:#14c8f5;
+  font-size:28px;
+  font-weight:900;
+  font-style:italic;
+}
+
+.signature-name{
+  color:#111;
+  font-size:14px;
+  font-weight:800;
+}
+
+.signature-company{
+  margin-top:1px;
+  color:#222;
+  font-size:11px;
+}
+
+.signature-tagline{
+  margin-top:2px;
+  color:#00a6d6;
+  font-size:9px;
+  letter-spacing:.28em;
+}
+
+.signature-links{
+  margin-top:17px;
+  padding-left:2px;
+  font-size:12px;
+  line-height:1.55;
+}
+
+.signature-links a{
+  color:#1769d2;
+  text-decoration:none;
+}
+
+.signature-note{
+  margin-top:12px;
+  color:#64736d;
+  font-size:10px;
+  line-height:1.5;
+}
+
+
+/* ACTIONS */
 
 .actions{
   display:grid;
@@ -283,20 +356,13 @@ textarea:focus{
   font-size:12px;
 }
 
-.good{
-  color:var(--green);
-}
-
-.bad{
-  color:var(--red);
-}
+.good{color:var(--green)}
+.bad{color:var(--red)}
 
 @media(max-width:800px){
-
   .template-grid{
     grid-template-columns:1fr 1fr;
   }
-
 }
 
 @media(max-width:720px){
@@ -317,7 +383,6 @@ textarea:focus{
   .actions{
     grid-template-columns:1fr;
   }
-
 }
 </style>
 </head>
@@ -330,20 +395,11 @@ textarea:focus{
 
 <div class="brand">
 
-<div class="brand-mark">
-E
-</div>
+<div class="brand-mark">E</div>
 
 <div>
-
-<div class="brand-name">
-EXCEDERE
-</div>
-
-<div class="brand-product">
-EMAIL
-</div>
-
+  <div class="brand-name">EXCEDERE</div>
+  <div class="brand-product">EMAIL</div>
 </div>
 
 </div>
@@ -500,6 +556,74 @@ Message
   id="message"
   placeholder="Write your email here..."></textarea>
 
+</div>
+
+
+<div class="signature-label">
+EMAIL SIGNATURE PREVIEW
+</div>
+
+<div class="signature-preview">
+
+<div class="signature-main">
+
+<div class="signature-logo">
+E
+</div>
+
+<div>
+
+<div class="signature-name">
+Wesley Jon Pollard
+</div>
+
+<div class="signature-company">
+Excedere Management Consultancy
+</div>
+
+<div class="signature-tagline">
+BUSINESS BEYOND BORDERS
+</div>
+
+</div>
+
+</div>
+
+
+<div class="signature-links">
+
+<div>
+📅
+<a href="https://cal.com/" target="_blank">
+Book a Free Consultation
+</a>
+</div>
+
+<div>
+🌐
+<a
+  href="https://excederemanagementconsultancy.github.io/excedere/"
+  target="_blank">
+Excedere Website
+</a>
+</div>
+
+<div>
+💬
+<a
+  href="https://wa.me/639602206667"
+  target="_blank">
+WhatsApp: +63 960 220 6667
+</a>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="signature-note">
+Preview only. Your actual PrivateEmail signature will still be inserted by PrivateEmail when the draft opens.
 </div>
 
 
@@ -740,11 +864,8 @@ I look forward to speaking with you.`
 
     blank:{
 
-      subject:
-        "",
-
-      message:
-        ""
+      subject:"",
+      message:""
     }
 
   };
@@ -773,7 +894,7 @@ I look forward to speaking with you.`
     )
     .innerHTML =
       `<span class="good">
-      Template loaded. Your email signature will be added by your email provider.
+      Template loaded.
       </span>`;
 }
 
