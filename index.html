@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Excedere Call Assist</title>
 
 <style>
-:root {
+:root{
   --bg:#06110e;
   --panel:#0a1915;
   --panel2:#0d1e19;
@@ -34,63 +32,58 @@ body{
   color:var(--text);
   background:
     radial-gradient(circle at 78% 0%,rgba(45,180,109,.08),transparent 28%),
-    linear-gradient(180deg,#06110e 0%,#07140f 100%);
+    linear-gradient(180deg,#06110e,#07140f);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 button,input,textarea{font:inherit}
-button{transition:.15s ease}
+button{cursor:pointer;transition:.15s ease}
 button:active{transform:translateY(1px)}
 
 .app{min-height:100vh}
 
-
 /* HEADER */
 
 header{
-  min-height:78px;
+  min-height:72px;
   display:grid;
-  grid-template-columns:240px minmax(360px,620px) 1fr;
-  gap:24px;
+  grid-template-columns:250px minmax(320px,560px) 1fr;
+  gap:20px;
   align-items:center;
-  padding:12px 26px;
+  padding:10px 22px;
   position:sticky;
   top:0;
   z-index:50;
-  background:rgba(5,16,13,.97);
+  background:rgba(5,16,13,.985);
   border-bottom:1px solid var(--border);
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:12px;
 }
 
 .brand-logo{
-  width:52px;
-  height:52px;
+  width:50px;
+  height:50px;
   object-fit:contain;
-  border-radius:12px;
-  display:block;
+  border-radius:50%;
 }
 
 .brand-name{
-  font-size:17px;
+  font-size:16px;
   font-weight:700;
   letter-spacing:.18em;
 }
 
 .brand-product{
-  margin-top:4px;
+  margin-top:3px;
   color:var(--green);
-  font-size:10px;
+  font-size:9px;
   font-weight:700;
-  letter-spacing:.26em;
+  letter-spacing:.28em;
 }
-
-
-/* SEARCH */
 
 .search-wrap{position:relative}
 
@@ -104,8 +97,8 @@ header{
 
 .search-box{
   width:100%;
-  height:46px;
-  padding:0 42px 0 44px;
+  height:44px;
+  padding:0 42px;
   border:1px solid var(--border);
   border-radius:10px;
   outline:none;
@@ -117,78 +110,67 @@ header{
 
 .search-clear{
   position:absolute;
-  right:9px;
+  right:8px;
   top:50%;
   transform:translateY(-50%);
-  width:29px;
-  height:29px;
+  width:30px;
+  height:30px;
   border:0;
   background:transparent;
   color:var(--muted);
-  cursor:pointer;
 }
 
 .search-results{
   display:none;
   position:absolute;
+  top:calc(100% + 7px);
   left:0;
   right:0;
-  top:calc(100% + 8px);
   max-height:360px;
-  overflow-y:auto;
+  overflow:auto;
   border:1px solid var(--border);
-  border-radius:11px;
+  border-radius:10px;
   background:#091713;
-  z-index:90;
+  z-index:100;
 }
 
 .search-results.open{display:block}
 
 .search-result{
   width:100%;
-  padding:13px 15px;
+  padding:12px 14px;
   text-align:left;
   border:0;
   border-bottom:1px solid var(--border-soft);
   background:transparent;
   color:var(--text);
-  cursor:pointer;
 }
 
 .search-result:hover{background:var(--panel3)}
-
-.search-result strong{
-  display:block;
-  margin-bottom:3px;
-}
-
+.search-result strong{display:block}
 .search-result small{color:var(--muted)}
-
-
-/* NAV */
 
 .record-nav{
   display:flex;
   justify-content:flex-end;
   align-items:center;
-  gap:9px;
+  gap:8px;
 }
 
 .record-counter{
-  min-width:65px;
+  min-width:62px;
   text-align:right;
   color:#c7d5d0;
-  font-size:13px;
+  font-size:12px;
 }
 
 .header-btn,.nav-arrow,.next-record-top{
-  min-height:42px;
-  border-radius:9px;
-  cursor:pointer;
+  min-height:40px;
+  border-radius:8px;
 }
 
 .header-btn{
-  padding:0 15px;
+  padding:0 13px;
   border:1px solid var(--border);
   background:var(--panel2);
   color:var(--text);
@@ -196,104 +178,103 @@ header{
 }
 
 .nav-arrow{
-  width:42px;
+  width:40px;
   border:1px solid var(--border);
   background:var(--panel2);
   color:var(--text);
-  font-size:20px;
+  font-size:19px;
 }
 
 .next-record-top{
-  padding:0 18px;
+  padding:0 16px;
   border:0;
   background:var(--green);
   color:#03120b;
   font-weight:800;
 }
 
-
-/* WORKSPACE */
+/* LAYOUT */
 
 .workspace{
   display:grid;
-  grid-template-columns:300px minmax(620px,1fr) 500px;
-  min-height:calc(100vh - 78px);
+  grid-template-columns:290px minmax(560px,1fr) 390px;
+  min-height:calc(100vh - 72px);
 }
 
 .left-panel{
-  padding:26px;
+  padding:22px;
   border-right:1px solid var(--border);
   background:rgba(7,21,16,.52);
-  height:calc(100vh - 78px);
-  overflow-y:auto;
+  height:calc(100vh - 72px);
+  overflow:auto;
   position:sticky;
-  top:78px;
+  top:72px;
 }
 
 .script-panel{
   min-width:0;
-  padding:32px 38px 48px;
+  padding:28px 34px 42px;
 }
 
 .right-panel{
   min-width:0;
-  padding:16px;
+  padding:14px;
   border-left:1px solid var(--border);
   background:rgba(7,21,16,.56);
-  height:calc(100vh - 78px);
-  overflow-y:auto;
+  height:calc(100vh - 72px);
+  overflow:auto;
   position:sticky;
-  top:78px;
+  top:72px;
 }
 
 .eyebrow{
-  margin-bottom:13px;
+  margin-bottom:12px;
   color:var(--green);
   font-size:10px;
   font-weight:800;
-  letter-spacing:.20em;
+  letter-spacing:.18em;
   text-transform:uppercase;
 }
 
-
-/* LEAD */
+/* LEFT LEAD */
 
 .lead-name{
-  margin-bottom:6px;
-  font-size:30px;
+  margin-bottom:5px;
+  font-size:27px;
   font-weight:760;
+  letter-spacing:-.02em;
 }
 
 .lead-title{
   color:#e0eae6;
-  font-size:14px;
+  font-size:13px;
 }
 
 .lead-company{
   margin-top:3px;
   color:var(--muted);
-  font-size:14px;
+  font-size:13px;
 }
 
-.lead-details{margin-top:24px}
+.lead-details{margin-top:20px}
 
 .detail{
-  padding:12px 0;
+  padding:10px 0;
   border-bottom:1px solid var(--border-soft);
 }
 
 .detail-label{
-  margin-bottom:6px;
+  margin-bottom:5px;
   color:var(--muted);
-  font-size:10px;
-  font-weight:650;
-  letter-spacing:.13em;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.12em;
   text-transform:uppercase;
 }
 
 .detail-value{
   color:var(--text);
-  font-size:13px;
+  font-size:12px;
   line-height:1.5;
 }
 
@@ -302,51 +283,54 @@ header{
   font-weight:750;
 }
 
-.email-link,.phone-link{
-  color:var(--text);
-  text-decoration:none;
-}
-
-.email-open-btn{
-  width:100%;
-  min-height:40px;
-  margin-top:9px;
-  border:1px solid var(--green);
-  border-radius:8px;
-  background:var(--green-dark);
-  color:var(--green);
-  font-weight:800;
-  cursor:pointer;
-}
-
-.phone-row{
+.phone-row,.email-row{
   display:grid;
   grid-template-columns:minmax(0,1fr) 38px;
   gap:8px;
   align-items:center;
 }
 
-.edit-phone{
+.phone-link,.email-link{
+  color:var(--text);
+  text-decoration:none;
+  overflow-wrap:anywhere;
+}
+
+.edit-phone,.edit-email{
   width:38px;
   height:38px;
   border:1px solid var(--border);
   border-radius:8px;
   background:var(--panel2);
   color:var(--muted);
-  cursor:pointer;
 }
 
-.empty-number{
+.edit-phone:hover,.edit-email:hover{
+  border-color:var(--green);
+  color:var(--green);
+}
+
+.empty-value{
   color:var(--muted);
   font-style:italic;
 }
 
+.email-open-btn{
+  width:100%;
+  min-height:38px;
+  margin-top:8px;
+  border:1px solid var(--green);
+  border-radius:8px;
+  background:var(--green-dark);
+  color:var(--green);
+  font-weight:800;
+}
 
 /* CRM STATUS */
 
 .crm-status-card{
-  margin-top:18px;
-  padding:13px;
+  margin-top:14px;
+  padding:11px;
   border:1px solid var(--border);
   border-radius:10px;
   background:rgba(12,28,23,.68);
@@ -356,232 +340,206 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:11px;
+  margin-bottom:9px;
 }
 
 .crm-status-title{
   color:var(--green);
-  font-size:10px;
+  font-size:9px;
   font-weight:800;
   letter-spacing:.14em;
 }
 
 .status-pill{
-  padding:5px 9px;
+  padding:4px 8px;
   border-radius:999px;
-  font-size:10px;
+  font-size:9px;
   font-weight:800;
 }
 
-.status-pill.neutral{
-  color:var(--muted);
-  border:1px solid var(--border);
-}
-
-.status-pill.green{
-  color:var(--green);
-  border:1px solid var(--green);
-}
-
-.status-pill.amber{
-  color:var(--amber);
-  border:1px solid var(--amber);
-}
-
-.status-pill.red{
-  color:var(--red);
-  border:1px solid var(--red);
-}
+.status-pill.neutral{color:var(--muted);border:1px solid var(--border)}
+.status-pill.green{color:var(--green);border:1px solid var(--green)}
+.status-pill.amber{color:var(--amber);border:1px solid var(--amber)}
+.status-pill.red{color:var(--red);border:1px solid var(--red)}
 
 .crm-status-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:6px;
 }
 
 .crm-status-item{
-  padding:8px 9px;
+  padding:7px 8px;
   border:1px solid var(--border-soft);
-  border-radius:8px;
+  border-radius:7px;
   background:#07130f;
 }
 
 .crm-status-item span{
   display:block;
-  margin-bottom:4px;
+  margin-bottom:3px;
   color:var(--muted);
-  font-size:9px;
+  font-size:8px;
 }
 
 .crm-status-item strong{
   display:block;
-  font-size:11px;
-  line-height:1.4;
+  font-size:10px;
+  line-height:1.35;
 }
 
-
-/* DETAILS */
+/* COLLAPSIBLES */
 
 .lead-intelligence,.call-history{
-  margin-top:14px;
+  margin-top:11px;
   border:1px solid var(--border);
   border-radius:10px;
   background:rgba(12,28,23,.65);
 }
 
 .lead-intelligence summary,.call-history summary{
-  padding:13px;
+  padding:12px;
   list-style:none;
-  cursor:pointer;
   color:var(--green);
-  font-size:11px;
+  font-size:10px;
   font-weight:800;
+  cursor:pointer;
 }
 
 .intelligence-body,.history-body{
-  padding:0 13px 13px;
+  padding:0 12px 12px;
 }
 
-.intelligence-item{
-  padding:10px 0;
+.intelligence-item,.history-entry{
+  padding:9px 0;
   border-top:1px solid var(--border-soft);
 }
 
 .intelligence-label{
-  margin-bottom:5px;
+  margin-bottom:4px;
   color:var(--muted);
-  font-size:9px;
+  font-size:8px;
   font-weight:700;
 }
 
 .intelligence-value{
   color:#dce8e3;
-  font-size:12px;
-  line-height:1.5;
+  font-size:11px;
+  line-height:1.45;
   white-space:pre-wrap;
 }
 
-.history-entry{
-  padding:11px 0;
-  border-top:1px solid var(--border-soft);
-}
-
 .history-date{
+  margin-bottom:4px;
   color:var(--green);
-  font-size:10px;
+  font-size:9px;
   font-weight:750;
-  margin-bottom:5px;
 }
 
 .history-outcome{
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:4px;
+  margin-bottom:3px;
+  font-size:11px;
+  font-weight:750;
 }
 
 .history-next,.history-notes{
   color:var(--muted);
-  font-size:11px;
+  font-size:10px;
   line-height:1.45;
+}
+
+.history-email .history-outcome{
+  color:#9bc8ff;
 }
 
 .skip-record{
   width:100%;
-  min-height:46px;
-  margin-top:18px;
+  min-height:42px;
+  margin-top:15px;
   border:1px solid var(--border);
-  border-radius:9px;
+  border-radius:8px;
   background:var(--panel2);
   color:var(--text);
   font-weight:700;
-  cursor:pointer;
 }
 
-
-/* CALL */
+/* CENTRE CALL */
 
 .call-header{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  gap:26px;
-  width:100%;
-  max-width:900px;
-  margin:0 auto 24px;
+  gap:24px;
+  max-width:860px;
+  margin:0 auto 20px;
 }
 
 .call-header h1{
   margin:0;
-  font-size:clamp(29px,2vw,36px);
+  font-size:clamp(28px,2vw,34px);
+  letter-spacing:-.025em;
 }
 
 .call-stage{
-  margin-top:8px;
+  margin-top:7px;
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
 }
 
 .start-call{
-  min-width:142px;
-  min-height:48px;
+  min-width:132px;
+  min-height:44px;
   border:0;
-  border-radius:10px;
+  border-radius:9px;
   background:var(--green);
   color:#03120b;
   font-weight:850;
-  cursor:pointer;
 }
-
-
-/* SCRIPT */
 
 .script-box{
   width:100%;
-  max-width:900px;
-  min-height:310px;
+  max-width:860px;
+  min-height:270px;
   margin:0 auto;
-  padding:30px 30px 32px;
+  padding:26px 28px;
   border:1px solid var(--border);
-  border-radius:15px;
-  background:linear-gradient(145deg,rgba(12,27,22,.92),rgba(9,22,18,.88));
+  border-radius:14px;
+  background:linear-gradient(145deg,rgba(12,27,22,.94),rgba(9,22,18,.9));
+  box-shadow:0 18px 45px rgba(0,0,0,.10);
 }
 
 .script-topline{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:22px;
+  margin-bottom:19px;
 }
 
 .script-label{
   color:var(--green);
   font-size:10px;
   font-weight:800;
-  letter-spacing:.18em;
+  letter-spacing:.17em;
 }
 
 .step-label{
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
 }
 
 .script-text{
-  max-width:760px;
-  font-size:clamp(20px,1.45vw,24px);
-  line-height:1.62;
+  max-width:730px;
+  font-size:clamp(19px,1.35vw,23px);
+  line-height:1.58;
 }
 
 .script-text strong{color:var(--green)}
 
-
-/* RESPONSES */
-
 .response-title{
-  width:100%;
-  max-width:900px;
-  margin:28px auto 12px;
+  max-width:860px;
+  margin:24px auto 11px;
   color:var(--green);
-  font-size:10px;
+  font-size:9px;
   font-weight:800;
   letter-spacing:.18em;
 }
@@ -589,30 +547,25 @@ header{
 .responses{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
-  width:100%;
-  max-width:900px;
+  gap:11px;
+  max-width:860px;
   margin:0 auto;
 }
 
 .response-btn{
-  min-height:64px;
+  min-height:58px;
+  padding:10px 14px;
   border:1px solid var(--border);
-  border-radius:10px;
+  border-radius:9px;
   background:#0d211a;
   color:var(--text);
-  font-size:15px;
+  font-size:14px;
   font-weight:700;
-  cursor:pointer;
 }
 
-
-/* PROGRESS */
-
 .progress-area{
-  width:100%;
-  max-width:820px;
-  margin:44px auto 0;
+  max-width:760px;
+  margin:34px auto 0;
 }
 
 .progress-line{
@@ -624,9 +577,9 @@ header{
 .progress-line::before{
   content:"";
   position:absolute;
+  top:16px;
   left:10%;
   right:10%;
-  top:17px;
   height:2px;
   background:#334b42;
 }
@@ -638,15 +591,16 @@ header{
 }
 
 .progress-circle{
-  width:35px;
-  height:35px;
-  margin:0 auto 10px;
+  width:33px;
+  height:33px;
+  margin:0 auto 8px;
   display:grid;
   place-items:center;
   border:3px solid #526a60;
   border-radius:50%;
   background:var(--bg);
   color:var(--muted);
+  font-size:11px;
 }
 
 .progress-item.active .progress-circle{
@@ -656,77 +610,78 @@ header{
 
 .progress-item small{
   color:var(--muted);
-  font-size:11px;
+  font-size:10px;
 }
 
-
-/* RIGHT */
+/* RIGHT PANEL */
 
 .tool-card{
-  margin-bottom:11px;
-  padding:14px;
+  margin-bottom:9px;
+  padding:12px;
   border:1px solid var(--border);
-  border-radius:12px;
+  border-radius:11px;
   background:rgba(12,28,23,.9);
 }
 
 .tool-card-title{
-  margin-bottom:11px;
+  margin-bottom:9px;
   color:var(--green);
-  font-size:10px;
+  font-size:9px;
   font-weight:850;
-  letter-spacing:.18em;
+  letter-spacing:.17em;
 }
 
 textarea,.action-input{
   width:100%;
-  padding:12px;
+  padding:10px;
   outline:none;
   border:1px solid var(--border);
-  border-radius:9px;
+  border-radius:8px;
   background:#08140f;
   color:var(--text);
 }
 
-#notes{min-height:104px}
+#notes{
+  min-height:92px;
+  resize:vertical;
+}
 
 .objection-grid,.outcome-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:7px;
 }
 
 .answer-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:8px;
+  gap:7px;
 }
 
 .objection-btn,.answer-btn,.outcome-btn{
   border:1px solid var(--border);
-  border-radius:8px;
+  border-radius:7px;
   background:#0d1f1a;
   color:#e3ece8;
-  cursor:pointer;
 }
 
 .objection-btn{
-  min-height:46px;
-  padding:9px 11px;
+  min-height:42px;
+  padding:8px 9px;
   text-align:left;
-  font-size:12px;
-}
-
-.answer-btn{
-  min-height:58px;
-  padding:8px;
   font-size:11px;
 }
 
+.answer-btn{
+  min-height:52px;
+  padding:7px;
+  font-size:10px;
+}
+
 .outcome-btn{
-  min-height:43px;
-  padding:9px;
-  font-size:12px;
+  min-height:40px;
+  padding:8px;
+  font-size:11px;
   font-weight:650;
 }
 
@@ -736,53 +691,49 @@ textarea,.action-input{
   color:var(--green);
 }
 
-
-/* SAVE */
-
 .followup-grid{
   display:grid;
-  grid-template-columns:1fr 155px;
-  gap:9px;
+  grid-template-columns:1fr 145px;
+  gap:8px;
 }
 
 .followup-label{
-  margin-bottom:6px;
+  margin-bottom:5px;
   color:var(--muted);
-  font-size:9px;
+  font-size:8px;
 }
 
 .save-call-btn,.refresh-btn{
   width:100%;
-  min-height:43px;
-  margin-top:10px;
+  min-height:40px;
+  margin-top:9px;
   border:0;
-  border-radius:8px;
+  border-radius:7px;
   background:var(--green);
   color:#03120b;
   font-weight:800;
-  cursor:pointer;
 }
 
-.save-call-status{
-  margin-top:8px;
+.save-call-status,.krisp-status,.crm-note-status{
+  margin-top:7px;
   color:var(--muted);
-  font-size:11px;
+  font-size:10px;
 }
 
-
-/* COLLAPSIBLE */
+.good{color:var(--green)}
+.bad{color:var(--red)}
 
 details.tool-details{
-  margin-bottom:11px;
+  margin-bottom:9px;
   overflow:hidden;
   border:1px solid var(--border);
-  border-radius:12px;
+  border-radius:11px;
   background:rgba(10,24,19,.85);
 }
 
 details.tool-details summary{
-  min-height:65px;
-  padding:13px 15px;
+  min-height:57px;
+  padding:11px 13px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -793,153 +744,122 @@ details.tool-details summary{
 .summary-left{
   display:flex;
   flex-direction:column;
-  gap:4px;
+  gap:3px;
 }
 
 .summary-title{
-  font-size:12px;
+  font-size:11px;
   font-weight:800;
 }
 
 .summary-subtitle{
   color:var(--muted);
-  font-size:11px;
+  font-size:10px;
 }
 
 .details-body{
-  padding:0 14px 14px;
+  padding:0 12px 12px;
 }
-
-
-/* KRISP */
 
 .krisp-meta{
-  margin-bottom:10px;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.krisp-card{
-  margin-bottom:10px;
-  padding:12px;
-  border:1px solid var(--border-soft);
-  border-radius:9px;
-  background:#07130f;
-}
-
-.krisp-heading{
-  margin-bottom:7px;
+  margin-bottom:8px;
   color:var(--muted);
   font-size:10px;
 }
 
+.krisp-card{
+  margin-bottom:8px;
+  padding:10px;
+  border:1px solid var(--border-soft);
+  border-radius:8px;
+  background:#07130f;
+}
+
+.krisp-heading{
+  margin-bottom:6px;
+  color:var(--muted);
+  font-size:9px;
+}
+
 .krisp-content{
-  max-height:220px;
-  overflow-y:auto;
+  max-height:180px;
+  overflow:auto;
   color:#d8e4df;
-  font-size:12px;
-  line-height:1.55;
+  font-size:11px;
+  line-height:1.5;
   white-space:pre-wrap;
 }
 
-.krisp-status,.crm-note-status{
-  margin-top:8px;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.good{color:var(--green)}
-.bad{color:var(--red)}
-
-.attach-btn{
-  width:100%;
-  min-height:43px;
-  margin-top:8px;
-  border:1px solid var(--green);
-  border-radius:8px;
-  background:var(--green-dark);
-  color:var(--green);
-  font-weight:800;
-  cursor:pointer;
-}
-
-
-/* MATCH ASSIST */
-
 .match-box{
-  display:block;
-  margin:10px 0;
-  padding:11px 12px;
+  margin:9px 0;
+  padding:10px;
   border:1px solid var(--border);
-  border-radius:9px;
+  border-radius:8px;
   background:#08140f;
 }
-
-.match-box.visible{display:block}
 
 .match-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
-  margin-bottom:7px;
+  gap:8px;
+  margin-bottom:6px;
 }
 
 .match-title{
-  font-size:10px;
   color:var(--muted);
-  letter-spacing:.1em;
+  font-size:9px;
   font-weight:800;
+  letter-spacing:.1em;
 }
 
 .match-badge{
-  padding:5px 8px;
+  padding:4px 7px;
   border-radius:999px;
-  font-size:10px;
+  font-size:9px;
   font-weight:850;
 }
 
-.match-badge.strong{
-  color:var(--green);
-  border:1px solid var(--green);
-}
-
-.match-badge.possible{
-  color:var(--amber);
-  border:1px solid var(--amber);
-}
-
-.match-badge.low{
-  color:var(--red);
-  border:1px solid var(--red);
-}
+.match-badge.strong{color:var(--green);border:1px solid var(--green)}
+.match-badge.possible{color:var(--amber);border:1px solid var(--amber)}
+.match-badge.low{color:var(--red);border:1px solid var(--red)}
 
 .match-details{
   color:var(--muted);
-  font-size:11px;
-  line-height:1.5;
+  font-size:10px;
+  line-height:1.45;
 }
 
+.attach-btn{
+  width:100%;
+  min-height:40px;
+  margin-top:7px;
+  border:1px solid var(--green);
+  border-radius:7px;
+  background:var(--green-dark);
+  color:var(--green);
+  font-weight:800;
+}
 
-/* CRM NOTES */
-
-.crm-notes-box{min-height:185px}
+.crm-notes-box{
+  min-height:160px;
+  resize:vertical;
+}
 
 .crm-actions{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:9px;
+  gap:7px;
+  margin-top:8px;
 }
 
 .crm-action{
-  min-height:42px;
+  min-height:39px;
   border:1px solid var(--border);
-  border-radius:8px;
+  border-radius:7px;
   background:var(--panel2);
   color:var(--text);
   font-weight:700;
-  cursor:pointer;
 }
 
 .crm-action.primary{
@@ -948,7 +868,6 @@ details.tool-details summary{
   color:#03120b;
 }
 
-
 /* IMPORT */
 
 .modal-backdrop{
@@ -956,66 +875,65 @@ details.tool-details summary{
   position:fixed;
   inset:0;
   z-index:200;
-  background:rgba(0,0,0,.70);
   padding:28px;
+  background:rgba(0,0,0,.7);
 }
 
 .modal-backdrop.open{
   display:flex;
-  align-items:flex-start;
   justify-content:center;
+  align-items:flex-start;
 }
 
 .import-modal{
   width:min(720px,100%);
   margin-top:6vh;
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:#091713;
   overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#091713;
 }
 
 .modal-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px 22px;
+  padding:18px 20px;
   border-bottom:1px solid var(--border);
 }
 
 .modal-close{
-  width:36px;
-  height:36px;
+  width:34px;
+  height:34px;
   border:1px solid var(--border);
-  border-radius:8px;
+  border-radius:7px;
   background:var(--panel2);
   color:var(--text);
 }
 
-.modal-body{padding:22px}
+.modal-body{padding:20px}
 
 .import-drop{
-  padding:28px;
-  border:1px dashed #35604e;
-  border-radius:12px;
+  padding:25px;
   text-align:center;
+  border:1px dashed #35604e;
+  border-radius:10px;
 }
 
 .choose-file{
   display:inline-block;
-  padding:11px 18px;
-  border-radius:9px;
+  padding:10px 17px;
+  border-radius:8px;
   background:var(--green);
   color:#03120b;
   font-weight:800;
-  cursor:pointer;
 }
 
 #importFile{display:none}
 
 .import-preview{
   display:none;
-  margin-top:20px;
+  margin-top:18px;
 }
 
 .import-preview.visible{display:block}
@@ -1023,61 +941,61 @@ details.tool-details summary{
 .import-stat-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
+  gap:9px;
 }
 
 .import-stat{
-  padding:14px;
+  padding:12px;
   border:1px solid var(--border);
-  border-radius:9px;
+  border-radius:8px;
   background:var(--panel2);
 }
 
 .import-stat span{
   display:block;
   color:var(--muted);
-  font-size:10px;
+  font-size:9px;
 }
 
-.import-stat strong{font-size:21px}
+.import-stat strong{font-size:19px}
 
 .import-mode{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:16px;
+  gap:9px;
+  margin-top:14px;
 }
 
 .mode-option{
-  padding:13px;
+  padding:11px;
   border:1px solid var(--border);
-  border-radius:9px;
+  border-radius:8px;
 }
 
-.preview-names{
-  margin-top:15px;
+.preview-names,.import-status{
+  margin-top:12px;
   color:var(--muted);
-  font-size:12px;
-  line-height:1.6;
-}
-
-.import-status{
-  margin-top:14px;
-  color:var(--muted);
-  font-size:12px;
+  font-size:11px;
+  line-height:1.55;
 }
 
 .modal-footer{
   display:flex;
   justify-content:flex-end;
-  gap:10px;
-  padding:18px 22px;
+  gap:9px;
+  padding:16px 20px;
 }
 
 .modal-secondary,.modal-primary{
-  min-height:42px;
-  padding:0 18px;
-  border-radius:9px;
+  min-height:40px;
+  padding:0 16px;
+  border-radius:8px;
+}
+
+.modal-secondary{
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:var(--text);
 }
 
 .modal-primary{
@@ -1088,9 +1006,9 @@ details.tool-details summary{
 
 .modal-primary:disabled{opacity:.4}
 
-@media(max-width:1450px){
+@media(max-width:1400px){
   .workspace{
-    grid-template-columns:275px minmax(520px,1fr) 420px;
+    grid-template-columns:270px minmax(500px,1fr) 360px;
   }
 }
 </style>
@@ -1121,7 +1039,6 @@ details.tool-details summary{
   >
 
   <button id="clearSearch" class="search-clear">×</button>
-
   <div id="searchResults" class="search-results"></div>
 </div>
 
@@ -1131,9 +1048,7 @@ details.tool-details summary{
     ↑ Import Leads
   </button>
 
-  <div id="recordCounter" class="record-counter">
-    1 of 1
-  </div>
+  <div id="recordCounter" class="record-counter">1 of 1</div>
 
   <button class="nav-arrow" onclick="previousRecord()">‹</button>
   <button class="nav-arrow" onclick="nextRecord()">›</button>
@@ -1146,9 +1061,7 @@ details.tool-details summary{
 
 </header>
 
-
 <main class="workspace">
-
 
 <!-- LEFT -->
 
@@ -1159,7 +1072,6 @@ details.tool-details summary{
 <div id="leadName" class="lead-name"></div>
 <div id="leadTitle" class="lead-title"></div>
 <div id="leadCompany" class="lead-company"></div>
-
 
 <div class="lead-details">
 
@@ -1174,46 +1086,44 @@ details.tool-details summary{
 </div>
 
 <div class="detail">
-
   <div class="detail-label">Telephone Number</div>
-
   <div class="phone-row">
-
     <a id="mainPhoneLink" class="phone-link" href="#">
-      <span>☎</span>
       <span id="mainPhone"></span>
     </a>
-
     <button class="edit-phone" onclick="editPhone('phone')">✎</button>
-
   </div>
-
 </div>
-
 
 <div class="detail">
-
   <div class="detail-label">Direct / Mobile</div>
-
   <div class="phone-row">
-
     <a id="directPhoneLink" class="phone-link" href="#">
-      <span>☎</span>
       <span id="directPhone"></span>
     </a>
-
     <button class="edit-phone" onclick="editPhone('directPhone')">✎</button>
-
   </div>
-
 </div>
-
 
 <div class="detail">
 
   <div class="detail-label">Email</div>
 
-  <a id="leadEmail" class="email-link" href="#"></a>
+  <div class="email-row">
+
+    <span
+      id="leadEmail"
+      class="email-link">
+    </span>
+
+    <button
+      class="edit-email"
+      onclick="editEmail()"
+      title="Edit email">
+      ✎
+    </button>
+
+  </div>
 
   <button
     class="email-open-btn"
@@ -1223,18 +1133,15 @@ details.tool-details summary{
 
 </div>
 
-
 <div class="detail">
   <div class="detail-label">Local Time</div>
   <div id="localTime" class="detail-value local-time"></div>
 </div>
 
-
 <div class="detail">
   <div class="detail-label">Job Type</div>
   <div id="leadJobType" class="detail-value"></div>
 </div>
-
 
 <div class="detail">
   <div class="detail-label">Pay Offered</div>
@@ -1242,7 +1149,6 @@ details.tool-details summary{
 </div>
 
 </div>
-
 
 <div class="crm-status-card">
 
@@ -1286,7 +1192,6 @@ details.tool-details summary{
 </div>
 
 </div>
-
 
 <details class="lead-intelligence">
 
@@ -1338,22 +1243,19 @@ details.tool-details summary{
 
 </details>
 
-
 <details class="call-history">
 
-<summary>CALL HISTORY ▾</summary>
+<summary>ACTIVITY HISTORY ▾</summary>
 
 <div id="callHistory" class="history-body"></div>
 
 </details>
-
 
 <button class="skip-record" onclick="nextRecord()">
   Skip to Next Record →
 </button>
 
 </aside>
-
 
 <!-- CENTRE -->
 
@@ -1363,7 +1265,10 @@ details.tool-details summary{
 
 <div>
   <div class="eyebrow">Live Call Assist</div>
-  <h1 id="callTitle">Vacancy Call</h1>
+
+  <h1 id="callTitle">
+    Vacancy Call
+  </h1>
 
   <div id="stageText" class="call-stage">
     Follow the script and select the best response.
@@ -1376,33 +1281,31 @@ details.tool-details summary{
 
 </div>
 
-
 <div class="script-box">
 
 <div class="script-topline">
 
-  <div id="scriptLabel" class="script-label">
-    Before you call
-  </div>
+<div id="scriptLabel" class="script-label">
+  Before you call
+</div>
 
-  <div id="stepLabel" class="step-label">
-    Ready
-  </div>
+<div id="stepLabel" class="step-label">
+  Ready
+</div>
 
 </div>
 
 <div id="scriptText" class="script-text">
-
 Review the lead information, then press
 <strong>Start Call</strong>
 when you're ready.
-
 </div>
 
 </div>
 
-
-<div class="response-title">PROSPECT RESPONSE</div>
+<div class="response-title">
+PROSPECT RESPONSE
+</div>
 
 <div id="responses" class="responses">
 
@@ -1411,7 +1314,6 @@ when you're ready.
 </button>
 
 </div>
-
 
 <div class="progress-area">
 
@@ -1448,69 +1350,72 @@ when you're ready.
 
 </section>
 
-
 <!-- RIGHT -->
 
 <aside class="right-panel">
 
-
 <div class="tool-card">
 
-<div class="tool-card-title">CALL NOTES</div>
+<div class="tool-card-title">
+CALL NOTES
+</div>
 
 <textarea
   id="notes"
-  placeholder="Type notes while you're speaking..."></textarea>
+  placeholder="Type notes while you're speaking...">
+</textarea>
 
 </div>
 
-
 <div class="tool-card">
 
-<div class="tool-card-title">QUICK OBJECTIONS</div>
+<div class="tool-card-title">
+QUICK OBJECTIONS
+</div>
 
 <div class="objection-grid">
 
 <button class="objection-btn" onclick="showObjection('busy')">
-  ◷ I'm busy
+  I'm busy
 </button>
 
 <button class="objection-btn" onclick="showObjection('internal')">
-  👥 We're handling it internally
+  We're handling it internally
 </button>
 
 <button class="objection-btn" onclick="showObjection('policy')">
-  ⊘ We do not outsource
+  We don't outsource
 </button>
 
 <button class="objection-btn" onclick="showObjection('local')">
-  📍 We only hire locally
+  We only hire locally
 </button>
 
 <button class="objection-btn" onclick="showObjection('info')">
-  ▤ Send me some information
+  Send information
 </button>
 
 <button class="objection-btn" onclick="showObjection('budget')">
-  $ No budget
+  No budget
 </button>
 
 <button class="objection-btn" onclick="showObjection('filled')">
-  ✓ Role filled
+  Role filled
 </button>
 
 <button class="objection-btn" onclick="showObjection('notInterested')">
-  ✕ Not interested
+  Not interested
 </button>
 
 </div>
 
 </div>
 
-
 <div class="tool-card">
 
-<div class="tool-card-title">QUICK ANSWERS</div>
+<div class="tool-card-title">
+QUICK ANSWERS
+</div>
 
 <div class="answer-grid">
 
@@ -1519,204 +1424,97 @@ when you're ready.
 </button>
 
 <button class="answer-btn" onclick="showQuickAnswer('support')">
-  What kind of bookkeeping support?
+  What support?
 </button>
 
 <button class="answer-btn" onclick="showQuickAnswer('recruitment')">
-  Are you a recruitment company?
+  Recruitment company?
 </button>
 
 </div>
 
 </div>
 
-
 <div class="tool-card">
 
-<div class="tool-card-title">CALL OUTCOME</div>
+<div class="tool-card-title">
+CALL OUTCOME
+</div>
 
 <div class="outcome-grid">
 
-<button
-  class="outcome-btn"
-  data-outcome="Appointment booked"
-  onclick="setOutcome('Appointment booked')">
-  Appointment
+<button class="outcome-btn" data-outcome="Appointment booked" onclick="setOutcome('Appointment booked')">
+Appointment
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Callback required"
-  onclick="setOutcome('Callback required')">
-  Callback
+<button class="outcome-btn" data-outcome="Callback required" onclick="setOutcome('Callback required')">
+Callback
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Follow up required"
-  onclick="setOutcome('Follow up required')">
-  Follow Up
+<button class="outcome-btn" data-outcome="Follow up required" onclick="setOutcome('Follow up required')">
+Follow Up
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Information requested"
-  onclick="setOutcome('Information requested')">
-  Send Info
+<button class="outcome-btn" data-outcome="Information requested" onclick="setOutcome('Information requested')">
+Send Info
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Role filled"
-  onclick="setOutcome('Role filled')">
-  Role Filled
+<button class="outcome-btn" data-outcome="Role filled" onclick="setOutcome('Role filled')">
+Role Filled
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Not interested"
-  onclick="setOutcome('Not interested')">
-  Not Interested
+<button class="outcome-btn" data-outcome="Not interested" onclick="setOutcome('Not interested')">
+Not Interested
 </button>
 
 </div>
 
 </div>
-
 
 <div class="tool-card">
 
-<div class="tool-card-title">SAVE CALL RESULT</div>
+<div class="tool-card-title">
+SAVE CALL RESULT
+</div>
 
 <div class="followup-grid">
 
 <div>
-  <div class="followup-label">NEXT ACTION</div>
 
-  <input
-    id="nextAction"
-    class="action-input"
-    type="text"
-    placeholder="e.g. Call back, send info, attend meeting">
+<div class="followup-label">
+NEXT ACTION
+</div>
+
+<input
+  id="nextAction"
+  class="action-input"
+  type="text"
+  placeholder="Call back, send info, meeting...">
+
 </div>
 
 <div>
-  <div class="followup-label">FOLLOW-UP DATE</div>
 
-  <input
-    id="followUpDate"
-    class="action-input"
-    type="date">
+<div class="followup-label">
+FOLLOW-UP DATE
+</div>
+
+<input
+  id="followUpDate"
+  class="action-input"
+  type="date">
+
 </div>
 
 </div>
 
 <button class="save-call-btn" onclick="saveCallResult()">
-  Save Call Result
+Save Call Result
 </button>
 
 <div id="saveCallStatus" class="save-call-status"></div>
 
 </div>
-
-
-<!-- KRISP -->
-
-<details class="tool-details" open>
-
-<summary>
-
-<div class="summary-left">
-
-<div class="summary-title">
-  KRISP CALL DATA
-</div>
-
-<div id="krispSummary" class="summary-subtitle">
-  No Krisp call attached to this lead
-</div>
-
-</div>
-
-<span>⌄</span>
-
-</summary>
-
-
-<div class="details-body">
-
-<div id="krispMeta" class="krisp-meta">
-  No Krisp call attached to this lead.
-</div>
-
-
-<div id="krispMatchBox" class="match-box">
-
-<div class="match-top">
-
-<div class="match-title">
-  MATCH ASSIST
-</div>
-
-<div id="krispMatchBadge" class="match-badge low">
-  LOW CONFIDENCE
-</div>
-
-</div>
-
-<div id="krispMatchDetails" class="match-details"></div>
-
-</div>
-
-
-<div class="krisp-card">
-
-<div class="krisp-heading">
-  KRISP TRANSCRIPT
-</div>
-
-<div id="krispTranscript" class="krisp-content">
-  No transcript attached to this lead.
-</div>
-
-</div>
-
-
-<div class="krisp-card">
-
-<div class="krisp-heading">
-  KRISP NOTES
-</div>
-
-<div id="krispNotes" class="krisp-content">
-  No Krisp notes attached to this lead.
-</div>
-
-</div>
-
-
-<button class="refresh-btn" onclick="loadKrispData()">
-  Check Latest Krisp Call
-</button>
-
-
-<button
-  id="attachKrispButton"
-  class="attach-btn"
-  onclick="attachKrispToCurrentLead()"
-  style="display:none;">
-  Attach This Call
-</button>
-
-
-<div id="krispStatus" class="krisp-status"></div>
-
-</div>
-
-</details>
-
-
-<!-- CRM NOTES -->
 
 <details class="tool-details">
 
@@ -1725,11 +1523,11 @@ when you're ready.
 <div class="summary-left">
 
 <div class="summary-title">
-  CRM NOTES
+KRISP CALL DATA
 </div>
 
-<div class="summary-subtitle">
-  Generate structured CRM notes
+<div id="krispSummary" class="summary-subtitle">
+No Krisp call attached
 </div>
 
 </div>
@@ -1738,23 +1536,110 @@ when you're ready.
 
 </summary>
 
+<div class="details-body">
+
+<div id="krispMeta" class="krisp-meta">
+No Krisp call attached to this lead.
+</div>
+
+<div id="krispMatchBox" class="match-box">
+
+<div class="match-top">
+
+<div class="match-title">
+MATCH ASSIST
+</div>
+
+<div id="krispMatchBadge" class="match-badge possible">
+Waiting
+</div>
+
+</div>
+
+<div id="krispMatchDetails" class="match-details">
+Click Check Latest Krisp Call after Krisp finishes processing.
+</div>
+
+</div>
+
+<div class="krisp-card">
+
+<div class="krisp-heading">
+KRISP TRANSCRIPT
+</div>
+
+<div id="krispTranscript" class="krisp-content">
+No transcript attached.
+</div>
+
+</div>
+
+<div class="krisp-card">
+
+<div class="krisp-heading">
+KRISP NOTES
+</div>
+
+<div id="krispNotes" class="krisp-content">
+No Krisp notes attached.
+</div>
+
+</div>
+
+<button class="refresh-btn" onclick="loadKrispData()">
+Check Latest Krisp Call
+</button>
+
+<button
+  id="attachKrispButton"
+  class="attach-btn"
+  onclick="attachKrispToCurrentLead()"
+  style="display:none;">
+Attach This Call
+</button>
+
+<div id="krispStatus" class="krisp-status"></div>
+
+</div>
+
+</details>
+
+<details class="tool-details">
+
+<summary>
+
+<div class="summary-left">
+
+<div class="summary-title">
+CRM NOTES
+</div>
+
+<div class="summary-subtitle">
+Generate structured notes
+</div>
+
+</div>
+
+<span>⌄</span>
+
+</summary>
 
 <div class="details-body">
 
 <textarea
   id="crmNotesOutput"
   class="crm-notes-box"
-  placeholder="Generate structured CRM notes..."></textarea>
-
+  placeholder="Generate structured CRM notes...">
+</textarea>
 
 <div class="crm-actions">
 
 <button class="crm-action primary" onclick="generateCRMNotes()">
-  Generate CRM Notes
+Generate CRM Notes
 </button>
 
 <button class="crm-action" onclick="copyCRMNotes()">
-  Copy CRM Notes
+Copy CRM Notes
 </button>
 
 </div>
@@ -1771,8 +1656,7 @@ when you're ready.
 
 </div>
 
-
-<!-- IMPORT -->
+<!-- IMPORT MODAL -->
 
 <div id="importBackdrop" class="modal-backdrop">
 
@@ -1782,10 +1666,11 @@ when you're ready.
 
 <h2>Import CSV Leads</h2>
 
-<button class="modal-close" onclick="closeImportModal()">×</button>
+<button class="modal-close" onclick="closeImportModal()">
+×
+</button>
 
 </div>
-
 
 <div class="modal-body">
 
@@ -1794,68 +1679,54 @@ when you're ready.
 <strong>Choose your lead CSV</strong>
 
 <p>
-Excedere will map the bookkeeping lead format automatically.
+Excedere will map your lead data automatically.
 </p>
 
 <label class="choose-file" for="importFile">
-  Choose CSV File
+Choose CSV File
 </label>
 
-<input id="importFile" type="file" accept=".csv,text/csv">
+<input
+  id="importFile"
+  type="file"
+  accept=".csv,text/csv">
 
 </div>
-
 
 <div id="importPreview" class="import-preview">
 
 <div class="import-stat-grid">
 
 <div class="import-stat">
-  <span>Records</span>
-  <strong id="previewRecordCount">0</strong>
+<span>Records</span>
+<strong id="previewRecordCount">0</strong>
 </div>
 
 <div class="import-stat">
-  <span>Columns</span>
-  <strong id="previewColumnCount">0</strong>
+<span>Columns</span>
+<strong id="previewColumnCount">0</strong>
 </div>
 
 <div class="import-stat">
-  <span>Duplicates</span>
-  <strong id="previewDuplicates">0</strong>
+<span>Duplicates</span>
+<strong id="previewDuplicates">0</strong>
 </div>
 
 </div>
-
 
 <div class="import-mode">
 
 <label class="mode-option">
-
-<input
-  type="radio"
-  name="importMode"
-  value="add"
-  checked>
-
+<input type="radio" name="importMode" value="add" checked>
 <strong>Add New Records</strong>
-
 </label>
 
-
 <label class="mode-option">
-
-<input
-  type="radio"
-  name="importMode"
-  value="replace">
-
+<input type="radio" name="importMode" value="replace">
 <strong>Replace Existing</strong>
-
 </label>
 
 </div>
-
 
 <div id="previewNames" class="preview-names"></div>
 <div id="importStatus" class="import-status"></div>
@@ -1864,11 +1735,10 @@ Excedere will map the bookkeeping lead format automatically.
 
 </div>
 
-
 <div class="modal-footer">
 
 <button class="modal-secondary" onclick="closeImportModal()">
-  Cancel
+Cancel
 </button>
 
 <button
@@ -1876,7 +1746,7 @@ Excedere will map the bookkeeping lead format automatically.
   class="modal-primary"
   onclick="performImport()"
   disabled>
-  Import Leads
+Import Leads
 </button>
 
 </div>
@@ -1885,47 +1755,21 @@ Excedere will map the bookkeeping lead format automatically.
 
 </div>
 
-
 <script>
-
-/* =====================================================
-   CONFIG
-===================================================== */
 
 const LEAD_STORAGE_KEY =
   "excedereCallAssistLeads";
 
-
 const KRISP_FUNCTION_URL =
   "https://kxxoyhagfmexvnzpuwys.supabase.co/functions/v1/latest-krisp-transcript";
 
-
-let currentLeadIndex =
-  0;
-
-
-let currentOutcome =
-  "";
-
-
-let pendingKrispCall =
-  null;
-
-
-let pendingImportRecords =
-  [];
-
-
-let pendingImportHeaders =
-  [];
-
-
-/* =====================================================
-   DEFAULT LEAD
-===================================================== */
+let currentLeadIndex = 0;
+let currentOutcome = "";
+let pendingKrispCall = null;
+let pendingImportRecords = [];
+let pendingImportHeaders = [];
 
 const defaultLeads = [
-
 {
   id:"demo-1",
   firstName:"Anthony",
@@ -1950,6 +1794,7 @@ const defaultLeads = [
   pipelineStage:"",
   callNotes:"",
   phoneHistory:[],
+  emailHistory:[],
   lastCalled:"",
   callCount:0,
   lastOutcome:"",
@@ -1960,17 +1805,12 @@ const defaultLeads = [
   krispCall:null,
   activeCallStartedAt:""
 }
-
 ];
-
-
-/* =====================================================
-   DEFAULTS
-===================================================== */
 
 function ensureLeadDefaults(lead){
 
   lead.phoneHistory ??= [];
+  lead.emailHistory ??= [];
   lead.callNotes ??= "";
   lead.lastCalled ??= "";
   lead.callCount ??= 0;
@@ -1985,11 +1825,6 @@ function ensureLeadDefaults(lead){
   return lead;
 }
 
-
-/* =====================================================
-   STORAGE
-===================================================== */
-
 function loadLeads(){
 
   try{
@@ -1999,12 +1834,10 @@ function loadLeads(){
         LEAD_STORAGE_KEY
       );
 
-
     if(stored){
 
       const parsed =
         JSON.parse(stored);
-
 
       if(
         Array.isArray(parsed) &&
@@ -2022,16 +1855,13 @@ function loadLeads(){
     console.error(error);
   }
 
-
   return JSON.parse(
     JSON.stringify(defaultLeads)
   );
 }
 
-
 let leads =
   loadLeads();
-
 
 function saveLeads(){
 
@@ -2041,18 +1871,12 @@ function saveLeads(){
   );
 }
 
-
 function getLead(){
 
   return leads[
     currentLeadIndex
   ];
 }
-
-
-/* =====================================================
-   HELPERS
-===================================================== */
 
 function setText(id,value){
 
@@ -2061,7 +1885,6 @@ function setText(id,value){
     .textContent =
       value ?? "";
 }
-
 
 function escapeHtml(value){
 
@@ -2073,7 +1896,6 @@ function escapeHtml(value){
     .replace(/'/g,"&#039;");
 }
 
-
 function makeLeadId(){
 
   if(
@@ -2083,7 +1905,6 @@ function makeLeadId(){
 
     return crypto.randomUUID();
   }
-
 
   return (
     "lead-" +
@@ -2095,10 +1916,7 @@ function makeLeadId(){
   );
 }
 
-
-/* =====================================================
-   RENDER
-===================================================== */
+/* RENDER LEAD */
 
 function renderLead(){
 
@@ -2107,13 +1925,11 @@ function renderLead(){
       getLead()
     );
 
-
   setText(
     "leadName",
     lead.firstName ||
     "Unknown"
   );
-
 
   setText(
     "leadTitle",
@@ -2121,13 +1937,11 @@ function renderLead(){
     ""
   );
 
-
   setText(
     "leadCompany",
     lead.company ||
     ""
   );
-
 
   setText(
     "leadRole",
@@ -2135,13 +1949,11 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "leadLocation",
     lead.location ||
     "Not provided"
   );
-
 
   setText(
     "leadJobType",
@@ -2149,21 +1961,18 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "leadPay",
     lead.pay ||
     "Not provided"
   );
 
-
   renderPhone(
     "mainPhone",
     "mainPhoneLink",
     lead.phone,
-    "No number available"
+    "Add phone number"
   );
-
 
   renderPhone(
     "directPhone",
@@ -2172,30 +1981,7 @@ function renderLead(){
     "Add direct number"
   );
 
-
-  const email =
-    document.getElementById(
-      "leadEmail"
-    );
-
-
-  if(lead.email){
-
-    email.textContent =
-      lead.email;
-
-    email.href =
-      `mailto:${lead.email}`;
-
-  }else{
-
-    email.textContent =
-      "Not publicly listed";
-
-    email.href =
-      "#";
-  }
-
+  renderEmail();
 
   setText(
     "intelBusiness",
@@ -2203,13 +1989,11 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "intelNeed",
     lead.whatTheyNeed ||
     "Not provided"
   );
-
 
   setText(
     "intelRequirements",
@@ -2217,13 +2001,11 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "intelAngle",
     lead.outsourcingAngle ||
     "Not provided"
   );
-
 
   setText(
     "intelConstraint",
@@ -2231,13 +2013,11 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "intelPriority",
     lead.outreachPriority ||
     "Not provided"
   );
-
 
   setText(
     "intelFit",
@@ -2245,19 +2025,16 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "intelStage",
     lead.pipelineStage ||
     "Not provided"
   );
 
-
   setText(
     "recordCounter",
     `${currentLeadIndex + 1} of ${leads.length}`
   );
-
 
   setText(
     "callTitle",
@@ -2266,22 +2043,12 @@ function renderLead(){
     )
   );
 
-
   updateTime();
-
   renderCRMStatus();
-
-  renderCallHistory();
-
+  renderActivityHistory();
   renderAttachedKrisp();
-
   resetCallWorkspace();
 }
-
-
-/* =====================================================
-   PHONE
-===================================================== */
 
 function renderPhone(
   textId,
@@ -2295,12 +2062,10 @@ function renderPhone(
       textId
     );
 
-
   const link =
     document.getElementById(
       linkId
     );
-
 
   if(number){
 
@@ -2308,16 +2073,13 @@ function renderPhone(
       number;
 
     text.classList.remove(
-      "empty-number"
+      "empty-value"
     );
 
     link.href =
       "tel:" +
       String(number)
-        .replace(
-          /[^\d+]/g,
-          ""
-        );
+        .replace(/[^\d+]/g,"");
 
   }else{
 
@@ -2325,7 +2087,7 @@ function renderPhone(
       emptyText;
 
     text.classList.add(
-      "empty-number"
+      "empty-value"
     );
 
     link.href =
@@ -2333,17 +2095,46 @@ function renderPhone(
   }
 }
 
+function renderEmail(){
+
+  const lead =
+    getLead();
+
+  const email =
+    document.getElementById(
+      "leadEmail"
+    );
+
+  if(lead.email){
+
+    email.textContent =
+      lead.email;
+
+    email.classList.remove(
+      "empty-value"
+    );
+
+  }else{
+
+    email.textContent =
+      "Add email address";
+
+    email.classList.add(
+      "empty-value"
+    );
+  }
+}
+
+/* EDIT DETAILS */
 
 function editPhone(field){
 
   const lead =
     getLead();
 
-
   const oldNumber =
     lead[field] ||
     "";
-
 
   const updated =
     prompt(
@@ -2351,51 +2142,70 @@ function editPhone(field){
       oldNumber
     );
 
-
   if(updated === null){
     return;
   }
 
-
   const newNumber =
     updated.trim();
 
-
-  if(
-    newNumber ===
-    oldNumber
-  ){
+  if(newNumber === oldNumber){
     return;
   }
 
-
   lead.phoneHistory.push({
-
     field,
-
     oldNumber,
-
     newNumber,
-
     changedAt:
       new Date()
         .toISOString()
   });
 
-
   lead[field] =
     newNumber;
 
-
   saveLeads();
-
   renderLead();
 }
 
+function editEmail(){
 
-/* =====================================================
-   TITLE
-===================================================== */
+  const lead =
+    getLead();
+
+  const updated =
+    prompt(
+      "Enter email address:",
+      lead.email || ""
+    );
+
+  if(updated === null){
+    return;
+  }
+
+  const newEmail =
+    updated.trim();
+
+  if(
+    newEmail &&
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      .test(newEmail)
+  ){
+
+    alert(
+      "Please enter a valid email address."
+    );
+
+    return;
+  }
+
+  lead.email =
+    newEmail;
+
+  saveLeads();
+  renderEmail();
+}
 
 function buildCallTitle(role){
 
@@ -2403,24 +2213,14 @@ function buildCallTitle(role){
     return "Vacancy Call";
   }
 
-
   return role
-    .replace(
-      /^part-time\s+/i,
-      ""
-    )
-    .replace(
-      /^full-time\s+/i,
-      ""
-    )
+    .replace(/^part-time\s+/i,"")
+    .replace(/^full-time\s+/i,"")
     +
     " Vacancy Call";
 }
 
-
-/* =====================================================
-   NAV
-===================================================== */
+/* NAVIGATION */
 
 function nextRecord(){
 
@@ -2430,10 +2230,8 @@ function nextRecord(){
     ) %
     leads.length;
 
-
   renderLead();
 }
-
 
 function previousRecord(){
 
@@ -2444,21 +2242,16 @@ function previousRecord(){
     ) %
     leads.length;
 
-
   renderLead();
 }
 
-
-/* =====================================================
-   TIME
-===================================================== */
+/* TIME */
 
 function deriveTimezone(location){
 
   const value =
     String(location || "")
       .toLowerCase();
-
 
   if(
     value.includes("california") ||
@@ -2471,7 +2264,6 @@ function deriveTimezone(location){
     };
   }
 
-
   if(
     value.includes("new york") ||
     value.includes("florida")
@@ -2483,10 +2275,7 @@ function deriveTimezone(location){
     };
   }
 
-
-  if(
-    value.includes("texas")
-  ){
+  if(value.includes("texas")){
 
     return {
       timezone:"America/Chicago",
@@ -2494,19 +2283,16 @@ function deriveTimezone(location){
     };
   }
 
-
   return {
     timezone:"America/Los_Angeles",
     label:"Local Time"
   };
 }
 
-
 function updateTime(){
 
   const lead =
     getLead();
-
 
   try{
 
@@ -2517,7 +2303,6 @@ function updateTime(){
           timeZone:
             lead.timezone ||
             "America/Los_Angeles",
-
           hour:"numeric",
           minute:"2-digit"
         }
@@ -2525,7 +2310,6 @@ function updateTime(){
       .format(
         new Date()
       );
-
 
     setText(
       "localTime",
@@ -2541,28 +2325,22 @@ function updateTime(){
   }
 }
 
-
 setInterval(
   updateTime,
   60000
 );
 
-
-/* =====================================================
-   SEARCH
-===================================================== */
+/* SEARCH */
 
 const searchInput =
   document.getElementById(
     "leadSearch"
   );
 
-
 const searchResults =
   document.getElementById(
     "searchResults"
   );
-
 
 searchInput.addEventListener(
   "input",
@@ -2573,22 +2351,17 @@ searchInput.addEventListener(
         .trim()
         .toLowerCase();
 
-
     searchResults.innerHTML =
       "";
-
 
     if(!query){
 
       searchResults
         .classList
-        .remove(
-          "open"
-        );
+        .remove("open");
 
       return;
     }
-
 
     const matches =
       leads.filter(
@@ -2609,13 +2382,11 @@ searchInput.addEventListener(
               .join(" ")
               .toLowerCase();
 
-
           return haystack.includes(
             query
           );
         }
       );
-
 
     matches.forEach(
       lead => {
@@ -2625,10 +2396,8 @@ searchInput.addEventListener(
             "button"
           );
 
-
         button.className =
           "search-result";
-
 
         button.innerHTML =
           `
@@ -2643,7 +2412,6 @@ searchInput.addEventListener(
           </small>
           `;
 
-
         button.onclick =
           () => {
 
@@ -2654,21 +2422,15 @@ searchInput.addEventListener(
                   lead.id
               );
 
-
             searchInput.value =
               "";
 
-
             searchResults
               .classList
-              .remove(
-                "open"
-              );
-
+              .remove("open");
 
             renderLead();
           };
-
 
         searchResults.appendChild(
           button
@@ -2676,15 +2438,11 @@ searchInput.addEventListener(
       }
     );
 
-
     searchResults
       .classList
-      .add(
-        "open"
-      );
+      .add("open");
   }
 );
-
 
 document
   .getElementById(
@@ -2698,24 +2456,21 @@ document
 
       searchResults
         .classList
-        .remove(
-          "open"
-        );
+        .remove("open");
     };
 
-
-/* =====================================================
-   EMAIL COMPOSER
-===================================================== */
+/* EMAIL */
 
 function openEmailComposer(){
 
   const lead =
     getLead();
 
-
   const params =
     new URLSearchParams({
+      leadId:
+        lead.id ||
+        "",
       name:
         lead.firstName ||
         "",
@@ -2727,29 +2482,20 @@ function openEmailComposer(){
         ""
     });
 
-
-  const emailUrl =
-    `email.html?${params.toString()}`;
-
-
   window.open(
-    emailUrl,
+    `email.html?${params.toString()}`,
     "_blank",
     "noopener"
   );
 }
 
-
-/* =====================================================
-   CRM STATUS
-===================================================== */
+/* CRM STATUS */
 
 function daysSince(iso){
 
   if(!iso){
     return null;
   }
-
 
   return Math.floor(
     (
@@ -2762,12 +2508,10 @@ function daysSince(iso){
   );
 }
 
-
 function renderCRMStatus(){
 
   const lead =
     getLead();
-
 
   setText(
     "statusCallCount",
@@ -2775,13 +2519,11 @@ function renderCRMStatus(){
     0
   );
 
-
   setText(
     "statusLastOutcome",
     lead.lastOutcome ||
     "None"
   );
-
 
   setText(
     "statusNextAction",
@@ -2789,13 +2531,11 @@ function renderCRMStatus(){
     "None"
   );
 
-
   setText(
     "statusFollowUp",
     lead.nextFollowUpDate ||
     "None"
   );
-
 
   if(lead.lastCalled){
 
@@ -2804,15 +2544,13 @@ function renderCRMStatus(){
       new Date(
         lead.lastCalled
       )
-        .toLocaleString()
+        .toLocaleDateString()
     );
-
 
     const days =
       daysSince(
         lead.lastCalled
       );
-
 
     setText(
       "statusDaysSince",
@@ -2834,16 +2572,13 @@ function renderCRMStatus(){
     );
   }
 
-
   const pill =
     document.getElementById(
       "followStatus"
     );
 
-
   pill.className =
     "status-pill neutral";
-
 
   if(!lead.lastCalled){
 
@@ -2852,7 +2587,6 @@ function renderCRMStatus(){
 
     return;
   }
-
 
   if(lead.nextFollowUpDate){
 
@@ -2863,12 +2597,10 @@ function renderCRMStatus(){
       0,0,0,0
     );
 
-
     const due =
       new Date(
         `${lead.nextFollowUpDate}T00:00:00`
       );
-
 
     const difference =
       Math.ceil(
@@ -2880,7 +2612,6 @@ function renderCRMStatus(){
         86400000
       );
 
-
     if(difference < 0){
 
       pill.className =
@@ -2891,7 +2622,6 @@ function renderCRMStatus(){
 
       return;
     }
-
 
     if(difference <= 2){
 
@@ -2905,7 +2635,6 @@ function renderCRMStatus(){
     }
   }
 
-
   pill.className =
     "status-pill green";
 
@@ -2913,52 +2642,80 @@ function renderCRMStatus(){
     "CURRENT";
 }
 
+/* ACTIVITY HISTORY */
 
-/* =====================================================
-   HISTORY
-===================================================== */
-
-function renderCallHistory(){
+function renderActivityHistory(){
 
   const lead =
     getLead();
-
 
   const area =
     document.getElementById(
       "callHistory"
     );
 
-
   area.innerHTML =
     "";
 
+  const calls =
+    (lead.callHistory || [])
+      .map(
+        entry => ({
+          type:"call",
+          timestamp:
+            entry.timestamp,
+          data:
+            entry
+        })
+      );
 
-  if(!lead.callHistory.length){
+  const emails =
+    (lead.emailHistory || [])
+      .map(
+        entry => ({
+          type:"email",
+          timestamp:
+            entry.timestamp,
+          data:
+            entry
+        })
+      );
+
+  const activity =
+    [...calls,...emails]
+      .sort(
+        (a,b) =>
+          new Date(b.timestamp) -
+          new Date(a.timestamp)
+      );
+
+  if(!activity.length){
 
     area.innerHTML =
       `<div class="history-notes">
-      No saved calls yet.
+      No activity saved yet.
       </div>`;
 
     return;
   }
 
+  activity.forEach(
+    item => {
 
-  [...lead.callHistory]
-    .reverse()
-    .forEach(
-      entry => {
+      const div =
+        document.createElement(
+          "div"
+        );
 
-        const div =
-          document.createElement(
-            "div"
-          );
+      div.className =
+        item.type === "email"
+          ? "history-entry history-email"
+          : "history-entry";
 
+      if(item.type === "email"){
 
-        div.className =
-          "history-entry";
-
+        const entry =
+          item.data;
 
         div.innerHTML =
           `
@@ -2972,8 +2729,45 @@ function renderCallHistory(){
           </div>
 
           <div class="history-outcome">
+          ✉ Email sent
+          </div>
+
+          <div class="history-next">
           ${escapeHtml(
-            entry.outcome
+            entry.subject ||
+            "Email"
+          )}
+          </div>
+
+          <div class="history-notes">
+          To:
+          ${escapeHtml(
+            entry.to ||
+            ""
+          )}
+          </div>
+          `;
+
+      }else{
+
+        const entry =
+          item.data;
+
+        div.innerHTML =
+          `
+          <div class="history-date">
+          ${escapeHtml(
+            new Date(
+              entry.timestamp
+            )
+              .toLocaleString()
+          )}
+          </div>
+
+          <div class="history-outcome">
+          ☎ ${escapeHtml(
+            entry.outcome ||
+            "Call"
           )}
           </div>
 
@@ -2998,25 +2792,21 @@ function renderCallHistory(){
             ""
           }
           `;
-
-
-        area.appendChild(
-          div
-        );
       }
-    );
+
+      area.appendChild(
+        div
+      );
+    }
+  );
 }
 
-
-/* =====================================================
-   KRISP AUTH
-===================================================== */
+/* AUTH */
 
 function getSupabaseAccessToken(){
 
   const projectRef =
     "kxxoyhagfmexvnzpuwys";
-
 
   for(
     let i = 0;
@@ -3027,7 +2817,6 @@ function getSupabaseAccessToken(){
     const key =
       localStorage.key(i);
 
-
     if(
       !key ||
       !key.includes(
@@ -3036,7 +2825,6 @@ function getSupabaseAccessToken(){
     ){
       continue;
     }
-
 
     try{
 
@@ -3047,12 +2835,10 @@ function getSupabaseAccessToken(){
           )
         );
 
-
       if(parsed?.access_token){
 
         return parsed.access_token;
       }
-
 
       if(
         parsed
@@ -3065,18 +2851,13 @@ function getSupabaseAccessToken(){
           .access_token;
       }
 
-    }catch{
-    }
+    }catch{}
   }
-
 
   return null;
 }
 
-
-/* =====================================================
-   MATCH ASSIST
-===================================================== */
+/* KRISP MATCH */
 
 function normaliseMatchText(value){
 
@@ -3095,7 +2876,6 @@ function normaliseMatchText(value){
     )
     .trim();
 }
-
 
 function importantWords(value){
 
@@ -3116,7 +2896,6 @@ function importantWords(value){
       "full"
     ]);
 
-
   return normaliseMatchText(
     value
   )
@@ -3130,31 +2909,23 @@ function importantWords(value){
     );
 }
 
-
 function calculateKrispMatch(
   lead,
   call
 ){
 
-  let score =
-    0;
-
-
-  const reasons =
-    [];
-
+  let score = 0;
+  const reasons = [];
 
   const combined =
     normaliseMatchText(
       `${call.meetingTitle || ""} ${call.transcriptText || ""} ${call.krispNotes || ""}`
     );
 
-
   const firstName =
     normaliseMatchText(
       lead.firstName
     );
-
 
   if(
     firstName &&
@@ -3170,12 +2941,10 @@ function calculateKrispMatch(
     );
   }
 
-
   const companyWords =
     importantWords(
       lead.company
     );
-
 
   const matchingCompanyWords =
     companyWords.filter(
@@ -3185,33 +2954,23 @@ function calculateKrispMatch(
         )
     );
 
+  if(matchingCompanyWords.length){
 
-  if(
-    matchingCompanyWords.length
-  ){
-
-    const companyPoints =
+    score +=
       Math.min(
         25,
         matchingCompanyWords.length * 10
       );
-
-
-    score +=
-      companyPoints;
-
 
     reasons.push(
       `Company match: ${matchingCompanyWords.join(", ")}`
     );
   }
 
-
   const roleWords =
     importantWords(
       lead.role
     );
-
 
   const roleMatches =
     roleWords.filter(
@@ -3221,10 +2980,7 @@ function calculateKrispMatch(
         )
     );
 
-
-  if(
-    roleMatches.length
-  ){
+  if(roleMatches.length){
 
     score +=
       Math.min(
@@ -3232,12 +2988,10 @@ function calculateKrispMatch(
         roleMatches.length * 5
       );
 
-
     reasons.push(
       `Role match: ${roleMatches.join(", ")}`
     );
   }
-
 
   const callStarted =
     lead.activeCallStartedAt
@@ -3246,20 +3000,14 @@ function calculateKrispMatch(
         )
       : null;
 
-
-  const krispStartedValue =
-    call.startedAt ||
-    call.receivedAt ||
-    "";
-
-
   const krispStarted =
-    krispStartedValue
+    call.startedAt ||
+    call.receivedAt
       ? new Date(
-          krispStartedValue
+          call.startedAt ||
+          call.receivedAt
         )
       : null;
-
 
   if(
     callStarted &&
@@ -3274,12 +3022,11 @@ function calculateKrispMatch(
 
     const minutes =
       Math.abs(
-        krispStarted.getTime() -
-        callStarted.getTime()
+        krispStarted -
+        callStarted
       )
       /
       60000;
-
 
     if(minutes <= 15){
 
@@ -3289,9 +3036,7 @@ function calculateKrispMatch(
         `Call timing within ${Math.round(minutes)} minutes`
       );
 
-    }else if(
-      minutes <= 30
-    ){
+    }else if(minutes <= 30){
 
       score += 30;
 
@@ -3299,9 +3044,7 @@ function calculateKrispMatch(
         `Call timing within ${Math.round(minutes)} minutes`
       );
 
-    }else if(
-      minutes <= 60
-    ){
+    }else if(minutes <= 60){
 
       score += 15;
 
@@ -3323,102 +3066,71 @@ function calculateKrispMatch(
     );
   }
 
-
   score =
     Math.min(
       100,
       score
     );
 
-
-  let label;
-  let className;
-
-
   if(score >= 60){
 
-    label =
-      "Strong Match";
-
-    className =
-      "strong";
-
-  }else if(score >= 30){
-
-    label =
-      "Possible Match";
-
-    className =
-      "possible";
-
-  }else{
-
-    label =
-      "Low Confidence";
-
-    className =
-      "low";
+    return {
+      score,
+      label:"Strong Match",
+      className:"strong",
+      reasons
+    };
   }
 
+  if(score >= 30){
+
+    return {
+      score,
+      label:"Possible Match",
+      className:"possible",
+      reasons
+    };
+  }
 
   return {
     score,
-    label,
-    className,
+    label:"Low Confidence",
+    className:"low",
     reasons
   };
 }
 
-
 function renderMatchAssist(match){
-
-  const box =
-    document.getElementById(
-      "krispMatchBox"
-    );
-
 
   const badge =
     document.getElementById(
       "krispMatchBadge"
     );
 
-
   const details =
     document.getElementById(
       "krispMatchDetails"
     );
-
-
-  box.classList.add(
-    "visible"
-  );
-
 
   if(!match){
 
     badge.className =
       "match-badge possible";
 
-
     badge.textContent =
-      "Waiting for Krisp call";
-
+      "Waiting";
 
     details.innerHTML =
-      "Click <strong>Check Latest Krisp Call</strong> after Krisp has processed the call. Excedere will compare the current lead with the latest Krisp recording.";
+      "Click <strong>Check Latest Krisp Call</strong> after Krisp processes the call.";
 
     return;
   }
 
-
   badge.className =
     `match-badge ${match.className}`;
 
-
   badge.textContent =
     `${match.label} · ${match.score}%`;
-
 
   details.innerHTML =
     match.reasons
@@ -3426,159 +3138,112 @@ function renderMatchAssist(match){
         reason =>
           `• ${escapeHtml(reason)}`
       )
-      .join(
-        "<br>"
-      );
+      .join("<br>");
 }
 
-
-/* =====================================================
-   ATTACHED KRISP
-===================================================== */
+/* ATTACHED KRISP */
 
 function renderAttachedKrisp(){
 
   pendingKrispCall =
     null;
 
-
   renderMatchAssist(
     null
   );
 
-
   const lead =
     getLead();
-
-
-  const meta =
-    document.getElementById(
-      "krispMeta"
-    );
-
-
-  const transcript =
-    document.getElementById(
-      "krispTranscript"
-    );
-
-
-  const notes =
-    document.getElementById(
-      "krispNotes"
-    );
-
-
-  const summary =
-    document.getElementById(
-      "krispSummary"
-    );
-
-
-  const status =
-    document.getElementById(
-      "krispStatus"
-    );
-
 
   const button =
     document.getElementById(
       "attachKrispButton"
     );
 
-
   button.style.display =
     "none";
 
-
-  status.textContent =
-    "";
-
+  setText(
+    "krispStatus",
+    ""
+  );
 
   if(!lead.krispCall){
 
-    meta.textContent =
-      "No Krisp call attached to this lead.";
+    setText(
+      "krispSummary",
+      "No Krisp call attached"
+    );
 
+    setText(
+      "krispMeta",
+      "No Krisp call attached to this lead."
+    );
 
-    transcript.textContent =
-      "No transcript attached to this lead.";
+    setText(
+      "krispTranscript",
+      "No transcript attached."
+    );
 
-
-    notes.textContent =
-      "No Krisp notes attached to this lead.";
-
-
-    summary.textContent =
-      "No Krisp call attached to this lead";
-
+    setText(
+      "krispNotes",
+      "No Krisp notes attached."
+    );
 
     return;
   }
 
-
   const call =
     lead.krispCall;
 
+  setText(
+    "krispSummary",
+    "Krisp call attached"
+  );
 
-  summary.textContent =
-    "Krisp call attached";
+  setText(
+    "krispMeta",
+    call.meetingTitle ||
+    "Krisp call"
+  );
 
-
-  meta.textContent =
-    `${call.meetingTitle || "Krisp call"}`
-    +
-    (
-      call.durationSeconds
-      ?
-      ` • ${call.durationSeconds} seconds`
-      :
-      ""
-    );
-
-
-  transcript.textContent =
+  setText(
+    "krispTranscript",
     call.transcriptText ||
-    "No transcript available.";
+    "No transcript available."
+  );
 
-
-  notes.textContent =
+  setText(
+    "krispNotes",
     call.krispNotes ||
-    "No Krisp notes available.";
+    "No Krisp notes available."
+  );
 
-
-  const attachedMatch =
+  const match =
     call.match ||
     calculateKrispMatch(
       lead,
       call
     );
 
-
   call.match =
-    attachedMatch;
-
+    match;
 
   renderMatchAssist(
-    attachedMatch
+    match
   );
-
 
   saveLeads();
 
-
-  status.className =
-    "krisp-status good";
-
-
-  status.textContent =
-    `Attached to ${lead.firstName}.`;
+  document
+    .getElementById(
+      "krispStatus"
+    )
+    .innerHTML =
+      `<span class="good">
+      Attached to ${escapeHtml(lead.firstName)}.
+      </span>`;
 }
-
-
-/* =====================================================
-   CHECK LATEST KRISP
-===================================================== */
 
 async function loadKrispData(){
 
@@ -3587,74 +3252,32 @@ async function loadKrispData(){
       "krispStatus"
     );
 
-
-  const meta =
-    document.getElementById(
-      "krispMeta"
-    );
-
-
-  const transcriptBox =
-    document.getElementById(
-      "krispTranscript"
-    );
-
-
-  const notesBox =
-    document.getElementById(
-      "krispNotes"
-    );
-
-
-  const summary =
-    document.getElementById(
-      "krispSummary"
-    );
-
-
   const attachButton =
     document.getElementById(
       "attachKrispButton"
     );
 
-
   pendingKrispCall =
     null;
-
 
   attachButton.style.display =
     "none";
 
-
-  renderMatchAssist(
-    null
-  );
-
-
-  status.className =
-    "krisp-status";
-
-
   status.textContent =
     "Checking latest Krisp call...";
-
 
   const token =
     getSupabaseAccessToken();
 
-
   if(!token){
 
-    status.className =
-      "krisp-status bad";
-
-
-    status.textContent =
-      "No active Excedere login session found.";
+    status.innerHTML =
+      `<span class="bad">
+      No active Excedere login session found.
+      </span>`;
 
     return;
   }
-
 
   try{
 
@@ -3669,10 +3292,8 @@ async function loadKrispData(){
         }
       );
 
-
     const result =
       await response.json();
-
 
     if(
       !response.ok ||
@@ -3685,7 +3306,6 @@ async function loadKrispData(){
       );
     }
 
-
     if(!result.transcript){
 
       status.textContent =
@@ -3694,17 +3314,14 @@ async function loadKrispData(){
       return;
     }
 
-
     const transcript =
       result.transcript;
-
 
     const meetingId =
       transcript.meeting_id ||
       transcript.krisp_event_id ||
       transcript.id ||
       "";
-
 
     pendingKrispCall = {
 
@@ -3723,8 +3340,7 @@ async function loadKrispData(){
         "",
 
       krispNotes:
-        result.notes
-          ?.krisp_notes ||
+        result.notes?.krisp_notes ||
         "",
 
       startedAt:
@@ -3741,235 +3357,116 @@ async function loadKrispData(){
           .toISOString()
     };
 
-
     const match =
       calculateKrispMatch(
         getLead(),
         pendingKrispCall
       );
 
-
     pendingKrispCall.match =
       match;
-
 
     renderMatchAssist(
       match
     );
 
+    setText(
+      "krispMeta",
+      pendingKrispCall.meetingTitle
+    );
+
+    setText(
+      "krispTranscript",
+      pendingKrispCall.transcriptText ||
+      "Transcript empty."
+    );
+
+    setText(
+      "krispNotes",
+      pendingKrispCall.krispNotes ||
+      "No Krisp notes available."
+    );
 
     const alreadyAttached =
       leads.find(
         lead =>
           lead.krispCall &&
-          lead.krispCall.meetingId &&
           lead.krispCall.meetingId ===
           meetingId
       );
 
-
-    meta.textContent =
-      `${pendingKrispCall.meetingTitle}`
-      +
-      (
-        pendingKrispCall.durationSeconds
-        ?
-        ` • ${pendingKrispCall.durationSeconds} seconds`
-        :
-        ""
-      );
-
-
-    transcriptBox.textContent =
-      pendingKrispCall.transcriptText ||
-      "Transcript empty.";
-
-
-    notesBox.textContent =
-      pendingKrispCall.krispNotes ||
-      "No Krisp notes available.";
-
-
-    summary.textContent =
-      `${match.label} for ${getLead().firstName}`;
-
-
     if(alreadyAttached){
 
-      if(
+      status.textContent =
         alreadyAttached.id ===
         getLead().id
-      ){
-
-        status.className =
-          "krisp-status good";
-
-
-        status.textContent =
-          "This Krisp call is already attached to this lead.";
-
-      }else{
-
-        status.className =
-          "krisp-status bad";
-
-
-        status.textContent =
-          `Already attached to ${alreadyAttached.firstName} at ${alreadyAttached.company}.`;
-      }
-
+          ? "This call is already attached to this lead."
+          : `Already attached to ${alreadyAttached.firstName}.`;
 
       return;
     }
 
-
     attachButton.textContent =
       `Attach This Call to ${getLead().firstName}`;
-
 
     attachButton.style.display =
       "block";
 
-
-    if(match.className === "strong"){
-
-      status.className =
-        "krisp-status good";
-
-
-      status.textContent =
-        "Strong match detected. Check the transcript, then attach.";
-
-    }else if(
-      match.className ===
-      "possible"
-    ){
-
-      status.className =
-        "krisp-status";
-
-
-      status.textContent =
-        "Possible match. Check the transcript before attaching.";
-
-    }else{
-
-      status.className =
-        "krisp-status bad";
-
-
-      status.textContent =
-        "Low confidence match. Verify this is the correct call before attaching.";
-    }
+    status.textContent =
+      match.className === "strong"
+        ? "Strong match detected."
+        : match.className === "possible"
+          ? "Possible match. Verify before attaching."
+          : "Low confidence. Verify carefully before attaching.";
 
   }catch(error){
 
-    status.className =
-      "krisp-status bad";
-
-
-    status.textContent =
-      error.message ||
-      "Unable to load Krisp data.";
+    status.innerHTML =
+      `<span class="bad">
+      ${escapeHtml(
+        error.message ||
+        "Unable to load Krisp data."
+      )}
+      </span>`;
   }
 }
-
-
-/* =====================================================
-   ATTACH KRISP
-===================================================== */
 
 function attachKrispToCurrentLead(){
 
   const lead =
     getLead();
 
-
-  const status =
-    document.getElementById(
-      "krispStatus"
-    );
-
-
   if(!pendingKrispCall){
-
-    status.className =
-      "krisp-status bad";
-
-
-    status.textContent =
-      "Check Latest Krisp Call first.";
-
     return;
   }
-
-
-  const duplicate =
-    leads.find(
-      other =>
-        other.id !==
-        lead.id &&
-        other.krispCall &&
-        other.krispCall.meetingId ===
-        pendingKrispCall.meetingId
-    );
-
-
-  if(duplicate){
-
-    status.className =
-      "krisp-status bad";
-
-
-    status.textContent =
-      `This call is already attached to ${duplicate.firstName}.`;
-
-    return;
-  }
-
 
   if(
-    pendingKrispCall.match &&
-    pendingKrispCall.match.className ===
+    pendingKrispCall.match?.className ===
     "low"
   ){
 
     const confirmed =
-      window.confirm(
-        `This is a LOW CONFIDENCE match for ${lead.firstName} at ${lead.company}.\n\nAttach it anyway?`
+      confirm(
+        `This is a low confidence match for ${lead.firstName}. Attach anyway?`
       );
-
 
     if(!confirmed){
       return;
     }
   }
 
-
   lead.krispCall = {
-
     ...pendingKrispCall,
-
     attachedAt:
       new Date()
         .toISOString()
   };
 
-
   saveLeads();
-
-
-  pendingKrispCall =
-    null;
-
-
   renderAttachedKrisp();
 }
 
-
-/* =====================================================
-   CALL NOTES
-===================================================== */
+/* CALL NOTES */
 
 document
   .getElementById(
@@ -3982,43 +3479,34 @@ document
       getLead().callNotes =
         event.target.value;
 
-
       saveLeads();
     }
   );
 
-
-/* =====================================================
-   RESET
-===================================================== */
+/* RESET */
 
 function resetCallWorkspace(){
 
   const lead =
     getLead();
 
-
   currentOutcome =
     "";
-
 
   setText(
     "stageText",
     "Follow the script and select the best response."
   );
 
-
   setText(
     "scriptLabel",
     "Before you call"
   );
 
-
   setText(
     "stepLabel",
     "Ready"
   );
-
 
   document
     .getElementById(
@@ -4029,7 +3517,6 @@ function resetCallWorkspace(){
       <strong>Start Call</strong>
       when you're ready.`;
 
-
   document
     .getElementById(
       "responses"
@@ -4039,7 +3526,6 @@ function resetCallWorkspace(){
       Start the call first
       </button>`;
 
-
   document
     .getElementById(
       "notes"
@@ -4047,7 +3533,6 @@ function resetCallWorkspace(){
     .value =
       lead.callNotes ||
       "";
-
 
   document
     .getElementById(
@@ -4057,7 +3542,6 @@ function resetCallWorkspace(){
       lead.nextAction ||
       "";
 
-
   document
     .getElementById(
       "followUpDate"
@@ -4066,7 +3550,6 @@ function resetCallWorkspace(){
       lead.nextFollowUpDate ||
       "";
 
-
   document
     .getElementById(
       "crmNotesOutput"
@@ -4074,7 +3557,6 @@ function resetCallWorkspace(){
     .value =
       lead.lastCRMNotes ||
       "";
-
 
   document
     .querySelectorAll(
@@ -4087,39 +3569,26 @@ function resetCallWorkspace(){
         )
     );
 
-
-  setStage(
-    0
-  );
+  setStage(0);
 }
 
-
-/* =====================================================
-   START CALL
-===================================================== */
+/* CALL FLOW */
 
 function startCall(){
 
   const lead =
     getLead();
 
-
   lead.activeCallStartedAt =
     new Date()
       .toISOString();
 
-
   saveLeads();
 
-
-  setStage(
-    1
-  );
-
+  setStage(1);
 
   showScript(
     "Opening",
-
     `Is that <strong>${lead.firstName}</strong>?<br><br>
 
     ${lead.firstName}, I noticed you're currently looking to hire for the
@@ -4132,247 +3601,115 @@ function startCall(){
     and then you can decide whether we continue?`
   );
 
-
   showResponses([
-
-    [
-      "Yes / Go ahead",
-      searchStatus
-    ],
-
-    [
-      "I'm busy",
-      () =>
-        showObjection(
-          "busy"
-        )
-    ],
-
-    [
-      "Who are you?",
-      () =>
-        showQuickAnswer(
-          "who"
-        )
-    ],
-
-    [
-      "Not interested",
-      () =>
-        showObjection(
-          "notInterested"
-        )
-    ]
-
+    ["Yes / Go ahead",searchStatus],
+    ["I'm busy",()=>showObjection("busy")],
+    ["Who are you?",()=>showQuickAnswer("who")],
+    ["Not interested",()=>showObjection("notInterested")]
   ]);
 }
 
-
 function searchStatus(){
 
-  setStage(
-    2
-  );
-
+  setStage(2);
 
   showScript(
     "Discovery",
-
     `How's the search going so far?
 
     Are you finding the right people,
     or is that proving difficult?`
   );
 
-
   showResponses([
-
-    [
-      "It's proving difficult",
-      applicantsQuestion
-    ],
-
-    [
-      "It's going fine",
-      applicantsQuestion
-    ],
-
-    [
-      "Handling internally",
-      () =>
-        showObjection(
-          "internal"
-        )
-    ],
-
-    [
-      "Role filled",
-      () =>
-        showObjection(
-          "filled"
-        )
-    ]
-
+    ["It's proving difficult",applicantsQuestion],
+    ["It's going fine",applicantsQuestion],
+    ["Handling internally",()=>showObjection("internal")],
+    ["Role filled",()=>showObjection("filled")]
   ]);
 }
 
-
 function applicantsQuestion(){
 
-  setStage(
-    3
-  );
-
+  setStage(3);
 
   showScript(
     "Applicant Quality",
-
     `What's missing from the applicants
     you've seen so far?`
   );
 
-
   showResponses([
-
-    [
-      "Continue",
-      workloadQuestion
-    ]
-
+    ["Continue",workloadQuestion]
   ]);
 }
-
 
 function workloadQuestion(){
 
   showScript(
     "Current Workload",
-
     `Who's handling the work
     while you're recruiting?`
   );
 
-
   showResponses([
-
-    [
-      "Continue",
-      alternativeQuestion
-    ]
-
+    ["Continue",alternativeQuestion]
   ]);
 }
 
-
 function alternativeQuestion(){
 
-  setStage(
-    4
-  );
-
+  setStage(4);
 
   showScript(
     "Permission",
-
     `Would you be open to looking at another way
     of filling the role?`
   );
 
-
   showResponses([
-
-    [
-      "Yes",
-      positionSolution
-    ],
-
-    [
-      "Possibly",
-      positionSolution
-    ],
-
-    [
-      "No",
-      () =>
-        showObjection(
-          "notInterested"
-        )
-    ]
-
+    ["Yes",positionSolution],
+    ["Possibly",positionSolution],
+    ["No",()=>showObjection("notInterested")]
   ]);
 }
-
 
 function positionSolution(){
 
   showScript(
     "Solution",
-
     `The reason I ask is that we help businesses
     in this situation by providing dedicated
     bookkeeping support rather than continuing
     the same hiring cycle.`
   );
 
-
   showResponses([
-
-    [
-      "Continue",
-      appointmentQuestion
-    ]
-
+    ["Continue",appointmentQuestion]
   ]);
 }
 
-
 function appointmentQuestion(){
 
-  setStage(
-    5
-  );
-
+  setStage(5);
 
   showScript(
     "Appointment",
-
     `Would it be worth twenty minutes
     to see if that could work for you?`
   );
 
-
   showResponses([
-
-    [
-      "Yes",
-      meetingExplanation
-    ],
-
-    [
-      "Send information",
-      () =>
-        setOutcome(
-          "Information requested"
-        )
-    ],
-
-    [
-      "Not interested",
-      () =>
-        setOutcome(
-          "Not interested"
-        )
-    ]
-
+    ["Yes",meetingExplanation],
+    ["Send information",()=>setOutcome("Information requested")],
+    ["Not interested",()=>setOutcome("Not interested")]
   ]);
 }
-
 
 function meetingExplanation(){
 
   showScript(
     "Meeting",
-
     `It's just twenty minutes.
 
     We understand what you need,
@@ -4382,32 +3719,13 @@ function meetingExplanation(){
     No commitment.`
   );
 
-
   showResponses([
-
-    [
-      "Appointment booked",
-      () =>
-        setOutcome(
-          "Appointment booked"
-        )
-    ],
-
-    [
-      "Callback",
-      () =>
-        setOutcome(
-          "Callback required"
-        )
-    ]
-
+    ["Appointment booked",()=>setOutcome("Appointment booked")],
+    ["Callback",()=>setOutcome("Callback required")]
   ]);
 }
 
-
-/* =====================================================
-   OBJECTIONS
-===================================================== */
+/* OBJECTIONS */
 
 function showObjection(type){
 
@@ -4421,22 +3739,11 @@ function showObjection(type){
 
         If it's not relevant,
         I'll let you go.`,
-
       buttons:[
-        [
-          "Go ahead",
-          searchStatus
-        ],
-        [
-          "Callback",
-          () =>
-            setOutcome(
-              "Callback required"
-            )
-        ]
+        ["Go ahead",searchStatus],
+        ["Callback",()=>setOutcome("Callback required")]
       ]
     },
-
 
     internal:{
       text:
@@ -4444,22 +3751,11 @@ function showObjection(type){
 
         Is that temporary while you look,
         or the long term plan?`,
-
       buttons:[
-        [
-          "Temporary",
-          workloadQuestion
-        ],
-        [
-          "Long term",
-          () =>
-            setOutcome(
-              "Handling internally"
-            )
-        ]
+        ["Temporary",workloadQuestion],
+        ["Long term",()=>setOutcome("Handling internally")]
       ]
     },
-
 
     policy:{
       text:
@@ -4467,22 +3763,11 @@ function showObjection(type){
 
         Is that a firm company policy
         for every role?`,
-
       buttons:[
-        [
-          "Firm policy",
-          () =>
-            setOutcome(
-              "Company policy: no outsourcing"
-            )
-        ],
-        [
-          "Could review",
-          workloadQuestion
-        ]
+        ["Firm policy",()=>setOutcome("Company policy: no outsourcing")],
+        ["Could review",workloadQuestion]
       ]
     },
-
 
     local:{
       text:
@@ -4490,22 +3775,11 @@ function showObjection(type){
 
         What makes hiring locally important
         for this role?`,
-
       buttons:[
-        [
-          "Must be local",
-          () =>
-            setOutcome(
-              "Local hire required"
-            )
-        ],
-        [
-          "Flexible",
-          workloadQuestion
-        ]
+        ["Must be local",()=>setOutcome("Local hire required")],
+        ["Flexible",workloadQuestion]
       ]
     },
-
 
     info:{
       text:
@@ -4513,22 +3787,11 @@ function showObjection(type){
 
         Just so I don't send something irrelevant,
         what is the biggest issue with the hiring search?`,
-
       buttons:[
-        [
-          "Discuss",
-          applicantsQuestion
-        ],
-        [
-          "Just send it",
-          () =>
-            setOutcome(
-              "Information requested"
-            )
-        ]
+        ["Discuss",applicantsQuestion],
+        ["Just send it",()=>setOutcome("Information requested")]
       ]
     },
-
 
     budget:{
       text:
@@ -4536,15 +3799,10 @@ function showObjection(type){
 
         Is there no budget for the role,
         or is the current hiring budget stretched?`,
-
       buttons:[
-        [
-          "Discuss",
-          workloadQuestion
-        ]
+        ["Discuss",workloadQuestion]
       ]
     },
-
 
     filled:{
       text:
@@ -4552,18 +3810,10 @@ function showObjection(type){
 
         Has the person already started,
         or are they due to start soon?`,
-
       buttons:[
-        [
-          "Role filled",
-          () =>
-            setOutcome(
-              "Role filled"
-            )
-        ]
+        ["Role filled",()=>setOutcome("Role filled")]
       ]
     },
-
 
     notInterested:{
       text:
@@ -4572,43 +3822,27 @@ function showObjection(type){
         Is that because the hiring search
         is under control,
         or simply not a priority right now?`,
-
       buttons:[
-        [
-          "Not interested",
-          () =>
-            setOutcome(
-              "Not interested"
-            )
-        ],
-        [
-          "Still looking",
-          searchStatus
-        ]
+        ["Not interested",()=>setOutcome("Not interested")],
+        ["Still looking",searchStatus]
       ]
     }
   };
 
-
   const objection =
     map[type];
-
 
   showScript(
     "Objection",
     objection.text
   );
 
-
   showResponses(
     objection.buttons
   );
 }
 
-
-/* =====================================================
-   QUICK ANSWERS
-===================================================== */
+/* QUICK ANSWERS */
 
 function showQuickAnswer(type){
 
@@ -4617,48 +3851,37 @@ function showQuickAnswer(type){
     who:
       `Sorry, I should've said.
 
-      Wes from Hey Rachel.
+      Wes from Excedere.
 
-      We help businesses with bookkeeping support.
+      We help businesses access dedicated remote support.
 
       How's the search going so far?`,
 
-
     support:
       `We help businesses access experienced
-      bookkeeping professionals without relying entirely
+      professionals without relying entirely
       on the local hiring market.`,
-
 
     recruitment:
       `Not exactly.
 
       We provide businesses with dedicated
-      bookkeeping professionals through an outsourced model,
-      rather than simply introducing a candidate and walking away.`
+      professionals through an outsourced model,
+      rather than simply introducing a candidate
+      and walking away.`
   };
-
 
   showScript(
     "Quick Answer",
     answers[type]
   );
 
-
   showResponses([
-
-    [
-      "Continue",
-      searchStatus
-    ]
-
+    ["Continue",searchStatus]
   ]);
 }
 
-
-/* =====================================================
-   SCRIPT HELPERS
-===================================================== */
+/* SCRIPT HELPERS */
 
 function showScript(label,text){
 
@@ -4666,7 +3889,6 @@ function showScript(label,text){
     "scriptLabel",
     label
   );
-
 
   document
     .getElementById(
@@ -4676,7 +3898,6 @@ function showScript(label,text){
       text;
 }
 
-
 function showResponses(buttons){
 
   const area =
@@ -4684,10 +3905,8 @@ function showResponses(buttons){
       "responses"
     );
 
-
   area.innerHTML =
     "";
-
 
   buttons.forEach(
     ([label,action]) => {
@@ -4697,18 +3916,14 @@ function showResponses(buttons){
           "button"
         );
 
-
       button.className =
         "response-btn";
-
 
       button.textContent =
         label;
 
-
       button.onclick =
         action;
-
 
       area.appendChild(
         button
@@ -4716,7 +3931,6 @@ function showResponses(buttons){
     }
   );
 }
-
 
 function setStage(number){
 
@@ -4726,7 +3940,6 @@ function setStage(number){
       ? `Step ${number} of 5`
       : "Ready"
   );
-
 
   for(
     let i = 1;
@@ -4746,54 +3959,30 @@ function setStage(number){
   }
 }
 
-
-/* =====================================================
-   OUTCOME
-===================================================== */
+/* OUTCOME */
 
 function defaultNextAction(outcome){
 
   const map = {
-
-    "Appointment booked":
-      "Attend scheduled appointment",
-
-    "Callback required":
-      "Call prospect back",
-
-    "Follow up required":
-      "Follow up with prospect",
-
-    "Information requested":
-      "Send requested information and follow up",
-
-    "Role filled":
-      "No immediate action",
-
-    "Not interested":
-      "No immediate action",
-
-    "Handling internally":
-      "Revisit at a later date",
-
-    "Company policy: no outsourcing":
-      "No further action",
-
-    "Local hire required":
-      "Revisit if requirements change"
+    "Appointment booked":"Attend scheduled appointment",
+    "Callback required":"Call prospect back",
+    "Follow up required":"Follow up with prospect",
+    "Information requested":"Send requested information and follow up",
+    "Role filled":"No immediate action",
+    "Not interested":"No immediate action",
+    "Handling internally":"Revisit at a later date",
+    "Company policy: no outsourcing":"No further action",
+    "Local hire required":"Revisit if requirements change"
   };
-
 
   return map[outcome] ||
     "";
 }
 
-
 function setOutcome(outcome){
 
   currentOutcome =
     outcome;
-
 
   document
     .querySelectorAll(
@@ -4808,12 +3997,10 @@ function setOutcome(outcome){
         )
     );
 
-
   const action =
     document.getElementById(
       "nextAction"
     );
-
 
   if(!action.value){
 
@@ -4823,47 +4010,30 @@ function setOutcome(outcome){
       );
   }
 
-
   setText(
     "stageText",
     `Completed: ${outcome}`
   );
 
-
   showScript(
     "Call Complete",
-
     `<strong>${outcome}</strong><br><br>
     Add final notes, next action and follow-up date,
     then save the call result.`
   );
 
-
   showResponses([
-
-    [
-      "Generate CRM Notes",
-      generateCRMNotes
-    ],
-
-    [
-      "Save Call Result",
-      saveCallResult
-    ]
-
+    ["Generate CRM Notes",generateCRMNotes],
+    ["Save Call Result",saveCallResult]
   ]);
 }
 
-
-/* =====================================================
-   CRM NOTES
-===================================================== */
+/* CRM NOTES */
 
 function generateCRMNotes(){
 
   const lead =
     getLead();
-
 
   const liveNotes =
     document
@@ -4873,49 +4043,14 @@ function generateCRMNotes(){
       .value
       .trim();
 
-
-  const transcript =
-    lead.krispCall
-      ?.transcriptText ||
-    "";
-
-
   let summary =
     `Spoke with ${lead.firstName} at ${lead.company} regarding the advertised ${lead.role}.`;
-
 
   if(liveNotes){
 
     summary +=
       ` ${liveNotes}`;
-
-  }else if(transcript){
-
-    const lower =
-      transcript.toLowerCase();
-
-
-    if(
-      lower.includes("difficult") ||
-      lower.includes("problem")
-    ){
-
-      summary +=
-        " Challenges with the current hiring search were discussed.";
-    }
-
-
-    if(
-      lower.includes("appointment") ||
-      lower.includes("meeting") ||
-      lower.includes("20 minutes")
-    ){
-
-      summary +=
-        " A follow up conversation or meeting was discussed.";
-    }
   }
-
 
   const next =
     document
@@ -4928,7 +4063,6 @@ function generateCRMNotes(){
     defaultNextAction(
       currentOutcome
     );
-
 
   document
     .getElementById(
@@ -4944,13 +4078,11 @@ ${currentOutcome || "Outcome not selected."}
 Next Step:
 ${next || "Next action not selected."}`;
 
-
   setText(
     "crmNoteStatus",
     "CRM notes generated."
   );
 }
-
 
 async function copyCRMNotes(){
 
@@ -4961,11 +4093,9 @@ async function copyCRMNotes(){
       )
       .value;
 
-
   if(!text){
     return;
   }
-
 
   await navigator
     .clipboard
@@ -4973,23 +4103,18 @@ async function copyCRMNotes(){
       text
     );
 
-
   setText(
     "crmNoteStatus",
     "CRM notes copied."
   );
 }
 
-
-/* =====================================================
-   SAVE CALL
-===================================================== */
+/* SAVE CALL */
 
 function saveCallResult(){
 
   const lead =
     getLead();
-
 
   if(!currentOutcome){
 
@@ -5005,11 +4130,9 @@ function saveCallResult(){
     return;
   }
 
-
   const now =
     new Date()
       .toISOString();
-
 
   const nextAction =
     document
@@ -5019,14 +4142,12 @@ function saveCallResult(){
       .value
       .trim();
 
-
   const followUp =
     document
       .getElementById(
         "followUpDate"
       )
       .value;
-
 
   const notes =
     document
@@ -5036,7 +4157,6 @@ function saveCallResult(){
       .value
       .trim();
 
-
   const crmNotes =
     document
       .getElementById(
@@ -5045,10 +4165,8 @@ function saveCallResult(){
       .value
       .trim();
 
-
   lead.lastCalled =
     now;
-
 
   lead.callCount =
     Number(
@@ -5057,10 +4175,8 @@ function saveCallResult(){
     ) +
     1;
 
-
   lead.lastOutcome =
     currentOutcome;
-
 
   lead.nextAction =
     nextAction ||
@@ -5068,58 +4184,38 @@ function saveCallResult(){
       currentOutcome
     );
 
-
   lead.nextFollowUpDate =
     followUp;
-
 
   lead.callNotes =
     notes;
 
-
   lead.lastCRMNotes =
     crmNotes;
 
-
   lead.callHistory.push({
-
-    id:
-      makeLeadId(),
-
-    timestamp:
-      now,
-
+    id:makeLeadId(),
+    timestamp:now,
     callStartedAt:
       lead.activeCallStartedAt ||
       "",
-
     outcome:
       currentOutcome,
-
     nextAction:
       lead.nextAction,
-
     nextFollowUpDate:
       followUp,
-
     liveNotes:
       notes,
-
     crmNotes,
-
     krispMeetingId:
-      lead.krispCall
-        ?.meetingId ||
+      lead.krispCall?.meetingId ||
       null
   });
 
-
   saveLeads();
-
   renderCRMStatus();
-
-  renderCallHistory();
-
+  renderActivityHistory();
 
   document
     .getElementById(
@@ -5131,10 +4227,7 @@ function saveCallResult(){
       </span>`;
 }
 
-
-/* =====================================================
-   CSV IMPORT
-===================================================== */
+/* CSV IMPORT */
 
 function openImportModal(){
 
@@ -5143,11 +4236,8 @@ function openImportModal(){
       "importBackdrop"
     )
     .classList
-    .add(
-      "open"
-    );
+    .add("open");
 }
-
 
 function closeImportModal(){
 
@@ -5156,11 +4246,8 @@ function closeImportModal(){
       "importBackdrop"
     )
     .classList
-    .remove(
-      "open"
-    );
+    .remove("open");
 }
-
 
 document
   .getElementById(
@@ -5171,31 +4258,25 @@ document
     handleCSVFile
   );
 
-
 async function handleCSVFile(event){
 
   const file =
     event.target.files[0];
 
-
   if(!file){
     return;
   }
 
-
   const text =
     await file.text();
-
 
   const rows =
     parseCSV(
       text
     );
 
-
   pendingImportHeaders =
     rows[0];
-
 
   const objects =
     rows
@@ -5217,7 +4298,6 @@ async function handleCSVFile(event){
           const object =
             {};
 
-
           pendingImportHeaders
             .forEach(
               (header,index) => {
@@ -5228,35 +4308,29 @@ async function handleCSVFile(event){
               }
             );
 
-
           return object;
         }
       );
-
 
   pendingImportRecords =
     objects.map(
       mapCSVRecord
     );
 
-
   setText(
     "previewRecordCount",
     pendingImportRecords.length
   );
-
 
   setText(
     "previewColumnCount",
     pendingImportHeaders.length
   );
 
-
   setText(
     "previewDuplicates",
     countImportDuplicates()
   );
-
 
   document
     .getElementById(
@@ -5264,28 +4338,19 @@ async function handleCSVFile(event){
     )
     .innerHTML =
       pendingImportRecords
-        .slice(
-          0,
-          5
-        )
+        .slice(0,5)
         .map(
           lead =>
             `${escapeHtml(lead.firstName)} — ${escapeHtml(lead.company)}`
         )
-        .join(
-          "<br>"
-        );
-
+        .join("<br>");
 
   document
     .getElementById(
       "importPreview"
     )
     .classList
-    .add(
-      "visible"
-    );
-
+    .add("visible");
 
   document
     .getElementById(
@@ -5295,7 +4360,6 @@ async function handleCSVFile(event){
       false;
 }
 
-
 function parseCSV(text){
 
   text =
@@ -5304,22 +4368,10 @@ function parseCSV(text){
       ""
     );
 
-
-  const rows =
-    [];
-
-
-  let row =
-    [];
-
-
-  let field =
-    "";
-
-
-  let quoted =
-    false;
-
+  const rows = [];
+  let row = [];
+  let field = "";
+  let quoted = false;
 
   for(
     let i = 0;
@@ -5329,7 +4381,6 @@ function parseCSV(text){
 
     const char =
       text[i];
-
 
     if(quoted){
 
@@ -5341,7 +4392,6 @@ function parseCSV(text){
         ){
 
           field += '"';
-
           i++;
 
         }else{
@@ -5356,83 +4406,51 @@ function parseCSV(text){
           char;
       }
 
-
       continue;
     }
-
 
     if(char === '"'){
 
       quoted =
         true;
 
-    }else if(
-      char === ","
-    ){
+    }else if(char === ","){
 
-      row.push(
-        field
-      );
+      row.push(field);
+      field = "";
 
-      field =
-        "";
+    }else if(char === "\n"){
 
-    }else if(
-      char === "\n"
-    ){
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
 
-      row.push(
-        field
-      );
-
-      rows.push(
-        row
-      );
-
-      row =
-        [];
-
-      field =
-        "";
-
-    }else if(
-      char !== "\r"
-    ){
+    }else if(char !== "\r"){
 
       field +=
         char;
     }
   }
 
-
   if(
     field.length ||
     row.length
   ){
 
-    row.push(
-      field
-    );
-
-    rows.push(
-      row
-    );
+    row.push(field);
+    rows.push(row);
   }
-
 
   rows[0] =
     rows[0].map(
       value =>
-        String(
-          value
-        )
+        String(value)
           .trim()
     );
 
-
   return rows;
 }
-
 
 function csvValue(
   record,
@@ -5446,7 +4464,6 @@ function csvValue(
     .trim();
 }
 
-
 function mapCSVRecord(record){
 
   const location =
@@ -5455,12 +4472,10 @@ function mapCSVRecord(record){
       "Location / Restrictions"
     );
 
-
   const zone =
     deriveTimezone(
       location
     );
-
 
   return ensureLeadDefaults({
 
@@ -5587,6 +4602,7 @@ function mapCSVRecord(record){
       ),
 
     phoneHistory:[],
+    emailHistory:[],
     lastCalled:"",
     callCount:0,
     lastOutcome:"",
@@ -5599,7 +4615,6 @@ function mapCSVRecord(record){
   });
 }
 
-
 function normalizePhone(value){
 
   return String(
@@ -5611,7 +4626,6 @@ function normalizePhone(value){
       ""
     );
 }
-
 
 function isDuplicate(
   candidate,
@@ -5631,7 +4645,6 @@ function isDuplicate(
           existing.phone
         );
 
-
       const emailMatch =
         candidate.email &&
         candidate.email
@@ -5642,7 +4655,6 @@ function isDuplicate(
           ""
         )
           .toLowerCase();
-
 
       const nameCompanyMatch =
         candidate.firstName &&
@@ -5665,7 +4677,6 @@ function isDuplicate(
         )
           .toLowerCase();
 
-
       return Boolean(
         phoneMatch ||
         emailMatch ||
@@ -5674,7 +4685,6 @@ function isDuplicate(
     }
   );
 }
-
 
 function countImportDuplicates(){
 
@@ -5688,7 +4698,6 @@ function countImportDuplicates(){
     .length;
 }
 
-
 function performImport(){
 
   const mode =
@@ -5698,11 +4707,7 @@ function performImport(){
       )
       .value;
 
-
-  if(
-    mode ===
-    "replace"
-  ){
+  if(mode === "replace"){
 
     leads =
       pendingImportRecords;
@@ -5713,11 +4718,7 @@ function performImport(){
       .forEach(
         record => {
 
-          if(
-            !isDuplicate(
-              record
-            )
-          ){
+          if(!isDuplicate(record)){
 
             leads.push(
               record
@@ -5727,22 +4728,42 @@ function performImport(){
       );
   }
 
-
-  currentLeadIndex =
-    0;
-
+  currentLeadIndex = 0;
 
   saveLeads();
-
   renderLead();
-
   closeImportModal();
 }
 
+/* REFRESH WHEN EMAIL TAB SAVES ACTIVITY */
 
-/* =====================================================
-   START
-===================================================== */
+window.addEventListener(
+  "storage",
+  event => {
+
+    if(
+      event.key ===
+      LEAD_STORAGE_KEY
+    ){
+
+      leads =
+        loadLeads();
+
+      if(
+        currentLeadIndex >=
+        leads.length
+      ){
+
+        currentLeadIndex =
+          0;
+      }
+
+      renderLead();
+    }
+  }
+);
+
+/* START */
 
 window.addEventListener(
   "load",
@@ -5753,10 +4774,7 @@ window.addEventListener(
         ensureLeadDefaults
       );
 
-
     saveLeads();
-
-
     renderLead();
   }
 );
