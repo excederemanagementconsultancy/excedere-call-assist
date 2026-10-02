@@ -47,6 +47,11 @@ button:active{
   transform:translateY(1px);
 }
 
+button:disabled{
+  cursor:not-allowed;
+  opacity:.55;
+}
+
 .app{
   min-height:100vh;
 }
@@ -245,7 +250,7 @@ textarea:focus{
 }
 
 
-/* SIGNATURE PREVIEW */
+/* SIGNATURE */
 
 .signature-preview{
   margin-top:6px;
@@ -319,85 +324,61 @@ textarea:focus{
 }
 
 
-/* PRIVATEEMAIL CONTROLS */
+/* SEND */
 
-.privateemail-panel{
+.send-area{
   margin-top:18px;
-  padding:16px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#07130f;
 }
 
-.privateemail-title{
-  margin-bottom:6px;
-  color:var(--green);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.14em;
-}
-
-.privateemail-help{
-  margin-bottom:14px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.5;
-}
-
-.open-privateemail{
+.send-btn{
   width:100%;
-  min-height:48px;
+  min-height:52px;
   border:0;
   border-radius:9px;
   background:var(--green);
   color:#03120b;
-  font-weight:800;
+  font-size:15px;
+  font-weight:850;
 }
 
-.copy-grid{
+.send-btn:hover:not(:disabled){
+  filter:brightness(1.05);
+}
+
+.secondary-actions{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
   margin-top:10px;
 }
 
-.copy-btn{
-  min-height:42px;
+.secondary-btn{
+  min-height:43px;
   border:1px solid var(--border);
-  border-radius:8px;
+  border-radius:9px;
   background:var(--panel2);
   color:var(--text);
   font-weight:700;
 }
 
-.copy-btn:hover{
-  border-color:var(--green);
+.status{
+  min-height:22px;
+  margin-top:13px;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.status.normal{
+  color:var(--muted);
+}
+
+.status.good{
   color:var(--green);
 }
 
-.clear-row{
-  margin-top:10px;
+.status.bad{
+  color:var(--red);
 }
-
-.clear-btn{
-  width:100%;
-  min-height:42px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:transparent;
-  color:var(--muted);
-  font-weight:700;
-}
-
-.status{
-  min-height:20px;
-  margin-top:12px;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.good{color:var(--green)}
-.bad{color:var(--red)}
 
 @media(max-width:800px){
 
@@ -422,7 +403,7 @@ textarea:focus{
     grid-template-columns:1fr;
   }
 
-  .copy-grid{
+  .secondary-actions{
     grid-template-columns:1fr;
   }
 
@@ -430,9 +411,11 @@ textarea:focus{
 </style>
 </head>
 
+
 <body>
 
 <div class="app">
+
 
 <header>
 
@@ -457,16 +440,18 @@ EMAIL
 
 </div>
 
+
 <button
   class="close-btn"
   onclick="window.close()">
-  Close
+Close
 </button>
 
 </header>
 
 
 <main class="workspace">
+
 
 <div class="page-heading">
 
@@ -479,7 +464,7 @@ Email Composer
 </h1>
 
 <div class="subtitle">
-Choose a template or write your own message, then send it through PrivateEmail.
+Choose a template, make any changes you want, and send directly from Excedere.
 </div>
 
 </div>
@@ -496,7 +481,7 @@ Contact
 <div
   id="contactName"
   class="contact-value">
-  Not selected
+Not selected
 </div>
 
 </div>
@@ -511,7 +496,7 @@ Company
 <div
   id="contactCompany"
   class="contact-value">
-  Not selected
+Not selected
 </div>
 
 </div>
@@ -525,42 +510,43 @@ Company
 EMAIL TEMPLATES
 </div>
 
+
 <div class="template-grid">
 
 <button
   class="template-btn"
   onclick="applyTemplate('initial',this)">
-  Initial Outreach
+Initial Outreach
 </button>
 
 <button
   class="template-btn"
   onclick="applyTemplate('info',this)">
-  Send Information
+Send Information
 </button>
 
 <button
   class="template-btn"
   onclick="applyTemplate('followup',this)">
-  Follow-Up
+Follow-Up
 </button>
 
 <button
   class="template-btn"
   onclick="applyTemplate('callback',this)">
-  Callback Follow-Up
+Callback Follow-Up
 </button>
 
 <button
   class="template-btn"
   onclick="applyTemplate('appointment',this)">
-  Appointment Confirmation
+Appointment Confirmation
 </button>
 
 <button
   class="template-btn"
   onclick="applyTemplate('blank',this)">
-  Blank Email
+Blank Email
 </button>
 
 </div>
@@ -616,7 +602,9 @@ Message
 EMAIL SIGNATURE PREVIEW
 </div>
 
+
 <div class="signature-preview">
+
 
 <div class="signature-main">
 
@@ -682,57 +670,32 @@ WhatsApp: +63 960 220 6667
 
 
 <div class="signature-note">
-Your normal PrivateEmail signature will be added when you compose the message in PrivateEmail.
+This signature will automatically be added to the email when Excedere sends it.
 </div>
 
 
-<div class="privateemail-panel">
-
-<div class="privateemail-title">
-SEND THROUGH PRIVATEEMAIL
-</div>
-
-<div class="privateemail-help">
-Open PrivateEmail, click Compose, then use the copy buttons below to transfer the recipient, subject and message.
-</div>
-
+<div class="send-area">
 
 <button
-  class="open-privateemail"
-  onclick="openPrivateEmail()">
-  Open PrivateEmail
+  id="sendButton"
+  class="send-btn"
+  onclick="sendEmail()">
+✉ Send Email
 </button>
 
 
-<div class="copy-grid">
+<div class="secondary-actions">
 
 <button
-  class="copy-btn"
-  onclick="copyTo()">
-  Copy To
+  class="secondary-btn"
+  onclick="copyEmail()">
+Copy Email
 </button>
 
 <button
-  class="copy-btn"
-  onclick="copySubject()">
-  Copy Subject
-</button>
-
-<button
-  class="copy-btn"
-  onclick="copyMessage()">
-  Copy Message
-</button>
-
-</div>
-
-
-<div class="clear-row">
-
-<button
-  class="clear-btn"
+  class="secondary-btn"
   onclick="clearEmail()">
-  Clear Email
+Clear
 </button>
 
 </div>
@@ -740,7 +703,7 @@ Open PrivateEmail, click Compose, then use the copy buttons below to transfer th
 
 <div
   id="status"
-  class="status">
+  class="status normal">
 </div>
 
 </div>
@@ -754,6 +717,32 @@ Open PrivateEmail, click Compose, then use the copy buttons below to transfer th
 
 
 <script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SEND_EMAIL_URL =
+  "https://kxxoyhagfmexvnzpuwys.supabase.co/functions/v1/send-excedere-email";
+
+
+/*
+IMPORTANT:
+
+Replace the text between the quotes below
+with your FULL Supabase sb_publishable_ key.
+
+Example:
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ABC123...";
+*/
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_2gcvru1GxULE5nCVFNPgQw__vOGbDxx";
+
+
+/* =====================================================
+   PARAMETERS
+===================================================== */
 
 function getParam(name){
 
@@ -801,8 +790,104 @@ document
     "to"
   )
   .value =
-    email;
+    cleanIncomingEmail(
+      email
+    );
 
+
+function cleanIncomingEmail(value){
+
+  const text =
+    String(value || "")
+      .trim();
+
+
+  if(
+    !text ||
+    text.toLowerCase() ===
+      "not publicly listed"
+  ){
+
+    return "";
+  }
+
+
+  return text;
+}
+
+
+/* =====================================================
+   AUTH TOKEN
+===================================================== */
+
+function getSupabaseAccessToken(){
+
+  const projectRef =
+    "kxxoyhagfmexvnzpuwys";
+
+
+  for(
+    let i = 0;
+    i < localStorage.length;
+    i++
+  ){
+
+    const key =
+      localStorage.key(i);
+
+
+    if(
+      !key ||
+      !key.includes(
+        projectRef
+      )
+    ){
+
+      continue;
+    }
+
+
+    try{
+
+      const parsed =
+        JSON.parse(
+          localStorage.getItem(
+            key
+          )
+        );
+
+
+      if(
+        parsed?.access_token
+      ){
+
+        return parsed.access_token;
+      }
+
+
+      if(
+        parsed
+          ?.currentSession
+          ?.access_token
+      ){
+
+        return parsed
+          .currentSession
+          .access_token;
+      }
+
+    }catch{
+    }
+  }
+
+
+  return null;
+}
+
+
+/* =====================================================
+   TEMPLATE HELPERS
+===================================================== */
 
 function greetingName(){
 
@@ -832,6 +917,10 @@ function clearTemplateSelection(){
     );
 }
 
+
+/* =====================================================
+   TEMPLATES
+===================================================== */
 
 function applyTemplate(
   type,
@@ -966,6 +1055,7 @@ I look forward to speaking with you.`
 
 
   if(!selected){
+
     return;
   }
 
@@ -980,59 +1070,18 @@ I look forward to speaking with you.`
 
   showStatus(
     "Template loaded.",
-    true
+    "good"
   );
 }
 
 
-function openPrivateEmail(){
+/* =====================================================
+   SEND EMAIL
+===================================================== */
 
-  window.open(
-    "https://privateemail.com/spm/mail/INBOX/",
-    "_blank",
-    "noopener"
-  );
+async function sendEmail(){
 
-
-  showStatus(
-    "PrivateEmail opened. Click Compose, then use Copy To, Copy Subject and Copy Message.",
-    true
-  );
-}
-
-
-async function copyText(
-  value,
-  successMessage
-){
-
-  try{
-
-    await navigator
-      .clipboard
-      .writeText(
-        value
-      );
-
-
-    showStatus(
-      successMessage,
-      true
-    );
-
-  }catch{
-
-    showStatus(
-      "Unable to copy. Please copy it manually.",
-      false
-    );
-  }
-}
-
-
-function copyTo(){
-
-  const value =
+  const to =
     document
       .getElementById(
         "to"
@@ -1041,27 +1090,7 @@ function copyTo(){
       .trim();
 
 
-  if(!value){
-
-    showStatus(
-      "Enter an email address first.",
-      false
-    );
-
-    return;
-  }
-
-
-  copyText(
-    value,
-    "Recipient email copied."
-  );
-}
-
-
-function copySubject(){
-
-  const value =
+  const subject =
     document
       .getElementById(
         "subject"
@@ -1070,27 +1099,7 @@ function copySubject(){
       .trim();
 
 
-  if(!value){
-
-    showStatus(
-      "Add a subject first.",
-      false
-    );
-
-    return;
-  }
-
-
-  copyText(
-    value,
-    "Subject copied."
-  );
-}
-
-
-function copyMessage(){
-
-  const value =
+  const message =
     document
       .getElementById(
         "message"
@@ -1099,27 +1108,302 @@ function copyMessage(){
       .trim();
 
 
-  if(!value){
+  const button =
+    document.getElementById(
+      "sendButton"
+    );
+
+
+  if(!to){
 
     showStatus(
-      "Add a message first.",
-      false
+      "Enter the recipient email address.",
+      "bad"
     );
 
     return;
   }
 
 
-  copyText(
-    value,
-    "Message copied."
+  if(!isValidEmail(to)){
+
+    showStatus(
+      "Enter a valid recipient email address.",
+      "bad"
+    );
+
+    return;
+  }
+
+
+  if(!subject){
+
+    showStatus(
+      "Add an email subject.",
+      "bad"
+    );
+
+    return;
+  }
+
+
+  if(!message){
+
+    showStatus(
+      "Add an email message.",
+      "bad"
+    );
+
+    return;
+  }
+
+
+  if(
+    !SUPABASE_PUBLISHABLE_KEY ||
+    SUPABASE_PUBLISHABLE_KEY.includes(
+      "PASTE_YOUR"
+    )
+  ){
+
+    showStatus(
+      "Supabase publishable key has not been configured.",
+      "bad"
+    );
+
+    return;
+  }
+
+
+  const token =
+    getSupabaseAccessToken();
+
+
+  if(!token){
+
+    showStatus(
+      "Your Excedere login session was not found. Sign in again and retry.",
+      "bad"
+    );
+
+    return;
+  }
+
+
+  const confirmed =
+    window.confirm(
+      `Send this email to ${to}?`
+    );
+
+
+  if(!confirmed){
+
+    return;
+  }
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "Sending Email...";
+
+
+  showStatus(
+    "Sending through Excedere...",
+    "normal"
   );
+
+
+  try{
+
+    const response =
+      await fetch(
+        SEND_EMAIL_URL,
+        {
+
+          method:
+            "POST",
+
+          headers:{
+
+            "Content-Type":
+              "application/json",
+
+            "apikey":
+              SUPABASE_PUBLISHABLE_KEY,
+
+            "Authorization":
+              `Bearer ${token}`
+          },
+
+          body:
+            JSON.stringify({
+              to,
+              subject,
+              message
+            })
+        }
+      );
+
+
+    let result;
+
+
+    try{
+
+      result =
+        await response.json();
+
+    }catch{
+
+      result =
+        {};
+    }
+
+
+    if(
+      !response.ok ||
+      !result.success
+    ){
+
+      throw new Error(
+        result.error ||
+        `Email sending failed (${response.status}).`
+      );
+    }
+
+
+    showStatus(
+      `✓ Email sent successfully to ${to}`,
+      "good"
+    );
+
+
+    button.textContent =
+      "✓ Email Sent";
+
+
+    setTimeout(
+      () => {
+
+        button.textContent =
+          "✉ Send Email";
+
+        button.disabled =
+          false;
+      },
+      2500
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Send email error:",
+      error
+    );
+
+
+    showStatus(
+      error.message ||
+      "Unable to send the email.",
+      "bad"
+    );
+
+
+    button.textContent =
+      "✉ Send Email";
+
+
+    button.disabled =
+      false;
+  }
 }
 
 
+function isValidEmail(value){
+
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    .test(
+      value
+    );
+}
+
+
+/* =====================================================
+   COPY
+===================================================== */
+
+async function copyEmail(){
+
+  const to =
+    document
+      .getElementById(
+        "to"
+      )
+      .value
+      .trim();
+
+
+  const subject =
+    document
+      .getElementById(
+        "subject"
+      )
+      .value
+      .trim();
+
+
+  const message =
+    document
+      .getElementById(
+        "message"
+      )
+      .value
+      .trim();
+
+
+  const text =
+`To: ${to}
+
+Subject: ${subject}
+
+${message}`;
+
+
+  try{
+
+    await navigator
+      .clipboard
+      .writeText(
+        text
+      );
+
+
+    showStatus(
+      "Email copied.",
+      "good"
+    );
+
+
+  }catch{
+
+    showStatus(
+      "Unable to copy email.",
+      "bad"
+    );
+  }
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
 function showStatus(
-  message,
-  success
+  text,
+  type = "normal"
 ){
 
   const status =
@@ -1129,15 +1413,17 @@ function showStatus(
 
 
   status.className =
-    success
-      ? "status good"
-      : "status bad";
+    `status ${type}`;
 
 
   status.textContent =
-    message;
+    text;
 }
 
+
+/* =====================================================
+   CLEAR
+===================================================== */
 
 function clearEmail(){
 
@@ -1157,12 +1443,10 @@ function clearEmail(){
       "";
 
 
-  document
-    .getElementById(
-      "status"
-    )
-    .textContent =
-      "";
+  showStatus(
+    "",
+    "normal"
+  );
 
 
   clearTemplateSelection();
