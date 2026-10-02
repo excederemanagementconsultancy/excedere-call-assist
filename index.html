@@ -22,12 +22,9 @@
   --blue:#6ab7ff;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html,
-body{
+html,body{
   margin:0;
   min-height:100%;
 }
@@ -40,24 +37,16 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-button,
-input,
-textarea{
-  font:inherit;
-}
+button,input,textarea{font:inherit}
 
 button{
   cursor:pointer;
   transition:.15s ease;
 }
 
-button:active{
-  transform:translateY(1px);
-}
+button:active{transform:translateY(1px)}
 
-.app{
-  min-height:100vh;
-}
+.app{min-height:100vh}
 
 
 /* =====================================================
@@ -159,9 +148,7 @@ header{
   box-shadow:0 20px 45px rgba(0,0,0,.35);
 }
 
-.search-results.open{
-  display:block;
-}
+.search-results.open{display:block}
 
 .search-result{
   width:100%;
@@ -173,17 +160,10 @@ header{
   color:var(--text);
 }
 
-.search-result:hover{
-  background:var(--panel3);
-}
+.search-result:hover{background:var(--panel3)}
 
-.search-result strong{
-  display:block;
-}
-
-.search-result small{
-  color:var(--muted);
-}
+.search-result strong{display:block}
+.search-result small{color:var(--muted)}
 
 .record-nav{
   display:flex;
@@ -237,7 +217,7 @@ header{
 
 .workspace{
   display:grid;
-  grid-template-columns:285px minmax(570px,1fr) 385px;
+  grid-template-columns:285px minmax(570px,1fr) 400px;
   min-height:calc(100vh - 70px);
 }
 
@@ -278,14 +258,13 @@ header{
 
 
 /* =====================================================
-   LEFT PANEL
+   LEFT
 ===================================================== */
 
 .lead-name{
   margin-bottom:4px;
   font-size:26px;
   font-weight:780;
-  letter-spacing:-.02em;
 }
 
 .lead-title{
@@ -299,9 +278,7 @@ header{
   font-size:12px;
 }
 
-.lead-details{
-  margin-top:18px;
-}
+.lead-details{margin-top:18px}
 
 .detail{
   padding:9px 0;
@@ -400,7 +377,6 @@ header{
   color:var(--green);
   font-size:8px;
   font-weight:850;
-  letter-spacing:.14em;
 }
 
 .status-pill{
@@ -453,12 +429,11 @@ header{
 .crm-status-item strong{
   display:block;
   font-size:9px;
-  line-height:1.35;
 }
 
 
 /* =====================================================
-   COLLAPSIBLES
+   LEFT COLLAPSIBLES
 ===================================================== */
 
 .lead-intelligence,
@@ -494,21 +469,18 @@ header{
   margin-bottom:4px;
   color:var(--muted);
   font-size:7px;
-  font-weight:700;
 }
 
 .intelligence-value{
   color:#dce8e3;
   font-size:10px;
   line-height:1.45;
-  white-space:pre-wrap;
 }
 
 .history-date{
   margin-bottom:4px;
   color:var(--green);
   font-size:8px;
-  font-weight:800;
 }
 
 .history-outcome{
@@ -536,7 +508,6 @@ header{
   border-radius:8px;
   background:var(--panel2);
   color:var(--text);
-  font-weight:700;
 }
 
 
@@ -548,15 +519,13 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
-  gap:24px;
   max-width:875px;
-  margin:0 auto 19px;
+  margin:0 auto 16px;
 }
 
 .call-header h1{
   margin:0;
-  font-size:clamp(28px,2vw,34px);
-  letter-spacing:-.025em;
+  font-size:32px;
 }
 
 .call-stage{
@@ -575,6 +544,45 @@ header{
   font-weight:850;
 }
 
+
+/* CALL MEMORY */
+
+.call-memory{
+  max-width:875px;
+  margin:0 auto 12px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.memory-item{
+  padding:9px 11px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#081611;
+}
+
+.memory-label{
+  margin-bottom:3px;
+  color:var(--muted);
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+
+.memory-value{
+  color:#dbe7e2;
+  font-size:11px;
+  font-weight:700;
+}
+
+.memory-value.selected{
+  color:var(--green);
+}
+
+
+/* SCRIPT */
+
 .script-box{
   width:100%;
   max-width:875px;
@@ -589,13 +597,11 @@ header{
       rgba(12,27,22,.94),
       rgba(9,22,18,.90)
     );
-  box-shadow:0 18px 45px rgba(0,0,0,.10);
 }
 
 .script-topline{
   display:flex;
   justify-content:space-between;
-  align-items:center;
   margin-bottom:19px;
 }
 
@@ -613,7 +619,7 @@ header{
 
 .script-text{
   max-width:760px;
-  font-size:clamp(19px,1.3vw,22px);
+  font-size:20px;
   line-height:1.6;
 }
 
@@ -639,13 +645,13 @@ header{
 }
 
 .response-btn{
-  min-height:56px;
-  padding:10px 14px;
+  min-height:54px;
+  padding:9px 13px;
   border:1px solid var(--border);
   border-radius:9px;
   background:#0d211a;
   color:var(--text);
-  font-size:13px;
+  font-size:12px;
   font-weight:700;
 }
 
@@ -656,7 +662,7 @@ header{
 
 .progress-area{
   max-width:760px;
-  margin:32px auto 0;
+  margin:31px auto 0;
 }
 
 .progress-line{
@@ -691,7 +697,6 @@ header{
   border-radius:50%;
   background:var(--bg);
   color:var(--muted);
-  font-size:11px;
 }
 
 .progress-item.active .progress-circle{
@@ -706,7 +711,7 @@ header{
 
 
 /* =====================================================
-   RIGHT PANEL
+   RIGHT
 ===================================================== */
 
 .tool-card{
@@ -737,9 +742,82 @@ textarea,
 }
 
 #notes{
-  min-height:88px;
+  min-height:84px;
   resize:vertical;
 }
+
+
+/* CONTEXT SELECTORS */
+
+.context-display{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-bottom:7px;
+}
+
+.context-value{
+  padding:7px;
+  border:1px solid var(--border-soft);
+  border-radius:7px;
+  background:#07130f;
+}
+
+.context-value span{
+  display:block;
+  color:var(--muted);
+  font-size:7px;
+  margin-bottom:3px;
+}
+
+.context-value strong{
+  display:block;
+  font-size:9px;
+  line-height:1.35;
+}
+
+.context-selector{
+  margin-top:6px;
+  border:1px solid var(--border-soft);
+  border-radius:7px;
+  overflow:hidden;
+}
+
+.context-selector summary{
+  padding:8px;
+  list-style:none;
+  cursor:pointer;
+  font-size:9px;
+  font-weight:750;
+  color:#cfe0d8;
+}
+
+.context-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+  padding:0 7px 7px;
+}
+
+.context-btn{
+  min-height:34px;
+  padding:5px 7px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  background:#0d1f1a;
+  color:#dfe9e5;
+  font-size:8px;
+  text-align:left;
+}
+
+.context-btn.selected{
+  border-color:var(--green);
+  color:var(--green);
+  background:var(--green-dark);
+}
+
+
+/* OBJECTIONS */
 
 .objection-grid,
 .outcome-grid{
@@ -821,18 +899,11 @@ textarea,
   font-size:9px;
 }
 
-.good{
-  color:var(--green);
-}
-
-.bad{
-  color:var(--red);
-}
+.good{color:var(--green)}
+.bad{color:var(--red)}
 
 
-/* =====================================================
-   RIGHT COLLAPSIBLES
-===================================================== */
+/* COLLAPSIBLES */
 
 details.tool-details{
   margin-bottom:8px;
@@ -912,8 +983,6 @@ details.tool-details summary{
 .match-top{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  gap:8px;
   margin-bottom:6px;
 }
 
@@ -921,7 +990,6 @@ details.tool-details summary{
   color:var(--muted);
   font-size:8px;
   font-weight:850;
-  letter-spacing:.1em;
 }
 
 .match-badge{
@@ -965,7 +1033,6 @@ details.tool-details summary{
 
 .crm-notes-box{
   min-height:155px;
-  resize:vertical;
 }
 
 .crm-actions{
@@ -981,7 +1048,6 @@ details.tool-details summary{
   border-radius:7px;
   background:var(--panel2);
   color:var(--text);
-  font-weight:700;
 }
 
 .crm-action.primary{
@@ -991,9 +1057,7 @@ details.tool-details summary{
 }
 
 
-/* =====================================================
-   IMPORT MODAL
-===================================================== */
+/* IMPORT */
 
 .modal-backdrop{
   display:none;
@@ -1013,16 +1077,15 @@ details.tool-details summary{
 .import-modal{
   width:min(720px,100%);
   margin-top:6vh;
-  overflow:hidden;
   border:1px solid var(--border);
   border-radius:14px;
   background:#091713;
+  overflow:hidden;
 }
 
 .modal-header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
   padding:18px 20px;
   border-bottom:1px solid var(--border);
 }
@@ -1036,9 +1099,7 @@ details.tool-details summary{
   color:var(--text);
 }
 
-.modal-body{
-  padding:20px;
-}
+.modal-body{padding:20px}
 
 .import-drop{
   padding:25px;
@@ -1056,18 +1117,14 @@ details.tool-details summary{
   font-weight:850;
 }
 
-#importFile{
-  display:none;
-}
+#importFile{display:none}
 
 .import-preview{
   display:none;
   margin-top:18px;
 }
 
-.import-preview.visible{
-  display:block;
-}
+.import-preview.visible{display:block}
 
 .import-stat-grid{
   display:grid;
@@ -1088,9 +1145,7 @@ details.tool-details summary{
   font-size:9px;
 }
 
-.import-stat strong{
-  font-size:19px;
-}
+.import-stat strong{font-size:19px}
 
 .import-mode{
   display:grid;
@@ -1110,7 +1165,6 @@ details.tool-details summary{
   margin-top:12px;
   color:var(--muted);
   font-size:11px;
-  line-height:1.55;
 }
 
 .modal-footer{
@@ -1139,110 +1193,55 @@ details.tool-details summary{
   color:#03120b;
 }
 
-.modal-primary:disabled{
-  opacity:.4;
-}
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media(max-width:1400px){
-
-  .workspace{
-    grid-template-columns:270px minmax(500px,1fr) 355px;
-  }
-}
+.modal-primary:disabled{opacity:.4}
 
 </style>
 </head>
-
 
 <body>
 
 <div class="app">
 
-
 <header>
 
 <div class="brand">
-
-<img
-  class="brand-logo"
-  src="excedere-logo.png"
-  alt="Excedere">
-
+<img class="brand-logo" src="excedere-logo.png" alt="Excedere">
 <div>
-
-<div class="brand-name">
-EXCEDERE
+<div class="brand-name">EXCEDERE</div>
+<div class="brand-product">CALL ASSIST</div>
 </div>
-
-<div class="brand-product">
-CALL ASSIST
 </div>
-
-</div>
-
-</div>
-
 
 <div class="search-wrap">
 
-<span class="search-icon">
-⌕
-</span>
+<span class="search-icon">⌕</span>
 
 <input
-  id="leadSearch"
-  class="search-box"
-  type="search"
-  placeholder="Search by name, company, location, phone or role...">
+id="leadSearch"
+class="search-box"
+type="search"
+placeholder="Search by name, company, location, phone or role...">
 
-<button
-  id="clearSearch"
-  class="search-clear">
-×
-</button>
+<button id="clearSearch" class="search-clear">×</button>
 
-<div
-  id="searchResults"
-  class="search-results">
-</div>
+<div id="searchResults" class="search-results"></div>
 
 </div>
-
 
 <div class="record-nav">
 
-<button
-  class="header-btn"
-  onclick="openImportModal()">
+<button class="header-btn" onclick="openImportModal()">
 ↑ Import Leads
 </button>
 
-<div
-  id="recordCounter"
-  class="record-counter">
+<div id="recordCounter" class="record-counter">
 1 of 1
 </div>
 
-<button
-  class="nav-arrow"
-  onclick="previousRecord()">
-‹
-</button>
+<button class="nav-arrow" onclick="previousRecord()">‹</button>
+<button class="nav-arrow" onclick="nextRecord()">›</button>
 
-<button
-  class="nav-arrow"
-  onclick="nextRecord()">
-›
-</button>
-
-<button
-  class="next-record-top"
-  onclick="nextRecord()">
+<button class="next-record-top" onclick="nextRecord()">
 Next Record →
 </button>
 
@@ -1254,87 +1253,40 @@ Next Record →
 <main class="workspace">
 
 
-<!-- =================================================
-     LEFT
-================================================== -->
+<!-- LEFT -->
 
-<aside
-  id="leftPanel"
-  class="left-panel">
+<aside id="leftPanel" class="left-panel">
 
+<div class="eyebrow">Current Lead</div>
 
-<div class="eyebrow">
-Current Lead
-</div>
-
-
-<div
-  id="leadName"
-  class="lead-name">
-</div>
-
-<div
-  id="leadTitle"
-  class="lead-title">
-</div>
-
-<div
-  id="leadCompany"
-  class="lead-company">
-</div>
+<div id="leadName" class="lead-name"></div>
+<div id="leadTitle" class="lead-title"></div>
+<div id="leadCompany" class="lead-company"></div>
 
 
 <div class="lead-details">
 
+<div class="detail">
+<div class="detail-label">Role Advertised</div>
+<div id="leadRole" class="detail-value"></div>
+</div>
+
+<div class="detail">
+<div class="detail-label">Location / Restrictions</div>
+<div id="leadLocation" class="detail-value"></div>
+</div>
 
 <div class="detail">
 
-<div class="detail-label">
-Role Advertised
-</div>
-
-<div
-  id="leadRole"
-  class="detail-value">
-</div>
-
-</div>
-
-
-<div class="detail">
-
-<div class="detail-label">
-Location / Restrictions
-</div>
-
-<div
-  id="leadLocation"
-  class="detail-value">
-</div>
-
-</div>
-
-
-<div class="detail">
-
-<div class="detail-label">
-Telephone Number
-</div>
+<div class="detail-label">Telephone Number</div>
 
 <div class="phone-row">
 
-<a
-  id="mainPhoneLink"
-  class="phone-link"
-  href="#">
-
+<a id="mainPhoneLink" class="phone-link" href="#">
 <span id="mainPhone"></span>
-
 </a>
 
-<button
-  class="edit-phone"
-  onclick="editPhone('phone')">
+<button class="edit-phone" onclick="editPhone('phone')">
 ✎
 </button>
 
@@ -1345,24 +1297,15 @@ Telephone Number
 
 <div class="detail">
 
-<div class="detail-label">
-Direct / Mobile
-</div>
+<div class="detail-label">Direct / Mobile</div>
 
 <div class="phone-row">
 
-<a
-  id="directPhoneLink"
-  class="phone-link"
-  href="#">
-
+<a id="directPhoneLink" class="phone-link" href="#">
 <span id="directPhone"></span>
-
 </a>
 
-<button
-  class="edit-phone"
-  onclick="editPhone('directPhone')">
+<button class="edit-phone" onclick="editPhone('directPhone')">
 ✎
 </button>
 
@@ -1373,29 +1316,19 @@ Direct / Mobile
 
 <div class="detail">
 
-<div class="detail-label">
-Email
-</div>
+<div class="detail-label">Email</div>
 
 <div class="email-row">
 
-<span
-  id="leadEmail"
-  class="email-link">
-</span>
+<span id="leadEmail" class="email-link"></span>
 
-<button
-  class="edit-email"
-  onclick="editEmail()"
-  title="Edit email">
+<button class="edit-email" onclick="editEmail()">
 ✎
 </button>
 
 </div>
 
-<button
-  class="email-open-btn"
-  onclick="openEmailComposer()">
+<button class="email-open-btn" onclick="openEmailComposer()">
 ✉ Email Prospect
 </button>
 
@@ -1403,46 +1336,19 @@ Email
 
 
 <div class="detail">
-
-<div class="detail-label">
-Local Time
+<div class="detail-label">Local Time</div>
+<div id="localTime" class="detail-value local-time"></div>
 </div>
-
-<div
-  id="localTime"
-  class="detail-value local-time">
-</div>
-
-</div>
-
 
 <div class="detail">
-
-<div class="detail-label">
-Job Type
+<div class="detail-label">Job Type</div>
+<div id="leadJobType" class="detail-value"></div>
 </div>
-
-<div
-  id="leadJobType"
-  class="detail-value">
-</div>
-
-</div>
-
 
 <div class="detail">
-
-<div class="detail-label">
-Pay Offered
+<div class="detail-label">Pay Offered</div>
+<div id="leadPay" class="detail-value"></div>
 </div>
-
-<div
-  id="leadPay"
-  class="detail-value">
-</div>
-
-</div>
-
 
 </div>
 
@@ -1455,14 +1361,11 @@ Pay Offered
 CRM STATUS
 </div>
 
-<div
-  id="followStatus"
-  class="status-pill neutral">
+<div id="followStatus" class="status-pill neutral">
 NEW
 </div>
 
 </div>
-
 
 <div class="crm-status-grid">
 
@@ -1560,30 +1463,20 @@ LEAD INTELLIGENCE ▾
 ACTIVITY HISTORY ▾
 </summary>
 
-<div
-  id="callHistory"
-  class="history-body">
-</div>
+<div id="callHistory" class="history-body"></div>
 
 </details>
 
-
-<button
-  class="skip-record"
-  onclick="nextRecord()">
+<button class="skip-record" onclick="nextRecord()">
 Skip to Next Record →
 </button>
-
 
 </aside>
 
 
-<!-- =================================================
-     CENTRE
-================================================== -->
+<!-- CENTRE -->
 
 <section class="script-panel">
-
 
 <div class="call-header">
 
@@ -1597,20 +1490,46 @@ Live Call Assist
 Vacancy Call
 </h1>
 
-<div
-  id="stageText"
-  class="call-stage">
+<div id="stageText" class="call-stage">
 Follow the script and select the best response.
 </div>
 
 </div>
 
-
-<button
-  class="start-call"
-  onclick="startCall()">
+<button class="start-call" onclick="startCall()">
 ☎ Start Call
 </button>
+
+</div>
+
+
+<!-- LIVE CALL MEMORY -->
+
+<div class="call-memory">
+
+<div class="memory-item">
+
+<div class="memory-label">
+CURRENT PAIN POINT
+</div>
+
+<div id="memoryPainPoint" class="memory-value">
+Not identified yet
+</div>
+
+</div>
+
+<div class="memory-item">
+
+<div class="memory-label">
+OUTSOURCING CONCERN
+</div>
+
+<div id="memoryConcern" class="memory-value">
+Not identified yet
+</div>
+
+</div>
 
 </div>
 
@@ -1619,24 +1538,17 @@ Follow the script and select the best response.
 
 <div class="script-topline">
 
-<div
-  id="scriptLabel"
-  class="script-label">
+<div id="scriptLabel" class="script-label">
 Before you call
 </div>
 
-<div
-  id="stepLabel"
-  class="step-label">
+<div id="stepLabel" class="step-label">
 Ready
 </div>
 
 </div>
 
-
-<div
-  id="scriptText"
-  class="script-text">
+<div id="scriptText" class="script-text">
 
 Review the lead information, then press
 <strong>Start Call</strong>
@@ -1651,14 +1563,9 @@ when you're ready.
 PROSPECT RESPONSE
 </div>
 
+<div id="responses" class="responses">
 
-<div
-  id="responses"
-  class="responses">
-
-<button
-  class="response-btn"
-  disabled>
+<button class="response-btn" disabled>
 Start the call first
 </button>
 
@@ -1669,91 +1576,39 @@ Start the call first
 
 <div class="progress-line">
 
-<div
-  id="progress1"
-  class="progress-item">
-
-<div class="progress-circle">
-1
+<div id="progress1" class="progress-item">
+<div class="progress-circle">1</div>
+<small>Opening</small>
 </div>
 
-<small>
-Opening
-</small>
-
+<div id="progress2" class="progress-item">
+<div class="progress-circle">2</div>
+<small>Discovery</small>
 </div>
 
-
-<div
-  id="progress2"
-  class="progress-item">
-
-<div class="progress-circle">
-2
+<div id="progress3" class="progress-item">
+<div class="progress-circle">3</div>
+<small>Qualification</small>
 </div>
 
-<small>
-Discovery
-</small>
-
+<div id="progress4" class="progress-item">
+<div class="progress-circle">4</div>
+<small>Solution</small>
 </div>
 
-
-<div
-  id="progress3"
-  class="progress-item">
-
-<div class="progress-circle">
-3
-</div>
-
-<small>
-Qualification
-</small>
-
-</div>
-
-
-<div
-  id="progress4"
-  class="progress-item">
-
-<div class="progress-circle">
-4
-</div>
-
-<small>
-Solution
-</small>
-
-</div>
-
-
-<div
-  id="progress5"
-  class="progress-item">
-
-<div class="progress-circle">
-5
-</div>
-
-<small>
-Appointment
-</small>
-
+<div id="progress5" class="progress-item">
+<div class="progress-circle">5</div>
+<small>Appointment</small>
 </div>
 
 </div>
 
 </div>
-
 
 </section>
 
 
-<!-- =================================================
-     RIGHT
-================================================== -->
+<!-- RIGHT -->
 
 <aside class="right-panel">
 
@@ -1765,9 +1620,147 @@ CALL NOTES
 </div>
 
 <textarea
-  id="notes"
-  placeholder="Type notes while you're speaking...">
-</textarea>
+id="notes"
+placeholder="Type notes while you're speaking..."></textarea>
+
+</div>
+
+
+<!-- CALL CONTEXT -->
+
+<div class="tool-card">
+
+<div class="tool-card-title">
+CALL CONTEXT
+</div>
+
+<div class="context-display">
+
+<div class="context-value">
+<span>PAIN POINT</span>
+<strong id="contextPainPoint">Not selected</strong>
+</div>
+
+<div class="context-value">
+<span>OUTSOURCING CONCERN</span>
+<strong id="contextConcern">Not selected</strong>
+</div>
+
+</div>
+
+
+<details class="context-selector">
+
+<summary>
+Set / Change Pain Point
+</summary>
+
+<div class="context-grid">
+
+<button class="context-btn pain-btn" data-pain="applicants" onclick="setPainPoint('applicants')">
+Not enough applicants
+</button>
+
+<button class="context-btn pain-btn" data-pain="experience" onclick="setPainPoint('experience')">
+Wrong experience
+</button>
+
+<button class="context-btn pain-btn" data-pain="cost" onclick="setPainPoint('cost')">
+Candidates too expensive
+</button>
+
+<button class="context-btn pain-btn" data-pain="overloaded" onclick="setPainPoint('overloaded')">
+Team overloaded
+</button>
+
+<button class="context-btn pain-btn" data-pain="slow" onclick="setPainPoint('slow')">
+Hiring taking too long
+</button>
+
+<button class="context-btn pain-btn" data-pain="reliability" onclick="setPainPoint('reliability')">
+Poor reliability
+</button>
+
+<button class="context-btn pain-btn" data-pain="hard" onclick="setPainPoint('hard')">
+Hard-to-fill role
+</button>
+
+<button class="context-btn pain-btn" data-pain="other" onclick="setPainPoint('other')">
+Other issue
+</button>
+
+</div>
+
+</details>
+
+
+<details class="context-selector">
+
+<summary>
+Set / Change Outsourcing Concern
+</summary>
+
+<div class="context-grid">
+
+<button class="context-btn concern-btn" data-concern="security" onclick="setOutsourcingConcern('security')">
+Security / data
+</button>
+
+<button class="context-btn concern-btn" data-concern="quality" onclick="setOutsourcingConcern('quality')">
+Quality
+</button>
+
+<button class="context-btn concern-btn" data-concern="badExperience" onclick="setOutsourcingConcern('badExperience')">
+Bad past experience
+</button>
+
+<button class="context-btn concern-btn" data-concern="office" onclick="setOutsourcingConcern('office')">
+Need office-based
+</button>
+
+<button class="context-btn concern-btn" data-concern="control" onclick="setOutsourcingConcern('control')">
+Management / control
+</button>
+
+<button class="context-btn concern-btn" data-concern="culture" onclick="setOutsourcingConcern('culture')">
+Culture / team fit
+</button>
+
+<button class="context-btn concern-btn" data-concern="compliance" onclick="setOutsourcingConcern('compliance')">
+Compliance / legal
+</button>
+
+<button class="context-btn concern-btn" data-concern="leadership" onclick="setOutsourcingConcern('leadership')">
+Leadership policy
+</button>
+
+<button class="context-btn concern-btn" data-concern="local" onclick="setOutsourcingConcern('local')">
+Prefer local hiring
+</button>
+
+<button class="context-btn concern-btn" data-concern="communication" onclick="setOutsourcingConcern('communication')">
+Communication
+</button>
+
+<button class="context-btn concern-btn" data-concern="timezone" onclick="setOutsourcingConcern('timezone')">
+Time-zone concerns
+</button>
+
+<button class="context-btn concern-btn" data-concern="retention" onclick="setOutsourcingConcern('retention')">
+Retention / loyalty
+</button>
+
+<button class="context-btn concern-btn" data-concern="understanding" onclick="setOutsourcingConcern('understanding')">
+Don't understand model
+</button>
+
+<button class="context-btn concern-btn" data-concern="other" onclick="setOutsourcingConcern('other')">
+Other
+</button>
+
+</div>
+
+</details>
 
 </div>
 
@@ -1780,51 +1773,35 @@ QUICK OBJECTIONS
 
 <div class="objection-grid">
 
-<button
-  class="objection-btn"
-  onclick="showObjection('busy')">
+<button class="objection-btn" onclick="showObjection('busy')">
 I'm busy
 </button>
 
-<button
-  class="objection-btn"
-  onclick="showObjection('internal')">
+<button class="objection-btn" onclick="showObjection('internal')">
 We're handling it internally
 </button>
 
-<button
-  class="objection-btn"
-  onclick="showObjection('policy')">
+<button class="objection-btn" onclick="showObjection('policy')">
 We don't outsource
 </button>
 
-<button
-  class="objection-btn"
-  onclick="showObjection('local')">
+<button class="objection-btn" onclick="showObjection('local')">
 We only hire locally
 </button>
 
-<button
-  class="objection-btn"
-  onclick="showObjection('info')">
+<button class="objection-btn" onclick="showObjection('info')">
 Send information
 </button>
 
-<button
-  class="objection-btn"
-  onclick="showObjection('budget')">
+<button class="objection-btn" onclick="showObjection('budget')">
 No budget
 </button>
 
-<button
-  class="objection-btn"
-  onclick="showObjection('filled')">
+<button class="objection-btn" onclick="showObjection('filled')">
 Role filled
 </button>
 
-<button
-  class="objection-btn"
-  onclick="showObjection('notInterested')">
+<button class="objection-btn" onclick="showObjection('notInterested')">
 Not interested
 </button>
 
@@ -1841,21 +1818,15 @@ QUICK ANSWERS
 
 <div class="answer-grid">
 
-<button
-  class="answer-btn"
-  onclick="showQuickAnswer('who')">
+<button class="answer-btn" onclick="showQuickAnswer('who')">
 Who are you?
 </button>
 
-<button
-  class="answer-btn"
-  onclick="showQuickAnswer('support')">
+<button class="answer-btn" onclick="showQuickAnswer('support')">
 What support?
 </button>
 
-<button
-  class="answer-btn"
-  onclick="showQuickAnswer('recruitment')">
+<button class="answer-btn" onclick="showQuickAnswer('recruitment')">
 Recruitment company?
 </button>
 
@@ -1872,45 +1843,27 @@ CALL OUTCOME
 
 <div class="outcome-grid">
 
-<button
-  class="outcome-btn"
-  data-outcome="Appointment booked"
-  onclick="setOutcome('Appointment booked')">
+<button class="outcome-btn" data-outcome="Appointment booked" onclick="setOutcome('Appointment booked')">
 Appointment
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Callback required"
-  onclick="setOutcome('Callback required')">
+<button class="outcome-btn" data-outcome="Callback required" onclick="setOutcome('Callback required')">
 Callback
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Follow up required"
-  onclick="setOutcome('Follow up required')">
+<button class="outcome-btn" data-outcome="Follow up required" onclick="setOutcome('Follow up required')">
 Follow Up
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Information requested"
-  onclick="setOutcome('Information requested')">
+<button class="outcome-btn" data-outcome="Information requested" onclick="setOutcome('Information requested')">
 Send Info
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Role filled"
-  onclick="setOutcome('Role filled')">
+<button class="outcome-btn" data-outcome="Role filled" onclick="setOutcome('Role filled')">
 Role Filled
 </button>
 
-<button
-  class="outcome-btn"
-  data-outcome="Not interested"
-  onclick="setOutcome('Not interested')">
+<button class="outcome-btn" data-outcome="Not interested" onclick="setOutcome('Not interested')">
 Not Interested
 </button>
 
@@ -1925,7 +1878,6 @@ Not Interested
 SAVE CALL RESULT
 </div>
 
-
 <div class="followup-grid">
 
 <div>
@@ -1935,13 +1887,12 @@ NEXT ACTION
 </div>
 
 <input
-  id="nextAction"
-  class="action-input"
-  type="text"
-  placeholder="Call back, send info, meeting...">
+id="nextAction"
+class="action-input"
+type="text"
+placeholder="Call back, send info, meeting...">
 
 </div>
-
 
 <div>
 
@@ -1950,25 +1901,19 @@ FOLLOW-UP DATE
 </div>
 
 <input
-  id="followUpDate"
-  class="action-input"
-  type="date">
+id="followUpDate"
+class="action-input"
+type="date">
 
 </div>
 
 </div>
 
-
-<button
-  class="save-call-btn"
-  onclick="saveCallResult()">
+<button class="save-call-btn" onclick="saveCallResult()">
 Save Call Result
 </button>
 
-<div
-  id="saveCallStatus"
-  class="save-call-status">
-</div>
+<div id="saveCallStatus" class="save-call-status"></div>
 
 </div>
 
@@ -1983,9 +1928,7 @@ Save Call Result
 KRISP CALL DATA
 </div>
 
-<div
-  id="krispSummary"
-  class="summary-subtitle">
+<div id="krispSummary" class="summary-subtitle">
 No Krisp call attached
 </div>
 
@@ -1995,19 +1938,13 @@ No Krisp call attached
 
 </summary>
 
-
 <div class="details-body">
 
-<div
-  id="krispMeta"
-  class="krisp-meta">
+<div id="krispMeta" class="krisp-meta">
 No Krisp call attached to this lead.
 </div>
 
-
-<div
-  id="krispMatchBox"
-  class="match-box">
+<div class="match-box">
 
 <div class="match-top">
 
@@ -2015,24 +1952,17 @@ No Krisp call attached to this lead.
 MATCH ASSIST
 </div>
 
-<div
-  id="krispMatchBadge"
-  class="match-badge possible">
+<div id="krispMatchBadge" class="match-badge possible">
 Waiting
 </div>
 
 </div>
 
-<div
-  id="krispMatchDetails"
-  class="match-details">
-
+<div id="krispMatchDetails" class="match-details">
 Click Check Latest Krisp Call after Krisp finishes processing.
-
 </div>
 
 </div>
-
 
 <div class="krisp-card">
 
@@ -2040,14 +1970,11 @@ Click Check Latest Krisp Call after Krisp finishes processing.
 KRISP TRANSCRIPT
 </div>
 
-<div
-  id="krispTranscript"
-  class="krisp-content">
+<div id="krispTranscript" class="krisp-content">
 No transcript attached.
 </div>
 
 </div>
-
 
 <div class="krisp-card">
 
@@ -2055,35 +1982,25 @@ No transcript attached.
 KRISP NOTES
 </div>
 
-<div
-  id="krispNotes"
-  class="krisp-content">
+<div id="krispNotes" class="krisp-content">
 No Krisp notes attached.
 </div>
 
 </div>
 
-
-<button
-  class="refresh-btn"
-  onclick="loadKrispData()">
+<button class="refresh-btn" onclick="loadKrispData()">
 Check Latest Krisp Call
 </button>
 
-
 <button
-  id="attachKrispButton"
-  class="attach-btn"
-  onclick="attachKrispToCurrentLead()"
-  style="display:none;">
+id="attachKrispButton"
+class="attach-btn"
+onclick="attachKrispToCurrentLead()"
+style="display:none;">
 Attach This Call
 </button>
 
-
-<div
-  id="krispStatus"
-  class="krisp-status">
-</div>
+<div id="krispStatus" class="krisp-status"></div>
 
 </div>
 
@@ -2110,37 +2027,26 @@ Generate structured notes
 
 </summary>
 
-
 <div class="details-body">
 
 <textarea
-  id="crmNotesOutput"
-  class="crm-notes-box"
-  placeholder="Generate structured CRM notes...">
-</textarea>
-
+id="crmNotesOutput"
+class="crm-notes-box"
+placeholder="Generate structured CRM notes..."></textarea>
 
 <div class="crm-actions">
 
-<button
-  class="crm-action primary"
-  onclick="generateCRMNotes()">
+<button class="crm-action primary" onclick="generateCRMNotes()">
 Generate CRM Notes
 </button>
 
-<button
-  class="crm-action"
-  onclick="copyCRMNotes()">
+<button class="crm-action" onclick="copyCRMNotes()">
 Copy CRM Notes
 </button>
 
 </div>
 
-
-<div
-  id="crmNoteStatus"
-  class="crm-note-status">
-</div>
+<div id="crmNoteStatus" class="crm-note-status"></div>
 
 </div>
 
@@ -2154,30 +2060,21 @@ Copy CRM Notes
 </div>
 
 
-<!-- =================================================
-     IMPORT MODAL
-================================================== -->
+<!-- IMPORT -->
 
-<div
-  id="importBackdrop"
-  class="modal-backdrop">
+<div id="importBackdrop" class="modal-backdrop">
 
 <div class="import-modal">
 
 <div class="modal-header">
 
-<h2>
-Import CSV Leads
-</h2>
+<h2>Import CSV Leads</h2>
 
-<button
-  class="modal-close"
-  onclick="closeImportModal()">
+<button class="modal-close" onclick="closeImportModal()">
 ×
 </button>
 
 </div>
-
 
 <div class="modal-body">
 
@@ -2191,23 +2088,15 @@ Choose your lead CSV
 Excedere will map your lead data automatically.
 </p>
 
-<label
-  class="choose-file"
-  for="importFile">
+<label class="choose-file" for="importFile">
 Choose CSV File
 </label>
 
-<input
-  id="importFile"
-  type="file"
-  accept=".csv,text/csv">
+<input id="importFile" type="file" accept=".csv,text/csv">
 
 </div>
 
-
-<div
-  id="importPreview"
-  class="import-preview">
+<div id="importPreview" class="import-preview">
 
 <div class="import-stat-grid">
 
@@ -2228,68 +2117,38 @@ Choose CSV File
 
 </div>
 
-
 <div class="import-mode">
 
 <label class="mode-option">
-
-<input
-  type="radio"
-  name="importMode"
-  value="add"
-  checked>
-
-<strong>
-Add New Records
-</strong>
-
+<input type="radio" name="importMode" value="add" checked>
+<strong>Add New Records</strong>
 </label>
-
 
 <label class="mode-option">
-
-<input
-  type="radio"
-  name="importMode"
-  value="replace">
-
-<strong>
-Replace Existing
-</strong>
-
+<input type="radio" name="importMode" value="replace">
+<strong>Replace Existing</strong>
 </label>
 
 </div>
 
-
-<div
-  id="previewNames"
-  class="preview-names">
-</div>
-
-<div
-  id="importStatus"
-  class="import-status">
-</div>
+<div id="previewNames" class="preview-names"></div>
+<div id="importStatus" class="import-status"></div>
 
 </div>
 
 </div>
-
 
 <div class="modal-footer">
 
-<button
-  class="modal-secondary"
-  onclick="closeImportModal()">
+<button class="modal-secondary" onclick="closeImportModal()">
 Cancel
 </button>
 
 <button
-  id="confirmImport"
-  class="modal-primary"
-  onclick="performImport()"
-  disabled>
+id="confirmImport"
+class="modal-primary"
+onclick="performImport()"
+disabled>
 Import Leads
 </button>
 
@@ -2302,41 +2161,243 @@ Import Leads
 
 <script>
 
-
 /* =====================================================
-   STORAGE
+   CONFIG
 ===================================================== */
 
 const LEAD_STORAGE_KEY =
   "excedereCallAssistLeads";
 
-
 const KRISP_FUNCTION_URL =
   "https://kxxoyhagfmexvnzpuwys.supabase.co/functions/v1/latest-krisp-transcript";
 
-
-let currentLeadIndex =
-  0;
-
-
-let currentOutcome =
-  "";
-
-
-let pendingKrispCall =
-  null;
-
-
-let pendingImportRecords =
-  [];
-
-
-let pendingImportHeaders =
-  [];
+let currentLeadIndex = 0;
+let currentOutcome = "";
+let pendingKrispCall = null;
+let pendingImportRecords = [];
+let pendingImportHeaders = [];
 
 
 /* =====================================================
-   FALLBACK LEAD
+   PAIN POINT DEFINITIONS
+===================================================== */
+
+const painPoints = {
+
+  applicants:{
+    label:"Not enough applicants",
+
+    conversation:
+      "you're struggling to get enough suitable applicants"
+  },
+
+  experience:{
+    label:"Wrong experience",
+
+    conversation:
+      "the candidates you're seeing don't have the experience you need"
+  },
+
+  cost:{
+    label:"Candidates too expensive",
+
+    conversation:
+      "the candidates you're finding are coming in above the budget you're comfortable with"
+  },
+
+  overloaded:{
+    label:"Team overloaded",
+
+    conversation:
+      "your existing team is carrying extra workload while the position remains open"
+  },
+
+  slow:{
+    label:"Hiring taking too long",
+
+    conversation:
+      "the role is taking longer than expected to fill"
+  },
+
+  reliability:{
+    label:"Poor reliability",
+
+    conversation:
+      "reliability has been one of the problems with the candidates you've seen"
+  },
+
+  hard:{
+    label:"Hard-to-fill role",
+
+    conversation:
+      "this has been a difficult role to fill"
+  },
+
+  other:{
+    label:"Other hiring issue",
+
+    conversation:
+      "the current hiring process is creating an issue for the business"
+  }
+};
+
+
+/* =====================================================
+   OUTSOURCING CONCERNS
+===================================================== */
+
+const outsourcingConcerns = {
+
+  security:{
+    label:"Security / data concerns",
+
+    response:
+      `That makes sense, particularly if the role handles sensitive business or customer information.
+
+      A remote model doesn't have to mean uncontrolled access. The important thing is understanding what information the person actually needs, how access is managed and what safeguards the role requires.`
+  },
+
+  quality:{
+    label:"Quality concerns",
+
+    response:
+      `That's a fair concern.
+
+      The intention isn't to accept lower quality because somebody is remote. You still decide what experience is required, interview the person and choose whether they're strong enough to join your team.
+
+      The difference is simply that you're able to look at a wider talent pool.`
+  },
+
+  badExperience:{
+    label:"Bad past experience",
+
+    response:
+      `I can understand why that would create a policy.
+
+      The question I'd ask is whether the previous problem was outsourcing itself, or the way that particular provider, employee or engagement was managed.
+
+      One poor experience doesn't necessarily mean every dedicated remote model will operate the same way.`
+  },
+
+  office:{
+    label:"Need people in the office",
+
+    response:
+      `I understand.
+
+      The important distinction is whether the work genuinely requires physical presence, or whether office-based hiring is simply the way the business has traditionally operated.`
+  },
+
+  control:{
+    label:"Management / control",
+
+    response:
+      `That's one of the most common concerns.
+
+      In a dedicated model the person works specifically for your business and your team manages the day-to-day work.
+
+      The aim isn't to take operational control away from you.`
+  },
+
+  culture:{
+    label:"Culture / team fit",
+
+    response:
+      `That's reasonable.
+
+      A remote hire still has to fit the way your business communicates and works.
+
+      That's why the business should still be involved in interviewing and selecting the individual rather than simply being assigned somebody.`
+  },
+
+  compliance:{
+    label:"Compliance / legal",
+
+    response:
+      `That absolutely needs to be understood properly.
+
+      Different roles have different requirements around information, access, location and compliance.
+
+      That's a reason to review the model carefully rather than make assumptions either way.`
+  },
+
+  leadership:{
+    label:"Senior leadership policy",
+
+    response:
+      `Understood.
+
+      If this is a leadership decision, the question is whether the policy is completely fixed or whether leadership would review an alternative if there were a clear business reason to do so.`
+  },
+
+  local:{
+    label:"Prefer local hiring",
+
+    response:
+      `I understand.
+
+      A local hire can absolutely be the right answer.
+
+      The remote model isn't about saying local hiring is wrong — it's about giving you another talent pool when the local market isn't solving the problem quickly enough.`
+  },
+
+  communication:{
+    label:"Communication concerns",
+
+    response:
+      `That's a valid concern.
+
+      Communication ability should be part of the selection process just like technical experience.
+
+      You should be able to interview the person yourself and decide whether their communication is strong enough for your team.`
+  },
+
+  timezone:{
+    label:"Time-zone concerns",
+
+    response:
+      `That makes sense.
+
+      The working schedule has to match what the role actually needs.
+
+      A remote hire only works if the required coverage and overlap can be agreed before anybody is hired.`
+  },
+
+  retention:{
+    label:"Retention / loyalty",
+
+    response:
+      `I understand the concern.
+
+      The important thing is whether the person is joining as a dedicated member of the team with a clear role and expectations, rather than being treated as temporary shared support.
+
+      That is something worth understanding when comparing models.`
+  },
+
+  understanding:{
+    label:"Don't understand the model",
+
+    response:
+      `That's completely reasonable.
+
+      A lot of businesses hear the word outsourcing and assume shared call centres or freelancers.
+
+      What we're discussing is a dedicated person working specifically for your business while the employment structure is handled remotely.`
+  },
+
+  other:{
+    label:"Other concern",
+
+    response:
+      `That's fair.
+
+      Before dismissing the model completely, it's worth understanding whether the concern is something inherent to remote hiring or something that could be addressed through the way the role is structured.`
+  }
+};
+
+
+/* =====================================================
+   DEFAULT LEAD
 ===================================================== */
 
 const defaultLeads = [
@@ -2390,6 +2451,10 @@ const defaultLeads = [
 
   emailHistory:[],
 
+  currentPainPoint:"",
+
+  outsourcingConcern:"",
+
   lastCalled:"",
 
   callCount:0,
@@ -2413,67 +2478,47 @@ const defaultLeads = [
 
 
 /* =====================================================
-   LEAD DEFAULTS
+   DEFAULTS
 ===================================================== */
 
 function ensureLeadDefaults(
   lead
 ){
 
-  lead.phoneHistory ??=
-    [];
+  lead.phoneHistory ??= [];
 
+  lead.emailHistory ??= [];
 
-  lead.emailHistory ??=
-    [];
+  lead.currentPainPoint ??= "";
 
+  lead.outsourcingConcern ??= "";
 
-  lead.callNotes ??=
-    "";
+  lead.callNotes ??= "";
 
+  lead.lastCalled ??= "";
 
-  lead.lastCalled ??=
-    "";
+  lead.callCount ??= 0;
 
+  lead.lastOutcome ??= "";
 
-  lead.callCount ??=
-    0;
+  lead.nextAction ??= "";
 
+  lead.nextFollowUpDate ??= "";
 
-  lead.lastOutcome ??=
-    "";
+  lead.lastCRMNotes ??= "";
 
+  lead.callHistory ??= [];
 
-  lead.nextAction ??=
-    "";
+  lead.krispCall ??= null;
 
-
-  lead.nextFollowUpDate ??=
-    "";
-
-
-  lead.lastCRMNotes ??=
-    "";
-
-
-  lead.callHistory ??=
-    [];
-
-
-  lead.krispCall ??=
-    null;
-
-
-  lead.activeCallStartedAt ??=
-    "";
-
+  lead.activeCallStartedAt ??= "";
 
   return lead;
 }
 
 
 /* =====================================================
-   LOAD / SAVE
+   STORAGE
 ===================================================== */
 
 function loadLeads(){
@@ -2485,14 +2530,12 @@ function loadLeads(){
         LEAD_STORAGE_KEY
       );
 
-
     if(stored){
 
       const parsed =
         JSON.parse(
           stored
         );
-
 
       if(
         Array.isArray(
@@ -2514,7 +2557,6 @@ function loadLeads(){
       error
     );
   }
-
 
   return JSON.parse(
     JSON.stringify(
@@ -2573,26 +2615,11 @@ function escapeHtml(
     value ??
     ""
   )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
 
@@ -2606,7 +2633,6 @@ function makeLeadId(){
     return crypto.randomUUID();
   }
 
-
   return (
     "lead-" +
     Date.now() +
@@ -2615,6 +2641,239 @@ function makeLeadId(){
       .toString(36)
       .slice(2)
   );
+}
+
+
+/* =====================================================
+   PAIN POINT MEMORY
+===================================================== */
+
+function setPainPoint(
+  key
+){
+
+  const lead =
+    getLead();
+
+  if(
+    !painPoints[
+      key
+    ]
+  ){
+
+    return;
+  }
+
+  lead.currentPainPoint =
+    key;
+
+  saveLeads();
+
+  renderCallContext();
+}
+
+
+function setPainAndContinue(
+  key,
+  nextFunction
+){
+
+  setPainPoint(
+    key
+  );
+
+  nextFunction();
+}
+
+
+function getPainLabel(){
+
+  const key =
+    getLead()
+      .currentPainPoint;
+
+  return painPoints[
+    key
+  ]
+    ?.label
+    ||
+    "Not identified yet";
+}
+
+
+function getPainConversation(){
+
+  const key =
+    getLead()
+      .currentPainPoint;
+
+  return painPoints[
+    key
+  ]
+    ?.conversation
+    ||
+    "";
+}
+
+
+/* =====================================================
+   OUTSOURCING CONCERN MEMORY
+===================================================== */
+
+function setOutsourcingConcern(
+  key
+){
+
+  const lead =
+    getLead();
+
+  if(
+    !outsourcingConcerns[
+      key
+    ]
+  ){
+
+    return;
+  }
+
+  lead.outsourcingConcern =
+    key;
+
+  saveLeads();
+
+  renderCallContext();
+}
+
+
+function getConcernLabel(){
+
+  const key =
+    getLead()
+      .outsourcingConcern;
+
+  return outsourcingConcerns[
+    key
+  ]
+    ?.label
+    ||
+    "Not identified yet";
+}
+
+
+function getConcernResponse(){
+
+  const key =
+    getLead()
+      .outsourcingConcern;
+
+  return outsourcingConcerns[
+    key
+  ]
+    ?.response
+    ||
+    "";
+}
+
+
+/* =====================================================
+   CONTEXT DISPLAY
+===================================================== */
+
+function renderCallContext(){
+
+  const pain =
+    getPainLabel();
+
+  const concern =
+    getConcernLabel();
+
+  setText(
+    "memoryPainPoint",
+    pain
+  );
+
+  setText(
+    "memoryConcern",
+    concern
+  );
+
+  setText(
+    "contextPainPoint",
+    pain
+  );
+
+  setText(
+    "contextConcern",
+    concern
+  );
+
+
+  const painSelected =
+    getLead()
+      .currentPainPoint;
+
+  document
+    .querySelectorAll(
+      ".pain-btn"
+    )
+    .forEach(
+      button => {
+
+        button.classList
+          .toggle(
+            "selected",
+            button.dataset.pain ===
+            painSelected
+          );
+      }
+    );
+
+
+  const concernSelected =
+    getLead()
+      .outsourcingConcern;
+
+  document
+    .querySelectorAll(
+      ".concern-btn"
+    )
+    .forEach(
+      button => {
+
+        button.classList
+          .toggle(
+            "selected",
+            button.dataset.concern ===
+            concernSelected
+          );
+      }
+    );
+
+
+  document
+    .getElementById(
+      "memoryPainPoint"
+    )
+    .classList
+    .toggle(
+      "selected",
+      Boolean(
+        painSelected
+      )
+    );
+
+
+  document
+    .getElementById(
+      "memoryConcern"
+    )
+    .classList
+    .toggle(
+      "selected",
+      Boolean(
+        concernSelected
+      )
+    );
 }
 
 
@@ -2636,13 +2895,11 @@ function renderLead(){
     "Unknown"
   );
 
-
   setText(
     "leadTitle",
     lead.title ||
     ""
   );
-
 
   setText(
     "leadCompany",
@@ -2650,13 +2907,11 @@ function renderLead(){
     ""
   );
 
-
   setText(
     "leadRole",
     lead.role ||
     "Not provided"
   );
-
 
   setText(
     "leadLocation",
@@ -2664,13 +2919,11 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "leadJobType",
     lead.jobType ||
     "Not provided"
   );
-
 
   setText(
     "leadPay",
@@ -2704,13 +2957,11 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "intelNeed",
     lead.whatTheyNeed ||
     "Not provided"
   );
-
 
   setText(
     "intelRequirements",
@@ -2718,13 +2969,11 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "intelAngle",
     lead.outsourcingAngle ||
     "Not provided"
   );
-
 
   setText(
     "intelConstraint",
@@ -2732,13 +2981,11 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "intelPriority",
     lead.outreachPriority ||
     "Not provided"
   );
-
 
   setText(
     "intelFit",
@@ -2746,19 +2993,16 @@ function renderLead(){
     "Not provided"
   );
 
-
   setText(
     "intelStage",
     lead.pipelineStage ||
     "Not provided"
   );
 
-
   setText(
     "recordCounter",
     `${currentLeadIndex + 1} of ${leads.length}`
   );
-
 
   setText(
     "callTitle",
@@ -2774,6 +3018,8 @@ function renderLead(){
 
   renderActivityHistory();
 
+  renderCallContext();
+
   renderAttachedKrisp();
 
   resetCallWorkspace();
@@ -2781,7 +3027,7 @@ function renderLead(){
 
 
 /* =====================================================
-   PHONE
+   PHONE / EMAIL
 ===================================================== */
 
 function renderPhone(
@@ -2796,23 +3042,19 @@ function renderPhone(
       textId
     );
 
-
   const link =
     document.getElementById(
       linkId
     );
-
 
   if(number){
 
     text.textContent =
       number;
 
-
     text.classList.remove(
       "empty-value"
     );
-
 
     link.href =
       "tel:" +
@@ -2824,17 +3066,14 @@ function renderPhone(
           ""
         );
 
-
   }else{
 
     text.textContent =
       emptyText;
 
-
     text.classList.add(
       "empty-value"
     );
-
 
     link.href =
       "#";
@@ -2842,38 +3081,29 @@ function renderPhone(
 }
 
 
-/* =====================================================
-   EMAIL
-===================================================== */
-
 function renderEmail(){
 
   const lead =
     getLead();
-
 
   const email =
     document.getElementById(
       "leadEmail"
     );
 
-
   if(lead.email){
 
     email.textContent =
       lead.email;
 
-
     email.classList.remove(
       "empty-value"
     );
-
 
   }else{
 
     email.textContent =
       "Add email address";
-
 
     email.classList.add(
       "empty-value"
@@ -2893,18 +3123,15 @@ function editPhone(
   const lead =
     getLead();
 
-
   const oldNumber =
     lead[field] ||
     "";
-
 
   const updated =
     prompt(
       "Enter number:",
       oldNumber
     );
-
 
   if(
     updated === null
@@ -2913,10 +3140,8 @@ function editPhone(
     return;
   }
 
-
   const newNumber =
     updated.trim();
-
 
   if(
     newNumber ===
@@ -2925,7 +3150,6 @@ function editPhone(
 
     return;
   }
-
 
   lead.phoneHistory.push({
 
@@ -2940,10 +3164,8 @@ function editPhone(
         .toISOString()
   });
 
-
   lead[field] =
     newNumber;
-
 
   saveLeads();
 
@@ -2956,14 +3178,12 @@ function editEmail(){
   const lead =
     getLead();
 
-
   const updated =
     prompt(
       "Enter email address:",
       lead.email ||
       ""
     );
-
 
   if(
     updated === null
@@ -2972,10 +3192,8 @@ function editEmail(){
     return;
   }
 
-
   const newEmail =
     updated.trim();
-
 
   if(
     newEmail &&
@@ -2989,14 +3207,11 @@ function editEmail(){
       "Please enter a valid email address."
     );
 
-
     return;
   }
 
-
   lead.email =
     newEmail;
-
 
   saveLeads();
 
@@ -3005,7 +3220,7 @@ function editEmail(){
 
 
 /* =====================================================
-   CALL TITLE
+   TITLE / NAVIGATION
 ===================================================== */
 
 function buildCallTitle(
@@ -3016,7 +3231,6 @@ function buildCallTitle(
 
     return "Vacancy Call";
   }
-
 
   return role
     .replace(
@@ -3032,20 +3246,14 @@ function buildCallTitle(
 }
 
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
 function resetPanelScroll(){
 
-  const panel =
-    document.getElementById(
+  document
+    .getElementById(
       "leftPanel"
-    );
-
-
-  panel.scrollTop =
-    0;
+    )
+    .scrollTop =
+      0;
 }
 
 
@@ -3057,7 +3265,6 @@ function nextRecord(){
     )
     %
     leads.length;
-
 
   resetPanelScroll();
 
@@ -3074,7 +3281,6 @@ function previousRecord(){
     )
     %
     leads.length;
-
 
   resetPanelScroll();
 
@@ -3097,7 +3303,6 @@ function deriveTimezone(
     )
       .toLowerCase();
 
-
   if(
     value.includes(
       "california"
@@ -3117,7 +3322,6 @@ function deriveTimezone(
         "Pacific Time"
     };
   }
-
 
   if(
     value.includes(
@@ -3139,7 +3343,6 @@ function deriveTimezone(
     };
   }
 
-
   if(
     value.includes(
       "texas"
@@ -3155,7 +3358,6 @@ function deriveTimezone(
         "Central Time"
     };
   }
-
 
   return {
 
@@ -3173,7 +3375,6 @@ function updateTime(){
   const lead =
     getLead();
 
-
   try{
 
     const time =
@@ -3184,23 +3385,19 @@ function updateTime(){
             lead.timezone ||
             "America/Los_Angeles",
 
-          hour:
-            "numeric",
+          hour:"numeric",
 
-          minute:
-            "2-digit"
+          minute:"2-digit"
         }
       )
       .format(
         new Date()
       );
 
-
     setText(
       "localTime",
       `${time} ${lead.timezoneLabel || ""}`
     );
-
 
   }catch{
 
@@ -3227,7 +3424,6 @@ const searchInput =
     "leadSearch"
   );
 
-
 const searchResults =
   document.getElementById(
     "searchResults"
@@ -3243,10 +3439,8 @@ searchInput.addEventListener(
         .trim()
         .toLowerCase();
 
-
     searchResults.innerHTML =
       "";
-
 
     if(!query){
 
@@ -3256,10 +3450,8 @@ searchInput.addEventListener(
           "open"
         );
 
-
       return;
     }
-
 
     const matches =
       leads.filter(
@@ -3282,7 +3474,6 @@ searchInput.addEventListener(
               )
               .toLowerCase();
 
-
           return haystack.includes(
             query
           );
@@ -3298,10 +3489,8 @@ searchInput.addEventListener(
             "button"
           );
 
-
         button.className =
           "search-result";
-
 
         button.innerHTML =
           `
@@ -3316,7 +3505,6 @@ searchInput.addEventListener(
           </small>
           `;
 
-
         button.onclick =
           () => {
 
@@ -3327,10 +3515,8 @@ searchInput.addEventListener(
                   lead.id
               );
 
-
             searchInput.value =
               "";
-
 
             searchResults
               .classList
@@ -3338,19 +3524,14 @@ searchInput.addEventListener(
                 "open"
               );
 
-
-            resetPanelScroll();
-
             renderLead();
           };
-
 
         searchResults.appendChild(
           button
         );
       }
     );
-
 
     searchResults
       .classList
@@ -3371,7 +3552,6 @@ document
       searchInput.value =
         "";
 
-
       searchResults
         .classList
         .remove(
@@ -3381,14 +3561,13 @@ document
 
 
 /* =====================================================
-   EMAIL COMPOSER
+   EMAIL
 ===================================================== */
 
 function openEmailComposer(){
 
   const lead =
     getLead();
-
 
   const params =
     new URLSearchParams({
@@ -3409,7 +3588,6 @@ function openEmailComposer(){
         lead.email ||
         ""
     });
-
 
   window.open(
     `email.html?${params.toString()}`,
@@ -3432,7 +3610,6 @@ function daysSince(
     return null;
   }
 
-
   return Math.floor(
     (
       Date.now() -
@@ -3452,13 +3629,11 @@ function renderCRMStatus(){
   const lead =
     getLead();
 
-
   setText(
     "statusCallCount",
     lead.callCount ||
     0
   );
-
 
   setText(
     "statusLastOutcome",
@@ -3466,20 +3641,17 @@ function renderCRMStatus(){
     "None"
   );
 
-
   setText(
     "statusNextAction",
     lead.nextAction ||
     "None"
   );
 
-
   setText(
     "statusFollowUp",
     lead.nextFollowUpDate ||
     "None"
   );
-
 
   if(
     lead.lastCalled
@@ -3493,12 +3665,10 @@ function renderCRMStatus(){
         .toLocaleDateString()
     );
 
-
     const days =
       daysSince(
         lead.lastCalled
       );
-
 
     setText(
       "statusDaysSince",
@@ -3507,7 +3677,6 @@ function renderCRMStatus(){
         : `${days} days`
     );
 
-
   }else{
 
     setText(
@@ -3515,23 +3684,19 @@ function renderCRMStatus(){
       "Never"
     );
 
-
     setText(
       "statusDaysSince",
       "—"
     );
   }
 
-
   const pill =
     document.getElementById(
       "followStatus"
     );
 
-
   pill.className =
     "status-pill neutral";
-
 
   if(
     !lead.lastCalled
@@ -3540,10 +3705,8 @@ function renderCRMStatus(){
     pill.textContent =
       "NEW";
 
-
     return;
   }
-
 
   if(
     lead.nextFollowUpDate
@@ -3552,7 +3715,6 @@ function renderCRMStatus(){
     const today =
       new Date();
 
-
     today.setHours(
       0,
       0,
@@ -3560,12 +3722,10 @@ function renderCRMStatus(){
       0
     );
 
-
     const due =
       new Date(
         `${lead.nextFollowUpDate}T00:00:00`
       );
-
 
     const difference =
       Math.ceil(
@@ -3577,7 +3737,6 @@ function renderCRMStatus(){
         86400000
       );
 
-
     if(
       difference < 0
     ){
@@ -3585,14 +3744,11 @@ function renderCRMStatus(){
       pill.className =
         "status-pill red";
 
-
       pill.textContent =
         "OVERDUE";
 
-
       return;
     }
-
 
     if(
       difference <= 2
@@ -3601,19 +3757,15 @@ function renderCRMStatus(){
       pill.className =
         "status-pill amber";
 
-
       pill.textContent =
         "DUE SOON";
-
 
       return;
     }
   }
 
-
   pill.className =
     "status-pill green";
-
 
   pill.textContent =
     "CURRENT";
@@ -3629,16 +3781,13 @@ function renderActivityHistory(){
   const lead =
     getLead();
 
-
   const area =
     document.getElementById(
       "callHistory"
     );
 
-
   area.innerHTML =
     "";
-
 
   const calls =
     (
@@ -3648,8 +3797,7 @@ function renderActivityHistory(){
       .map(
         entry => ({
 
-          type:
-            "call",
+          type:"call",
 
           timestamp:
             entry.timestamp,
@@ -3658,7 +3806,6 @@ function renderActivityHistory(){
             entry
         })
       );
-
 
   const emails =
     (
@@ -3668,8 +3815,7 @@ function renderActivityHistory(){
       .map(
         entry => ({
 
-          type:
-            "email",
+          type:"email",
 
           timestamp:
             entry.timestamp,
@@ -3678,7 +3824,6 @@ function renderActivityHistory(){
             entry
         })
       );
-
 
   const activity =
     [
@@ -3696,7 +3841,6 @@ function renderActivityHistory(){
           )
       );
 
-
   if(
     !activity.length
   ){
@@ -3708,10 +3852,8 @@ function renderActivityHistory(){
       </div>
       `;
 
-
     return;
   }
-
 
   activity.forEach(
     item => {
@@ -3721,7 +3863,6 @@ function renderActivityHistory(){
           "div"
         );
 
-
       div.className =
         item.type ===
         "email"
@@ -3730,7 +3871,6 @@ function renderActivityHistory(){
           :
           "history-entry";
 
-
       if(
         item.type ===
         "email"
@@ -3738,7 +3878,6 @@ function renderActivityHistory(){
 
         const entry =
           item.data;
-
 
         div.innerHTML =
           `
@@ -3771,12 +3910,10 @@ function renderActivityHistory(){
           </div>
           `;
 
-
       }else{
 
         const entry =
           item.data;
-
 
         div.innerHTML =
           `
@@ -3805,22 +3942,45 @@ function renderActivityHistory(){
           </div>
 
           ${
+            entry.painPoint
+            ?
+            `<div class="history-notes">
+            Pain point:
+            ${escapeHtml(
+              entry.painPoint
+            )}
+            </div>`
+            :
+            ""
+          }
+
+          ${
+            entry.outsourcingConcern
+            ?
+            `<div class="history-notes">
+            Concern:
+            ${escapeHtml(
+              entry.outsourcingConcern
+            )}
+            </div>`
+            :
+            ""
+          }
+
+          ${
             entry.liveNotes
             ?
-            `
-            <div class="history-notes">
+            `<div class="history-notes">
             Notes:
             ${escapeHtml(
               entry.liveNotes
             )}
-            </div>
-            `
+            </div>`
             :
             ""
           }
           `;
       }
-
 
       area.appendChild(
         div
@@ -3839,7 +3999,6 @@ function getSupabaseAccessToken(){
   const projectRef =
     "kxxoyhagfmexvnzpuwys";
 
-
   for(
     let i = 0;
     i < localStorage.length;
@@ -3851,7 +4010,6 @@ function getSupabaseAccessToken(){
         i
       );
 
-
     if(
       !key ||
       !key.includes(
@@ -3862,7 +4020,6 @@ function getSupabaseAccessToken(){
       continue;
     }
 
-
     try{
 
       const parsed =
@@ -3872,14 +4029,12 @@ function getSupabaseAccessToken(){
           )
         );
 
-
       if(
         parsed?.access_token
       ){
 
         return parsed.access_token;
       }
-
 
       if(
         parsed
@@ -3892,17 +4047,15 @@ function getSupabaseAccessToken(){
           .access_token;
       }
 
-
     }catch{}
   }
-
 
   return null;
 }
 
 
 /* =====================================================
-   KRISP MATCHING
+   KRISP
 ===================================================== */
 
 function normaliseMatchText(
@@ -3947,7 +4100,6 @@ function importantWords(
       "full"
     ]);
 
-
   return normaliseMatchText(
     value
   )
@@ -3973,10 +4125,8 @@ function calculateKrispMatch(
   let score =
     0;
 
-
   const reasons =
     [];
-
 
   const combined =
     normaliseMatchText(
@@ -3992,12 +4142,10 @@ function calculateKrispMatch(
       }`
     );
 
-
   const firstName =
     normaliseMatchText(
       lead.firstName
     );
-
 
   if(
     firstName
@@ -4010,18 +4158,15 @@ function calculateKrispMatch(
     score +=
       20;
 
-
     reasons.push(
       `Name "${lead.firstName}" found`
     );
   }
 
-
   const companyWords =
     importantWords(
       lead.company
     );
-
 
   const matchingCompanyWords =
     companyWords.filter(
@@ -4030,7 +4175,6 @@ function calculateKrispMatch(
           word
         )
     );
-
 
   if(
     matchingCompanyWords.length
@@ -4043,18 +4187,15 @@ function calculateKrispMatch(
         10
       );
 
-
     reasons.push(
       `Company match: ${matchingCompanyWords.join(", ")}`
     );
   }
 
-
   const roleWords =
     importantWords(
       lead.role
     );
-
 
   const roleMatches =
     roleWords.filter(
@@ -4063,7 +4204,6 @@ function calculateKrispMatch(
           word
         )
     );
-
 
   if(
     roleMatches.length
@@ -4076,12 +4216,10 @@ function calculateKrispMatch(
         5
       );
 
-
     reasons.push(
       `Role match: ${roleMatches.join(", ")}`
     );
   }
-
 
   const callStarted =
     lead.activeCallStartedAt
@@ -4091,7 +4229,6 @@ function calculateKrispMatch(
       )
       :
       null;
-
 
   const krispStarted =
     call.startedAt ||
@@ -4103,7 +4240,6 @@ function calculateKrispMatch(
       )
       :
       null;
-
 
   if(
     callStarted
@@ -4127,7 +4263,6 @@ function calculateKrispMatch(
       /
       60000;
 
-
     if(
       minutes <= 15
     ){
@@ -4135,11 +4270,9 @@ function calculateKrispMatch(
       score +=
         45;
 
-
       reasons.push(
         `Call timing within ${Math.round(minutes)} minutes`
       );
-
 
     }else if(
       minutes <= 30
@@ -4148,11 +4281,9 @@ function calculateKrispMatch(
       score +=
         30;
 
-
       reasons.push(
         `Call timing within ${Math.round(minutes)} minutes`
       );
-
 
     }else if(
       minutes <= 60
@@ -4161,11 +4292,9 @@ function calculateKrispMatch(
       score +=
         15;
 
-
       reasons.push(
         `Call timing within ${Math.round(minutes)} minutes`
       );
-
 
     }else{
 
@@ -4174,7 +4303,6 @@ function calculateKrispMatch(
       );
     }
 
-
   }else{
 
     reasons.push(
@@ -4182,13 +4310,11 @@ function calculateKrispMatch(
     );
   }
 
-
   score =
     Math.min(
       100,
       score
     );
-
 
   if(
     score >= 60
@@ -4208,7 +4334,6 @@ function calculateKrispMatch(
     };
   }
 
-
   if(
     score >= 30
   ){
@@ -4226,7 +4351,6 @@ function calculateKrispMatch(
       reasons
     };
   }
-
 
   return {
 
@@ -4252,12 +4376,10 @@ function renderMatchAssist(
       "krispMatchBadge"
     );
 
-
   const details =
     document.getElementById(
       "krispMatchDetails"
     );
-
 
   if(
     !match
@@ -4266,29 +4388,20 @@ function renderMatchAssist(
     badge.className =
       "match-badge possible";
 
-
     badge.textContent =
       "Waiting";
 
-
     details.innerHTML =
-      `
-      Click <strong>Check Latest Krisp Call</strong>
-      after Krisp processes the call.
-      `;
-
+      `Click <strong>Check Latest Krisp Call</strong> after Krisp processes the call.`;
 
     return;
   }
 
-
   badge.className =
     `match-badge ${match.className}`;
 
-
   badge.textContent =
     `${match.label} · ${match.score}%`;
-
 
   details.innerHTML =
     match.reasons
@@ -4302,40 +4415,30 @@ function renderMatchAssist(
 }
 
 
-/* =====================================================
-   ATTACHED KRISP
-===================================================== */
-
 function renderAttachedKrisp(){
 
   pendingKrispCall =
     null;
 
-
   renderMatchAssist(
     null
   );
 
-
   const lead =
     getLead();
-
 
   const button =
     document.getElementById(
       "attachKrispButton"
     );
 
-
   button.style.display =
     "none";
-
 
   setText(
     "krispStatus",
     ""
   );
-
 
   if(
     !lead.krispCall
@@ -4346,38 +4449,31 @@ function renderAttachedKrisp(){
       "No Krisp call attached"
     );
 
-
     setText(
       "krispMeta",
       "No Krisp call attached to this lead."
     );
-
 
     setText(
       "krispTranscript",
       "No transcript attached."
     );
 
-
     setText(
       "krispNotes",
       "No Krisp notes attached."
     );
 
-
     return;
   }
 
-
   const call =
     lead.krispCall;
-
 
   setText(
     "krispSummary",
     "Krisp call attached"
   );
-
 
   setText(
     "krispMeta",
@@ -4385,20 +4481,17 @@ function renderAttachedKrisp(){
     "Krisp call"
   );
 
-
   setText(
     "krispTranscript",
     call.transcriptText ||
     "No transcript available."
   );
 
-
   setText(
     "krispNotes",
     call.krispNotes ||
     "No Krisp notes available."
   );
-
 
   const match =
     call.match ||
@@ -4407,35 +4500,25 @@ function renderAttachedKrisp(){
       call
     );
 
-
   call.match =
     match;
-
 
   renderMatchAssist(
     match
   );
 
-
   saveLeads();
-
 
   document
     .getElementById(
       "krispStatus"
     )
     .innerHTML =
-      `
-      <span class="good">
+      `<span class="good">
       Attached to ${escapeHtml(lead.firstName)}.
-      </span>
-      `;
+      </span>`;
 }
 
-
-/* =====================================================
-   GET LATEST KRISP
-===================================================== */
 
 async function loadKrispData(){
 
@@ -4444,44 +4527,34 @@ async function loadKrispData(){
       "krispStatus"
     );
 
-
   const attachButton =
     document.getElementById(
       "attachKrispButton"
     );
 
-
   pendingKrispCall =
     null;
-
 
   attachButton.style.display =
     "none";
 
-
   status.textContent =
     "Checking latest Krisp call...";
 
-
   const token =
     getSupabaseAccessToken();
-
 
   if(
     !token
   ){
 
     status.innerHTML =
-      `
-      <span class="bad">
+      `<span class="bad">
       No active Excedere login session found.
-      </span>
-      `;
-
+      </span>`;
 
     return;
   }
-
 
   try{
 
@@ -4497,10 +4570,8 @@ async function loadKrispData(){
         }
       );
 
-
     const result =
       await response.json();
-
 
     if(
       !response.ok
@@ -4514,7 +4585,6 @@ async function loadKrispData(){
       );
     }
 
-
     if(
       !result.transcript
     ){
@@ -4522,14 +4592,11 @@ async function loadKrispData(){
       status.textContent =
         "No Krisp transcript available.";
 
-
       return;
     }
 
-
     const transcript =
       result.transcript;
-
 
     const meetingId =
       transcript.meeting_id
@@ -4539,7 +4606,6 @@ async function loadKrispData(){
       transcript.id
       ||
       "";
-
 
     pendingKrispCall = {
 
@@ -4577,28 +4643,23 @@ async function loadKrispData(){
           .toISOString()
     };
 
-
     const match =
       calculateKrispMatch(
         getLead(),
         pendingKrispCall
       );
 
-
     pendingKrispCall.match =
       match;
-
 
     renderMatchAssist(
       match
     );
 
-
     setText(
       "krispMeta",
       pendingKrispCall.meetingTitle
     );
-
 
     setText(
       "krispTranscript",
@@ -4606,13 +4667,11 @@ async function loadKrispData(){
       "Transcript empty."
     );
 
-
     setText(
       "krispNotes",
       pendingKrispCall.krispNotes ||
       "No Krisp notes available."
     );
-
 
     const alreadyAttached =
       leads.find(
@@ -4622,7 +4681,6 @@ async function loadKrispData(){
           lead.krispCall.meetingId ===
           meetingId
       );
-
 
     if(
       alreadyAttached
@@ -4636,18 +4694,14 @@ async function loadKrispData(){
           :
           `Already attached to ${alreadyAttached.firstName}.`;
 
-
       return;
     }
-
 
     attachButton.textContent =
       `Attach This Call to ${getLead().firstName}`;
 
-
     attachButton.style.display =
       "block";
-
 
     status.textContent =
       match.className ===
@@ -4662,31 +4716,23 @@ async function loadKrispData(){
           :
           "Low confidence. Verify carefully before attaching.";
 
-
   }catch(error){
 
     status.innerHTML =
-      `
-      <span class="bad">
+      `<span class="bad">
       ${escapeHtml(
         error.message ||
         "Unable to load Krisp data."
       )}
-      </span>
-      `;
+      </span>`;
   }
 }
 
-
-/* =====================================================
-   ATTACH KRISP
-===================================================== */
 
 function attachKrispToCurrentLead(){
 
   const lead =
     getLead();
-
 
   if(
     !pendingKrispCall
@@ -4694,7 +4740,6 @@ function attachKrispToCurrentLead(){
 
     return;
   }
-
 
   if(
     pendingKrispCall
@@ -4708,7 +4753,6 @@ function attachKrispToCurrentLead(){
         `This is a low confidence match for ${lead.firstName}. Attach anyway?`
       );
 
-
     if(
       !confirmed
     ){
@@ -4716,7 +4760,6 @@ function attachKrispToCurrentLead(){
       return;
     }
   }
-
 
   lead.krispCall = {
 
@@ -4727,7 +4770,6 @@ function attachKrispToCurrentLead(){
         .toISOString()
   };
 
-
   saveLeads();
 
   renderAttachedKrisp();
@@ -4735,7 +4777,7 @@ function attachKrispToCurrentLead(){
 
 
 /* =====================================================
-   CALL NOTES
+   NOTES
 ===================================================== */
 
 document
@@ -4750,14 +4792,13 @@ document
         .callNotes =
           event.target.value;
 
-
       saveLeads();
     }
   );
 
 
 /* =====================================================
-   RESET CALL WORKSPACE
+   RESET
 ===================================================== */
 
 function resetCallWorkspace(){
@@ -4765,54 +4806,41 @@ function resetCallWorkspace(){
   const lead =
     getLead();
 
-
   currentOutcome =
     "";
-
 
   setText(
     "stageText",
     "Follow the script and select the best response."
   );
 
-
   setText(
     "scriptLabel",
     "Before you call"
   );
-
 
   setText(
     "stepLabel",
     "Ready"
   );
 
-
   document
     .getElementById(
       "scriptText"
     )
     .innerHTML =
-      `
-      Review the lead information, then press
+      `Review the lead information, then press
       <strong>Start Call</strong>
-      when you're ready.
-      `;
-
+      when you're ready.`;
 
   document
     .getElementById(
       "responses"
     )
     .innerHTML =
-      `
-      <button
-        class="response-btn"
-        disabled>
+      `<button class="response-btn" disabled>
       Start the call first
-      </button>
-      `;
-
+      </button>`;
 
   document
     .getElementById(
@@ -4822,7 +4850,6 @@ function resetCallWorkspace(){
       lead.callNotes ||
       "";
 
-
   document
     .getElementById(
       "nextAction"
@@ -4830,7 +4857,6 @@ function resetCallWorkspace(){
     .value =
       lead.nextAction ||
       "";
-
 
   document
     .getElementById(
@@ -4840,7 +4866,6 @@ function resetCallWorkspace(){
       lead.nextFollowUpDate ||
       "";
 
-
   document
     .getElementById(
       "crmNotesOutput"
@@ -4848,7 +4873,6 @@ function resetCallWorkspace(){
     .value =
       lead.lastCRMNotes ||
       "";
-
 
   document
     .querySelectorAll(
@@ -4862,12 +4886,10 @@ function resetCallWorkspace(){
           )
     );
 
-
   setText(
     "saveCallStatus",
     ""
   );
-
 
   setStage(
     0
@@ -4884,19 +4906,15 @@ function startCall(){
   const lead =
     getLead();
 
-
   lead.activeCallStartedAt =
     new Date()
       .toISOString();
 
-
   saveLeads();
-
 
   setStage(
     1
   );
-
 
   showScript(
     "Opening",
@@ -4917,7 +4935,6 @@ function startCall(){
     and then you can decide whether we continue?
     `
   );
-
 
   showResponses([
 
@@ -4953,20 +4970,10 @@ function startCall(){
 }
 
 
-/* =====================================================
-   10 SECOND REASON
-===================================================== */
-
 function tenSecondReason(){
 
   const lead =
     getLead();
-
-
-  setStage(
-    1
-  );
-
 
   showScript(
     "Why I'm Calling",
@@ -4981,21 +4988,51 @@ function tenSecondReason(){
     or not producing the right candidates.
     <br><br>
 
-    I'm not asking you to make any decision now.
+    I'm not asking you to make a decision now.
     I just wanted to understand how the search is going.
     `
   );
 
-
   showResponses([
 
     [
-      "Search has been difficult",
-      searchDifficulty
+      "Not enough applicants",
+      () =>
+        setPainAndContinue(
+          "applicants",
+          applicantProblem
+        )
     ],
 
     [
-      "Search is going fine",
+      "Wrong experience",
+      () =>
+        setPainAndContinue(
+          "experience",
+          experienceProblem
+        )
+    ],
+
+    [
+      "Candidates too expensive",
+      () =>
+        setPainAndContinue(
+          "cost",
+          costProblem
+        )
+    ],
+
+    [
+      "Taking too long",
+      () =>
+        setPainAndContinue(
+          "slow",
+          currentWorkloadQuestion
+        )
+    ],
+
+    [
+      "It's going fine",
       searchGoingFine
     ],
 
@@ -5004,14 +5041,6 @@ function tenSecondReason(){
       () =>
         showObjection(
           "internal"
-        )
-    ],
-
-    [
-      "Role is already filled",
-      () =>
-        showObjection(
-          "filled"
         )
     ]
   ]);
@@ -5022,106 +5051,23 @@ function tenSecondReason(){
    DISCOVERY
 ===================================================== */
 
-function searchDifficulty(){
+function applicantProblem(){
 
   setStage(
     2
   );
 
-
   showScript(
     "Discovery",
     `
-    Understood.
+    So the issue is getting enough suitable people
+    into the process.
     <br><br>
 
-    What's been the biggest issue so far —
-    finding enough applicants,
-    finding people with the right experience,
-    or getting someone at the right cost?
+    While you're still trying to fill the role,
+    who's carrying the work?
     `
   );
-
-
-  showResponses([
-
-    [
-      "Not enough applicants",
-      applicantProblem
-    ],
-
-    [
-      "Wrong experience",
-      experienceProblem
-    ],
-
-    [
-      "Too expensive",
-      costProblem
-    ],
-
-    [
-      "Something else",
-      currentWorkloadQuestion
-    ]
-  ]);
-}
-
-
-function searchGoingFine(){
-
-  setStage(
-    2
-  );
-
-
-  showScript(
-    "Discovery",
-    `
-    That's good.
-    <br><br>
-
-    Are you already seeing candidates
-    you'd genuinely be comfortable hiring,
-    or are you still keeping your options open?
-    `
-  );
-
-
-  showResponses([
-
-    [
-      "Good candidates",
-      goodCandidateBranch
-    ],
-
-    [
-      "Still open",
-      currentWorkloadQuestion
-    ],
-
-    [
-      "Still early",
-      currentWorkloadQuestion
-    ]
-  ]);
-}
-
-
-function goodCandidateBranch(){
-
-  showScript(
-    "Discovery",
-    `
-    Makes sense.
-    <br><br>
-
-    While you're still deciding,
-    who's covering the work the new hire
-    would normally be responsible for?
-    `
-  );
-
 
   showResponses([
 
@@ -5143,58 +5089,15 @@ function goodCandidateBranch(){
 }
 
 
-function applicantProblem(){
-
-  setStage(
-    3
-  );
-
-
-  showScript(
-    "Qualification",
-    `
-    So the issue isn't necessarily the role itself —
-    it's getting enough suitable people into the process.
-    <br><br>
-
-    Who's carrying the work while you're trying to fill it?
-    `
-  );
-
-
-  showResponses([
-
-    [
-      "Existing team",
-      workloadPressureQuestion
-    ],
-
-    [
-      "Owner / manager",
-      workloadPressureQuestion
-    ],
-
-    [
-      "Nobody yet",
-      workloadPressureQuestion
-    ]
-  ]);
-}
-
-
 function experienceProblem(){
 
   setStage(
-    3
+    2
   );
 
-
   showScript(
-    "Qualification",
+    "Discovery",
     `
-    Understood.
-    <br><br>
-
     What are candidates missing most —
     technical experience,
     industry knowledge,
@@ -5202,7 +5105,6 @@ function experienceProblem(){
     or something else?
     `
   );
-
 
   showResponses([
 
@@ -5218,7 +5120,11 @@ function experienceProblem(){
 
     [
       "Reliability",
-      currentWorkloadQuestion
+      () =>
+        setPainAndContinue(
+          "reliability",
+          currentWorkloadQuestion
+        )
     ],
 
     [
@@ -5232,23 +5138,21 @@ function experienceProblem(){
 function costProblem(){
 
   setStage(
-    3
+    2
   );
 
-
   showScript(
-    "Qualification",
+    "Discovery",
     `
     Understood.
     <br><br>
 
-    Is the main issue that the people you're finding
+    Is the main issue that suitable candidates
     are above the budget,
     or that you're not seeing enough value
     for what they're asking?
     `
   );
-
 
   showResponses([
 
@@ -5265,12 +5169,49 @@ function costProblem(){
 }
 
 
+function searchGoingFine(){
+
+  setStage(
+    2
+  );
+
+  showScript(
+    "Discovery",
+    `
+    That's good.
+    <br><br>
+
+    Are you already seeing people
+    you'd genuinely be comfortable hiring,
+    or are you still keeping your options open?
+    `
+  );
+
+  showResponses([
+
+    [
+      "Good candidates",
+      currentWorkloadQuestion
+    ],
+
+    [
+      "Still open",
+      currentWorkloadQuestion
+    ],
+
+    [
+      "Still early",
+      currentWorkloadQuestion
+    ]
+  ]);
+}
+
+
 function currentWorkloadQuestion(){
 
   setStage(
     3
   );
-
 
   showScript(
     "Current Workload",
@@ -5280,7 +5221,6 @@ function currentWorkloadQuestion(){
     this person would normally be doing?
     `
   );
-
 
   showResponses([
 
@@ -5313,22 +5253,24 @@ function workloadPressureQuestion(){
     3
   );
 
-
   showScript(
     "Impact",
     `
     And is that arrangement working comfortably,
-    or is it starting to create extra workload,
+    or is it creating extra workload,
     delays or pressure elsewhere?
     `
   );
 
-
   showResponses([
 
     [
-      "Creating pressure",
-      alternativePermission
+      "Team is overloaded",
+      () =>
+        setPainAndContinue(
+          "overloaded",
+          alternativePermission
+        )
     ],
 
     [
@@ -5345,7 +5287,7 @@ function workloadPressureQuestion(){
 
 
 /* =====================================================
-   SOLUTION PERMISSION
+   PERMISSION / SOLUTION
 ===================================================== */
 
 function alternativePermission(){
@@ -5354,20 +5296,15 @@ function alternativePermission(){
     4
   );
 
-
   showScript(
     "Permission",
     `
-    That's helpful.
-    <br><br>
-
     Would you be open to looking at another way
     of filling the role
     if it gave you access to experienced people
     without relying only on the local hiring market?
     `
   );
-
 
   showResponses([
 
@@ -5387,10 +5324,10 @@ function alternativePermission(){
     ],
 
     [
-      "No",
+      "We don't outsource",
       () =>
-        setOutcome(
-          "Not interested"
+        showObjection(
+          "policy"
         )
     ]
   ]);
@@ -5403,10 +5340,8 @@ function explainSolution(){
     4
   );
 
-
   const lead =
     getLead();
-
 
   showScript(
     "Solution",
@@ -5417,17 +5352,16 @@ function explainSolution(){
 
     For a role like
     <strong>${escapeHtml(lead.role)}</strong>,
-    that means you can look beyond the local candidate pool
-    while still choosing who joins your team
-    and keeping control of how the role is managed.
+    you can look beyond the local candidate pool
+    while still deciding who joins the team
+    and how the work is managed.
     <br><br>
 
-    The point isn't to replace a good local hire.
-    It's to give you another option
-    if the current search isn't delivering what you need.
+    It isn't about saying a local hire is wrong.
+    It's simply another option when the current search
+    isn't solving the problem.
     `
   );
-
 
   showResponses([
 
@@ -5437,17 +5371,20 @@ function explainSolution(){
     ],
 
     [
+      "We don't outsource",
+      () =>
+        showObjection(
+          "policy"
+        )
+    ],
+
+    [
       "What would it cost?",
       costAnswer
     ],
 
     [
-      "Is this outsourcing?",
-      outsourcingAnswer
-    ],
-
-    [
-      "Send me information",
+      "Send information",
       informationBeforeSend
     ]
   ]);
@@ -5460,18 +5397,14 @@ function costAnswer(){
     "Cost Question",
     `
     It depends on the experience level,
-    working arrangement and location you need.
+    schedule and working arrangement you need.
     <br><br>
 
-    Rather than throw out a number that may not apply,
+    Rather than give you a number that may not apply,
     we'd first understand the role properly
-    and then show you the available options and costs.
-    <br><br>
-
-    That's what the short consultation is for.
+    and then show you the relevant options and costs.
     `
   );
-
 
   showResponses([
 
@@ -5488,37 +5421,476 @@ function costAnswer(){
 }
 
 
-function outsourcingAnswer(){
+/* =====================================================
+   OUTSOURCING POLICY DRILL-DOWN
+===================================================== */
+
+function outsourcingReasonSelector(){
 
   showScript(
-    "Outsourcing Question",
+    "Outsourcing Policy",
     `
-    Yes — but it's a dedicated model.
+    Understood.
     <br><br>
 
-    The person works specifically for your business.
-    You're involved in selecting them,
-    you manage the day-to-day work,
-    and they become an extension of your team.
+    That's usually a policy for a reason.
+    <br><br>
+
+    What is the main concern behind it?
     `
   );
-
 
   showResponses([
 
     [
-      "Okay, continue",
+      "Security / data",
+      () =>
+        chooseConcern(
+          "security"
+        )
+    ],
+
+    [
+      "Quality concerns",
+      () =>
+        chooseConcern(
+          "quality"
+        )
+    ],
+
+    [
+      "Bad past experience",
+      () =>
+        chooseConcern(
+          "badExperience"
+        )
+    ],
+
+    [
+      "Need people in office",
+      () =>
+        chooseConcern(
+          "office"
+        )
+    ],
+
+    [
+      "Management / control",
+      () =>
+        chooseConcern(
+          "control"
+        )
+    ],
+
+    [
+      "Culture / team fit",
+      () =>
+        chooseConcern(
+          "culture"
+        )
+    ],
+
+    [
+      "Compliance / legal",
+      () =>
+        chooseConcern(
+          "compliance"
+        )
+    ],
+
+    [
+      "Leadership policy",
+      () =>
+        chooseConcern(
+          "leadership"
+        )
+    ],
+
+    [
+      "Prefer local hiring",
+      () =>
+        chooseConcern(
+          "local"
+        )
+    ],
+
+    [
+      "Communication",
+      () =>
+        chooseConcern(
+          "communication"
+        )
+    ],
+
+    [
+      "Time-zone concerns",
+      () =>
+        chooseConcern(
+          "timezone"
+        )
+    ],
+
+    [
+      "Retention / loyalty",
+      () =>
+        chooseConcern(
+          "retention"
+        )
+    ],
+
+    [
+      "Don't understand model",
+      () =>
+        chooseConcern(
+          "understanding"
+        )
+    ],
+
+    [
+      "Something else",
+      () =>
+        chooseConcern(
+          "other"
+        )
+    ]
+  ]);
+}
+
+
+function chooseConcern(
+  key
+){
+
+  setOutsourcingConcern(
+    key
+  );
+
+  if(
+    key ===
+    "office"
+  ){
+
+    officeRequirementProbe();
+
+    return;
+  }
+
+  if(
+    key ===
+    "leadership"
+  ){
+
+    leadershipPolicyProbe();
+
+    return;
+  }
+
+  showPolicyRebuttal();
+}
+
+
+/* =====================================================
+   OFFICE PROBE
+===================================================== */
+
+function officeRequirementProbe(){
+
+  showScript(
+    "Office Requirement",
+    `
+    I understand.
+    <br><br>
+
+    Does this particular role genuinely require
+    somebody to be physically on-site,
+    or is office-based hiring simply
+    the company's normal preference?
+    `
+  );
+
+  showResponses([
+
+    [
+      "Must physically be on-site",
+      () =>
+        setOutcome(
+          "Local hire required"
+        )
+    ],
+
+    [
+      "Mostly company preference",
+      showPolicyRebuttal
+    ],
+
+    [
+      "Could potentially be remote",
+      showPolicyRebuttal
+    ]
+  ]);
+}
+
+
+/* =====================================================
+   LEADERSHIP POLICY PROBE
+===================================================== */
+
+function leadershipPolicyProbe(){
+
+  showScript(
+    "Leadership Policy",
+    `
+    Understood.
+    <br><br>
+
+    Is that policy completely fixed,
+    or could leadership review an alternative
+    if there were a clear business reason
+    for making an exception?
+    `
+  );
+
+  showResponses([
+
+    [
+      "Completely fixed",
+      () =>
+        setOutcome(
+          "Company policy: no outsourcing"
+        )
+    ],
+
+    [
+      "Could potentially review it",
+      showPolicyRebuttal
+    ],
+
+    [
+      "I'd need another stakeholder",
+      stakeholderMeeting
+    ]
+  ]);
+}
+
+
+function stakeholderMeeting(){
+
+  showScript(
+    "Stakeholder",
+    `
+    That makes sense.
+    <br><br>
+
+    Rather than asking you to challenge the policy yourself,
+    would it make sense to have a short discussion
+    with the relevant stakeholder included
+    so they can understand the model directly
+    and decide whether it's worth reviewing?
+    `
+  );
+
+  showResponses([
+
+    [
+      "Yes",
       appointmentQuestion
     ],
 
     [
-      "We don't outsource",
+      "Send information first",
+      informationBeforeSend
+    ],
+
+    [
+      "No",
       () =>
-        showObjection(
-          "policy"
+        setOutcome(
+          "Company policy: no outsourcing"
         )
     ]
   ]);
+}
+
+
+/* =====================================================
+   DYNAMIC POLICY REBUTTAL
+===================================================== */
+
+function showPolicyRebuttal(){
+
+  const pain =
+    getPainConversation();
+
+  const concernResponse =
+    getConcernResponse();
+
+  if(
+    !pain
+  ){
+
+    policyNeedsPainPoint();
+
+    return;
+  }
+
+  showScript(
+    "Why It May Be Worth Reviewing",
+    `
+    ${escapeHtml(
+      concernResponse
+    )
+      .replace(
+        /\n/g,
+        "<br>"
+      )}
+    <br><br>
+
+    The only reason I'd suggest it may be worth reviewing
+    is because you mentioned that
+    <strong>${escapeHtml(pain)}</strong>.
+    <br><br>
+
+    If the current policy is reducing the options available
+    to solve that problem,
+    it may be worth understanding
+    what a dedicated remote model looks like today —
+    even if you decide afterwards
+    that it still isn't right for the business.
+    <br><br>
+
+    Would it be worth twenty minutes
+    to compare the options properly?
+    `
+  );
+
+  showResponses([
+
+    [
+      "Yes, let's review it",
+      meetingExplanation
+    ],
+
+    [
+      "Maybe — explain more",
+      explainSolution
+    ],
+
+    [
+      "Send information first",
+      informationBeforeSend
+    ],
+
+    [
+      "Policy cannot change",
+      () =>
+        setOutcome(
+          "Company policy: no outsourcing"
+        )
+    ]
+  ]);
+}
+
+
+/* =====================================================
+   IF PAIN POINT NOT YET KNOWN
+===================================================== */
+
+function policyNeedsPainPoint(){
+
+  showScript(
+    "One Quick Question",
+    `
+    I understand.
+    <br><br>
+
+    Before I try to suggest that a company policy
+    should be reviewed,
+    I'd rather understand whether there's actually
+    a business reason to do so.
+    <br><br>
+
+    What's been the biggest issue with the current hiring search?
+    `
+  );
+
+  showResponses([
+
+    [
+      "Not enough applicants",
+      () =>
+        selectPainForPolicy(
+          "applicants"
+        )
+    ],
+
+    [
+      "Wrong experience",
+      () =>
+        selectPainForPolicy(
+          "experience"
+        )
+    ],
+
+    [
+      "Candidates too expensive",
+      () =>
+        selectPainForPolicy(
+          "cost"
+        )
+    ],
+
+    [
+      "Team overloaded",
+      () =>
+        selectPainForPolicy(
+          "overloaded"
+        )
+    ],
+
+    [
+      "Taking too long",
+      () =>
+        selectPainForPolicy(
+          "slow"
+        )
+    ],
+
+    [
+      "Reliability",
+      () =>
+        selectPainForPolicy(
+          "reliability"
+        )
+    ],
+
+    [
+      "Hard role to fill",
+      () =>
+        selectPainForPolicy(
+          "hard"
+        )
+    ],
+
+    [
+      "No real hiring problem",
+      () =>
+        setOutcome(
+          "Company policy: no outsourcing"
+        )
+    ]
+  ]);
+}
+
+
+function selectPainForPolicy(
+  key
+){
+
+  setPainPoint(
+    key
+  );
+
+  showPolicyRebuttal();
 }
 
 
@@ -5532,7 +5904,6 @@ function appointmentQuestion(){
     5
   );
 
-
   showScript(
     "Appointment",
     `
@@ -5542,7 +5913,6 @@ function appointmentQuestion(){
     and see whether the model could genuinely work for you?
     `
   );
-
 
   showResponses([
 
@@ -5577,6 +5947,10 @@ function appointmentQuestion(){
 
 function meetingExplanation(){
 
+  setStage(
+    5
+  );
+
   showScript(
     "Meeting",
     `
@@ -5593,7 +5967,6 @@ function meetingExplanation(){
     There's no commitment.
     `
   );
-
 
   showResponses([
 
@@ -5617,7 +5990,7 @@ function meetingExplanation(){
 
 
 /* =====================================================
-   INFORMATION BRANCH
+   INFORMATION
 ===================================================== */
 
 function informationBeforeSend(){
@@ -5629,19 +6002,15 @@ function informationBeforeSend(){
     <br><br>
 
     Just so I send you something relevant
-    rather than a generic brochure,
-    what's the main thing you'd want the information to cover —
-    how the model works,
-    likely costs,
-    or the type of people available?
+    rather than generic information,
+    what's the main thing you'd want it to cover?
     `
   );
-
 
   showResponses([
 
     [
-      "How it works",
+      "How the model works",
       () =>
         finishInformationRequest(
           "How the model works"
@@ -5684,7 +6053,6 @@ function finishInformationRequest(
       "notes"
     );
 
-
   if(
     !notes.value.includes(
       topic
@@ -5707,14 +6075,11 @@ function finishInformationRequest(
         `Information requested: ${topic}.`
       );
 
-
     getLead().callNotes =
       notes.value;
 
-
     saveLeads();
   }
-
 
   setOutcome(
     "Information requested"
@@ -5723,7 +6088,7 @@ function finishInformationRequest(
 
 
 /* =====================================================
-   QUICK OBJECTIONS
+   OBJECTIONS
 ===================================================== */
 
 function showObjection(
@@ -5749,7 +6114,6 @@ function showObjection(
       `
     );
 
-
     showResponses([
 
       [
@@ -5765,7 +6129,6 @@ function showObjection(
           )
       ]
     ]);
-
 
     return;
   }
@@ -5788,17 +6151,16 @@ function showObjection(
       `
     );
 
-
     showResponses([
 
       [
         "Temporary",
-        workloadPressureQuestion
+        currentWorkloadQuestion
       ],
 
       [
         "Still recruiting",
-        searchDifficulty
+        tenSecondReason
       ],
 
       [
@@ -5810,7 +6172,6 @@ function showObjection(
       ]
     ]);
 
-
     return;
   }
 
@@ -5820,39 +6181,7 @@ function showObjection(
     "policy"
   ){
 
-    showScript(
-      "We Don't Outsource",
-      `
-      Understood.
-      <br><br>
-
-      Is that a firm company policy for every role,
-      or simply the preference for this particular position?
-      `
-    );
-
-
-    showResponses([
-
-      [
-        "Firm company policy",
-        () =>
-          setOutcome(
-            "Company policy: no outsourcing"
-          )
-      ],
-
-      [
-        "Preference only",
-        alternativePermission
-      ],
-
-      [
-        "Could consider it",
-        explainSolution
-      ]
-    ]);
-
+    outsourcingReasonSelector();
 
     return;
   }
@@ -5863,18 +6192,22 @@ function showObjection(
     "local"
   ){
 
+    setOutsourcingConcern(
+      "local"
+    );
+
     showScript(
       "Local Hiring",
       `
       Understood.
       <br><br>
 
-      Is there something about the role
-      that requires the person to be physically on-site,
-      or is local hiring simply your usual preference?
+      Is there something about this role
+      that genuinely requires the person
+      to be physically on-site,
+      or is local hiring mainly the company's preference?
       `
     );
-
 
     showResponses([
 
@@ -5887,16 +6220,15 @@ function showObjection(
       ],
 
       [
-        "Preference only",
-        alternativePermission
+        "Mostly preference",
+        showPolicyRebuttal
       ],
 
       [
         "Could be remote",
-        explainSolution
+        showPolicyRebuttal
       ]
     ]);
-
 
     return;
   }
@@ -5918,6 +6250,10 @@ function showObjection(
     "budget"
   ){
 
+    setPainPoint(
+      "cost"
+    );
+
     showScript(
       "No Budget",
       `
@@ -5930,7 +6266,6 @@ function showObjection(
       is above what the business wants to spend?
       `
     );
-
 
     showResponses([
 
@@ -5956,7 +6291,6 @@ function showObjection(
       ]
     ]);
 
-
     return;
   }
 
@@ -5977,7 +6311,6 @@ function showObjection(
       `
     );
 
-
     showResponses([
 
       [
@@ -5997,14 +6330,13 @@ function showObjection(
       ],
 
       [
-        "Offer not final yet",
+        "Offer not final",
         () =>
           setOutcome(
             "Follow up required"
           )
       ]
     ]);
-
 
     return;
   }
@@ -6028,7 +6360,6 @@ function showObjection(
       `
     );
 
-
     showResponses([
 
       [
@@ -6040,10 +6371,10 @@ function showObjection(
       ],
 
       [
-        "Wouldn't consider outsourcing",
+        "We don't outsource",
         () =>
-          setOutcome(
-            "Company policy: no outsourcing"
+          showObjection(
+            "policy"
           )
       ],
 
@@ -6091,7 +6422,6 @@ function showQuickAnswer(
       `
     );
 
-
     showResponses([
 
       [
@@ -6107,7 +6437,6 @@ function showQuickAnswer(
           )
       ]
     ]);
-
 
     return;
   }
@@ -6134,11 +6463,10 @@ function showQuickAnswer(
       `
     );
 
-
     showResponses([
 
       [
-        "Okay, why did you call?",
+        "Okay — why did you call?",
         tenSecondReason
       ],
 
@@ -6150,7 +6478,6 @@ function showQuickAnswer(
           )
       ]
     ]);
-
 
     return;
   }
@@ -6172,15 +6499,14 @@ function showQuickAnswer(
       and steps away.
       <br><br>
 
-      We provide a dedicated outsourced employment model
-      where the person works specifically for your business.
+      We help businesses use a dedicated remote employment model
+      where the person works specifically for their business.
       <br><br>
 
       Can I take ten seconds to explain
-      why that might be relevant to the vacancy you're advertising?
+      why that might be relevant to your vacancy?
       `
     );
-
 
     showResponses([
 
@@ -6215,7 +6541,6 @@ function showScript(
     label
   );
 
-
   document
     .getElementById(
       "scriptText"
@@ -6234,10 +6559,8 @@ function showResponses(
       "responses"
     );
 
-
   area.innerHTML =
     "";
-
 
   buttons.forEach(
     ([label,action]) => {
@@ -6247,18 +6570,14 @@ function showResponses(
           "button"
         );
 
-
       button.className =
         "response-btn";
-
 
       button.textContent =
         label;
 
-
       button.onclick =
         action;
-
 
       area.appendChild(
         button
@@ -6280,7 +6599,6 @@ function setStage(
       :
       "Ready"
   );
-
 
   for(
     let i = 1;
@@ -6340,7 +6658,6 @@ function defaultNextAction(
       "Revisit if requirements change"
   };
 
-
   return map[
     outcome
   ]
@@ -6356,7 +6673,6 @@ function setOutcome(
   currentOutcome =
     outcome;
 
-
   document
     .querySelectorAll(
       ".outcome-btn"
@@ -6371,12 +6687,10 @@ function setOutcome(
           )
     );
 
-
   const action =
     document.getElementById(
       "nextAction"
     );
-
 
   if(
     !action.value
@@ -6388,12 +6702,10 @@ function setOutcome(
       );
   }
 
-
   setText(
     "stageText",
     `Completed: ${outcome}`
   );
-
 
   showScript(
     "Call Complete",
@@ -6401,17 +6713,16 @@ function setOutcome(
     <strong>${escapeHtml(outcome)}</strong>
     <br><br>
 
-    Complete any final call notes,
+    Complete any final notes,
     next action and follow-up date
-    in the panel on the right.
+    on the right.
     <br><br>
 
     Then use the single
     <strong>Save Call Result</strong>
-    button on the right to save the activity.
+    button.
     `
   );
-
 
   showResponses([
 
@@ -6432,7 +6743,6 @@ function generateCRMNotes(){
   const lead =
     getLead();
 
-
   const liveNotes =
     document
       .getElementById(
@@ -6441,9 +6751,26 @@ function generateCRMNotes(){
       .value
       .trim();
 
-
   let summary =
     `Spoke with ${lead.firstName} at ${lead.company} regarding the advertised ${lead.role}.`;
+
+
+  if(
+    lead.currentPainPoint
+  ){
+
+    summary +=
+      ` Main hiring issue: ${getPainLabel()}.`;
+  }
+
+
+  if(
+    lead.outsourcingConcern
+  ){
+
+    summary +=
+      ` Outsourcing concern: ${getConcernLabel()}.`;
+  }
 
 
   if(
@@ -6499,7 +6826,6 @@ async function copyCRMNotes(){
       )
       .value;
 
-
   if(
     !text
   ){
@@ -6507,13 +6833,11 @@ async function copyCRMNotes(){
     return;
   }
 
-
   await navigator
     .clipboard
     .writeText(
       text
     );
-
 
   setText(
     "crmNoteStatus",
@@ -6531,7 +6855,6 @@ function saveCallResult(){
   const lead =
     getLead();
 
-
   if(
     !currentOutcome
   ){
@@ -6541,21 +6864,16 @@ function saveCallResult(){
         "saveCallStatus"
       )
       .innerHTML =
-        `
-        <span class="bad">
+        `<span class="bad">
         Select a call outcome first.
-        </span>
-        `;
-
+        </span>`;
 
     return;
   }
 
-
   const now =
     new Date()
       .toISOString();
-
 
   const nextAction =
     document
@@ -6565,14 +6883,12 @@ function saveCallResult(){
       .value
       .trim();
 
-
   const followUp =
     document
       .getElementById(
         "followUpDate"
       )
       .value;
-
 
   const notes =
     document
@@ -6582,7 +6898,6 @@ function saveCallResult(){
       .value
       .trim();
 
-
   const crmNotes =
     document
       .getElementById(
@@ -6591,10 +6906,8 @@ function saveCallResult(){
       .value
       .trim();
 
-
   lead.lastCalled =
     now;
-
 
   lead.callCount =
     Number(
@@ -6604,10 +6917,8 @@ function saveCallResult(){
     +
     1;
 
-
   lead.lastOutcome =
     currentOutcome;
-
 
   lead.nextAction =
     nextAction
@@ -6616,18 +6927,14 @@ function saveCallResult(){
       currentOutcome
     );
 
-
   lead.nextFollowUpDate =
     followUp;
-
 
   lead.callNotes =
     notes;
 
-
   lead.lastCRMNotes =
     crmNotes;
-
 
   lead.callHistory.push({
 
@@ -6643,6 +6950,16 @@ function saveCallResult(){
 
     outcome:
       currentOutcome,
+
+    painPoint:
+      getPainLabel(),
+
+    outsourcingConcern:
+      lead.outsourcingConcern
+        ?
+        getConcernLabel()
+        :
+        "",
 
     nextAction:
       lead.nextAction,
@@ -6662,31 +6979,25 @@ function saveCallResult(){
       null
   });
 
-
   saveLeads();
-
 
   renderCRMStatus();
 
-
   renderActivityHistory();
-
 
   document
     .getElementById(
       "saveCallStatus"
     )
     .innerHTML =
-      `
-      <span class="good">
+      `<span class="good">
       Call result saved.
-      </span>
-      `;
+      </span>`;
 }
 
 
 /* =====================================================
-   IMPORT MODAL
+   IMPORT
 ===================================================== */
 
 function openImportModal(){
@@ -6734,7 +7045,6 @@ async function handleCSVFile(
       0
     ];
 
-
   if(
     !file
   ){
@@ -6742,22 +7052,18 @@ async function handleCSVFile(
     return;
   }
 
-
   const text =
     await file.text();
-
 
   const rows =
     parseCSV(
       text
     );
 
-
   pendingImportHeaders =
     rows[
       0
     ];
-
 
   const objects =
     rows
@@ -6781,7 +7087,6 @@ async function handleCSVFile(
           const object =
             {};
 
-
           pendingImportHeaders
             .forEach(
               (header,index) => {
@@ -6797,35 +7102,29 @@ async function handleCSVFile(
               }
             );
 
-
           return object;
         }
       );
-
 
   pendingImportRecords =
     objects.map(
       mapCSVRecord
     );
 
-
   setText(
     "previewRecordCount",
     pendingImportRecords.length
   );
-
 
   setText(
     "previewColumnCount",
     pendingImportHeaders.length
   );
 
-
   setText(
     "previewDuplicates",
     countImportDuplicates()
   );
-
 
   document
     .getElementById(
@@ -6845,7 +7144,6 @@ async function handleCSVFile(
           "<br>"
         );
 
-
   document
     .getElementById(
       "importPreview"
@@ -6855,7 +7153,6 @@ async function handleCSVFile(
       "visible"
     );
 
-
   document
     .getElementById(
       "confirmImport"
@@ -6864,10 +7161,6 @@ async function handleCSVFile(
       false;
 }
 
-
-/* =====================================================
-   CSV PARSER
-===================================================== */
 
 function parseCSV(
   text
@@ -6879,22 +7172,17 @@ function parseCSV(
       ""
     );
 
-
   const rows =
     [];
-
 
   let row =
     [];
 
-
   let field =
     "";
 
-
   let quoted =
     false;
-
 
   for(
     let i = 0;
@@ -6906,7 +7194,6 @@ function parseCSV(
       text[
         i
       ];
-
 
     if(
       quoted
@@ -6928,9 +7215,7 @@ function parseCSV(
           field +=
             '"';
 
-
           i++;
-
 
         }else{
 
@@ -6938,17 +7223,14 @@ function parseCSV(
             false;
         }
 
-
       }else{
 
         field +=
           char;
       }
 
-
       continue;
     }
-
 
     if(
       char ===
@@ -6957,7 +7239,6 @@ function parseCSV(
 
       quoted =
         true;
-
 
     }else if(
       char ===
@@ -6968,10 +7249,8 @@ function parseCSV(
         field
       );
 
-
       field =
         "";
-
 
     }else if(
       char ===
@@ -6982,19 +7261,15 @@ function parseCSV(
         field
       );
 
-
       rows.push(
         row
       );
 
-
       row =
         [];
 
-
       field =
         "";
-
 
     }else if(
       char !==
@@ -7006,7 +7281,6 @@ function parseCSV(
     }
   }
 
-
   if(
     field.length
     ||
@@ -7017,12 +7291,10 @@ function parseCSV(
       field
     );
 
-
     rows.push(
       row
     );
   }
-
 
   rows[
     0
@@ -7037,7 +7309,6 @@ function parseCSV(
           )
             .trim()
       );
-
 
   return rows;
 }
@@ -7059,10 +7330,6 @@ function csvValue(
 }
 
 
-/* =====================================================
-   CSV → LEAD
-===================================================== */
-
 function mapCSVRecord(
   record
 ){
@@ -7073,12 +7340,10 @@ function mapCSVRecord(
       "Location / Restrictions"
     );
 
-
   const zone =
     deriveTimezone(
       location
     );
-
 
   return ensureLeadDefaults({
 
@@ -7130,8 +7395,7 @@ function mapCSVRecord(
         "Phone Number"
       ),
 
-    directPhone:
-      "",
+    directPhone:"",
 
     email:
       csvValue(
@@ -7205,45 +7469,34 @@ function mapCSVRecord(
         "Call Notes"
       ),
 
-    phoneHistory:
-      [],
+    phoneHistory:[],
 
-    emailHistory:
-      [],
+    emailHistory:[],
 
-    lastCalled:
-      "",
+    currentPainPoint:"",
 
-    callCount:
-      0,
+    outsourcingConcern:"",
 
-    lastOutcome:
-      "",
+    lastCalled:"",
 
-    nextAction:
-      "",
+    callCount:0,
 
-    nextFollowUpDate:
-      "",
+    lastOutcome:"",
 
-    lastCRMNotes:
-      "",
+    nextAction:"",
 
-    callHistory:
-      [],
+    nextFollowUpDate:"",
 
-    krispCall:
-      null,
+    lastCRMNotes:"",
 
-    activeCallStartedAt:
-      ""
+    callHistory:[],
+
+    krispCall:null,
+
+    activeCallStartedAt:""
   });
 }
 
-
-/* =====================================================
-   DUPLICATE CHECK
-===================================================== */
 
 function normalizePhone(
   value
@@ -7279,7 +7532,6 @@ function isDuplicate(
           existing.phone
         );
 
-
       const emailMatch =
         candidate.email
         &&
@@ -7291,7 +7543,6 @@ function isDuplicate(
           ""
         )
           .toLowerCase();
-
 
       const nameCompanyMatch =
         candidate.firstName
@@ -7315,7 +7566,6 @@ function isDuplicate(
           ""
         )
           .toLowerCase();
-
 
       return Boolean(
         phoneMatch
@@ -7342,10 +7592,6 @@ function countImportDuplicates(){
 }
 
 
-/* =====================================================
-   PERFORM IMPORT
-===================================================== */
-
 function performImport(){
 
   const mode =
@@ -7355,7 +7601,6 @@ function performImport(){
       )
       .value;
 
-
   if(
     mode ===
     "replace"
@@ -7363,7 +7608,6 @@ function performImport(){
 
     leads =
       pendingImportRecords;
-
 
   }else{
 
@@ -7385,26 +7629,19 @@ function performImport(){
       );
   }
 
-
   currentLeadIndex =
     0;
 
-
   saveLeads();
 
-
-  resetPanelScroll();
-
-
   renderLead();
-
 
   closeImportModal();
 }
 
 
 /* =====================================================
-   EMAIL TAB STORAGE UPDATE
+   EMAIL TAB UPDATE
 ===================================================== */
 
 window.addEventListener(
@@ -7419,7 +7656,6 @@ window.addEventListener(
       leads =
         loadLeads();
 
-
       if(
         currentLeadIndex >=
         leads.length
@@ -7428,7 +7664,6 @@ window.addEventListener(
         currentLeadIndex =
           0;
       }
-
 
       renderLead();
     }
@@ -7449,9 +7684,7 @@ window.addEventListener(
         ensureLeadDefaults
       );
 
-
     saveLeads();
-
 
     renderLead();
   }
