@@ -43,9 +43,13 @@ button{
   transition:.15s ease;
 }
 
-button:active{transform:translateY(1px)}
+button:active{
+  transform:translateY(1px);
+}
 
-.app{min-height:100vh}
+.app{
+  min-height:100vh;
+}
 
 header{
   min-height:78px;
@@ -315,28 +319,74 @@ textarea:focus{
 }
 
 
-/* ACTIONS */
+/* PRIVATEEMAIL CONTROLS */
 
-.actions{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
+.privateemail-panel{
   margin-top:18px;
-}
-
-.action-btn{
-  min-height:46px;
+  padding:16px;
   border:1px solid var(--border);
-  border-radius:9px;
-  background:var(--panel2);
-  color:var(--text);
-  font-weight:750;
+  border-radius:10px;
+  background:#07130f;
 }
 
-.action-btn.primary{
+.privateemail-title{
+  margin-bottom:6px;
+  color:var(--green);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+.privateemail-help{
+  margin-bottom:14px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+}
+
+.open-privateemail{
+  width:100%;
+  min-height:48px;
   border:0;
+  border-radius:9px;
   background:var(--green);
   color:#03120b;
+  font-weight:800;
+}
+
+.copy-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+
+.copy-btn{
+  min-height:42px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--panel2);
+  color:var(--text);
+  font-weight:700;
+}
+
+.copy-btn:hover{
+  border-color:var(--green);
+  color:var(--green);
+}
+
+.clear-row{
+  margin-top:10px;
+}
+
+.clear-btn{
+  width:100%;
+  min-height:42px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:transparent;
+  color:var(--muted);
+  font-weight:700;
 }
 
 .status{
@@ -350,9 +400,11 @@ textarea:focus{
 .bad{color:var(--red)}
 
 @media(max-width:800px){
+
   .template-grid{
     grid-template-columns:1fr 1fr;
   }
+
 }
 
 @media(max-width:720px){
@@ -370,9 +422,10 @@ textarea:focus{
     grid-template-columns:1fr;
   }
 
-  .actions{
+  .copy-grid{
     grid-template-columns:1fr;
   }
+
 }
 </style>
 </head>
@@ -385,11 +438,21 @@ textarea:focus{
 
 <div class="brand">
 
-<img class="brand-logo" src="excedere-logo.png" alt="Excedere">
+<img
+  class="brand-logo"
+  src="excedere-logo.png"
+  alt="Excedere">
 
 <div>
-  <div class="brand-name">EXCEDERE</div>
-  <div class="brand-product">EMAIL</div>
+
+<div class="brand-name">
+EXCEDERE
+</div>
+
+<div class="brand-product">
+EMAIL
+</div>
+
 </div>
 
 </div>
@@ -416,7 +479,7 @@ Email Composer
 </h1>
 
 <div class="subtitle">
-Choose a template or write your own message, then open it in your normal email application.
+Choose a template or write your own message, then send it through PrivateEmail.
 </div>
 
 </div>
@@ -619,28 +682,57 @@ WhatsApp: +63 960 220 6667
 
 
 <div class="signature-note">
-Preview only. Your actual PrivateEmail signature will still be inserted by PrivateEmail when the draft opens.
+Your normal PrivateEmail signature will be added when you compose the message in PrivateEmail.
 </div>
 
 
-<div class="actions">
+<div class="privateemail-panel">
+
+<div class="privateemail-title">
+SEND THROUGH PRIVATEEMAIL
+</div>
+
+<div class="privateemail-help">
+Open PrivateEmail, click Compose, then use the copy buttons below to transfer the recipient, subject and message.
+</div>
+
 
 <button
-  class="action-btn primary"
-  onclick="openEmailApp()">
-  Open in Email App
+  class="open-privateemail"
+  onclick="openPrivateEmail()">
+  Open PrivateEmail
+</button>
+
+
+<div class="copy-grid">
+
+<button
+  class="copy-btn"
+  onclick="copyTo()">
+  Copy To
 </button>
 
 <button
-  class="action-btn"
-  onclick="copyEmail()">
-  Copy Email
+  class="copy-btn"
+  onclick="copySubject()">
+  Copy Subject
 </button>
 
 <button
-  class="action-btn"
+  class="copy-btn"
+  onclick="copyMessage()">
+  Copy Message
+</button>
+
+</div>
+
+
+<div class="clear-row">
+
+<button
+  class="clear-btn"
   onclick="clearEmail()">
-  Clear
+  Clear Email
 </button>
 
 </div>
@@ -649,6 +741,8 @@ Preview only. Your actual PrivateEmail signature will still be inserted by Priva
 <div
   id="status"
   class="status">
+</div>
+
 </div>
 
 
@@ -884,148 +978,164 @@ I look forward to speaking with you.`
     selected.message;
 
 
-  document
-    .getElementById(
-      "status"
-    )
-    .innerHTML =
-      `<span class="good">
-      Template loaded.
-      </span>`;
+  showStatus(
+    "Template loaded.",
+    true
+  );
 }
 
 
-function openEmailApp(){
+function openPrivateEmail(){
 
-  const to =
-    document
-      .getElementById(
-        "to"
-      )
-      .value
-      .trim();
+  window.open(
+    "https://privateemail.com/spm/mail/INBOX/",
+    "_blank",
+    "noopener"
+  );
 
 
-  const subject =
-    document
-      .getElementById(
-        "subject"
-      )
-      .value
-      .trim();
-
-
-  const message =
-    document
-      .getElementById(
-        "message"
-      )
-      .value
-      .trim();
-
-
-  const status =
-    document
-      .getElementById(
-        "status"
-      );
-
-
-  if(!to){
-
-    status.className =
-      "status bad";
-
-    status.textContent =
-      "Enter an email address first.";
-
-    return;
-  }
-
-
-  const mailto =
-    "mailto:" +
-    encodeURIComponent(to) +
-    "?subject=" +
-    encodeURIComponent(subject) +
-    "&body=" +
-    encodeURIComponent(message);
-
-
-  status.className =
-    "status good";
-
-  status.textContent =
-    "Opening your email application...";
-
-
-  window.location.href =
-    mailto;
+  showStatus(
+    "PrivateEmail opened. Click Compose, then use Copy To, Copy Subject and Copy Message.",
+    true
+  );
 }
 
 
-async function copyEmail(){
-
-  const to =
-    document
-      .getElementById(
-        "to"
-      )
-      .value
-      .trim();
-
-
-  const subject =
-    document
-      .getElementById(
-        "subject"
-      )
-      .value
-      .trim();
-
-
-  const message =
-    document
-      .getElementById(
-        "message"
-      )
-      .value
-      .trim();
-
-
-  const text =
-`To: ${to}
-
-Subject: ${subject}
-
-${message}`;
-
+async function copyText(
+  value,
+  successMessage
+){
 
   try{
 
     await navigator
       .clipboard
       .writeText(
-        text
+        value
       );
 
 
-    document
-      .getElementById(
-        "status"
-      )
-      .innerHTML =
-        '<span class="good">Email copied.</span>';
+    showStatus(
+      successMessage,
+      true
+    );
 
   }catch{
 
+    showStatus(
+      "Unable to copy. Please copy it manually.",
+      false
+    );
+  }
+}
+
+
+function copyTo(){
+
+  const value =
     document
       .getElementById(
-        "status"
+        "to"
       )
-      .innerHTML =
-        '<span class="bad">Unable to copy email.</span>';
+      .value
+      .trim();
+
+
+  if(!value){
+
+    showStatus(
+      "Enter an email address first.",
+      false
+    );
+
+    return;
   }
+
+
+  copyText(
+    value,
+    "Recipient email copied."
+  );
+}
+
+
+function copySubject(){
+
+  const value =
+    document
+      .getElementById(
+        "subject"
+      )
+      .value
+      .trim();
+
+
+  if(!value){
+
+    showStatus(
+      "Add a subject first.",
+      false
+    );
+
+    return;
+  }
+
+
+  copyText(
+    value,
+    "Subject copied."
+  );
+}
+
+
+function copyMessage(){
+
+  const value =
+    document
+      .getElementById(
+        "message"
+      )
+      .value
+      .trim();
+
+
+  if(!value){
+
+    showStatus(
+      "Add a message first.",
+      false
+    );
+
+    return;
+  }
+
+
+  copyText(
+    value,
+    "Message copied."
+  );
+}
+
+
+function showStatus(
+  message,
+  success
+){
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  status.className =
+    success
+      ? "status good"
+      : "status bad";
+
+
+  status.textContent =
+    message;
 }
 
 
