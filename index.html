@@ -6,24 +6,24 @@
 
 <title>Excedere Call Assist</title>
 
-<link rel="icon" type="image/png" href="excedere-logo.png">
-<link rel="apple-touch-icon" href="excedere-logo.png">
+<link rel="icon" type="image/png" href="excedere-favicon.png?v=2">
+<link rel="apple-touch-icon" href="excedere-favicon.png?v=2">
 
 <style>
 :root{
-  --bg:#06110e;
-  --panel:#0a1915;
-  --panel2:#0d1e19;
-  --panel3:#10231d;
-  --border:#223c32;
-  --border-soft:#193128;
-  --text:#f0f7f4;
-  --muted:#8da89d;
-  --green:#35d07f;
-  --green-dark:#113e2b;
-  --amber:#e9b44c;
-  --red:#f06464;
-  --blue:#6ab7ff;
+  --bg:#050b12;
+  --panel:#0a1620;
+  --panel2:#0d1b27;
+  --panel3:#102332;
+  --border:#203341;
+  --border-soft:#172a37;
+  --text:#f4f5f7;
+  --muted:#91a4b3;
+  --green:#e3b15d;
+  --green-dark:#342815;
+  --amber:#f4d08a;
+  --red:#ee7373;
+  --blue:#75bfff;
 }
 
 *{box-sizing:border-box}
@@ -36,8 +36,9 @@ html,body{
 body{
   color:var(--text);
   background:
-    radial-gradient(circle at 76% 0%,rgba(45,180,109,.07),transparent 28%),
-    linear-gradient(180deg,#06110e,#07140f);
+    radial-gradient(circle at 78% -4%,rgba(49,118,158,.20),transparent 32%),
+    radial-gradient(circle at 5% 95%,rgba(227,177,93,.08),transparent 28%),
+    linear-gradient(145deg,#050b12,#07131d);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
@@ -62,7 +63,7 @@ header{
   position:sticky;
   top:0;
   z-index:50;
-  background:rgba(5,16,13,.99);
+  background:rgba(5,13,20,.97);
   border-bottom:1px solid var(--border);
 }
 
@@ -75,14 +76,20 @@ header{
 .brand-logo{
   width:49px;
   height:49px;
-  object-fit:contain;
-  border-radius:50%;
+  object-fit:cover;
+  border-radius:13px;
+  box-shadow:0 0 20px rgba(227,177,93,.16);
 }
 
 .brand-name{
-  font-size:16px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:17px;
   font-weight:750;
-  letter-spacing:.18em;
+  letter-spacing:.19em;
+  background:linear-gradient(90deg,#f4d08a,#ffffff,#c9d5df);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
 
 .brand-product{
@@ -110,7 +117,7 @@ header{
   border:1px solid var(--border);
   border-radius:10px;
   outline:none;
-  background:#0b1a16;
+  background:#08141d;
   color:var(--text);
 }
 
@@ -138,7 +145,7 @@ header{
   overflow:auto;
   border:1px solid var(--border);
   border-radius:10px;
-  background:#091713;
+  background:#08141d;
   z-index:100;
   box-shadow:0 20px 45px rgba(0,0,0,.35);
 }
@@ -170,7 +177,7 @@ header{
 .record-counter{
   min-width:58px;
   text-align:right;
-  color:#c7d5d0;
+  color:#c9d5df;
   font-size:12px;
 }
 
@@ -200,7 +207,7 @@ header{
 }
 
 .crm-return-btn:hover{
-  background:#174d35;
+  background:#4b3a1b;
 }
 
 .nav-arrow{
@@ -214,7 +221,7 @@ header{
 .next-record-top{
   padding:0 14px;
   border:0;
-  background:var(--green);
+  background:linear-gradient(135deg,#f2cf87,#d7a248);
   color:#03120b;
   font-weight:850;
 }
@@ -228,7 +235,7 @@ header{
 .left-panel{
   padding:20px 19px 26px;
   border-right:1px solid var(--border);
-  background:rgba(7,21,16,.52);
+  background:rgba(6,18,27,.62);
   height:calc(100vh - 70px);
   overflow:auto;
   position:sticky;
@@ -244,7 +251,7 @@ header{
   min-width:0;
   padding:13px;
   border-left:1px solid var(--border);
-  background:rgba(7,21,16,.55);
+  background:rgba(6,18,27,.68);
   height:calc(100vh - 70px);
   overflow:auto;
   position:sticky;
@@ -267,7 +274,7 @@ header{
 }
 
 .lead-title{
-  color:#e0eae6;
+  color:#e4e9ed;
   font-size:12px;
 }
 
@@ -357,7 +364,7 @@ header{
   padding:10px;
   border:1px solid var(--border);
   border-radius:10px;
-  background:rgba(12,28,23,.68);
+  background:rgba(10,27,39,.78);
 }
 
 .crm-status-top{
@@ -410,7 +417,7 @@ header{
   padding:7px;
   border:1px solid var(--border-soft);
   border-radius:7px;
-  background:#07130f;
+  background:#07141e;
 }
 
 .crm-status-item span{
@@ -430,7 +437,7 @@ header{
   margin-top:10px;
   border:1px solid var(--border);
   border-radius:10px;
-  background:rgba(12,28,23,.64);
+  background:rgba(10,27,39,.76);
 }
 
 .lead-intelligence summary,
@@ -461,7 +468,7 @@ header{
 }
 
 .intelligence-value{
-  color:#dce8e3;
+  color:#dce5eb;
   font-size:10px;
   line-height:1.45;
 }
@@ -521,7 +528,7 @@ header{
   min-height:43px;
   border:0;
   border-radius:9px;
-  background:var(--green);
+  background:linear-gradient(135deg,#f2cf87,#d7a248);
   color:#03120b;
   font-weight:850;
 }
@@ -538,7 +545,7 @@ header{
   padding:9px 11px;
   border:1px solid var(--border);
   border-radius:8px;
-  background:#081611;
+  background:#081722;
 }
 
 .memory-label{
@@ -550,7 +557,7 @@ header{
 }
 
 .memory-value{
-  color:#dbe7e2;
+  color:#dce5eb;
   font-size:11px;
   font-weight:700;
 }
@@ -568,8 +575,8 @@ header{
   background:
     linear-gradient(
       145deg,
-      rgba(12,27,22,.94),
-      rgba(9,22,18,.90)
+      rgba(11,28,40,.96),
+      rgba(7,20,29,.94)
     );
 }
 
@@ -621,15 +628,15 @@ header{
   padding:9px 13px;
   border:1px solid var(--border);
   border-radius:9px;
-  background:#0d211a;
+  background:#0d1f2c;
   color:var(--text);
   font-size:12px;
   font-weight:700;
 }
 
 .response-btn:hover:not(:disabled){
-  border-color:#35604e;
-  background:#102a21;
+  border-color:#8f6d31;
+  background:#11293a;
 }
 
 .progress-area{
@@ -650,7 +657,7 @@ header{
   left:10%;
   right:10%;
   height:2px;
-  background:#334b42;
+  background:#304653;
 }
 
 .progress-item{
@@ -665,7 +672,7 @@ header{
   margin:0 auto 8px;
   display:grid;
   place-items:center;
-  border:3px solid #526a60;
+  border:3px solid #536b7a;
   border-radius:50%;
   background:var(--bg);
   color:var(--muted);
@@ -686,7 +693,7 @@ header{
   padding:11px;
   border:1px solid var(--border);
   border-radius:10px;
-  background:rgba(12,28,23,.90);
+  background:rgba(10,27,39,.92);
 }
 
 .tool-card-title{
@@ -704,7 +711,7 @@ textarea,
   outline:none;
   border:1px solid var(--border);
   border-radius:8px;
-  background:#08140f;
+  background:#07151f;
   color:var(--text);
 }
 
@@ -724,7 +731,7 @@ textarea,
   padding:7px;
   border:1px solid var(--border-soft);
   border-radius:7px;
-  background:#07130f;
+  background:#07141e;
 }
 
 .context-value span{
@@ -753,7 +760,7 @@ textarea,
   cursor:pointer;
   font-size:9px;
   font-weight:750;
-  color:#cfe0d8;
+  color:#d7e1e8;
 }
 
 .context-grid{
@@ -768,8 +775,8 @@ textarea,
   padding:5px 7px;
   border:1px solid var(--border);
   border-radius:6px;
-  background:#0d1f1a;
-  color:#dfe9e5;
+  background:#0d1f2c;
+  color:#e7edf1;
   font-size:8px;
   text-align:left;
 }
@@ -798,7 +805,7 @@ textarea,
 .outcome-btn{
   border:1px solid var(--border);
   border-radius:7px;
-  background:#0d1f1a;
+  background:#0d1f2c;
   color:#e3ece8;
 }
 
@@ -847,7 +854,7 @@ textarea,
   margin-top:8px;
   border:0;
   border-radius:7px;
-  background:var(--green);
+  background:linear-gradient(135deg,#f2cf87,#d7a248);
   color:#03120b;
   font-weight:850;
 }
@@ -868,7 +875,7 @@ details.tool-details{
   overflow:hidden;
   border:1px solid var(--border);
   border-radius:10px;
-  background:rgba(10,24,19,.85);
+  background:rgba(8,22,32,.88);
 }
 
 details.tool-details summary{
@@ -912,7 +919,7 @@ details.tool-details summary{
   padding:9px;
   border:1px solid var(--border-soft);
   border-radius:8px;
-  background:#07130f;
+  background:#07141e;
 }
 
 .krisp-heading{
@@ -924,7 +931,7 @@ details.tool-details summary{
 .krisp-content{
   max-height:180px;
   overflow:auto;
-  color:#d8e4df;
+  color:#d9e3ea;
   font-size:10px;
   line-height:1.5;
   white-space:pre-wrap;
@@ -935,7 +942,7 @@ details.tool-details summary{
   padding:9px;
   border:1px solid var(--border);
   border-radius:8px;
-  background:#08140f;
+  background:#07151f;
 }
 
 .match-top{
@@ -1010,7 +1017,7 @@ details.tool-details summary{
 
 .crm-action.primary{
   border:0;
-  background:var(--green);
+  background:linear-gradient(135deg,#f2cf87,#d7a248);
   color:#03120b;
 }
 
@@ -1034,7 +1041,7 @@ details.tool-details summary{
   margin-top:6vh;
   border:1px solid var(--border);
   border-radius:14px;
-  background:#091713;
+  background:#08141d;
   overflow:hidden;
 }
 
@@ -1059,7 +1066,7 @@ details.tool-details summary{
 .import-drop{
   padding:25px;
   text-align:center;
-  border:1px dashed #35604e;
+  border:1px dashed #8f6d31;
   border-radius:10px;
 }
 
@@ -1067,7 +1074,7 @@ details.tool-details summary{
   display:inline-block;
   padding:10px 17px;
   border-radius:8px;
-  background:var(--green);
+  background:linear-gradient(135deg,#f2cf87,#d7a248);
   color:#03120b;
   font-weight:850;
 }
@@ -1144,7 +1151,7 @@ details.tool-details summary{
 
 .modal-primary{
   border:0;
-  background:var(--green);
+  background:linear-gradient(135deg,#f2cf87,#d7a248);
   color:#03120b;
 }
 
@@ -1169,6 +1176,11 @@ details.tool-details summary{
   }
 }
 
+*{scrollbar-width:thin;scrollbar-color:#3b5260 #07131d}
+*::-webkit-scrollbar{width:8px;height:8px}
+*::-webkit-scrollbar-track{background:#07131d}
+*::-webkit-scrollbar-thumb{background:#3b5260;border-radius:999px}
+*::-webkit-scrollbar-thumb:hover{background:#536f80}
 </style>
 </head>
 
@@ -1179,7 +1191,7 @@ details.tool-details summary{
 <header>
 
 <div class="brand">
-<img class="brand-logo" src="excedere-logo.png" alt="Excedere">
+<img class="brand-logo" src="excedere-favicon.png?v=2" alt="Excedere">
 
 <div>
 <div class="brand-name">EXCEDERE</div>
@@ -1187,7 +1199,6 @@ details.tool-details summary{
 </div>
 
 </div>
-
 
 <div class="search-wrap">
 
@@ -1204,7 +1215,6 @@ placeholder="Search by name, company, location, phone or role...">
 <div id="searchResults" class="search-results"></div>
 
 </div>
-
 
 <div class="record-nav">
 
@@ -1234,9 +1244,7 @@ Next Record →
 
 </header>
 
-
 <main class="workspace">
-
 
 <aside id="leftPanel" class="left-panel">
 
@@ -1245,7 +1253,6 @@ Next Record →
 <div id="leadName" class="lead-name"></div>
 <div id="leadTitle" class="lead-title"></div>
 <div id="leadCompany" class="lead-company"></div>
-
 
 <div class="lead-details">
 
@@ -1277,7 +1284,6 @@ Next Record →
 
 </div>
 
-
 <div class="detail">
 
 <div class="detail-label">Direct / Mobile</div>
@@ -1295,7 +1301,6 @@ Next Record →
 </div>
 
 </div>
-
 
 <div class="detail">
 
@@ -1317,7 +1322,6 @@ Next Record →
 
 </div>
 
-
 <div class="detail">
 <div class="detail-label">Local Time</div>
 <div id="localTime" class="detail-value local-time"></div>
@@ -1334,7 +1338,6 @@ Next Record →
 </div>
 
 </div>
-
 
 <div class="crm-status-card">
 
@@ -1378,7 +1381,6 @@ Next Record →
 </div>
 
 </div>
-
 
 <details class="lead-intelligence">
 
@@ -1430,7 +1432,6 @@ Next Record →
 
 </details>
 
-
 <details class="call-history">
 
 <summary>ACTIVITY HISTORY ▾</summary>
@@ -1439,16 +1440,13 @@ Next Record →
 
 </details>
 
-
 <button class="skip-record" onclick="nextRecord()">
 Skip to Next Record →
 </button>
 
 </aside>
 
-
 <section class="script-panel">
-
 
 <div class="call-header">
 
@@ -1466,13 +1464,11 @@ Follow the script and select the best response.
 
 </div>
 
-
 <button class="start-call" onclick="startCall()">
 ☎ Start Call
 </button>
 
 </div>
-
 
 <div class="call-memory">
 
@@ -1488,7 +1484,6 @@ Not identified yet
 
 </div>
 
-
 <div class="memory-item">
 
 <div class="memory-label">
@@ -1502,7 +1497,6 @@ Not identified yet
 </div>
 
 </div>
-
 
 <div class="script-box">
 
@@ -1518,7 +1512,6 @@ Ready
 
 </div>
 
-
 <div id="scriptText" class="script-text">
 
 Review the lead information, then press
@@ -1529,11 +1522,9 @@ when you're ready.
 
 </div>
 
-
 <div class="response-title">
 PROSPECT RESPONSE
 </div>
-
 
 <div id="responses" class="responses">
 
@@ -1542,7 +1533,6 @@ Start the call first
 </button>
 
 </div>
-
 
 <div class="progress-area">
 
@@ -1579,9 +1569,7 @@ Start the call first
 
 </section>
 
-
 <aside class="right-panel">
-
 
 <div class="tool-card">
 
@@ -1594,7 +1582,6 @@ id="notes"
 placeholder="Type notes while you're speaking..."></textarea>
 
 </div>
-
 
 <div class="tool-card">
 
@@ -1615,7 +1602,6 @@ CALL CONTEXT
 </div>
 
 </div>
-
 
 <details class="context-selector">
 
@@ -1658,7 +1644,6 @@ Other issue
 </div>
 
 </details>
-
 
 <details class="context-selector">
 
@@ -1728,7 +1713,6 @@ Other
 
 </div>
 
-
 <div class="tool-card">
 
 <div class="tool-card-title">
@@ -1773,7 +1757,6 @@ Not interested
 
 </div>
 
-
 <div class="tool-card">
 
 <div class="tool-card-title">
@@ -1797,7 +1780,6 @@ Recruitment company?
 </div>
 
 </div>
-
 
 <div class="tool-card">
 
@@ -1834,7 +1816,6 @@ Not Interested
 </div>
 
 </div>
-
 
 <div class="tool-card">
 
@@ -1880,7 +1861,6 @@ Save Call Result
 <div id="saveCallStatus" class="save-call-status"></div>
 
 </div>
-
 
 <details class="tool-details">
 
@@ -1970,7 +1950,6 @@ Attach This Call
 
 </details>
 
-
 <details class="tool-details">
 
 <summary>
@@ -2021,7 +2000,6 @@ Copy CRM Notes
 </main>
 
 </div>
-
 
 <div id="importBackdrop" class="modal-backdrop">
 
@@ -2112,7 +2090,6 @@ Import Leads
 </div>
 
 </div>
-
 
 <script>
 
