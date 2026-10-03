@@ -1,350 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Excedere Email</title>
 
+<link rel="icon" type="image/png" href="excedere-icon.png">
+<link rel="apple-touch-icon" href="excedere-icon.png">
+
 <style>
 :root{
-  --bg:#06110e;
-  --panel:#0a1915;
-  --panel2:#0d1e19;
-  --border:#223c32;
-  --border-soft:#193128;
-  --text:#f0f7f4;
-  --muted:#8da89d;
-  --green:#35d07f;
-  --green-dark:#113e2b;
-  --red:#f06464;
+  --bg:#050b12;
+  --panel:#0a1620;
+  --panel2:#0d1b27;
+  --panel3:#102332;
+  --border:#203341;
+  --border-soft:#172a37;
+  --text:#f4f5f7;
+  --muted:#91a4b3;
+  --gold:#e3b15d;
+  --gold-light:#f4d08a;
+  --gold-dark:#342815;
+  --blue:#75bfff;
+  --silver:#c9d5df;
+  --red:#ee7373;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
+html,
 body{
   margin:0;
-  min-height:100vh;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 80% 0%,rgba(45,180,109,.08),transparent 30%),
-    linear-gradient(180deg,#06110e,#07140f);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  min-height:100%;
 }
 
-button,input,textarea{font:inherit}
-button{cursor:pointer}
+body{
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      circle at 80% -5%,
+      rgba(49,118,158,.20),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 4% 96%,
+      rgba(227,177,93,.08),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #050b12,
+      #07131d
+    );
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+  transition:.15s ease;
+}
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+button:active{
+  transform:translateY(1px);
+}
+
+.app{
+  min-height:100vh;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 header{
-  min-height:72px;
+  min-height:78px;
+
   display:flex;
-  justify-content:space-between;
+
+  justify-content:
+    space-between;
+
   align-items:center;
-  padding:10px 26px;
-  border-bottom:1px solid var(--border);
-  background:rgba(5,16,13,.98);
+
+  padding:
+    12px 28px;
+
+  border-bottom:
+    1px solid
+    var(--border);
+
+  background:
+    rgba(5,13,20,.97);
+
+  box-shadow:
+    0 8px 30px
+    rgba(0,0,0,.16);
+
+  position:sticky;
+
+  top:0;
+
+  z-index:20;
 }
+
 
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
 }
+
 
 .brand-logo{
-  width:50px;
-  height:50px;
-  object-fit:contain;
-  border-radius:50%;
+  width:52px;
+  height:52px;
+
+  object-fit:cover;
+
+  border-radius:13px;
+
+  display:block;
+
+  box-shadow:
+    0 0 22px
+    rgba(227,177,93,.16);
 }
+
 
 .brand-name{
-  font-size:16px;
-  font-weight:700;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:18px;
+
+  font-weight:750;
+
   letter-spacing:.18em;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--gold-light),
+      #ffffff,
+      var(--silver)
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
 }
 
+
 .brand-product{
-  margin-top:3px;
-  color:var(--green);
-  font-size:9px;
-  font-weight:700;
+  margin-top:4px;
+
+  color:
+    var(--gold);
+
+  font-size:10px;
+
+  font-weight:800;
+
   letter-spacing:.28em;
 }
 
+
 .close-btn{
-  min-height:40px;
-  padding:0 17px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:var(--panel2);
-  color:var(--text);
+  min-height:42px;
+
+  padding:
+    0 18px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:9px;
+
+  background:
+    var(--panel2);
+
+  color:
+    var(--text);
+
+  font-weight:700;
 }
+
+
+.close-btn:hover{
+  border-color:
+    var(--gold);
+
+  color:
+    var(--gold-light);
+}
+
+
+/* =====================================================
+   WORKSPACE
+===================================================== */
 
 .workspace{
-  width:min(1050px,calc(100% - 40px));
-  margin:32px auto;
+  width:
+    min(
+      1100px,
+      calc(100% - 40px)
+    );
+
+  margin:
+    38px auto 60px;
 }
+
+
+.page-heading{
+  margin-bottom:24px;
+}
+
 
 .eyebrow{
-  margin-bottom:9px;
-  color:var(--green);
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:.18em;
+  margin-bottom:10px;
+
+  color:
+    var(--gold);
+
+  font-size:10px;
+
+  font-weight:850;
+
+  letter-spacing:.20em;
+
+  text-transform:
+    uppercase;
 }
+
 
 h1{
-  margin:0 0 7px;
-  font-size:32px;
+  margin:
+    0 0 8px;
+
+  font-size:36px;
+
+  line-height:1.1;
+
+  letter-spacing:-.02em;
 }
+
 
 .subtitle{
-  margin-bottom:20px;
-  color:var(--muted);
-  font-size:13px;
-}
+  color:
+    var(--muted);
 
-.contact-card{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:16px;
-  padding:16px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:rgba(12,28,23,.85);
-}
-
-.contact-item{
-  padding:10px 12px;
-  border:1px solid var(--border-soft);
-  border-radius:8px;
-  background:#07130f;
-}
-
-.contact-label{
-  margin-bottom:4px;
-  color:var(--muted);
-  font-size:8px;
-  font-weight:700;
-  letter-spacing:.11em;
-}
-
-.contact-value{
-  font-size:13px;
-  font-weight:700;
-}
-
-.template-panel{
-  margin-bottom:16px;
-  padding:16px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:rgba(12,28,23,.85);
-}
-
-.template-title{
-  margin-bottom:11px;
-  color:var(--green);
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:.15em;
-}
-
-.template-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-}
-
-.template-btn{
-  min-height:45px;
-  padding:8px 10px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:var(--panel2);
-  color:var(--text);
-  font-weight:700;
-}
-
-.template-btn:hover{
-  border-color:var(--green);
-  color:var(--green);
-}
-
-.template-btn.active{
-  border-color:var(--green);
-  background:var(--green-dark);
-  color:var(--green);
-}
-
-.composer{
-  padding:20px;
-  border:1px solid var(--border);
-  border-radius:13px;
-  background:rgba(12,28,23,.88);
-}
-
-.field{
-  margin-bottom:15px;
-}
-
-label{
-  display:block;
-  margin-bottom:6px;
-  color:var(--muted);
-  font-size:9px;
-  font-weight:750;
-  letter-spacing:.10em;
-  text-transform:uppercase;
-}
-
-input,textarea{
-  width:100%;
-  padding:12px 13px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  outline:none;
-  background:#08140f;
-  color:var(--text);
-}
-
-input:focus,textarea:focus{
-  border-color:var(--green);
-}
-
-#message{
-  min-height:270px;
-  resize:vertical;
-  line-height:1.55;
-}
-
-.signature-label{
-  margin-bottom:10px;
-  color:var(--muted);
-  font-size:8px;
-  font-weight:800;
-  letter-spacing:.11em;
-}
-
-.signature-preview{
-  padding:16px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:#fff;
-  color:#111;
-}
-
-.signature-main{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
-.signature-logo-img{
-  width:58px;
-  height:58px;
-  object-fit:contain;
-  border-radius:50%;
-}
-
-.signature-name{
   font-size:14px;
-  font-weight:800;
-}
 
-.signature-company{
-  margin-top:1px;
-  font-size:11px;
-}
-
-.signature-tagline{
-  margin-top:2px;
-  color:#00a6d6;
-  font-size:9px;
-  letter-spacing:.26em;
-}
-
-.signature-links{
-  margin-top:14px;
-  font-size:11px;
   line-height:1.6;
 }
 
-.signature-links a{
-  color:#1769d2;
-  text-decoration:none;
-}
 
-.signature-note{
-  margin-top:10px;
-  color:#64736d;
-  font-size:9px;
-}
+/* =====================================================
+   CONTACT CARD
+===================================================== */
 
-.actions{
+.contact-card{
   display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:9px;
-  margin-top:16px;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:14px;
+
+  margin-bottom:18px;
+
+  padding:18px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10,27,39,.92),
+      rgba(7,20,29,.94)
+    );
+
+  box-shadow:
+    0 16px 40px
+    rgba(0,0,0,.12);
 }
 
-.send-btn,.action-btn{
-  min-height:46px;
-  border-radius:8px;
+
+.contact-item{
+  padding:
+    13px 14px;
+
+  border:
+    1px solid
+    var(--border-soft);
+
+  border-radius:9px;
+
+  background:
+    #07141e;
+}
+
+
+.contact-label{
+  margin-bottom:5px;
+
+  color:
+    var(--muted);
+
+  font-size:9px;
+
+  font-weight:750;
+
+  letter-spacing:.12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.contact-value{
+  color:
+    var(--text);
+
+  font-size:14px;
+
+  font-weight:750;
+}
+
+
+/* =====================================================
+   TEMPLATES
+===================================================== */
+
+.template-panel{
+  margin-bottom:18px;
+
+  padding:18px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10,27,39,.92),
+      rgba(7,20,29,.94)
+    );
+}
+
+
+.template-title{
+  margin-bottom:12px;
+
+  color:
+    var(--gold);
+
+  font-size:10px;
+
+  font-weight:850;
+
+  letter-spacing:.16em;
+}
+
+
+.template-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:10px;
+}
+
+
+.template-btn{
+  min-height:48px;
+
+  padding:
+    9px 12px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:9px;
+
+  background:
+    var(--panel2);
+
+  color:
+    var(--text);
+
+  font-weight:700;
+}
+
+
+.template-btn:hover{
+  border-color:
+    var(--gold);
+
+  color:
+    var(--gold-light);
+
+  background:
+    var(--panel3);
+}
+
+
+.template-btn.active{
+  border-color:
+    var(--gold);
+
+  background:
+    linear-gradient(
+      145deg,
+      #342815,
+      #221b10
+    );
+
+  color:
+    var(--gold-light);
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(244,208,138,.08);
+}
+
+
+/* =====================================================
+   COMPOSER
+===================================================== */
+
+.composer{
+  padding:24px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10,27,39,.96),
+      rgba(7,20,29,.96)
+    );
+
+  box-shadow:
+    0 22px 55px
+    rgba(0,0,0,.18);
+}
+
+
+.field{
+  margin-bottom:17px;
+}
+
+
+label{
+  display:block;
+
+  margin-bottom:7px;
+
+  color:
+    var(--muted);
+
+  font-size:10px;
+
+  font-weight:750;
+
+  letter-spacing:.10em;
+
+  text-transform:
+    uppercase;
+}
+
+
+input,
+textarea{
+  width:100%;
+
+  padding:
+    13px 14px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:9px;
+
+  outline:none;
+
+  background:
+    #07151f;
+
+  color:
+    var(--text);
+
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    background .15s ease;
+}
+
+
+input::placeholder,
+textarea::placeholder{
+  color:
+    #637785;
+}
+
+
+input:focus,
+textarea:focus{
+  border-color:
+    var(--gold);
+
+  background:
+    #081923;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(227,177,93,.08);
+}
+
+
+#message{
+  min-height:300px;
+
+  resize:vertical;
+
+  line-height:1.65;
+}
+
+
+/* =====================================================
+   SIGNATURE PREVIEW
+===================================================== */
+
+.signature-label{
+  margin:
+    5px 0 12px;
+
+  color:
+    var(--gold);
+
+  font-size:9px;
+
+  font-weight:850;
+
+  letter-spacing:.14em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.signature-preview{
+  margin-top:6px;
+
+  padding:20px;
+
+  border:
+    1px solid
+    #d6dce0;
+
+  border-radius:10px;
+
+  background:#fff;
+
+  color:#111;
+
+  box-shadow:
+    0 10px 28px
+    rgba(0,0,0,.15);
+}
+
+
+.signature-main{
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+}
+
+
+.signature-logo-img{
+  width:58px;
+
+  height:58px;
+
+  flex:
+    0 0 58px;
+
+  object-fit:contain;
+
+  border-radius:50%;
+
+  display:block;
+}
+
+
+.signature-name{
+  color:#111;
+
+  font-size:14px;
+
   font-weight:800;
 }
 
-.send-btn{
-  border:0;
-  background:var(--green);
-  color:#03120b;
-}
 
-.send-btn:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
+.signature-company{
+  margin-top:1px;
 
-.action-btn{
-  border:1px solid var(--border);
-  background:var(--panel2);
-  color:var(--text);
-}
+  color:#222;
 
-.status{
-  min-height:19px;
-  margin-top:11px;
-  color:var(--muted);
   font-size:11px;
 }
 
-.good{color:var(--green)}
-.bad{color:var(--red)}
+
+.signature-tagline{
+  margin-top:2px;
+
+  color:#00a6d6;
+
+  font-size:9px;
+
+  letter-spacing:.28em;
+}
+
+
+.signature-links{
+  margin-top:17px;
+
+  padding-left:2px;
+
+  font-size:12px;
+
+  line-height:1.55;
+}
+
+
+.signature-links a{
+  color:#1769d2;
+
+  text-decoration:none;
+}
+
+
+.signature-note{
+  margin-top:12px;
+
+  color:
+    var(--muted);
+
+  font-size:10px;
+
+  line-height:1.5;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.actions{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr 1fr;
+
+  gap:10px;
+
+  margin-top:20px;
+}
+
+
+.send-btn{
+  width:100%;
+
+  min-height:50px;
+
+  border:0;
+
+  border-radius:9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f2cf87,
+      #d7a248
+    );
+
+  color:#11100c;
+
+  font-weight:850;
+
+  box-shadow:
+    0 8px 20px
+    rgba(227,177,93,.14);
+}
+
+
+.send-btn:hover{
+  box-shadow:
+    0 10px 26px
+    rgba(227,177,93,.24);
+}
+
+
+.send-btn:disabled{
+  opacity:.55;
+
+  cursor:not-allowed;
+
+  transform:none;
+}
+
+
+.action-btn{
+  min-height:46px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:9px;
+
+  background:
+    var(--panel2);
+
+  color:
+    var(--text);
+
+  font-weight:750;
+}
+
+
+.action-btn:hover{
+  border-color:
+    var(--gold);
+
+  color:
+    var(--gold-light);
+}
+
+
+.status{
+  min-height:20px;
+
+  margin-top:14px;
+
+  color:
+    var(--muted);
+
+  font-size:12px;
+}
+
+
+.good{
+  color:
+    var(--gold-light);
+}
+
+
+.bad{
+  color:
+    var(--red);
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+*{
+  scrollbar-width:thin;
+
+  scrollbar-color:
+    #3b5260
+    #07131d;
+}
+
+
+*::-webkit-scrollbar{
+  width:8px;
+  height:8px;
+}
+
+
+*::-webkit-scrollbar-track{
+  background:#07131d;
+}
+
+
+*::-webkit-scrollbar-thumb{
+  background:#3b5260;
+
+  border-radius:999px;
+}
+
+
+*::-webkit-scrollbar-thumb:hover{
+  background:#536f80;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:800px){
+
+  .template-grid{
+    grid-template-columns:
+      1fr 1fr;
+  }
+}
+
 
 @media(max-width:720px){
 
-  .template-grid,
-  .actions,
+  header{
+    padding:
+      10px 15px;
+  }
+
+  .brand-logo{
+    width:46px;
+    height:46px;
+  }
+
+  .brand-name{
+    font-size:15px;
+  }
+
+  .workspace{
+    width:
+      min(
+        calc(100% - 24px),
+        1100px
+      );
+
+    margin:
+      22px auto 40px;
+  }
+
   .contact-card{
-    grid-template-columns:1fr;
+    grid-template-columns:
+      1fr;
+  }
+
+  .template-grid{
+    grid-template-columns:
+      1fr;
+  }
+
+  .actions{
+    grid-template-columns:
+      1fr;
+  }
+
+  .composer{
+    padding:17px;
+  }
+
+  h1{
+    font-size:30px;
   }
 }
+
 </style>
 </head>
 
+
 <body>
 
+<div class="app">
+
+
 <header>
+
 
 <div class="brand">
 
 <img
   class="brand-logo"
-  src="excedere-logo.png"
+  src="excedere-icon.png"
   alt="Excedere">
+
 
 <div>
 
@@ -360,18 +938,24 @@ EMAIL
 
 </div>
 
+
 <button
   class="close-btn"
   onclick="window.close()">
 Close
 </button>
 
+
 </header>
+
 
 <main class="workspace">
 
+
+<div class="page-heading">
+
 <div class="eyebrow">
-PROSPECT COMMUNICATION
+Prospect Communication
 </div>
 
 <h1>
@@ -379,15 +963,19 @@ Email Composer
 </h1>
 
 <div class="subtitle">
-Choose a template, edit it if needed, and send directly from Excedere.
+Choose a template, make any changes you want, and send directly from Excedere.
 </div>
 
+</div>
+
+
 <div class="contact-card">
+
 
 <div class="contact-item">
 
 <div class="contact-label">
-CONTACT
+Contact
 </div>
 
 <div
@@ -398,10 +986,11 @@ Not selected
 
 </div>
 
+
 <div class="contact-item">
 
 <div class="contact-label">
-COMPANY
+Company
 </div>
 
 <div
@@ -412,45 +1001,70 @@ Not selected
 
 </div>
 
+
 </div>
 
+
 <div class="template-panel">
+
 
 <div class="template-title">
 EMAIL TEMPLATES
 </div>
 
+
 <div class="template-grid">
 
-<button class="template-btn" onclick="applyTemplate('initial',this)">
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('initial',this)">
 Initial Outreach
 </button>
 
-<button class="template-btn" onclick="applyTemplate('info',this)">
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('info',this)">
 Send Information
 </button>
 
-<button class="template-btn" onclick="applyTemplate('followup',this)">
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('followup',this)">
 Follow-Up
 </button>
 
-<button class="template-btn" onclick="applyTemplate('callback',this)">
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('callback',this)">
 Callback Follow-Up
 </button>
 
-<button class="template-btn" onclick="applyTemplate('appointment',this)">
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('appointment',this)">
 Appointment Confirmation
 </button>
 
-<button class="template-btn" onclick="applyTemplate('blank',this)">
+
+<button
+  class="template-btn"
+  onclick="applyTemplate('blank',this)">
 Blank Email
 </button>
 
+
 </div>
 
 </div>
+
 
 <div class="composer">
+
 
 <div class="field">
 
@@ -465,6 +1079,7 @@ To
 
 </div>
 
+
 <div class="field">
 
 <label for="subject">
@@ -478,6 +1093,7 @@ Subject
 
 </div>
 
+
 <div class="field">
 
 <label for="message">
@@ -486,16 +1102,18 @@ Message
 
 <textarea
   id="message"
-  placeholder="Write your email here...">
-</textarea>
+  placeholder="Write your email here..."></textarea>
 
 </div>
+
 
 <div class="signature-label">
 EMAIL SIGNATURE PREVIEW
 </div>
 
+
 <div class="signature-preview">
+
 
 <div class="signature-main">
 
@@ -503,6 +1121,7 @@ EMAIL SIGNATURE PREVIEW
   class="signature-logo-img"
   src="excedere-logo.png"
   alt="Excedere">
+
 
 <div>
 
@@ -522,44 +1141,65 @@ BUSINESS BEYOND BORDERS
 
 </div>
 
+
 <div class="signature-links">
 
+
 <div>
+
 📅
+
 <a
   href="https://cal.com/excedere/consultation?overlayCalendar=true"
-  target="_blank">
+  target="_blank"
+  rel="noopener">
 Book a Free Consultation
 </a>
+
 </div>
 
+
 <div>
+
 🌐
+
 <a
   href="https://excederemanagementconsultancy.github.io/excedere/"
-  target="_blank">
+  target="_blank"
+  rel="noopener">
 Excedere Website
 </a>
+
 </div>
+
 
 <div>
+
 💬
+
 <a
   href="https://wa.me/639602206667"
-  target="_blank">
+  target="_blank"
+  rel="noopener">
 WhatsApp: +63 960 220 6667
 </a>
-</div>
 
 </div>
 
+
 </div>
+
+
+</div>
+
 
 <div class="signature-note">
 This signature will automatically be added when Excedere sends the email.
 </div>
 
+
 <div class="actions">
+
 
 <button
   id="sendButton"
@@ -568,11 +1208,13 @@ This signature will automatically be added when Excedere sends the email.
 ✉ Send Email
 </button>
 
+
 <button
   class="action-btn"
   onclick="copyEmail()">
 Copy Email
 </button>
+
 
 <button
   class="action-btn"
@@ -580,73 +1222,48 @@ Copy Email
 Clear
 </button>
 
-</div>
-
-<div id="status" class="status"></div>
 
 </div>
+
+
+<div
+  id="status"
+  class="status">
+</div>
+
+
+</div>
+
 
 </main>
 
+</div>
+
+
 <script>
+
 
 const SEND_EMAIL_URL =
   "https://kxxoyhagfmexvnzpuwys.supabase.co/functions/v1/send-excedere-email";
 
+
 const LEAD_STORAGE_KEY =
   "excedereCallAssistLeads";
+
 
 let selectedTemplate =
   "";
 
-function getParam(name){
 
-  return new URLSearchParams(
-    window.location.search
-  )
-    .get(name) ||
-    "";
-}
-
-const contactName =
-  getParam("name");
-
-const company =
-  getParam("company");
-
-const email =
-  getParam("email");
-
-const leadId =
-  getParam("leadId");
-
-document
-  .getElementById(
-    "contactName"
-  )
-  .textContent =
-    contactName ||
-    "Not provided";
-
-document
-  .getElementById(
-    "contactCompany"
-  )
-  .textContent =
-    company ||
-    "Not provided";
-
-document
-  .getElementById(
-    "to"
-  )
-  .value =
-    email;
+/* =====================================================
+   SUPABASE SESSION
+===================================================== */
 
 function getSupabaseAccessToken(){
 
   const projectRef =
     "kxxoyhagfmexvnzpuwys";
+
 
   for(
     let i = 0;
@@ -657,15 +1274,17 @@ function getSupabaseAccessToken(){
     const key =
       localStorage.key(i);
 
+
     if(
-      !key ||
+      !key
+      ||
       !key.includes(
         projectRef
       )
     ){
-
       continue;
     }
+
 
     try{
 
@@ -676,10 +1295,12 @@ function getSupabaseAccessToken(){
           )
         );
 
+
       if(parsed?.access_token){
 
         return parsed.access_token;
       }
+
 
       if(
         parsed
@@ -695,8 +1316,82 @@ function getSupabaseAccessToken(){
     }catch{}
   }
 
+
   return null;
 }
+
+
+/* =====================================================
+   QUERY PARAMS
+===================================================== */
+
+function getParam(name){
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  return params.get(name) || "";
+}
+
+
+const contactName =
+  getParam("name");
+
+
+const company =
+  getParam("company");
+
+
+const email =
+  getParam("email");
+
+
+const leadId =
+  getParam("leadId");
+
+
+document
+  .getElementById(
+    "contactName"
+  )
+  .textContent =
+    contactName ||
+    "Not provided";
+
+
+document
+  .getElementById(
+    "contactCompany"
+  )
+  .textContent =
+    company ||
+    "Not provided";
+
+
+document
+  .getElementById(
+    "to"
+  )
+  .value =
+    String(
+      email ||
+      ""
+    )
+      .toLowerCase()
+    ===
+    "not publicly listed"
+      ?
+      ""
+      :
+      email;
+
+
+/* =====================================================
+   TEMPLATE HELPERS
+===================================================== */
 
 function greetingName(){
 
@@ -704,11 +1399,13 @@ function greetingName(){
     "there";
 }
 
+
 function companyName(){
 
   return company ||
     "your business";
 }
+
 
 function clearTemplateSelection(){
 
@@ -718,11 +1415,18 @@ function clearTemplateSelection(){
     )
     .forEach(
       button =>
-        button.classList.remove(
-          "active"
-        )
+        button
+          .classList
+          .remove(
+            "active"
+          )
     );
 }
+
+
+/* =====================================================
+   EMAIL TEMPLATES
+===================================================== */
 
 function applyTemplate(
   type,
@@ -731,27 +1435,51 @@ function applyTemplate(
 
   clearTemplateSelection();
 
+
   selectedTemplate =
     type;
 
+
   if(button){
 
-    button.classList.add(
-      "active"
-    );
+    button
+      .classList
+      .add(
+        "active"
+      );
   }
+
 
   const name =
     greetingName();
 
+
   const business =
     companyName();
 
+
+  const subject =
+    document
+      .getElementById(
+        "subject"
+      );
+
+
+  const message =
+    document
+      .getElementById(
+        "message"
+      );
+
+
   const templates = {
 
+
     initial:{
+
       subject:
         `Quick question regarding ${business}`,
+
       message:
 `Hi ${name},
 
@@ -762,9 +1490,12 @@ We help businesses access experienced remote support where traditional local hir
 If the position is still open, I would be happy to briefly explain how the model works and see whether it could be relevant for ${business}.`
     },
 
+
     info:{
+
       subject:
         `Information as discussed - ${business}`,
+
       message:
 `Hi ${name},
 
@@ -775,9 +1506,12 @@ As discussed, I am sending over some information regarding the support options a
 If it looks relevant, we can arrange a short call to go through your requirements and answer any questions.`
     },
 
+
     followup:{
+
       subject:
         `Following up - ${business}`,
+
       message:
 `Hi ${name},
 
@@ -788,9 +1522,12 @@ I appreciate priorities can change, so I wanted to check whether this is still s
 If the role is still open, I would be happy to reconnect briefly.`
     },
 
+
     callback:{
+
       subject:
         `Following up on our conversation - ${business}`,
+
       message:
 `Hi ${name},
 
@@ -799,9 +1536,12 @@ Following our recent conversation, I wanted to reconnect as agreed.
 If the timing still works for you, I would be happy to pick things back up and discuss the role in a little more detail.`
     },
 
+
     appointment:{
+
       subject:
         `Meeting confirmation - ${business}`,
+
       message:
 `Hi ${name},
 
@@ -814,38 +1554,47 @@ We will use the time to understand what you need, explain how the support model 
 I look forward to speaking with you.`
     },
 
+
     blank:{
+
       subject:"",
       message:""
     }
+
   };
+
 
   const selected =
     templates[type];
+
 
   if(!selected){
     return;
   }
 
-  document
-    .getElementById(
-      "subject"
-    )
-    .value =
-      selected.subject;
+
+  subject.value =
+    selected.subject;
+
+
+  message.value =
+    selected.message;
+
 
   document
     .getElementById(
-      "message"
+      "status"
     )
-    .value =
-      selected.message;
-
-  showStatus(
-    "Template loaded.",
-    "good"
-  );
+    .innerHTML =
+      `<span class="good">
+      Template loaded.
+      </span>`;
 }
+
+
+/* =====================================================
+   SEND EMAIL
+===================================================== */
 
 async function sendEmail(){
 
@@ -857,6 +1606,7 @@ async function sendEmail(){
       .value
       .trim();
 
+
   const subject =
     document
       .getElementById(
@@ -864,6 +1614,7 @@ async function sendEmail(){
       )
       .value
       .trim();
+
 
   const message =
     document
@@ -873,69 +1624,75 @@ async function sendEmail(){
       .value
       .trim();
 
+
+  const status =
+    document
+      .getElementById(
+        "status"
+      );
+
+
   const button =
-    document.getElementById(
-      "sendButton"
-    );
+    document
+      .getElementById(
+        "sendButton"
+      );
+
 
   if(!to){
 
-    showStatus(
-      "Enter an email address first.",
-      "bad"
-    );
+    status.className =
+      "status bad";
+
+    status.textContent =
+      "Enter an email address first.";
 
     return;
   }
 
-  if(
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      .test(to)
-  ){
-
-    showStatus(
-      "Enter a valid email address.",
-      "bad"
-    );
-
-    return;
-  }
 
   if(!subject){
 
-    showStatus(
-      "Enter a subject first.",
-      "bad"
-    );
+    status.className =
+      "status bad";
+
+    status.textContent =
+      "Enter a subject first.";
 
     return;
   }
+
 
   if(!message){
 
-    showStatus(
-      "Enter a message first.",
-      "bad"
-    );
+    status.className =
+      "status bad";
+
+    status.textContent =
+      "Enter a message first.";
 
     return;
   }
+
 
   const token =
     getSupabaseAccessToken();
 
+
   if(!token){
 
-    showStatus(
-      "Your Excedere login session was not found. Sign in again and retry.",
-      "bad"
-    );
+    status.className =
+      "status bad";
+
+    status.textContent =
+      "Your Excedere login session was not found. Sign in again and retry.";
 
     return;
   }
 
+
   if(
-    !confirm(
+    !window.confirm(
       `Send this email to ${to}?`
     )
   ){
@@ -943,28 +1700,38 @@ async function sendEmail(){
     return;
   }
 
+
   button.disabled =
     true;
+
 
   button.textContent =
     "Sending Email...";
 
-  showStatus(
-    "Sending through Excedere...",
-    ""
-  );
+
+  status.className =
+    "status";
+
+
+  status.textContent =
+    "Sending through Excedere...";
+
 
   try{
+
 
     const response =
       await fetch(
         SEND_EMAIL_URL,
         {
-          method:"POST",
+
+          method:
+            "POST",
 
           headers:{
             "Content-Type":
               "application/json",
+
             "Authorization":
               `Bearer ${token}`
           },
@@ -975,10 +1742,13 @@ async function sendEmail(){
               subject,
               message
             })
+
         }
       );
 
+
     let result = {};
+
 
     try{
 
@@ -987,8 +1757,10 @@ async function sendEmail(){
 
     }catch{}
 
+
     if(
-      !response.ok ||
+      !response.ok
+      ||
       !result.success
     ){
 
@@ -997,6 +1769,7 @@ async function sendEmail(){
         `Email sending failed (${response.status}).`
       );
     }
+
 
     recordEmailActivity({
       to,
@@ -1009,13 +1782,18 @@ async function sendEmail(){
         ""
     });
 
-    showStatus(
-      `✓ Email sent successfully to ${to}`,
-      "good"
-    );
+
+    status.className =
+      "status good";
+
+
+    status.textContent =
+      `✓ Email sent successfully to ${to}`;
+
 
     button.textContent =
       "✓ Email Sent";
+
 
     setTimeout(
       () => {
@@ -1025,25 +1803,37 @@ async function sendEmail(){
 
         button.textContent =
           "✉ Send Email";
+
       },
       2200
     );
 
+
   }catch(error){
 
-    showStatus(
+
+    status.className =
+      "status bad";
+
+
+    status.textContent =
       error?.message ||
-      "Unable to send email.",
-      "bad"
-    );
+      "Unable to send email.";
+
 
     button.disabled =
       false;
+
 
     button.textContent =
       "✉ Send Email";
   }
 }
+
+
+/* =====================================================
+   RECORD EMAIL IN CRM
+===================================================== */
 
 function recordEmailActivity(entry){
 
@@ -1051,19 +1841,27 @@ function recordEmailActivity(entry){
     return;
   }
 
+
   try{
 
+
     const raw =
-      localStorage.getItem(
-        LEAD_STORAGE_KEY
-      );
+      localStorage
+        .getItem(
+          LEAD_STORAGE_KEY
+        );
+
 
     if(!raw){
       return;
     }
 
+
     const leads =
-      JSON.parse(raw);
+      JSON.parse(
+        raw
+      );
+
 
     const index =
       leads.findIndex(
@@ -1072,16 +1870,20 @@ function recordEmailActivity(entry){
           leadId
       );
 
+
     if(index < 0){
       return;
     }
 
-    leads[index].emailHistory ??=
-      [];
+
+    leads[index]
+      .emailHistory ??= [];
+
 
     leads[index]
       .emailHistory
       .push({
+
         timestamp:
           new Date()
             .toISOString(),
@@ -1097,12 +1899,18 @@ function recordEmailActivity(entry){
 
         messageId:
           entry.messageId
+
       });
 
-    localStorage.setItem(
-      LEAD_STORAGE_KEY,
-      JSON.stringify(leads)
-    );
+
+    localStorage
+      .setItem(
+        LEAD_STORAGE_KEY,
+        JSON.stringify(
+          leads
+        )
+      );
+
 
   }catch(error){
 
@@ -1112,6 +1920,11 @@ function recordEmailActivity(entry){
     );
   }
 }
+
+
+/* =====================================================
+   COPY EMAIL
+===================================================== */
 
 async function copyEmail(){
 
@@ -1123,6 +1936,7 @@ async function copyEmail(){
       .value
       .trim();
 
+
   const subject =
     document
       .getElementById(
@@ -1130,6 +1944,7 @@ async function copyEmail(){
       )
       .value
       .trim();
+
 
   const message =
     document
@@ -1139,6 +1954,7 @@ async function copyEmail(){
       .value
       .trim();
 
+
   const text =
 `To: ${to}
 
@@ -1146,7 +1962,9 @@ Subject: ${subject}
 
 ${message}`;
 
+
   try{
+
 
     await navigator
       .clipboard
@@ -1154,19 +1972,31 @@ ${message}`;
         text
       );
 
-    showStatus(
-      "Email copied.",
-      "good"
-    );
+
+    document
+      .getElementById(
+        "status"
+      )
+      .innerHTML =
+        '<span class="good">Email copied.</span>';
+
 
   }catch{
 
-    showStatus(
-      "Unable to copy email.",
-      "bad"
-    );
+
+    document
+      .getElementById(
+        "status"
+      )
+      .innerHTML =
+        '<span class="bad">Unable to copy email.</span>';
   }
 }
+
+
+/* =====================================================
+   CLEAR EMAIL
+===================================================== */
 
 function clearEmail(){
 
@@ -1177,6 +2007,7 @@ function clearEmail(){
     .value =
       "";
 
+
   document
     .getElementById(
       "message"
@@ -1184,33 +2015,22 @@ function clearEmail(){
     .value =
       "";
 
+
+  document
+    .getElementById(
+      "status"
+    )
+    .textContent =
+      "";
+
+
   selectedTemplate =
     "";
 
+
   clearTemplateSelection();
-
-  showStatus(
-    "",
-    ""
-  );
 }
 
-function showStatus(
-  text,
-  type
-){
-
-  const status =
-    document.getElementById(
-      "status"
-    );
-
-  status.className =
-    `status ${type || ""}`;
-
-  status.textContent =
-    text;
-}
 
 </script>
 
