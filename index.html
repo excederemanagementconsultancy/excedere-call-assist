@@ -533,6 +533,48 @@ header{
   font-weight:850;
 }
 
+.call-controls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.call-session{
+  min-width:118px;
+  min-height:43px;
+  padding:7px 11px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-end;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#081722;
+}
+
+.call-session-status{
+  color:var(--muted);
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.16em;
+}
+
+.call-session-status.live{
+  color:var(--green);
+}
+
+.call-session-status.saved{
+  color:var(--blue);
+}
+
+.call-timer{
+  margin-top:2px;
+  color:var(--text);
+  font-size:15px;
+  font-weight:850;
+  font-variant-numeric:tabular-nums;
+}
+
 .call-memory{
   max-width:875px;
   margin:0 auto 12px;
@@ -1479,12 +1521,20 @@ Follow the script and select the best response.
 </div>
 
 
-<button class="start-call" onclick="startCall()">
+<div class="call-controls">
+
+<div id="callSession" class="call-session">
+<span id="callStatus" class="call-session-status">READY</span>
+<span id="callTimer" class="call-timer">00:00</span>
+</div>
+
+<button id="startCallButton" class="start-call" onclick="startCall()">
 ☎ Start Call
 </button>
 
 </div>
 
+</div>
 
 <div class="call-memory">
 
@@ -2045,7 +2095,7 @@ Copy CRM Notes
 
 <button class="modal-close" onclick="closeImportModal()">×</button>
 
-</div>
+</div>  
 
 <div class="modal-body">
 
@@ -2142,6 +2192,8 @@ let currentOutcome = "";
 let pendingKrispCall = null;
 let pendingImportRecords = [];
 let pendingImportHeaders = [];
+let callTimerInterval = null;
+let callTimerLeadId = null;
 
 
 /* =====================================================
@@ -2336,51 +2388,7 @@ What we're discussing is a dedicated person working specifically for your busine
 
 Before dismissing the model completely, it's worth understanding whether the concern is something inherent to remote hiring or something that could be addressed through the way the role is structured.`
   }
-};
-
-
-/* =====================================================
-   DATA
-===================================================== */
-
-const defaultLeads = [{
-  id:"demo-1",
-  firstName:"Anthony",
-  title:"Owner",
-  company:"Public House Temecula",
-  role:"Part-time Bookkeeper",
-  location:"Temecula, California",
-  timezone:"America/Los_Angeles",
-  timezoneLabel:"Pacific Time",
-  phone:"",
-  directPhone:"",
-  email:"",
-  jobType:"Part-time",
-  pay:"$24-$27 per hour",
-  businessDetails:"",
-  whatTheyNeed:"",
-  requirements:"",
-  outsourcingAngle:"",
-  mainConstraint:"",
-  outreachPriority:"",
-  outsourceFit:"",
-  pipelineStage:"",
-  callNotes:"",
-  phoneHistory:[],
-  emailHistory:[],
-  currentPainPoint:"",
-  outsourcingConcern:"",
-  lastCalled:"",
-  callCount:0,
-  lastOutcome:"",
-  nextAction:"",
-  nextFollowUpDate:"",
-  lastCRMNotes:"",
-  callHistory:[],
-  krispCall:null,
-  activeCallStartedAt:""
-}];
-
+};  
 
 function ensureLeadDefaults(lead){
 
@@ -2398,6 +2406,7 @@ function ensureLeadDefaults(lead){
   lead.callHistory ??= [];
   lead.krispCall ??= null;
   lead.activeCallStartedAt ??= "";
+  lead.lastCallDurationSeconds ??= 0;
 
   return lead;
 }
@@ -2698,13 +2707,48 @@ function renderLead(){
       getLead()
     );
 
-  setText("leadName",lead.firstName || "Unknown");
-  setText("leadTitle",lead.title || "");
-  setText("leadCompany",lead.company || "");
-  setText("leadRole",lead.role || "Not provided");
-  setText("leadLocation",lead.location || "Not provided");
-  setText("leadJobType",lead.jobType || "Not provided");
-  setText("leadPay",lead.pay || "Not provided");
+  setText(
+    "leadName",
+    lead.firstName ||
+    "Unknown"
+  );
+
+  setText(
+    "leadTitle",
+    lead.title ||
+    ""
+  );
+
+  setText(
+    "leadCompany",
+    lead.company ||
+    ""
+  );
+
+  setText(
+    "leadRole",
+    lead.role ||
+    "Not provided"
+  );
+
+  setText(
+    "leadLocation",
+    lead.location ||
+    "Not provided"
+  );
+
+  setText(
+    "leadJobType",
+    lead.jobType ||
+    "Not provided"
+  );
+
+  setText(
+    "leadPay",
+    lead.pay ||
+    "Not provided"
+  );
+
 
   renderPhone(
     "mainPhone",
@@ -2713,6 +2757,7 @@ function renderLead(){
     "Add phone number"
   );
 
+
   renderPhone(
     "directPhone",
     "directPhoneLink",
@@ -2720,21 +2765,64 @@ function renderLead(){
     "Add direct number"
   );
 
+
   renderEmail();
 
-  setText("intelBusiness",lead.businessDetails || "Not provided");
-  setText("intelNeed",lead.whatTheyNeed || "Not provided");
-  setText("intelRequirements",lead.requirements || "Not provided");
-  setText("intelAngle",lead.outsourcingAngle || "Not provided");
-  setText("intelConstraint",lead.mainConstraint || "Not provided");
-  setText("intelPriority",lead.outreachPriority || "Not provided");
-  setText("intelFit",lead.outsourceFit || "Not provided");
-  setText("intelStage",lead.pipelineStage || "Not provided");
+
+  setText(
+    "intelBusiness",
+    lead.businessDetails ||
+    "Not provided"
+  );
+
+  setText(
+    "intelNeed",
+    lead.whatTheyNeed ||
+    "Not provided"
+  );
+
+  setText(
+    "intelRequirements",
+    lead.requirements ||
+    "Not provided"
+  );
+
+  setText(
+    "intelAngle",
+    lead.outsourcingAngle ||
+    "Not provided"
+  );
+
+  setText(
+    "intelConstraint",
+    lead.mainConstraint ||
+    "Not provided"
+  );
+
+  setText(
+    "intelPriority",
+    lead.outreachPriority ||
+    "Not provided"
+  );
+
+  setText(
+    "intelFit",
+    lead.outsourceFit ||
+    "Not provided"
+  );
+
+  setText(
+    "intelStage",
+    lead.pipelineStage ||
+    "Not provided"
+  );
+
 
   setText(
     "recordCounter",
     `${currentLeadIndex + 1} of ${leads.length}`
   );
+
 
   setText(
     "callTitle",
@@ -2742,6 +2830,7 @@ function renderLead(){
       lead.role
     )
   );
+
 
   updateTime();
   renderCRMStatus();
@@ -2760,23 +2849,30 @@ function renderPhone(
 ){
 
   const text =
-    document.getElementById(
-      textId
-    );
+    document
+      .getElementById(
+        textId
+      );
 
   const link =
-    document.getElementById(
-      linkId
-    );
+    document
+      .getElementById(
+        linkId
+      );
+
 
   if(number){
 
     text.textContent =
       number;
 
-    text.classList.remove(
-      "empty-value"
-    );
+
+    text
+      .classList
+      .remove(
+        "empty-value"
+      );
+
 
     link.href =
       "tel:" +
@@ -2791,9 +2887,13 @@ function renderPhone(
     text.textContent =
       emptyText;
 
-    text.classList.add(
-      "empty-value"
-    );
+
+    text
+      .classList
+      .add(
+        "empty-value"
+      );
+
 
     link.href =
       "#";
@@ -2806,28 +2906,37 @@ function renderEmail(){
   const lead =
     getLead();
 
+
   const email =
-    document.getElementById(
-      "leadEmail"
-    );
+    document
+      .getElementById(
+        "leadEmail"
+      );
+
 
   if(lead.email){
 
     email.textContent =
       lead.email;
 
-    email.classList.remove(
-      "empty-value"
-    );
+
+    email
+      .classList
+      .remove(
+        "empty-value"
+      );
 
   }else{
 
     email.textContent =
       "Add email address";
 
-    email.classList.add(
-      "empty-value"
-    );
+
+    email
+      .classList
+      .add(
+        "empty-value"
+      );
   }
 }
 
@@ -2837,9 +2946,11 @@ function editPhone(field){
   const lead =
     getLead();
 
+
   const oldNumber =
     lead[field] ||
     "";
+
 
   const updated =
     prompt(
@@ -2847,30 +2958,45 @@ function editPhone(field){
       oldNumber
     );
 
+
   if(updated === null){
     return;
   }
 
+
   const newNumber =
     updated.trim();
 
-  if(newNumber === oldNumber){
+
+  if(
+    newNumber ===
+    oldNumber
+  ){
     return;
   }
 
-  lead.phoneHistory.push({
-    field,
-    oldNumber,
-    newNumber,
-    changedAt:
-      new Date()
-        .toISOString()
-  });
+
+  lead
+    .phoneHistory
+    .push({
+      field,
+
+      oldNumber,
+
+      newNumber,
+
+      changedAt:
+        new Date()
+          .toISOString()
+    });
+
 
   lead[field] =
     newNumber;
 
+
   saveLeads();
+
   renderLead();
 }
 
@@ -2880,23 +3006,31 @@ function editEmail(){
   const lead =
     getLead();
 
+
   const updated =
     prompt(
       "Enter email address:",
-      lead.email || ""
+      lead.email ||
+      ""
     );
+
 
   if(updated === null){
     return;
   }
 
+
   const newEmail =
     updated.trim();
 
+
   if(
-    newEmail &&
+    newEmail
+    &&
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      .test(newEmail)
+      .test(
+        newEmail
+      )
   ){
 
     alert(
@@ -2906,10 +3040,13 @@ function editEmail(){
     return;
   }
 
+
   lead.email =
     newEmail;
 
+
   saveLeads();
+
   renderEmail();
 }
 
@@ -2920,9 +3057,16 @@ function buildCallTitle(role){
     return "Vacancy Call";
   }
 
+
   return role
-    .replace(/^part-time\s+/i,"")
-    .replace(/^full-time\s+/i,"")
+    .replace(
+      /^part-time\s+/i,
+      ""
+    )
+    .replace(
+      /^full-time\s+/i,
+      ""
+    )
     +
     " Vacancy Call";
 }
@@ -2943,12 +3087,15 @@ function nextRecord(){
 
   currentLeadIndex =
     (
-      currentLeadIndex + 1
+      currentLeadIndex +
+      1
     )
     %
     leads.length;
 
+
   resetPanelScroll();
+
   renderLead();
 }
 
@@ -2957,13 +3104,16 @@ function previousRecord(){
 
   currentLeadIndex =
     (
-      currentLeadIndex - 1 +
+      currentLeadIndex -
+      1 +
       leads.length
     )
     %
     leads.length;
 
+
   resetPanelScroll();
+
   renderLead();
 }
 
@@ -2975,46 +3125,75 @@ function previousRecord(){
 function deriveTimezone(location){
 
   const value =
-    String(location || "")
+    String(
+      location ||
+      ""
+    )
       .toLowerCase();
 
+
   if(
-    value.includes("california")
+    value.includes(
+      "california"
+    )
     ||
-    value.includes(", ca")
+    value.includes(
+      ", ca"
+    )
   ){
 
     return {
-      timezone:"America/Los_Angeles",
-      label:"Pacific Time"
+      timezone:
+        "America/Los_Angeles",
+
+      label:
+        "Pacific Time"
     };
   }
 
+
   if(
-    value.includes("new york")
+    value.includes(
+      "new york"
+    )
     ||
-    value.includes("florida")
+    value.includes(
+      "florida"
+    )
   ){
 
     return {
-      timezone:"America/New_York",
-      label:"Eastern Time"
+      timezone:
+        "America/New_York",
+
+      label:
+        "Eastern Time"
     };
   }
+
 
   if(
-    value.includes("texas")
+    value.includes(
+      "texas"
+    )
   ){
 
     return {
-      timezone:"America/Chicago",
-      label:"Central Time"
+      timezone:
+        "America/Chicago",
+
+      label:
+        "Central Time"
     };
   }
+
 
   return {
-    timezone:"America/Los_Angeles",
-    label:"Local Time"
+    timezone:
+      "America/Los_Angeles",
+
+    label:
+      "Local Time"
   };
 }
 
@@ -3024,22 +3203,30 @@ function updateTime(){
   const lead =
     getLead();
 
+
   try{
 
     const time =
-      new Intl.DateTimeFormat(
-        "en-US",
-        {
-          timeZone:
-            lead.timezone ||
-            "America/Los_Angeles",
-          hour:"numeric",
-          minute:"2-digit"
-        }
-      )
-      .format(
-        new Date()
-      );
+      new Intl
+        .DateTimeFormat(
+          "en-US",
+          {
+            timeZone:
+              lead.timezone
+              ||
+              "America/Los_Angeles",
+
+            hour:
+              "numeric",
+
+            minute:
+              "2-digit"
+          }
+        )
+        .format(
+          new Date()
+        );
+
 
     setText(
       "localTime",
@@ -3067,123 +3254,155 @@ setInterval(
 ===================================================== */
 
 const searchInput =
-  document.getElementById(
-    "leadSearch"
-  );
+  document
+    .getElementById(
+      "leadSearch"
+    );
+
 
 const searchResults =
-  document.getElementById(
-    "searchResults"
-  );
+  document
+    .getElementById(
+      "searchResults"
+    );
 
 
-searchInput.addEventListener(
-  "input",
-  event => {
+searchInput
+  .addEventListener(
+    "input",
+    event => {
 
-    const query =
-      event.target.value
-        .trim()
-        .toLowerCase();
+      const query =
+        event
+          .target
+          .value
+          .trim()
+          .toLowerCase();
 
-    searchResults.innerHTML =
-      "";
 
-    if(!query){
+      searchResults.innerHTML =
+        "";
+
+
+      if(!query){
+
+        searchResults
+          .classList
+          .remove(
+            "open"
+          );
+
+        return;
+      }
+
+
+      const matches =
+        leads.filter(
+          lead => {
+
+            const haystack =
+              [
+                lead.firstName,
+                lead.title,
+                lead.company,
+                lead.role,
+                lead.location,
+                lead.phone,
+                lead.email,
+                lead.nextAction,
+                lead.lastOutcome
+              ]
+                .join(
+                  " "
+                )
+                .toLowerCase();
+
+
+            return haystack
+              .includes(
+                query
+              );
+          }
+        );
+
+
+      matches
+        .forEach(
+          lead => {
+
+            const button =
+              document
+                .createElement(
+                  "button"
+                );
+
+
+            button.className =
+              "search-result";
+
+
+            button.innerHTML =
+              `
+              <strong>
+              ${escapeHtml(
+                lead.firstName
+              )}
+              ·
+              ${escapeHtml(
+                lead.company
+              )}
+              </strong>
+
+              <small>
+              ${escapeHtml(
+                lead.role
+              )}
+              </small>
+              `;
+
+
+            button.onclick =
+              () => {
+
+                currentLeadIndex =
+                  leads
+                    .findIndex(
+                      item =>
+                        item.id ===
+                        lead.id
+                    );
+
+
+                searchInput.value =
+                  "";
+
+
+                searchResults
+                  .classList
+                  .remove(
+                    "open"
+                  );
+
+
+                renderLead();
+              };
+
+
+            searchResults
+              .appendChild(
+                button
+              );
+          }
+        );
+
 
       searchResults
         .classList
-        .remove(
+        .add(
           "open"
         );
-
-      return;
     }
-
-    const matches =
-      leads.filter(
-        lead => {
-
-          const haystack =
-            [
-              lead.firstName,
-              lead.title,
-              lead.company,
-              lead.role,
-              lead.location,
-              lead.phone,
-              lead.email,
-              lead.nextAction,
-              lead.lastOutcome
-            ]
-              .join(" ")
-              .toLowerCase();
-
-          return haystack.includes(
-            query
-          );
-        }
-      );
-
-    matches.forEach(
-      lead => {
-
-        const button =
-          document.createElement(
-            "button"
-          );
-
-        button.className =
-          "search-result";
-
-        button.innerHTML =
-          `
-          <strong>
-          ${escapeHtml(lead.firstName)}
-          ·
-          ${escapeHtml(lead.company)}
-          </strong>
-
-          <small>
-          ${escapeHtml(lead.role)}
-          </small>
-          `;
-
-        button.onclick =
-          () => {
-
-            currentLeadIndex =
-              leads.findIndex(
-                item =>
-                  item.id ===
-                  lead.id
-              );
-
-            searchInput.value =
-              "";
-
-            searchResults
-              .classList
-              .remove(
-                "open"
-              );
-
-            renderLead();
-          };
-
-        searchResults.appendChild(
-          button
-        );
-      }
-    );
-
-    searchResults
-      .classList
-      .add(
-        "open"
-      );
-  }
-);
+  );
 
 
 document
@@ -3195,6 +3414,7 @@ document
 
       searchInput.value =
         "";
+
 
       searchResults
         .classList
@@ -3213,13 +3433,26 @@ function openEmailComposer(){
   const lead =
     getLead();
 
+
   const params =
     new URLSearchParams({
-      leadId:lead.id || "",
-      name:lead.firstName || "",
-      company:lead.company || "",
-      email:lead.email || ""
+      leadId:
+        lead.id ||
+        "",
+
+      name:
+        lead.firstName ||
+        "",
+
+      company:
+        lead.company ||
+        "",
+
+      email:
+        lead.email ||
+        ""
     });
+
 
   window.open(
     `email.html?${params.toString()}`,
@@ -3239,10 +3472,15 @@ function daysSince(iso){
     return null;
   }
 
+
   return Math.floor(
     (
-      Date.now() -
-      new Date(iso).getTime()
+      Date.now()
+      -
+      new Date(
+        iso
+      )
+        .getTime()
     )
     /
     86400000
@@ -3255,25 +3493,34 @@ function renderCRMStatus(){
   const lead =
     getLead();
 
+
   setText(
     "statusCallCount",
-    lead.callCount || 0
+    lead.callCount ||
+    0
   );
+
 
   setText(
     "statusLastOutcome",
-    lead.lastOutcome || "None"
+    lead.lastOutcome ||
+    "None"
   );
+
 
   setText(
     "statusNextAction",
-    lead.nextAction || "None"
+    lead.nextAction ||
+    "None"
   );
+
 
   setText(
     "statusFollowUp",
-    lead.nextFollowUpDate || "None"
+    lead.nextFollowUpDate ||
+    "None"
   );
+
 
   if(lead.lastCalled){
 
@@ -3285,10 +3532,12 @@ function renderCRMStatus(){
         .toLocaleDateString()
     );
 
+
     const days =
       daysSince(
         lead.lastCalled
       );
+
 
     setText(
       "statusDaysSince",
@@ -3306,19 +3555,24 @@ function renderCRMStatus(){
       "Never"
     );
 
+
     setText(
       "statusDaysSince",
       "—"
     );
   }
 
+
   const pill =
-    document.getElementById(
-      "followStatus"
-    );
+    document
+      .getElementById(
+        "followStatus"
+      );
+
 
   pill.className =
     "status-pill neutral";
+
 
   if(!lead.lastCalled){
 
@@ -3328,19 +3582,28 @@ function renderCRMStatus(){
     return;
   }
 
-  if(lead.nextFollowUpDate){
+
+  if(
+    lead.nextFollowUpDate
+  ){
 
     const today =
       new Date();
 
+
     today.setHours(
-      0,0,0,0
+      0,
+      0,
+      0,
+      0
     );
+
 
     const due =
       new Date(
         `${lead.nextFollowUpDate}T00:00:00`
       );
+
 
     const difference =
       Math.ceil(
@@ -3352,10 +3615,15 @@ function renderCRMStatus(){
         86400000
       );
 
-    if(difference < 0){
+
+    if(
+      difference <
+      0
+    ){
 
       pill.className =
         "status-pill red";
+
 
       pill.textContent =
         "OVERDUE";
@@ -3363,10 +3631,15 @@ function renderCRMStatus(){
       return;
     }
 
-    if(difference <= 2){
+
+    if(
+      difference <=
+      2
+    ){
 
       pill.className =
         "status-pill amber";
+
 
       pill.textContent =
         "DUE SOON";
@@ -3375,8 +3648,10 @@ function renderCRMStatus(){
     }
   }
 
+
   pill.className =
     "status-pill green";
+
 
   pill.textContent =
     "CURRENT";
@@ -3388,13 +3663,17 @@ function renderActivityHistory(){
   const lead =
     getLead();
 
+
   const area =
-    document.getElementById(
-      "callHistory"
-    );
+    document
+      .getElementById(
+        "callHistory"
+      );
+
 
   area.innerHTML =
     "";
+
 
   const calls =
     (
@@ -3403,13 +3682,17 @@ function renderActivityHistory(){
     )
       .map(
         entry => ({
-          type:"call",
+          type:
+            "call",
+
           timestamp:
             entry.timestamp,
+
           data:
             entry
         })
       );
+
 
   const emails =
     (
@@ -3418,13 +3701,17 @@ function renderActivityHistory(){
     )
       .map(
         entry => ({
-          type:"email",
+          type:
+            "email",
+
           timestamp:
             entry.timestamp,
+
           data:
             entry
         })
       );
+
 
   const activity =
     [
@@ -3442,7 +3729,10 @@ function renderActivityHistory(){
           )
       );
 
-  if(!activity.length){
+
+  if(
+    !activity.length
+  ){
 
     area.innerHTML =
       `
@@ -3454,137 +3744,166 @@ function renderActivityHistory(){
     return;
   }
 
-  activity.forEach(
-    item => {
 
-      const div =
-        document.createElement(
-          "div"
-        );
+  activity
+    .forEach(
+      item => {
 
-      div.className =
-        item.type ===
-        "email"
-          ?
-          "history-entry history-email"
-          :
-          "history-entry";
+        const div =
+          document
+            .createElement(
+              "div"
+            );
 
-      if(item.type === "email"){
 
-        const entry =
-          item.data;
-
-        div.innerHTML =
-          `
-          <div class="history-date">
-          ${escapeHtml(
-            new Date(
-              entry.timestamp
-            )
-              .toLocaleString()
-          )}
-          </div>
-
-          <div class="history-outcome">
-          ✉ Email sent
-          </div>
-
-          <div class="history-next">
-          ${escapeHtml(
-            entry.subject ||
-            "Email"
-          )}
-          </div>
-
-          <div class="history-notes">
-          To:
-          ${escapeHtml(
-            entry.to ||
-            ""
-          )}
-          </div>
-          `;
-
-      }else{
-
-        const entry =
-          item.data;
-
-        div.innerHTML =
-          `
-          <div class="history-date">
-          ${escapeHtml(
-            new Date(
-              entry.timestamp
-            )
-              .toLocaleString()
-          )}
-          </div>
-
-          <div class="history-outcome">
-          ☎ ${escapeHtml(
-            entry.outcome ||
-            "Call"
-          )}
-          </div>
-
-          <div class="history-next">
-          Next:
-          ${escapeHtml(
-            entry.nextAction ||
-            "None"
-          )}
-          </div>
-
-          ${
-            entry.painPoint
+        div.className =
+          item.type ===
+          "email"
             ?
-            `<div class="history-notes">
-            Pain point:
+            "history-entry history-email"
+            :
+            "history-entry";
+
+
+        if(
+          item.type ===
+          "email"
+        ){
+
+          const entry =
+            item.data;
+
+
+          div.innerHTML =
+            `
+            <div class="history-date">
             ${escapeHtml(
+              new Date(
+                entry.timestamp
+              )
+                .toLocaleString()
+            )}
+            </div>
+
+            <div class="history-outcome">
+            ✉ Email sent
+            </div>
+
+            <div class="history-next">
+            ${escapeHtml(
+              entry.subject ||
+              "Email"
+            )}
+            </div>
+
+            <div class="history-notes">
+            To:
+            ${escapeHtml(
+              entry.to ||
+              ""
+            )}
+            </div>
+            `;
+
+        }else{
+
+          const entry =
+            item.data;
+
+
+          div.innerHTML =
+            `
+            <div class="history-date">
+            ${escapeHtml(
+              new Date(
+                entry.timestamp
+              )
+                .toLocaleString()
+            )}
+            </div>
+
+            <div class="history-outcome">
+            ☎ ${escapeHtml(
+              entry.outcome ||
+              "Call"
+            )}
+            </div>
+
+            ${
+              Number(
+                entry.durationSeconds ||
+                0
+              ) > 0
+                ?
+                `<div class="history-notes">
+                Duration:
+                ${escapeHtml(
+                  formatCallDuration(
+                    entry.durationSeconds
+                  )
+                )}
+                </div>`
+                :
+                ""
+            }
+
+            <div class="history-next">
+            Next:
+            ${escapeHtml(
+              entry.nextAction ||
+              "None"
+            )}
+            </div>
+
+            ${
               entry.painPoint
-            )}
-            </div>`
-            :
-            ""
-          }
+                ?
+                `<div class="history-notes">
+                Pain point:
+                ${escapeHtml(
+                  entry.painPoint
+                )}
+                </div>`
+                :
+                ""
+            }
 
-          ${
-            entry.outsourcingConcern
-            ?
-            `<div class="history-notes">
-            Concern:
-            ${escapeHtml(
+            ${
               entry.outsourcingConcern
-            )}
-            </div>`
-            :
-            ""
-          }
+                ?
+                `<div class="history-notes">
+                Concern:
+                ${escapeHtml(
+                  entry.outsourcingConcern
+                )}
+                </div>`
+                :
+                ""
+            }
 
-          ${
-            entry.liveNotes
-            ?
-            `<div class="history-notes">
-            Notes:
-            ${escapeHtml(
+            ${
               entry.liveNotes
-            )}
-            </div>`
-            :
-            ""
-          }
-          `;
+                ?
+                `<div class="history-notes">
+                Notes:
+                ${escapeHtml(
+                  entry.liveNotes
+                )}
+                </div>`
+                :
+                ""
+            }
+            `;
+        }
+
+
+        area
+          .appendChild(
+            div
+          );
       }
-
-      area.appendChild(
-        div
-      );
-    }
-  );
+    );
 }
-
 
 /* =====================================================
    SUPABASE / KRISP
@@ -4298,6 +4617,249 @@ function attachKrispToCurrentLead(){
 
 
 /* =====================================================
+   CALL SESSION / TIMER
+===================================================== */
+
+function formatCallDuration(totalSeconds){
+
+  const safeSeconds =
+    Math.max(
+      0,
+      Math.floor(
+        Number(totalSeconds || 0)
+      )
+    );
+
+  const hours =
+    Math.floor(
+      safeSeconds / 3600
+    );
+
+  const minutes =
+    Math.floor(
+      (safeSeconds % 3600) / 60
+    );
+
+  const seconds =
+    safeSeconds % 60;
+
+  const mmss =
+    `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+
+  if(hours > 0){
+    return `${String(hours).padStart(2,"0")}:${mmss}`;
+  }
+
+  return mmss;
+}
+
+
+function getCallElapsedSeconds(lead = getLead()){
+
+  if(!lead?.activeCallStartedAt){
+    return 0;
+  }
+
+  const started =
+    new Date(
+      lead.activeCallStartedAt
+    )
+      .getTime();
+
+  if(!Number.isFinite(started)){
+    return 0;
+  }
+
+  return Math.max(
+    0,
+    Math.floor(
+      (Date.now() - started) / 1000
+    )
+  );
+}
+
+
+function stopCallTimer(){
+
+  if(callTimerInterval){
+
+    clearInterval(
+      callTimerInterval
+    );
+  }
+
+  callTimerInterval =
+    null;
+
+  callTimerLeadId =
+    null;
+}
+
+
+function renderCallSession(
+  state = "",
+  fixedDurationSeconds = null
+){
+
+  const lead =
+    getLead();
+
+  const status =
+    document.getElementById(
+      "callStatus"
+    );
+
+  const timer =
+    document.getElementById(
+      "callTimer"
+    );
+
+  const button =
+    document.getElementById(
+      "startCallButton"
+    );
+
+  if(
+    !status ||
+    !timer ||
+    !button
+  ){
+    return;
+  }
+
+  status.className =
+    "call-session-status";
+
+  if(state === "saved"){
+
+    status.classList.add(
+      "saved"
+    );
+
+    status.textContent =
+      "SAVED";
+
+    timer.textContent =
+      formatCallDuration(
+        fixedDurationSeconds ??
+        lead.lastCallDurationSeconds ??
+        0
+      );
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "☎ Start Call";
+
+    return;
+  }
+
+  if(lead.activeCallStartedAt){
+
+    status.classList.add(
+      "live"
+    );
+
+    status.textContent =
+      "LIVE CALL";
+
+    timer.textContent =
+      formatCallDuration(
+        getCallElapsedSeconds(
+          lead
+        )
+      );
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "☎ Call Running";
+
+    return;
+  }
+
+  status.textContent =
+    "READY";
+
+  timer.textContent =
+    "00:00";
+
+  button.disabled =
+    false;
+
+  button.textContent =
+    "☎ Start Call";
+}
+
+
+function startCallTimer(){
+
+  stopCallTimer();
+
+  const lead =
+    getLead();
+
+  if(!lead?.activeCallStartedAt){
+
+    renderCallSession();
+
+    return;
+  }
+
+  callTimerLeadId =
+    lead.id;
+
+  renderCallSession();
+
+  callTimerInterval =
+    setInterval(
+      () => {
+
+        const currentLead =
+          getLead();
+
+        if(
+          !currentLead ||
+          currentLead.id !==
+          callTimerLeadId ||
+          !currentLead.activeCallStartedAt
+        ){
+
+          stopCallTimer();
+
+          renderCallSession();
+
+          return;
+        }
+
+        renderCallSession();
+      },
+      1000
+    );
+}
+
+
+function restoreCallSession(){
+
+  const lead =
+    getLead();
+
+  if(lead?.activeCallStartedAt){
+
+    startCallTimer();
+
+  }else{
+
+    stopCallTimer();
+
+    renderCallSession();
+  }
+}
+
+
+/* =====================================================
    NOTES / RESET
 ===================================================== */
 
@@ -4403,23 +4965,30 @@ function resetCallWorkspace(){
   );
 
   setStage(0);
+
+  restoreCallSession();
 }
 
 
 /* =====================================================
    CALL FLOW
-===================================================== */
+===================================================== */  
 
 function startCall(){
 
   const lead =
     getLead();
 
-  lead.activeCallStartedAt =
-    new Date()
-      .toISOString();
+  if(!lead.activeCallStartedAt){
 
-  saveLeads();
+    lead.activeCallStartedAt =
+      new Date()
+        .toISOString();
+
+    saveLeads();
+  }
+
+  startCallTimer();
 
   setStage(1);
 
@@ -4630,353 +5199,205 @@ function alternativePermission(){
   setStage(4);
 
   showScript(
-    "Permission",
+    "Alternative",
     `
-    Would you be open to looking at another way
-    of filling the role
+    That's exactly why I called.
+    <br><br>
+
+    Rather than replacing what you're already doing,
+    would you be against looking at another option
+    alongside your existing search
     if it gave you access to experienced people
-    without relying only on the local hiring market?
+    outside the local candidate pool?
     `
   );
 
   showResponses([
-    ["Yes",explainSolution],
-    ["Possibly",explainSolution],
-    ["How does it work?",explainSolution],
-    ["We don't outsource",()=>showObjection("policy")]
+    ["I'm open to hearing it",explainModel],
+    ["How does that work?",explainModel],
+    ["We don't outsource",()=>showObjection("policy")],
+    ["We only hire locally",()=>showObjection("local")]
   ]);
 }
 
 
-function explainSolution(){
+function explainModel(){
 
   setStage(4);
 
-  const lead =
-    getLead();
-
   showScript(
-    "Solution",
+    "Dedicated Remote Model",
     `
-    We help businesses hire dedicated remote professionals
-    who work specifically for their business.
+    The model is quite simple.
     <br><br>
 
-    For a role like
-    <strong>${escapeHtml(lead.role)}</strong>,
-    you can look beyond the local candidate pool
-    while still deciding who joins the team
-    and how the work is managed.
+    Instead of using a freelancer
+    or sharing somebody with several businesses,
+    you hire a dedicated professional
+    who works specifically for your company.
     <br><br>
 
-    It isn't about saying a local hire is wrong.
-    It's simply another option when the current search
-    isn't solving the problem.
+    You still interview and choose the person.
+    They work with your team,
+    your systems and your processes.
     `
   );
 
   showResponses([
-    ["That could be useful",appointmentQuestion],
-    ["We don't outsource",()=>showObjection("policy")],
-    ["What would it cost?",costAnswer],
+    ["What does it cost?",costConversation],
+    ["Where are they based?",locationConversation],
+    ["What about quality?",()=>showObjection("quality")],
+    ["What about security?",()=>showObjection("security")],
+    ["That sounds interesting",appointmentTransition]
+  ]);
+}
+
+
+function costConversation(){
+
+  showScript(
+    "Cost",
+    `
+    It depends on the role,
+    experience level and where the person is based.
+    <br><br>
+
+    The reason businesses look at this model
+    is normally because it can give them
+    experienced dedicated staff
+    at a materially lower overall employment cost
+    than hiring the same profile locally.
+    <br><br>
+
+    Rather than throw a random number at you,
+    we'd normally price the actual position
+    based on what you need.
+    `
+  );
+
+  showResponses([
+    ["Okay",appointmentTransition],
+    ["Where are they based?",locationConversation],
+    ["Send me information",informationBeforeSend]
+  ]);
+}
+
+
+function locationConversation(){
+
+  showScript(
+    "Location",
+    `
+    We work with talent across several international markets.
+    <br><br>
+
+    The right location depends on the role,
+    working hours,
+    experience required
+    and what makes the most sense for the business.
+    <br><br>
+
+    The important part is that the person
+    is dedicated to your company
+    rather than being shared.
+    `
+  );
+
+  showResponses([
+    ["How do we choose someone?",selectionConversation],
+    ["What about working hours?",workingHoursConversation],
+    ["That sounds interesting",appointmentTransition]
+  ]);
+}
+
+
+function selectionConversation(){
+
+  showScript(
+    "Selection",
+    `
+    You still control the hiring decision.
+    <br><br>
+
+    Suitable candidates are identified
+    against the experience and requirements you need,
+    and you interview them before deciding
+    whether anybody is right for the role.
+    <br><br>
+
+    You're not simply assigned somebody.
+    `
+  );
+
+  showResponses([
+    ["Okay",appointmentTransition],
+    ["What about quality?",()=>showObjection("quality")],
+    ["Send me information",informationBeforeSend]
+  ]);
+}
+
+
+function workingHoursConversation(){
+
+  showScript(
+    "Working Hours",
+    `
+    The schedule is agreed around
+    what the position actually requires.
+    <br><br>
+
+    If you need overlap with your local team,
+    customer coverage,
+    or specific working hours,
+    that should be established before hiring.
+    `
+  );
+
+  showResponses([
+    ["Okay",appointmentTransition],
+    ["Time zones concern me",()=>showObjection("timezone")],
     ["Send information",informationBeforeSend]
   ]);
 }
 
 
-function costAnswer(){
-
-  showScript(
-    "Cost Question",
-    `
-    It depends on the experience level,
-    schedule and working arrangement you need.
-    <br><br>
-
-    Rather than give you a number that may not apply,
-    we'd first understand the role properly
-    and then show you the relevant options and costs.
-    `
-  );
-
-  showResponses([
-    ["Okay",appointmentQuestion],
-    ["Send information first",informationBeforeSend]
-  ]);
-}
-
-
-/* =====================================================
-   OUTSOURCING POLICY
-===================================================== */
-
-function outsourcingReasonSelector(){
-
-  showScript(
-    "Outsourcing Policy",
-    `
-    Understood.
-    <br><br>
-
-    That's usually a policy for a reason.
-    <br><br>
-
-    What is the main concern behind it?
-    `
-  );
-
-  showResponses([
-    ["Security / data",()=>chooseConcern("security")],
-    ["Quality concerns",()=>chooseConcern("quality")],
-    ["Bad past experience",()=>chooseConcern("badExperience")],
-    ["Need people in office",()=>chooseConcern("office")],
-    ["Management / control",()=>chooseConcern("control")],
-    ["Culture / team fit",()=>chooseConcern("culture")],
-    ["Compliance / legal",()=>chooseConcern("compliance")],
-    ["Leadership policy",()=>chooseConcern("leadership")],
-    ["Prefer local hiring",()=>chooseConcern("local")],
-    ["Communication",()=>chooseConcern("communication")],
-    ["Time-zone concerns",()=>chooseConcern("timezone")],
-    ["Retention / loyalty",()=>chooseConcern("retention")],
-    ["Don't understand model",()=>chooseConcern("understanding")],
-    ["Something else",()=>chooseConcern("other")]
-  ]);
-}
-
-
-function chooseConcern(key){
-
-  setOutsourcingConcern(key);
-
-  if(key === "office"){
-
-    officeRequirementProbe();
-    return;
-  }
-
-  if(key === "leadership"){
-
-    leadershipPolicyProbe();
-    return;
-  }
-
-  showPolicyRebuttal();
-}
-
-
-function officeRequirementProbe(){
-
-  showScript(
-    "Office Requirement",
-    `
-    I understand.
-    <br><br>
-
-    Does this particular role genuinely require
-    somebody to be physically on-site,
-    or is office-based hiring simply
-    the company's normal preference?
-    `
-  );
-
-  showResponses([
-    ["Must physically be on-site",()=>setOutcome("Local hire required")],
-    ["Mostly company preference",showPolicyRebuttal],
-    ["Could potentially be remote",showPolicyRebuttal]
-  ]);
-}
-
-
-function leadershipPolicyProbe(){
-
-  showScript(
-    "Leadership Policy",
-    `
-    Understood.
-    <br><br>
-
-    Is that policy completely fixed,
-    or could leadership review an alternative
-    if there were a clear business reason
-    for making an exception?
-    `
-  );
-
-  showResponses([
-    ["Completely fixed",()=>setOutcome("Company policy: no outsourcing")],
-    ["Could potentially review it",showPolicyRebuttal],
-    ["I'd need another stakeholder",stakeholderMeeting]
-  ]);
-}
-
-
-function stakeholderMeeting(){
-
-  showScript(
-    "Stakeholder",
-    `
-    That makes sense.
-    <br><br>
-
-    Rather than asking you to challenge the policy yourself,
-    would it make sense to have a short discussion
-    with the relevant stakeholder included
-    so they can understand the model directly
-    and decide whether it's worth reviewing?
-    `
-  );
-
-  showResponses([
-    ["Yes",appointmentQuestion],
-    ["Send information first",informationBeforeSend],
-    ["No",()=>setOutcome("Company policy: no outsourcing")]
-  ]);
-}
-
-
-function showPolicyRebuttal(){
-
-  const pain =
-    getPainConversation();
-
-  const concernResponse =
-    getConcernResponse();
-
-  if(!pain){
-
-    policyNeedsPainPoint();
-    return;
-  }
-
-  showScript(
-    "Why It May Be Worth Reviewing",
-    `
-    ${escapeHtml(
-      concernResponse
-    )
-      .replace(
-        /\n/g,
-        "<br>"
-      )}
-    <br><br>
-
-    The only reason I'd suggest it may be worth reviewing
-    is because you mentioned that
-    <strong>${escapeHtml(pain)}</strong>.
-    <br><br>
-
-    If the current policy is reducing the options available
-    to solve that problem,
-    it may be worth understanding
-    what a dedicated remote model looks like today —
-    even if you decide afterwards
-    that it still isn't right for the business.
-    <br><br>
-
-    Would it be worth twenty minutes
-    to compare the options properly?
-    `
-  );
-
-  showResponses([
-    ["Yes, let's review it",meetingExplanation],
-    ["Maybe — explain more",explainSolution],
-    ["Send information first",informationBeforeSend],
-    ["Policy cannot change",()=>setOutcome("Company policy: no outsourcing")]
-  ]);
-}
-
-
-function policyNeedsPainPoint(){
-
-  showScript(
-    "One Quick Question",
-    `
-    I understand.
-    <br><br>
-
-    Before I try to suggest that a company policy
-    should be reviewed,
-    I'd rather understand whether there's actually
-    a business reason to do so.
-    <br><br>
-
-    What's been the biggest issue with the current hiring search?
-    `
-  );
-
-  showResponses([
-    ["Not enough applicants",()=>selectPainForPolicy("applicants")],
-    ["Wrong experience",()=>selectPainForPolicy("experience")],
-    ["Candidates too expensive",()=>selectPainForPolicy("cost")],
-    ["Team overloaded",()=>selectPainForPolicy("overloaded")],
-    ["Taking too long",()=>selectPainForPolicy("slow")],
-    ["Reliability",()=>selectPainForPolicy("reliability")],
-    ["Hard role to fill",()=>selectPainForPolicy("hard")],
-    ["No real hiring problem",()=>setOutcome("Company policy: no outsourcing")]
-  ]);
-}
-
-
-function selectPainForPolicy(key){
-
-  setPainPoint(key);
-  showPolicyRebuttal();
-}
-
-
-/* =====================================================
-   APPOINTMENT / INFO
-===================================================== */
-
-function appointmentQuestion(){
+function appointmentTransition(){
 
   setStage(5);
 
   showScript(
-    "Appointment",
+    "Next Step",
     `
-    Rather than trying to cover everything on a cold call,
-    would it be worth twenty minutes
-    to understand what you need
-    and see whether the model could genuinely work for you?
+    Rather than trying to cover everything
+    on a cold call,
+    the sensible next step would be
+    a short conversation around the role.
+    <br><br>
+
+    We can look at what you're hiring for,
+    the experience you need
+    and whether the model is even worth considering.
+    <br><br>
+
+    Would you be against setting aside
+    a short call for that?
     `
   );
 
   showResponses([
-    ["Yes",meetingExplanation],
+    ["Yes — let's book something",appointmentBooked],
     ["Call me back",()=>setOutcome("Callback required")],
-    ["Send information",informationBeforeSend],
-    ["Not interested",()=>setOutcome("Not interested")]
+    ["Send information first",informationBeforeSend],
+    ["Not interested",()=>showObjection("notInterested")]
   ]);
 }
 
 
-function meetingExplanation(){
+function appointmentBooked(){
 
-  setStage(5);
-
-  showScript(
-    "Meeting",
-    `
-    Perfect.
-    <br><br>
-
-    It's simply a twenty-minute discussion.
-    We understand the role,
-    explain how the model works,
-    show you the relevant options,
-    and you decide whether it's worth taking further.
-    <br><br>
-
-    There's no commitment.
-    `
+  setOutcome(
+    "Appointment booked"
   );
-
-  showResponses([
-    ["Appointment booked",()=>setOutcome("Appointment booked")],
-    ["Need to confirm time",()=>setOutcome("Follow up required")]
-  ]);
 }
 
 
@@ -4988,48 +5409,43 @@ function informationBeforeSend(){
     Absolutely.
     <br><br>
 
-    Just so I send you something relevant
-    rather than generic information,
-    what's the main thing you'd want it to cover?
+    So I send something that's actually relevant,
+    what would be most useful —
+    how the employment model works,
+    indicative costs,
+    or information specific to the role you're hiring for?
     `
   );
 
   showResponses([
-    ["How the model works",()=>finishInformationRequest("How the model works")],
-    ["Costs",()=>finishInformationRequest("Pricing / likely costs")],
-    ["Available talent",()=>finishInformationRequest("Available talent")],
-    ["Everything",()=>finishInformationRequest("General information")]
+    ["How the model works",()=>informationRequested("Employment model")],
+    ["Indicative costs",()=>informationRequested("Indicative pricing")],
+    ["Role-specific information",()=>informationRequested("Role-specific information")]
   ]);
 }
 
 
-function finishInformationRequest(topic){
+function informationRequested(topic){
 
   const notes =
-    document.getElementById(
-      "notes"
-    );
+    document
+      .getElementById(
+        "notes"
+      );
 
-  if(
-    !notes.value.includes(
-      topic
-    )
-  ){
+  if(topic){
 
     notes.value =
       (
         notes.value.trim()
-        +
-        (
-          notes.value.trim()
-            ?
+          ?
+          notes.value.trim() +
             "\n"
-            :
-            ""
-        )
-        +
-        `Information requested: ${topic}.`
-      );
+          :
+          ""
+      )
+      +
+      `Information requested: ${topic}.`;
 
     getLead().callNotes =
       notes.value;
@@ -5041,7 +5457,6 @@ function finishInformationRequest(topic){
     "Information requested"
   );
 }
-
 
 /* =====================================================
    OBJECTIONS
@@ -5619,6 +6034,27 @@ function saveCallResult(){
     new Date()
       .toISOString();
 
+  const callStartedAt =
+    lead.activeCallStartedAt ||
+    "";
+
+  const durationSeconds =
+    callStartedAt
+      ?
+      Math.max(
+        0,
+        Math.floor(
+          (
+            new Date(now).getTime() -
+            new Date(callStartedAt).getTime()
+          )
+          /
+          1000
+        )
+      )
+      :
+      0;
+
   const nextAction =
     document
       .getElementById(
@@ -5687,9 +6123,9 @@ function saveCallResult(){
     timestamp:
       now,
 
-    callStartedAt:
-      lead.activeCallStartedAt ||
-      "",
+    callStartedAt,
+
+    durationSeconds,
 
     outcome:
       currentOutcome,
@@ -5722,8 +6158,23 @@ function saveCallResult(){
       null
   });
 
+  lead.lastCallDurationSeconds =
+    durationSeconds;
+
+  lead.activeCallStartedAt =
+    "";
+
   saveLeads();
+
+  stopCallTimer();
+
+  renderCallSession(
+    "saved",
+    durationSeconds
+  );
+
   renderCRMStatus();
+
   renderActivityHistory();
 
   document
@@ -5887,8 +6338,11 @@ function parseCSV(text){
     );
 
   const rows = [];
+
   let row = [];
+
   let field = "";
+
   let quoted = false;
 
   for(
@@ -5911,6 +6365,7 @@ function parseCSV(text){
         ){
 
           field += '"';
+
           i++;
 
         }else{
@@ -5928,6 +6383,7 @@ function parseCSV(text){
       continue;
     }
 
+
     if(char === '"'){
 
       quoted =
@@ -5935,16 +6391,28 @@ function parseCSV(text){
 
     }else if(char === ","){
 
-      row.push(field);
-      field = "";
+      row.push(
+        field
+      );
+
+      field =
+        "";
 
     }else if(char === "\n"){
 
-      row.push(field);
-      rows.push(row);
+      row.push(
+        field
+      );
 
-      row = [];
-      field = "";
+      rows.push(
+        row
+      );
+
+      row =
+        [];
+
+      field =
+        "";
 
     }else if(char !== "\r"){
 
@@ -5953,15 +6421,22 @@ function parseCSV(text){
     }
   }
 
+
   if(
     field.length
     ||
     row.length
   ){
 
-    row.push(field);
-    rows.push(row);
+    row.push(
+      field
+    );
+
+    rows.push(
+      row
+    );
   }
+
 
   rows[0] =
     rows[0]
@@ -5971,9 +6446,9 @@ function parseCSV(text){
             .trim()
       );
 
+
   return rows;
 }
-
 
 function csvValue(
   record,
@@ -6138,7 +6613,8 @@ function mapCSVRecord(record){
     lastCRMNotes:"",
     callHistory:[],
     krispCall:null,
-    activeCallStartedAt:""
+    activeCallStartedAt:"",
+    lastCallDurationSeconds:0
   });
 }
 
@@ -6274,6 +6750,486 @@ function performImport(){
   closeImportModal();
 }
 
+/* =====================================================
+   APPOINTMENT SUPPORT
+===================================================== */
+
+function appointmentQuestion(){
+
+  setStage(5);
+
+  showScript(
+    "Appointment",
+    `
+    Rather than trying to cover everything on a cold call,
+    would it be worth twenty minutes
+    to understand what you need
+    and see whether the model could genuinely work for you?
+    `
+  );
+
+  showResponses([
+    ["Yes",meetingExplanation],
+    ["Call me back",()=>setOutcome("Callback required")],
+    ["Send information",informationBeforeSend],
+    ["Not interested",()=>setOutcome("Not interested")]
+  ]);
+}
+
+
+function meetingExplanation(){
+
+  setStage(5);
+
+  showScript(
+    "Meeting",
+    `
+    Perfect.
+    <br><br>
+
+    It's simply a twenty-minute discussion.
+    We understand the role,
+    explain how the model works,
+    show you the relevant options,
+    and you decide whether it's worth taking further.
+    <br><br>
+
+    There's no commitment.
+    `
+  );
+
+  showResponses([
+    ["Appointment booked",()=>setOutcome("Appointment booked")],
+    ["Need to confirm time",()=>setOutcome("Follow up required")]
+  ]);
+}
+
+
+/* =====================================================
+   OUTSOURCING POLICY SUPPORT
+===================================================== */
+
+function outsourcingReasonSelector(){
+
+  showScript(
+    "Outsourcing Policy",
+    `
+    Understood.
+    <br><br>
+
+    That's usually a policy for a reason.
+    <br><br>
+
+    What is the main concern behind it?
+    `
+  );
+
+  showResponses([
+    ["Security / data",()=>chooseConcern("security")],
+    ["Quality concerns",()=>chooseConcern("quality")],
+    ["Bad past experience",()=>chooseConcern("badExperience")],
+    ["Need people in office",()=>chooseConcern("office")],
+    ["Management / control",()=>chooseConcern("control")],
+    ["Culture / team fit",()=>chooseConcern("culture")],
+    ["Compliance / legal",()=>chooseConcern("compliance")],
+    ["Leadership policy",()=>chooseConcern("leadership")],
+    ["Prefer local hiring",()=>chooseConcern("local")],
+    ["Communication",()=>chooseConcern("communication")],
+    ["Time-zone concerns",()=>chooseConcern("timezone")],
+    ["Retention / loyalty",()=>chooseConcern("retention")],
+    ["Don't understand model",()=>chooseConcern("understanding")],
+    ["Something else",()=>chooseConcern("other")]
+  ]);
+}
+
+
+function chooseConcern(key){
+
+  setOutsourcingConcern(
+    key
+  );
+
+  if(key === "office"){
+
+    officeRequirementProbe();
+
+    return;
+  }
+
+  if(key === "leadership"){
+
+    leadershipPolicyProbe();
+
+    return;
+  }
+
+  showPolicyRebuttal();
+}
+
+
+function officeRequirementProbe(){
+
+  showScript(
+    "Office Requirement",
+    `
+    I understand.
+    <br><br>
+
+    Does this particular role genuinely require
+    somebody to be physically on-site,
+    or is office-based hiring simply
+    the company's normal preference?
+    `
+  );
+
+  showResponses([
+    ["Must physically be on-site",()=>setOutcome("Local hire required")],
+    ["Mostly company preference",showPolicyRebuttal],
+    ["Could potentially be remote",showPolicyRebuttal]
+  ]);
+}
+
+
+function leadershipPolicyProbe(){
+
+  showScript(
+    "Leadership Policy",
+    `
+    Understood.
+    <br><br>
+
+    Is that policy completely fixed,
+    or could leadership review an alternative
+    if there were a clear business reason
+    for making an exception?
+    `
+  );
+
+  showResponses([
+    ["Completely fixed",()=>setOutcome("Company policy: no outsourcing")],
+    ["Could potentially review it",showPolicyRebuttal],
+    ["I'd need another stakeholder",stakeholderMeeting]
+  ]);
+}
+
+
+function stakeholderMeeting(){
+
+  showScript(
+    "Stakeholder",
+    `
+    That makes sense.
+    <br><br>
+
+    Rather than asking you to challenge the policy yourself,
+    would it make sense to have a short discussion
+    with the relevant stakeholder included
+    so they can understand the model directly
+    and decide whether it's worth reviewing?
+    `
+  );
+
+  showResponses([
+    ["Yes",appointmentQuestion],
+    ["Send information first",informationBeforeSend],
+    ["No",()=>setOutcome("Company policy: no outsourcing")]
+  ]);
+}
+
+
+function showPolicyRebuttal(){
+
+  const pain =
+    getPainConversation();
+
+  const concernResponse =
+    getConcernResponse();
+
+  if(!pain){
+
+    policyNeedsPainPoint();
+
+    return;
+  }
+
+  showScript(
+    "Why It May Be Worth Reviewing",
+    `
+    ${escapeHtml(
+      concernResponse
+    )
+      .replace(
+        /\n/g,
+        "<br>"
+      )}
+    <br><br>
+
+    The only reason I'd suggest it may be worth reviewing
+    is because you mentioned that
+    <strong>${escapeHtml(pain)}</strong>.
+    <br><br>
+
+    If the current policy is reducing the options available
+    to solve that problem,
+    it may be worth understanding
+    what a dedicated remote model looks like today —
+    even if you decide afterwards
+    that it still isn't right for the business.
+    <br><br>
+
+    Would it be worth twenty minutes
+    to compare the options properly?
+    `
+  );
+
+  showResponses([
+    ["Yes, let's review it",meetingExplanation],
+    ["Maybe — explain more",appointmentTransition],
+    ["Send information first",informationBeforeSend],
+    ["Policy cannot change",()=>setOutcome("Company policy: no outsourcing")]
+  ]);
+}
+
+
+function policyNeedsPainPoint(){
+
+  showScript(
+    "One Quick Question",
+    `
+    I understand.
+    <br><br>
+
+    Before I try to suggest that a company policy
+    should be reviewed,
+    I'd rather understand whether there's actually
+    a business reason to do so.
+    <br><br>
+
+    What's been the biggest issue with the current hiring search?
+    `
+  );
+
+  showResponses([
+    ["Not enough applicants",()=>selectPainForPolicy("applicants")],
+    ["Wrong experience",()=>selectPainForPolicy("experience")],
+    ["Candidates too expensive",()=>selectPainForPolicy("cost")],
+    ["Team overloaded",()=>selectPainForPolicy("overloaded")],
+    ["Taking too long",()=>selectPainForPolicy("slow")],
+    ["Reliability",()=>selectPainForPolicy("reliability")],
+    ["Hard role to fill",()=>selectPainForPolicy("hard")],
+    ["No real hiring problem",()=>setOutcome("Company policy: no outsourcing")]
+  ]);
+}
+
+
+function selectPainForPolicy(key){
+
+  setPainPoint(
+    key
+  );
+
+  showPolicyRebuttal();
+}
+
+
+/* =====================================================
+   EXTRA OBJECTION SUPPORT
+===================================================== */
+
+const baseShowObjection =
+  showObjection;
+
+
+function enhancedShowObjection(type){
+
+  if(type === "quality"){
+
+    setOutsourcingConcern(
+      "quality"
+    );
+
+    showPolicyRebuttal();
+
+    return;
+  }
+
+
+  if(type === "security"){
+
+    setOutsourcingConcern(
+      "security"
+    );
+
+    showPolicyRebuttal();
+
+    return;
+  }
+
+
+  return baseShowObjection(
+    type
+  );
+}
+
+
+showObjection =
+  enhancedShowObjection;
+
+
+/* =====================================================
+   SAFE LEAD FALLBACK
+===================================================== */
+
+function loadLeads(){
+
+  try{
+
+    const stored =
+      localStorage.getItem(
+        LEAD_STORAGE_KEY
+      );
+
+    if(stored){
+
+      const parsed =
+        JSON.parse(
+          stored
+        );
+
+      if(
+        Array.isArray(parsed)
+        &&
+        parsed.length
+      ){
+
+        return parsed.map(
+          ensureLeadDefaults
+        );
+      }
+    }
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+  }
+
+
+  return [
+    ensureLeadDefaults({
+
+      id:
+        "demo-1",
+
+      firstName:
+        "Anthony",
+
+      title:
+        "Owner",
+
+      company:
+        "Public House Temecula",
+
+      role:
+        "Part-time Bookkeeper",
+
+      location:
+        "Temecula, California",
+
+      timezone:
+        "America/Los_Angeles",
+
+      timezoneLabel:
+        "Pacific Time",
+
+      phone:
+        "",
+
+      directPhone:
+        "",
+
+      email:
+        "",
+
+      jobType:
+        "Part-time",
+
+      pay:
+        "$24-$27 per hour",
+
+      businessDetails:
+        "",
+
+      whatTheyNeed:
+        "",
+
+      requirements:
+        "",
+
+      outsourcingAngle:
+        "",
+
+      mainConstraint:
+        "",
+
+      outreachPriority:
+        "",
+
+      outsourceFit:
+        "",
+
+      pipelineStage:
+        "",
+
+      callNotes:
+        "",
+
+      phoneHistory:
+        [],
+
+      emailHistory:
+        [],
+
+      currentPainPoint:
+        "",
+
+      outsourcingConcern:
+        "",
+
+      lastCalled:
+        "",
+
+      callCount:
+        0,
+
+      lastOutcome:
+        "",
+
+      nextAction:
+        "",
+
+      nextFollowUpDate:
+        "",
+
+      lastCRMNotes:
+        "",
+
+      callHistory:
+        [],
+
+      krispCall:
+        null,
+
+      activeCallStartedAt:
+        "",
+
+      lastCallDurationSeconds:
+        0
+    })
+  ];
+}
+
 
 /* =====================================================
    STORAGE SYNC
@@ -6295,6 +7251,7 @@ window.addEventListener(
       leads =
         loadLeads();
 
+
       if(currentId){
 
         const restoredIndex =
@@ -6304,12 +7261,16 @@ window.addEventListener(
               currentId
           );
 
-        if(restoredIndex >= 0){
+        if(
+          restoredIndex >=
+          0
+        ){
 
           currentLeadIndex =
             restoredIndex;
         }
       }
+
 
       if(
         currentLeadIndex >=
@@ -6320,10 +7281,16 @@ window.addEventListener(
           0;
       }
 
+
       renderCRMStatus();
+
       renderActivityHistory();
+
       renderEmail();
+
       renderCallContext();
+
+      restoreCallSession();
     }
   }
 );
@@ -6340,9 +7307,12 @@ function loadSelectedLeadFromCRM(){
       "excedereSelectedLeadId"
     );
 
+
   if(!selectedLeadId){
+
     return;
   }
+
 
   const selectedIndex =
     leads.findIndex(
@@ -6351,11 +7321,16 @@ function loadSelectedLeadFromCRM(){
         selectedLeadId
     );
 
-  if(selectedIndex >= 0){
+
+  if(
+    selectedIndex >=
+    0
+  ){
 
     currentLeadIndex =
       selectedIndex;
   }
+
 
   localStorage.removeItem(
     "excedereSelectedLeadId"
@@ -6376,9 +7351,12 @@ window.addEventListener(
         ensureLeadDefaults
       );
 
+
     saveLeads();
 
+
     loadSelectedLeadFromCRM();
+
 
     renderLead();
   }
@@ -6388,3 +7366,4 @@ window.addEventListener(
 
 </body>
 </html>
+
