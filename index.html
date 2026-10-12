@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-crm-vault="required" data-crm-entry="protected">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1224,6 +1224,10 @@ details.tool-details summary{
 *::-webkit-scrollbar-thumb{background:#3b5260;border-radius:999px}
 *::-webkit-scrollbar-thumb:hover{background:#536f80}
 </style>
+<style>html:not([data-crm-authorised="true"]) body{visibility:hidden;pointer-events:none}</style>
+<script src="secure-records.js"></script>
+<script src="record-access.js"></script>
+<script src="record-coordinator.js"></script>
 </head>
 
 <body>
@@ -2176,7 +2180,7 @@ Import Leads
 </div>
 
 
-<script>
+<script type="application/x-excedere-protected">
 
 const LEAD_STORAGE_KEY =
   "excedereCallAssistLeads";
@@ -2457,14 +2461,8 @@ let leads =
   loadLeads();
 
 
-function saveLeads(){
-
-  localStorage.setItem(
-    LEAD_STORAGE_KEY,
-    JSON.stringify(leads)
-  );
-}
-
+const leadWriter=window.ExcedereRecordCoordinator.connectLeads(leads);
+function saveLeads(){leadWriter.save(leads);}
 
 function getLead(){
 
@@ -7248,8 +7246,10 @@ window.addEventListener(
         getLead()
           ?.id;
 
+      if(leadWriter.coordinator.pending()) return;
       leads =
         loadLeads();
+      leadWriter.coordinator.base=window.ExcedereRecordCoordinator.cached();
 
 
       if(currentId){

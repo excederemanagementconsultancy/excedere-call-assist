@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-crm-vault="required" data-crm-entry="protected">
 
 <head>
 <meta charset="UTF-8">
@@ -775,6 +775,10 @@ textarea:focus{
 }
 
 </style>
+<style>html:not([data-crm-authorised="true"]) body{visibility:hidden;pointer-events:none}</style>
+<script src="secure-records.js"></script>
+<script src="record-access.js"></script>
+<script src="record-coordinator.js"></script>
 </head>
 
 
@@ -1124,7 +1128,7 @@ Clear
 </div>
 
 
-<script>
+<script type="application/x-excedere-protected">
 
 
 const SEND_EMAIL_URL =
@@ -1761,13 +1765,8 @@ function recordEmailActivity(entry){
       });
 
 
-    localStorage
-      .setItem(
-        LEAD_STORAGE_KEY,
-        JSON.stringify(
-          leads
-        )
-      );
+    const writer=window.ExcedereRecordCoordinator.connectLeads(JSON.parse(localStorage.getItem(LEAD_STORAGE_KEY)||"[]"));
+    writer.save(leads);
 
 
   }catch(error){
